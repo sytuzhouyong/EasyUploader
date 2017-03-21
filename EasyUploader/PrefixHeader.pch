@@ -1,0 +1,39 @@
+//
+//  PrefixHeader.pch
+//  EasyUploader
+//
+//  Created by zhouyong on 17/3/18.
+//  Copyright © 2017年 zhouyong. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <UIKit/UIKit.h>
+
+#define DD_LEGACY_MACROS    0
+
+#import "CocoaLumberjack.h"
+#import "DDLogCustomFormatter.h"
+#import "Masonry.h"
+
+#import "AppDelegate.h"
+#import "UIView+FrameExtension.h"
+#import "ZyxSingleton.h"
+#import "ZyxPhotoManager.h"
+#import "ZyxMacro.h"
+
+
+#import "LanguagTranslateUtil.h"
+#import "DateUtil.h"
+#import "DateUtil.h"
+#import "DeviceUtil.h"
+#import "StringUtil.h"
+
+
+
+#endif /* PrefixHeader_pch */
