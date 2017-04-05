@@ -21,8 +21,7 @@
     
     ZyxImagePickerController *vc = [[ZyxImagePickerController alloc] init];
     vc.selectionMode = ZyxImagePickerSelectionModeNone;
-    vc.imagePickerDelegate = self;
-    
+//    vc.imagePickerDelegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -31,7 +31,6 @@
     [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectAllButtonPressed"];
     
     self.presentingVC = self.unuploadPhotosVC;
-    [kNotificationCenter addObserver:self selector:@selector(taskUploadSuccess:) name:@"TaskUploadSuccess" object:nil];
     
     [self enumAsset];
 }

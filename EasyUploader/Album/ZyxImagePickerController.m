@@ -7,7 +7,7 @@
 //
 
 #import "ZyxImagePickerController.h"
-#import "AlbumPhotosViewController.h"
+#import "ZyxPhotosViewController.h"
 #import "UINormalTableViewCell.h"
 
 #define kCellIdentifier  @"ZyxImagePickerControllerCell"
@@ -170,9 +170,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ALAssetsGroup *group = _groups[indexPath.row];
-    AlbumPhotosViewController *vc = [[AlbumPhotosViewController alloc] init];
-    vc.group = group;
-    vc.imagePickerDelegate = self;
+    ZyxPhotosViewController *vc = [[ZyxPhotosViewController alloc] initWithAssetsGroup:group];
+    vc.selectionMode = ZyxImagePickerSelectionModeMultiple;
+    vc.selectDelegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

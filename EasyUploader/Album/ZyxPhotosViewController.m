@@ -17,8 +17,8 @@
 @interface ZyxPhotosViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ZyxImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) ALAssetsGroup *group;
 @property (nonatomic, assign) CGSize cellSize;
-@property (nonatomic, copy  ) NSString *groupName;
 
 @property (nonatomic, strong) NSMutableArray<NSString *> *dateDescs;    // 有序
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSDate *> *datesDict;
@@ -30,21 +30,21 @@
 
 - (instancetype)initWithAssetsGroup:(ALAssetsGroup *)group {
     if (self = [super initWithNibName:nil bundle:nil]) {
+        self.group = group;
         self.numberOfCellsPerLine = 4;
         self.cellSpacing = 5;
         self.isSelectAll = NO;
-        self.groupName = [kZyxPhotoManager nameOfGroup:group];
         self.dateDescs = [NSMutableArray array];
         self.datesDict = [NSMutableDictionary dictionary];
         self.assetsDict = [NSMutableDictionary dictionary];
+        [self enumPhotosInGroup:group];
     }
     return self;
 }
 
 - (void)viewDidLoad {    
     [super viewDidLoad];
-    self.title = self.groupName;
-    self.isTitleViewHidden = YES;
+    self.title = [kZyxPhotoManager nameOfGroup:self.group];
     // Do any additional setup after loading the view.
     [self addSubviews];
 }
@@ -64,6 +64,51 @@
         make.top.equalTo(self.titleView.mas_bottom);
     }];
 }
+
+- (void)enumPhotosInGroup:(ALAssetsGroup *)group {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSMutableDictionary<NSString *, NSMutableArray<ALAsset *> *> *unuploadAssetsDict = [NSMutableDictionary dictionary];
+        NSMutableDictionary<NSString *, NSMutableArray<ALAsset *> *> *allAssetsDict = [NSMutableDictionary dictionary];
+        NSMutableDictionary<NSString *, NSDate *> *dateStringsDict = [NSMutableDictionary dictionary];
+        
+        [group setAssetsFilter:[ALAssetsFilter allAssets]];
+        [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+            if (asset == nil) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self addAssetsDict:allAssetsDict dateStringsDict:dateStringsDict];
+                });
+                return;
+            }
+            
+            NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+            NSDate *date = [asset valueForProperty:ALAssetPropertyDate];
+            NSString *yyyyMMdd = [DateUtil yyyyMMddStringWithDate:date];
+            dateStringsDict[yyyyMMdd] = date;
+            
+            NSMutableArray<ALAsset *> *allAssets = allAssetsDict[yyyyMMdd];
+            if (allAssets == nil) {
+                allAssets = [NSMutableArray array];
+                allAssetsDict[yyyyMMdd] = allAssets;
+            }
+            [allAssets addObject:asset];
+            
+            if ((index % 200) == 0) {
+                // 这边必须要用dispatch_sync，不能用dispatch_async
+                // 因为这边有清除allAssetsDict和unuploadAssetsDict数据，而这两个数据实在后台线程中修改的
+                // 如果使用dispatch_async，那么函数会直接返回继续下个循环，在下个循环中会向这两个字典中添加数据，
+                // 而此时在主线程中会更新UI, 并且会将这两个数据源清空，这时后台线程就有可能正在操作字典里面的数据，
+                // 导致操作被释放的数据，引起异常。
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self addAssetsDict:allAssetsDict dateStringsDict:dateStringsDict];
+                    
+                    [allAssetsDict removeAllObjects];
+                    [unuploadAssetsDict removeAllObjects];
+                });
+            }
+        }];
+    });
+}
+
 
 - (NSMutableSet<ALAsset *> *)selectedPhotos {
     NSMutableSet<ALAsset *> *assets = [NSMutableSet set];
