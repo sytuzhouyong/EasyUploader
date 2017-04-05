@@ -10,7 +10,7 @@
 
 #define kFormatStringJoiner         @" ## "
 #define kParamStringPlaceholder     @"%s"
-#define kPrefixString               @"XHC_"
+#define kPrefixString               @"EU_"
 #define kParamStringJoiner          @", "
 
 @interface LanguagTranslateUtil ()

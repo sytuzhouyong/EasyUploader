@@ -14,7 +14,6 @@
 		2503921A1E65C758002062F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250392181E65C758002062F0 /* LaunchScreen.storyboard */; };
 		250392251E65C758002062F0 /* EasyUploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250392241E65C758002062F0 /* EasyUploaderTests.m */; };
 		250392301E65C758002062F0 /* EasyUploaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503922F1E65C758002062F0 /* EasyUploaderUITests.m */; };
-		2508F3481E7D78C000217772 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2508F3461E7D78C000217772 /* Main.storyboard */; };
 		2508F34C1E7D7AD400217772 /* AlbumPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F34B1E7D7AD400217772 /* AlbumPhotosViewController.m */; };
 		2508F34F1E7D7AFA00217772 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F34E1E7D7AFA00217772 /* BaseViewController.m */; };
 		2508F3561E7D7B2500217772 /* ZyxImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3511E7D7B2500217772 /* ZyxImagePickerController.m */; };
@@ -33,6 +32,8 @@
 		2524D2EB1E817BDB001075C0 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2524D2F01E817EA4001075C0 /* UINormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2ED1E817EA4001075C0 /* UINormalTableViewCell.m */; };
 		2524D2F11E817EA4001075C0 /* UITextField+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2EF1E817EA4001075C0 /* UITextField+extend.m */; };
+		25D853011E95361300A6BA04 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25D853001E95361300A6BA04 /* zh-Hans.plist */; };
+		25D853031E95362D00A6BA04 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25D853021E95362D00A6BA04 /* en.plist */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
 		B2E4EFD313F359690997E2B5 /* libPods-EasyUploaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD63AFD981F83625EDC9589 /* libPods-EasyUploaderTests.a */; };
 		F89407846E1599FCA3F8E031 /* libPods-EasyUploaderUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B807D0790021F0E66A695D /* libPods-EasyUploaderUITests.a */; };
@@ -72,7 +73,6 @@
 		2503922B1E65C758002062F0 /* EasyUploaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyUploaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2503922F1E65C758002062F0 /* EasyUploaderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyUploaderUITests.m; sourceTree = "<group>"; };
 		250392311E65C758002062F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2508F3471E7D78C000217772 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2508F34A1E7D7AD400217772 /* AlbumPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumPhotosViewController.h; sourceTree = "<group>"; };
 		2508F34B1E7D7AD400217772 /* AlbumPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosViewController.m; sourceTree = "<group>"; };
 		2508F34D1E7D7AFA00217772 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -111,6 +111,8 @@
 		2524D2ED1E817EA4001075C0 /* UINormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINormalTableViewCell.m; sourceTree = "<group>"; };
 		2524D2EE1E817EA4001075C0 /* UITextField+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+extend.h"; sourceTree = "<group>"; };
 		2524D2EF1E817EA4001075C0 /* UITextField+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+extend.m"; sourceTree = "<group>"; };
+		25D853001E95361300A6BA04 /* zh-Hans.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "zh-Hans.plist"; sourceTree = "<group>"; };
+		25D853021E95362D00A6BA04 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
 		2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploader.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploader/Pods-EasyUploader.release.xcconfig"; sourceTree = "<group>"; };
 		3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F06F99B7DAEEABA4061A1A2 /* Pods-EasyUploaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderTests/Pods-EasyUploaderTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -182,11 +184,12 @@
 				250392101E65C758002062F0 /* ViewController.h */,
 				250392111E65C758002062F0 /* ViewController.m */,
 				250392161E65C758002062F0 /* Assets.xcassets */,
-				2508F3461E7D78C000217772 /* Main.storyboard */,
 				250392181E65C758002062F0 /* LaunchScreen.storyboard */,
 				2503921B1E65C758002062F0 /* Info.plist */,
 				2503920A1E65C758002062F0 /* Supporting Files */,
 				2508F35F1E7D7EDA00217772 /* PrefixHeader.pch */,
+				25D853001E95361300A6BA04 /* zh-Hans.plist */,
+				25D853021E95362D00A6BA04 /* en.plist */,
 			);
 			path = EasyUploader;
 			sourceTree = "<group>";
@@ -430,8 +433,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2508F3481E7D78C000217772 /* Main.storyboard in Resources */,
+				25D853011E95361300A6BA04 /* zh-Hans.plist in Resources */,
 				2503921A1E65C758002062F0 /* LaunchScreen.storyboard in Resources */,
+				25D853031E95362D00A6BA04 /* en.plist in Resources */,
 				250392171E65C758002062F0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,14 +662,6 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		2508F3461E7D78C000217772 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2508F3471E7D78C000217772 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -769,6 +765,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sytuzhouyong.EasyUploader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 			};
 			name = Debug;
 		};
@@ -784,6 +781,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sytuzhouyong.EasyUploader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "-Wno-deprecated-declarations";
 			};
 			name = Release;
 		};

@@ -7,19 +7,28 @@
 //
 
 #import "ViewController.h"
+#import "ZyxImagePickerController.h"
 
 @interface ViewController ()
 
 @end
 
-@implementation ViewController
+@implementation ViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    ZyxImagePickerController *vc = [[ZyxImagePickerController alloc] init];
+    vc.selectionMode = ZyxImagePickerSelectionModeNone;
+    vc.imagePickerDelegate = self;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)zyxImagePickrController:(ZyxImagePickerController *)picker didFinishPickingMedioWithInfos:(NSArray<NSDictionary *> *)infos {
+    NSLog(@"111111");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -49,6 +49,7 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
                 dispatch_semaphore_signal(semaphore);
             } else {
                 [groups addObject:group];
+                NSLog(@"add group: %@", [group valueForProperty:ALAssetsGroupPropertyName]);
             }
         } failureBlock:^(NSError *error) {
             [weakself enumerateErrorHandler:error];

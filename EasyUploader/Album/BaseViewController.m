@@ -64,7 +64,7 @@
     }
     
     [self addTitleView];
-    [self addGestureRecognizers];
+//    [self addGestureRecognizers];
     
     self.barButtonVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.isKeyboardHideWhenTapOnView = YES;
