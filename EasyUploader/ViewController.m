@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     ZyxImagePickerController *vc = [[ZyxImagePickerController alloc] init];
     vc.selectionMode = ZyxImagePickerSelectionModeNone;
 //    vc.imagePickerDelegate = self;

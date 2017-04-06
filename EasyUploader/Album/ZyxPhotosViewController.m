@@ -47,6 +47,13 @@
     self.title = [kZyxPhotoManager nameOfGroup:self.group];
     // Do any additional setup after loading the view.
     [self addSubviews];
+    [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectButtonPressed"];
+}
+
+- (void)selectButtonPressed {
+    self.rightBarButtonTitle = Text(self.isSelectAll ? @"CancelSelectAll" : @"SelectAll");
+    self.isSelectAll = !self.isSelectAll;
+//    self.selectedPhotos = [self selectedPhotos];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -80,7 +87,7 @@
                 return;
             }
             
-            NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+//            NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
             NSDate *date = [asset valueForProperty:ALAssetPropertyDate];
             NSString *yyyyMMdd = [DateUtil yyyyMMddStringWithDate:date];
             dateStringsDict[yyyyMMdd] = date;

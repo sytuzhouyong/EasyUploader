@@ -8,5 +8,7 @@
 	<string>选择相册</string>
 	<key>SelectAll</key>
 	<string>全选</string>
+	<key>CancelSelectAll</key>
+	<string>取消全选</string>
 </dict>
 </plist>

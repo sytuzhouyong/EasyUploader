@@ -86,7 +86,8 @@
     [super setSelected:selected];
     
     NSString *imageName = ImageNameOfSelectedState(selected);
-    self.selectedStateImageView.image = [UIImage imageNamed:imageName];
+    UIImage *image = [UIImage imageNamed:imageName];
+    self.selectedStateImageView.image = image;
 }
 
 @end

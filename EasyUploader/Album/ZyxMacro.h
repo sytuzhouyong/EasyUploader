@@ -99,7 +99,7 @@ typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
 
 
 #define ImageNameOfSelectedState(_s) \
-    _s ? @"icon_selected_round_blue" : @"icon_unselected_round_gray"
+    _s ? @"icon_round_selected_blue" : @"icon_round_unselected_gray"
 #define AddButtonEvent(_b, _e)  \
     [_b addTarget:self action:NSSelectorFromString(_e) forControlEvents:UIControlEventTouchUpInside]
 #define AddButtonEventTarget(_t, _b, _e) \
