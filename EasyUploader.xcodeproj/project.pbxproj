@@ -34,6 +34,7 @@
 		2524D2F11E817EA4001075C0 /* UITextField+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2EF1E817EA4001075C0 /* UITextField+extend.m */; };
 		25D853011E95361300A6BA04 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25D853001E95361300A6BA04 /* zh-Hans.plist */; };
 		25D853031E95362D00A6BA04 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25D853021E95362D00A6BA04 /* en.plist */; };
+		25D853081E96975D00A6BA04 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D853071E96975D00A6BA04 /* QiniuUploadManager.m */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
 		B2E4EFD313F359690997E2B5 /* libPods-EasyUploaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD63AFD981F83625EDC9589 /* libPods-EasyUploaderTests.a */; };
 		F89407846E1599FCA3F8E031 /* libPods-EasyUploaderUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B807D0790021F0E66A695D /* libPods-EasyUploaderUITests.a */; };
@@ -113,6 +114,8 @@
 		2524D2EF1E817EA4001075C0 /* UITextField+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+extend.m"; sourceTree = "<group>"; };
 		25D853001E95361300A6BA04 /* zh-Hans.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "zh-Hans.plist"; sourceTree = "<group>"; };
 		25D853021E95362D00A6BA04 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
+		25D853061E96975D00A6BA04 /* QiniuUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QiniuUploadManager.h; path = Qiniu/QiniuUploadManager.h; sourceTree = "<group>"; };
+		25D853071E96975D00A6BA04 /* QiniuUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QiniuUploadManager.m; path = Qiniu/QiniuUploadManager.m; sourceTree = "<group>"; };
 		2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploader.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploader/Pods-EasyUploader.release.xcconfig"; sourceTree = "<group>"; };
 		3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F06F99B7DAEEABA4061A1A2 /* Pods-EasyUploaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderTests/Pods-EasyUploaderTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +180,7 @@
 		250392091E65C758002062F0 /* EasyUploader */ = {
 			isa = PBXGroup;
 			children = (
+				25D853051E96970E00A6BA04 /* Qiniu */,
 				2524D2DF1E817BDB001075C0 /* ThirdParty */,
 				2508F3491E7D7AD400217772 /* Album */,
 				2503920D1E65C758002062F0 /* AppDelegate.h */,
@@ -292,6 +296,15 @@
 				2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */,
 			);
 			path = KeychainWrapper;
+			sourceTree = "<group>";
+		};
+		25D853051E96970E00A6BA04 /* Qiniu */ = {
+			isa = PBXGroup;
+			children = (
+				25D853061E96975D00A6BA04 /* QiniuUploadManager.h */,
+				25D853071E96975D00A6BA04 /* QiniuUploadManager.m */,
+			);
+			name = Qiniu;
 			sourceTree = "<group>";
 		};
 		5D8780288547C981C44BD48A /* Pods */ = {
@@ -612,6 +625,7 @@
 				2508F34F1E7D7AFA00217772 /* BaseViewController.m in Sources */,
 				2524D2EA1E817BDB001075C0 /* IPAddress.m in Sources */,
 				2503920F1E65C758002062F0 /* AppDelegate.m in Sources */,
+				25D853081E96975D00A6BA04 /* QiniuUploadManager.m in Sources */,
 				2524D2F11E817EA4001075C0 /* UITextField+extend.m in Sources */,
 				2503920C1E65C758002062F0 /* main.m in Sources */,
 				2524D2D81E7D85D0001075C0 /* DeviceUtil.m in Sources */,
