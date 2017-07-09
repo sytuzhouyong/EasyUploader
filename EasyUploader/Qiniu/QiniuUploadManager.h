@@ -10,4 +10,6 @@
 
 @interface QiniuUploadManager : NSObject
 
+- (NSString *)makeUploadTokenWithAccessKey:(NSString *)accessKey secretKey:(NSString *)secretKey;
+
 @end

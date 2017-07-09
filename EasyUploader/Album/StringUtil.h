@@ -27,7 +27,7 @@
 + (NSString *)descriptionOfSpeed:(UInt64)speed;
 
 // 128 AES CBC NoPadding
-+ (NSString *)AES128Encrypt:(NSString *)plainText;
+//+ (NSString *)AES128Encrypt:(NSString *)plainText;
 + (NSString *)md5:(NSString *)string;
 
 + (NSString *)toUnicode:(NSString *)plainText;
