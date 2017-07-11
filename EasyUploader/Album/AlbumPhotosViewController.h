@@ -7,11 +7,11 @@
 //
 
 #import "BaseViewController.h"
-#import "ZyxImagePickerController.h"
+#import "ZyxPickAlbumViewController.h"
 
 @interface AlbumPhotosViewController : BaseViewController
 
 @property (nonatomic, strong) ALAssetsGroup *group;
-@property (nonatomic, weak  ) id<ZyxImagePickerControllerDelegate> imagePickerDelegate;
+@property (nonatomic, weak  ) id<ZyxPickAlbumViewControllerDelegate> imagePickerDelegate;
 
 @end

@@ -8,9 +8,9 @@
 
 #import "ZyxPhotoManager.h"
 #import <AVFoundation/AVFoundation.h>
-#ifdef __IPHONE_8_0
-#import <Photos/Photos.h>
-#endif
+//#ifdef __IPHONE_8_0
+//#import <Photos/Photos.h>
+//#endif
 
 @interface ZyxPhotoManager ()
 
@@ -26,13 +26,13 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
 - (id)init {
     if (self= [super init]) {
         _assetsLibrary = [[ALAssetsLibrary alloc] init];
-        kWeakself;
-        [self addGroupNamed:@"XHC" withSuccessBlock:^(ALAssetsGroup *group) {
-            DDLogInfo(@"yes, group[XHC] ready!");
-            weakself.appGroup = group;
-        } failureBlock:^(NSString *groupName, NSError *error) {
-            DDLogInfo(@"oh no, create group[XHC] failed!");
-        }];
+//        kWeakself;
+//        [self addGroupNamed:@"XHC" withSuccessBlock:^(ALAssetsGroup *group) {
+//            DDLogInfo(@"yes, group[XHC] ready!");
+//            weakself.appGroup = group;
+//        } failureBlock:^(NSString *groupName, NSError *error) {
+//            DDLogInfo(@"oh no, create group[XHC] failed!");
+//        }];
     }
     return self;
 }
@@ -448,7 +448,7 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
         return;
     }
     
-    // 先判断有没有对应的group
+    // 再判断有没有对应的group
     __block ALAssetsGroup *theGroup = nil;
     kWeakself;
     
@@ -487,30 +487,30 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
     }
     
     // 创建相册
-#ifdef __IPHONE_8_0
-    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-        [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:name];
-    } completionHandler:^(BOOL success, NSError *error) {
-        if (!success) {
-            DDLogError(@"create group(%@) failed", name);
-            ExecuteBlock2IfNotNil(failureBlock, name, error);
-            return;
-        }
-        
-        DDLogInfo(@"create group(%@) success", name);
-        [_assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if (group == nil) {
-                return;
-            }
-            
-            NSString *groupName = [group valueForProperty:ALAssetsGroupPropertyName];
-            if ([name isEqualToString:groupName]) {
-                successBlock(group);
-                *stop = YES;
-            }
-        } failureBlock:nil];
-    }];
-#else
+//#ifdef __IPHONE_8_0
+//    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+//        [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:name];
+//    } completionHandler:^(BOOL success, NSError *error) {
+//        if (!success) {
+//            DDLogError(@"create group(%@) failed", name);
+//            ExecuteBlock2IfNotNil(failureBlock, name, error);
+//            return;
+//        }
+//        
+//        DDLogInfo(@"create group(%@) success", name);
+//        [_assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+//            if (group == nil) {
+//                return;
+//            }
+//            
+//            NSString *groupName = [group valueForProperty:ALAssetsGroupPropertyName];
+//            if ([name isEqualToString:groupName]) {
+//                successBlock(group);
+//                *stop = YES;
+//            }
+//        } failureBlock:nil];
+//    }];
+//#else
     [_assetsLibrary addAssetsGroupAlbumWithName:name resultBlock:^(ALAssetsGroup *group) {
         if (group == nil) {
             DDLogError(@"create group(%@) failed", name);
@@ -522,7 +522,7 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
     } failureBlock:^(NSError *error) {
         failureBlock(name, error);
     }];
-#endif
+//#endif
 }
 
 - (void)saveImageAtPath:(NSString *)path toGroupNamed:(NSString *)group successBlock:(void (^)(void))successBlock failureBlock:(void (^)(NSError *error))failureBlock {

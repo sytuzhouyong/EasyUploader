@@ -140,7 +140,7 @@
     }
     
     if ([_imagePickerDelegate respondsToSelector:@selector(zyxImagePickrController:didFinishPickingMedioWithInfos:)]) {
-        ZyxImagePickerController *picker = (ZyxImagePickerController *)self.parentViewController;
+        ZyxPickAlbumViewController *picker = (ZyxPickAlbumViewController *)self.parentViewController;
         [_imagePickerDelegate zyxImagePickrController:picker didFinishPickingMedioWithInfos:infos];
     }
 }

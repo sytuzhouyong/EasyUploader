@@ -14,7 +14,7 @@
 #define kPhotoSectionHeaderIdentifier   @"ZyxPhotoSectionHeader"
 #define kPhotoSectionFooterIdentifier   @"ZyxPhotoSectionFooter"
 
-@interface ZyxPhotosViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ZyxImagePickerControllerDelegate>
+@interface ZyxPhotosViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ZyxPickAlbumViewControllerDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) ALAssetsGroup *group;

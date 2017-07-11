@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "ZyxImagePickerController.h"
+#import "ZyxPickAlbumViewController.h"
 
 @class ALAssetsGroup;
 
@@ -24,7 +24,7 @@
 @property (nonatomic, assign) CGFloat cellSpacing;
 @property (nonatomic, assign) BOOL isSelectAll;
 @property (nonatomic, assign) ZyxImagePickerSelectionMode selectionMode;
-@property (nonatomic, weak  ) id<ZyxImagePickerControllerDelegate> imagePickerDelegate;
+@property (nonatomic, weak  ) id<ZyxPickAlbumViewControllerDelegate> imagePickerDelegate;
 @property (nonatomic, weak  ) id<ZyxSelectPhotoDelegate> selectDelegate;
 
 - (instancetype)initWithAssetsGroup:(ALAssetsGroup *)group;

@@ -11,5 +11,6 @@
 @interface QiniuUploadManager : NSObject
 
 - (NSString *)makeUploadTokenWithAccessKey:(NSString *)accessKey secretKey:(NSString *)secretKey;
+- (void)uploadALAsset:(ALAsset *)asset;
 
 @end

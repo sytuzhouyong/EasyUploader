@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ZyxImagePickerController.h"
+#import "ZyxPickAlbumViewController.h"
 
 @interface ViewController ()
 
@@ -19,13 +19,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    ZyxImagePickerController *vc = [[ZyxImagePickerController alloc] init];
+    ZyxPickAlbumViewController *vc = [[ZyxPickAlbumViewController alloc] init];
     vc.selectionMode = ZyxImagePickerSelectionModeNone;
 //    vc.imagePickerDelegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)zyxImagePickrController:(ZyxImagePickerController *)picker didFinishPickingMedioWithInfos:(NSArray<NSDictionary *> *)infos {
+- (void)zyxImagePickrController:(ZyxPickAlbumViewController *)picker didFinishPickingMedioWithInfos:(NSArray<NSDictionary *> *)infos {
     NSLog(@"111111");
 }
 

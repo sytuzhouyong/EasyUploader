@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZyxImagePickerController.h"
+#import "ZyxPickAlbumViewController.h"
 
 @class ALAsset;
 

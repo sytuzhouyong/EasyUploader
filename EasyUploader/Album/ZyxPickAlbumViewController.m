@@ -1,19 +1,19 @@
 //
-//  ZyxImagePickerController.m
+//  ZyxPickAlbumViewController.m
 //  TestReadImage
 //
 //  Created by zhouyong on 12/25/15.
 //  Copyright © 2015 zhouyong. All rights reserved.
 //
 
-#import "ZyxImagePickerController.h"
+#import "ZyxPickAlbumViewController.h"
 #import "ZyxPhotosViewController.h"
 #import "UINormalTableViewCell.h"
 
-#define kCellIdentifier  @"ZyxImagePickerControllerCell"
+#define kCellIdentifier  @"ZyxPickAlbumViewControllerCell"
 
-@interface ZyxImagePickerController () <UITableViewDataSource, UITableViewDelegate,
-    ZyxImagePickerControllerDelegate>
+@interface ZyxPickAlbumViewController () <UITableViewDataSource, UITableViewDelegate,
+    ZyxPickAlbumViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray<ALAssetsGroup *> *groups;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation ZyxImagePickerController
+@implementation ZyxPickAlbumViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -81,9 +81,9 @@
     self.title = [NSString stringWithFormat:Text(@"SelectedItemsCount"), @(count-1)];
 }
 
-#pragma mark - ZyxImagePickerControllerDelegate Methods
+#pragma mark - ZyxPickAlbumViewControllerDelegate Methods
 
-- (void)zyxImagePickrController:(ZyxImagePickerController *)picker didFinishPickingMedioWithInfos:(NSArray<NSDictionary *> *)infos {
+- (void)zyxImagePickrController:(ZyxPickAlbumViewController *)picker didFinishPickingMedioWithInfos:(NSArray<NSDictionary *> *)infos {
     if ([_imagePickerDelegate respondsToSelector:@selector(zyxImagePickrController:didFinishPickingMedioWithInfos:)]) {
         [_imagePickerDelegate zyxImagePickrController:self didFinishPickingMedioWithInfos:infos];
     }

@@ -16,22 +16,22 @@
 		250392301E65C758002062F0 /* EasyUploaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503922F1E65C758002062F0 /* EasyUploaderUITests.m */; };
 		2508F34C1E7D7AD400217772 /* AlbumPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F34B1E7D7AD400217772 /* AlbumPhotosViewController.m */; };
 		2508F34F1E7D7AFA00217772 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F34E1E7D7AFA00217772 /* BaseViewController.m */; };
-		2508F3561E7D7B2500217772 /* ZyxImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3511E7D7B2500217772 /* ZyxImagePickerController.m */; };
+		2508F3561E7D7B2500217772 /* ZyxPickAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3511E7D7B2500217772 /* ZyxPickAlbumViewController.m */; };
 		2508F3571E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */; };
 		2508F3581E7D7B2500217772 /* ZyxPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3551E7D7B2500217772 /* ZyxPhotosViewController.m */; };
 		2508F35B1E7D7BFF00217772 /* ZyxPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F35A1E7D7BFF00217772 /* ZyxPhotoManager.m */; };
 		2508F35D1E7D7C3600217772 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */; };
-		2524D2CE1E7D851D001075C0 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2CD1E7D851D001075C0 /* DateUtil.m */; };
 		2524D2D71E7D85D0001075C0 /* DDLogCustomFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2CF1E7D85D0001075C0 /* DDLogCustomFormatter.m */; };
-		2524D2D81E7D85D0001075C0 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2D21E7D85D0001075C0 /* DeviceUtil.m */; };
-		2524D2D91E7D85D0001075C0 /* LanguagTranslateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2D41E7D85D0001075C0 /* LanguagTranslateUtil.m */; };
-		2524D2DA1E7D85D0001075C0 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2D61E7D85D0001075C0 /* StringUtil.m */; };
-		2524D2DD1E81775F001075C0 /* UIView+FrameExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2DC1E81775F001075C0 /* UIView+FrameExtension.m */; };
 		2524D2E91E817BDB001075C0 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E21E817BDB001075C0 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2524D2EA1E817BDB001075C0 /* IPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E51E817BDB001075C0 /* IPAddress.m */; };
 		2524D2EB1E817BDB001075C0 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2524D2F01E817EA4001075C0 /* UINormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2ED1E817EA4001075C0 /* UINormalTableViewCell.m */; };
-		2524D2F11E817EA4001075C0 /* UITextField+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2EF1E817EA4001075C0 /* UITextField+extend.m */; };
+		25A45C641F151DE3006299E0 /* UITextField+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C581F151DE3006299E0 /* UITextField+extend.m */; };
+		25A45C651F151DE3006299E0 /* UIView+FrameExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5A1F151DE3006299E0 /* UIView+FrameExtension.m */; };
+		25A45C661F151DE3006299E0 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5D1F151DE3006299E0 /* DateUtil.m */; };
+		25A45C671F151DE3006299E0 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5F1F151DE3006299E0 /* DeviceUtil.m */; };
+		25A45C681F151DE3006299E0 /* LanguagTranslateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C611F151DE3006299E0 /* LanguagTranslateUtil.m */; };
+		25A45C691F151DE3006299E0 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C631F151DE3006299E0 /* StringUtil.m */; };
 		25D853011E95361300A6BA04 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25D853001E95361300A6BA04 /* zh-Hans.plist */; };
 		25D853031E95362D00A6BA04 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25D853021E95362D00A6BA04 /* en.plist */; };
 		25D853081E96975D00A6BA04 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D853071E96975D00A6BA04 /* QiniuUploadManager.m */; };
@@ -78,8 +78,8 @@
 		2508F34B1E7D7AD400217772 /* AlbumPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosViewController.m; sourceTree = "<group>"; };
 		2508F34D1E7D7AFA00217772 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		2508F34E1E7D7AFA00217772 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		2508F3501E7D7B2500217772 /* ZyxImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxImagePickerController.h; sourceTree = "<group>"; };
-		2508F3511E7D7B2500217772 /* ZyxImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxImagePickerController.m; sourceTree = "<group>"; };
+		2508F3501E7D7B2500217772 /* ZyxPickAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPickAlbumViewController.h; sourceTree = "<group>"; };
+		2508F3511E7D7B2500217772 /* ZyxPickAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPickAlbumViewController.m; sourceTree = "<group>"; };
 		2508F3521E7D7B2500217772 /* ZyxPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		2508F3541E7D7B2500217772 /* ZyxPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotosViewController.h; sourceTree = "<group>"; };
@@ -89,18 +89,8 @@
 		2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		2508F35E1E7D7E4800217772 /* ZyxSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxSingleton.h; sourceTree = "<group>"; };
 		2508F35F1E7D7EDA00217772 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		2524D2CC1E7D851D001075C0 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
-		2524D2CD1E7D851D001075C0 /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
 		2524D2CF1E7D85D0001075C0 /* DDLogCustomFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLogCustomFormatter.m; sourceTree = "<group>"; };
-		2524D2D01E7D85D0001075C0 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
 		2524D2D11E7D85D0001075C0 /* DDLogCustomFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogCustomFormatter.h; sourceTree = "<group>"; };
-		2524D2D21E7D85D0001075C0 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtil.m; sourceTree = "<group>"; };
-		2524D2D31E7D85D0001075C0 /* LanguagTranslateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagTranslateUtil.h; sourceTree = "<group>"; };
-		2524D2D41E7D85D0001075C0 /* LanguagTranslateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagTranslateUtil.m; sourceTree = "<group>"; };
-		2524D2D51E7D85D0001075C0 /* StringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtil.h; sourceTree = "<group>"; };
-		2524D2D61E7D85D0001075C0 /* StringUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtil.m; sourceTree = "<group>"; };
-		2524D2DB1E81775F001075C0 /* UIView+FrameExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameExtension.h"; sourceTree = "<group>"; };
-		2524D2DC1E81775F001075C0 /* UIView+FrameExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameExtension.m"; sourceTree = "<group>"; };
 		2524D2DE1E8178B5001075C0 /* ZyxMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZyxMacro.h; sourceTree = "<group>"; };
 		2524D2E11E817BDB001075C0 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		2524D2E21E817BDB001075C0 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
@@ -110,8 +100,18 @@
 		2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		2524D2EC1E817EA4001075C0 /* UINormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINormalTableViewCell.h; sourceTree = "<group>"; };
 		2524D2ED1E817EA4001075C0 /* UINormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINormalTableViewCell.m; sourceTree = "<group>"; };
-		2524D2EE1E817EA4001075C0 /* UITextField+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+extend.h"; sourceTree = "<group>"; };
-		2524D2EF1E817EA4001075C0 /* UITextField+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+extend.m"; sourceTree = "<group>"; };
+		25A45C571F151DE3006299E0 /* UITextField+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+extend.h"; sourceTree = "<group>"; };
+		25A45C581F151DE3006299E0 /* UITextField+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+extend.m"; sourceTree = "<group>"; };
+		25A45C591F151DE3006299E0 /* UIView+FrameExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameExtension.h"; sourceTree = "<group>"; };
+		25A45C5A1F151DE3006299E0 /* UIView+FrameExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameExtension.m"; sourceTree = "<group>"; };
+		25A45C5C1F151DE3006299E0 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
+		25A45C5D1F151DE3006299E0 /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
+		25A45C5E1F151DE3006299E0 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
+		25A45C5F1F151DE3006299E0 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtil.m; sourceTree = "<group>"; };
+		25A45C601F151DE3006299E0 /* LanguagTranslateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagTranslateUtil.h; sourceTree = "<group>"; };
+		25A45C611F151DE3006299E0 /* LanguagTranslateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagTranslateUtil.m; sourceTree = "<group>"; };
+		25A45C621F151DE3006299E0 /* StringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtil.h; sourceTree = "<group>"; };
+		25A45C631F151DE3006299E0 /* StringUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtil.m; sourceTree = "<group>"; };
 		25D853001E95361300A6BA04 /* zh-Hans.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "zh-Hans.plist"; sourceTree = "<group>"; };
 		25D853021E95362D00A6BA04 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
 		25D853061E96975D00A6BA04 /* QiniuUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QiniuUploadManager.h; path = Qiniu/QiniuUploadManager.h; sourceTree = "<group>"; };
@@ -180,20 +180,22 @@
 		250392091E65C758002062F0 /* EasyUploader */ = {
 			isa = PBXGroup;
 			children = (
-				25D853051E96970E00A6BA04 /* Qiniu */,
-				2524D2DF1E817BDB001075C0 /* ThirdParty */,
 				2508F3491E7D7AD400217772 /* Album */,
 				2503920D1E65C758002062F0 /* AppDelegate.h */,
 				2503920E1E65C758002062F0 /* AppDelegate.m */,
+				250392161E65C758002062F0 /* Assets.xcassets */,
+				25D853021E95362D00A6BA04 /* en.plist */,
+				25A45C561F151DE3006299E0 /* Extensions */,
+				2503921B1E65C758002062F0 /* Info.plist */,
+				250392181E65C758002062F0 /* LaunchScreen.storyboard */,
+				2508F35F1E7D7EDA00217772 /* PrefixHeader.pch */,
+				25D853051E96970E00A6BA04 /* Qiniu */,
+				2503920A1E65C758002062F0 /* Supporting Files */,
+				2524D2DF1E817BDB001075C0 /* ThirdParty */,
+				25A45C5B1F151DE3006299E0 /* Utils */,
 				250392101E65C758002062F0 /* ViewController.h */,
 				250392111E65C758002062F0 /* ViewController.m */,
-				250392161E65C758002062F0 /* Assets.xcassets */,
-				250392181E65C758002062F0 /* LaunchScreen.storyboard */,
-				2503921B1E65C758002062F0 /* Info.plist */,
-				2503920A1E65C758002062F0 /* Supporting Files */,
-				2508F35F1E7D7EDA00217772 /* PrefixHeader.pch */,
 				25D853001E95361300A6BA04 /* zh-Hans.plist */,
-				25D853021E95362D00A6BA04 /* en.plist */,
 			);
 			path = EasyUploader;
 			sourceTree = "<group>";
@@ -229,26 +231,14 @@
 			children = (
 				2524D2EC1E817EA4001075C0 /* UINormalTableViewCell.h */,
 				2524D2ED1E817EA4001075C0 /* UINormalTableViewCell.m */,
-				2524D2EE1E817EA4001075C0 /* UITextField+extend.h */,
-				2524D2EF1E817EA4001075C0 /* UITextField+extend.m */,
 				2508F34A1E7D7AD400217772 /* AlbumPhotosViewController.h */,
 				2508F34B1E7D7AD400217772 /* AlbumPhotosViewController.m */,
 				2508F34D1E7D7AFA00217772 /* BaseViewController.h */,
 				2508F34E1E7D7AFA00217772 /* BaseViewController.m */,
-				2524D2CC1E7D851D001075C0 /* DateUtil.h */,
-				2524D2CD1E7D851D001075C0 /* DateUtil.m */,
 				2524D2D11E7D85D0001075C0 /* DDLogCustomFormatter.h */,
 				2524D2CF1E7D85D0001075C0 /* DDLogCustomFormatter.m */,
-				2524D2D01E7D85D0001075C0 /* DeviceUtil.h */,
-				2524D2D21E7D85D0001075C0 /* DeviceUtil.m */,
-				2524D2D31E7D85D0001075C0 /* LanguagTranslateUtil.h */,
-				2524D2D41E7D85D0001075C0 /* LanguagTranslateUtil.m */,
-				2524D2D51E7D85D0001075C0 /* StringUtil.h */,
-				2524D2D61E7D85D0001075C0 /* StringUtil.m */,
-				2524D2DB1E81775F001075C0 /* UIView+FrameExtension.h */,
-				2524D2DC1E81775F001075C0 /* UIView+FrameExtension.m */,
-				2508F3501E7D7B2500217772 /* ZyxImagePickerController.h */,
-				2508F3511E7D7B2500217772 /* ZyxImagePickerController.m */,
+				2508F3501E7D7B2500217772 /* ZyxPickAlbumViewController.h */,
+				2508F3511E7D7B2500217772 /* ZyxPickAlbumViewController.m */,
 				2508F3521E7D7B2500217772 /* ZyxPhotoCollectionViewCell.h */,
 				2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */,
 				2508F3591E7D7BFF00217772 /* ZyxPhotoManager.h */,
@@ -296,6 +286,32 @@
 				2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */,
 			);
 			path = KeychainWrapper;
+			sourceTree = "<group>";
+		};
+		25A45C561F151DE3006299E0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				25A45C571F151DE3006299E0 /* UITextField+extend.h */,
+				25A45C581F151DE3006299E0 /* UITextField+extend.m */,
+				25A45C591F151DE3006299E0 /* UIView+FrameExtension.h */,
+				25A45C5A1F151DE3006299E0 /* UIView+FrameExtension.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		25A45C5B1F151DE3006299E0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				25A45C5C1F151DE3006299E0 /* DateUtil.h */,
+				25A45C5D1F151DE3006299E0 /* DateUtil.m */,
+				25A45C5E1F151DE3006299E0 /* DeviceUtil.h */,
+				25A45C5F1F151DE3006299E0 /* DeviceUtil.m */,
+				25A45C601F151DE3006299E0 /* LanguagTranslateUtil.h */,
+				25A45C611F151DE3006299E0 /* LanguagTranslateUtil.m */,
+				25A45C621F151DE3006299E0 /* StringUtil.h */,
+				25A45C631F151DE3006299E0 /* StringUtil.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		25D853051E96970E00A6BA04 /* Qiniu */ = {
@@ -612,26 +628,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2524D2DA1E7D85D0001075C0 /* StringUtil.m in Sources */,
+				25A45C671F151DE3006299E0 /* DeviceUtil.m in Sources */,
 				250392121E65C758002062F0 /* ViewController.m in Sources */,
-				2524D2CE1E7D851D001075C0 /* DateUtil.m in Sources */,
 				2524D2F01E817EA4001075C0 /* UINormalTableViewCell.m in Sources */,
 				2524D2E91E817BDB001075C0 /* GTMBase64.m in Sources */,
 				2508F3571E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m in Sources */,
-				2508F3561E7D7B2500217772 /* ZyxImagePickerController.m in Sources */,
+				2508F3561E7D7B2500217772 /* ZyxPickAlbumViewController.m in Sources */,
 				2508F3581E7D7B2500217772 /* ZyxPhotosViewController.m in Sources */,
 				2508F35B1E7D7BFF00217772 /* ZyxPhotoManager.m in Sources */,
+				25A45C661F151DE3006299E0 /* DateUtil.m in Sources */,
 				2524D2EB1E817BDB001075C0 /* KeychainItemWrapper.m in Sources */,
+				25A45C691F151DE3006299E0 /* StringUtil.m in Sources */,
 				2508F34F1E7D7AFA00217772 /* BaseViewController.m in Sources */,
+				25A45C651F151DE3006299E0 /* UIView+FrameExtension.m in Sources */,
 				2524D2EA1E817BDB001075C0 /* IPAddress.m in Sources */,
 				2503920F1E65C758002062F0 /* AppDelegate.m in Sources */,
 				25D853081E96975D00A6BA04 /* QiniuUploadManager.m in Sources */,
-				2524D2F11E817EA4001075C0 /* UITextField+extend.m in Sources */,
 				2503920C1E65C758002062F0 /* main.m in Sources */,
-				2524D2D81E7D85D0001075C0 /* DeviceUtil.m in Sources */,
 				2524D2D71E7D85D0001075C0 /* DDLogCustomFormatter.m in Sources */,
-				2524D2D91E7D85D0001075C0 /* LanguagTranslateUtil.m in Sources */,
-				2524D2DD1E81775F001075C0 /* UIView+FrameExtension.m in Sources */,
+				25A45C641F151DE3006299E0 /* UITextField+extend.m in Sources */,
+				25A45C681F151DE3006299E0 /* LanguagTranslateUtil.m in Sources */,
 				2508F34C1E7D7AD400217772 /* AlbumPhotosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
