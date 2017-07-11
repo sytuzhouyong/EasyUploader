@@ -1,14 +1,14 @@
 //
-//  UITextField+extend.m
+//  UITextField+Padding.m
 //  XingHomecloud
 //
 //  Created by zte's iMac on 26/11/15.
 //  Copyright © 2015年 zte. All rights reserved.
 //
 
-#import "UITextField+extend.h"
+#import "UITextField+Padding.h"
 
-@implementation UITextField (extend)
+@implementation UITextField (Padding)
 
 +(void)setTextFieldLeftPadding:(UITextField *)textField forWidth:(CGFloat)leftWidth{
     

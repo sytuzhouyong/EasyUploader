@@ -1,11 +1,11 @@
 //
-//  UIView+FrameExtension.m
+//  UIView+Frame.m
 //
 //  Created by zhouyong on 14-11-14.
 //  Copyright (c) 2014年 zhouyong. All rights reserved.
 //
 
-#import "UIView+FrameExtension.h"
+#import "UIView+Frame.h"
 
 @implementation UIView (FrameExtension)
 

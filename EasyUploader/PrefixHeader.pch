@@ -22,7 +22,7 @@
 #import "Masonry.h"
 
 #import "AppDelegate.h"
-#import "UIView+FrameExtension.h"
+#import "UIView+Frame.h"
 #import "ZyxSingleton.h"
 #import "ZyxPhotoManager.h"
 #import "ZyxMacro.h"
