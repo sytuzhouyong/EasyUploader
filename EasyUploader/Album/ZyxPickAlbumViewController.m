@@ -192,7 +192,7 @@
 - (void)didSelectPhoto:(ALAsset *)asset atIndexPath:indexPath {
 //    [self.selectedPhotos addObject:asset];
 
-    [[QiniuUploadManager sharedInstance] uploadALAsset:asset];
+    [[QiniuUploadManager sharedInstance] uploadALAsset:asset withKey:@"ccc"];
 }
 
 - (void)didDeselectPhoto:(ALAsset *)asset atIndexPath:indexPath {

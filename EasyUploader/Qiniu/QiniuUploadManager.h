@@ -12,7 +12,6 @@
 
 SINGLETON_DECLEAR;
 
-- (NSString *)makeUploadTokenWithAccessKey:(NSString *)accessKey secretKey:(NSString *)secretKey;
-- (void)uploadALAsset:(ALAsset *)asset;
+- (void)uploadALAsset:(ALAsset *)asset withKey:(NSString *)key;
 
 @end
