@@ -10,6 +10,8 @@
 
 @interface QiniuUploadManager : NSObject
 
+SINGLETON_DECLEAR;
+
 - (NSString *)makeUploadTokenWithAccessKey:(NSString *)accessKey secretKey:(NSString *)secretKey;
 - (void)uploadALAsset:(ALAsset *)asset;
 

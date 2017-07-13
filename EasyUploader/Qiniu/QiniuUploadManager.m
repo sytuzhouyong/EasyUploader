@@ -19,6 +19,8 @@
 
 @implementation QiniuUploadManager
 
+SINGLETON_IMPLEMENTATION(QiniuUploadManager);
+
 - (NSString *)marshal {
     time_t deadline;
     time(&deadline);    // 返回当前系统时间
@@ -31,7 +33,7 @@
     // 如果只希望上传指定key的文件，并且不允许修改，那么可以将下面的 insertOnly 属性值设为 1。
     // 所以如果参数只传users的话，下次上传key还是aaa的文件会提示存在同名文件，不能上传。
     // 传users:aaa的话，可以覆盖更新，但实测延迟较长，我上传同名新文件上去，下载下来的还是老文件。
-    params[@"scope"] = @"users:aaa";
+    params[@"scope"] = @"easy-uploader:bbb";
     params[@"deadline"] = @(deadline);
     NSString *json = [StringUtil jsonStringFromObject:params];
     return json;
@@ -57,11 +59,11 @@
 
 - (void)uploadALAsset:(ALAsset *)asset {
     NSString *token = [self makeUploadTokenWithAccessKey:kAccessKey secretKey:kSecretKey];
-    NSLog(@"token = %@",token);
+    NSLog(@"upload token = %@",token);
 
     QNUploadManager *manager = [[QNUploadManager alloc] init];
     [manager putALAsset: asset
-                      key: @"aaa"
+                      key: @"bbb"
                     token: token
                  complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
                      NSLog(@"info = %@\n", info);

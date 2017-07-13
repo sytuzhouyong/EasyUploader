@@ -9,6 +9,7 @@
 #import "ZyxPickAlbumViewController.h"
 #import "ZyxPhotosViewController.h"
 #import "UINormalTableViewCell.h"
+#import "QiniuUploadManager.h"
 
 #define kCellIdentifier  @"ZyxPickAlbumViewControllerCell"
 
@@ -184,6 +185,18 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
     }
+}
+
+#pragma mark - ZyxSelectPhotoDelegate Methods
+
+- (void)didSelectPhoto:(ALAsset *)asset atIndexPath:indexPath {
+//    [self.selectedPhotos addObject:asset];
+
+    [[QiniuUploadManager sharedInstance] uploadALAsset:asset];
+}
+
+- (void)didDeselectPhoto:(ALAsset *)asset atIndexPath:indexPath {
+//    [self.selectedPhotos removeObject:asset];
 }
 
 - (void)viewDidLayoutSubviews {

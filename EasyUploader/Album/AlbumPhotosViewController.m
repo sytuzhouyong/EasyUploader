@@ -145,16 +145,6 @@
     }
 }
 
-#pragma mark - ZyxPhotoSelectDelegate Methods
-
-- (void)didSelectPhoto:(ALAsset *)asset atIndexPath:indexPath {
-    [self.selectedPhotos addObject:asset];
-}
-
-- (void)didDeselectPhoto:(ALAsset *)asset atIndexPath:indexPath {
-    [self.selectedPhotos removeObject:asset];
-}
-
 # pragma mark - SlideViewPageChangedDelegate Methods
 
 - (void)slideViewChangeFromIndex:(NSInteger)fromIndex ToIndex:(NSInteger)toIndex {
