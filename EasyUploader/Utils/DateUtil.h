@@ -10,6 +10,8 @@
 
 @interface DateUtil : NSObject
 
++ (NSDateFormatter *)sharedDateFormatter;
+
 + (NSString *)stringFromDate:(NSDate *)date format:(NSString *)format;
 + (NSString *)defaultStringWithDate:(NSDate *)date;
 + (NSString *)yyyyMMddStringWithDate:(NSDate *)date;

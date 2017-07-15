@@ -26,6 +26,7 @@
 		2524D2EA1E817BDB001075C0 /* IPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E51E817BDB001075C0 /* IPAddress.m */; };
 		2524D2EB1E817BDB001075C0 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2524D2F01E817EA4001075C0 /* UINormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2ED1E817EA4001075C0 /* UINormalTableViewCell.m */; };
+		255E14E21F1A272E00411A67 /* ALAssetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14E11F1A272E00411A67 /* ALAssetUtil.m */; };
 		25A45C641F151DE3006299E0 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C581F151DE3006299E0 /* UITextField+Padding.m */; };
 		25A45C651F151DE3006299E0 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5A1F151DE3006299E0 /* UIView+Frame.m */; };
 		25A45C661F151DE3006299E0 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5D1F151DE3006299E0 /* DateUtil.m */; };
@@ -100,6 +101,8 @@
 		2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		2524D2EC1E817EA4001075C0 /* UINormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINormalTableViewCell.h; sourceTree = "<group>"; };
 		2524D2ED1E817EA4001075C0 /* UINormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINormalTableViewCell.m; sourceTree = "<group>"; };
+		255E14E01F1A272E00411A67 /* ALAssetUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAssetUtil.h; sourceTree = "<group>"; };
+		255E14E11F1A272E00411A67 /* ALAssetUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAssetUtil.m; sourceTree = "<group>"; };
 		25A45C571F151DE3006299E0 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		25A45C581F151DE3006299E0 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		25A45C591F151DE3006299E0 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 				25A45C611F151DE3006299E0 /* LanguagTranslateUtil.m */,
 				25A45C621F151DE3006299E0 /* StringUtil.h */,
 				25A45C631F151DE3006299E0 /* StringUtil.m */,
+				255E14E01F1A272E00411A67 /* ALAssetUtil.h */,
+				255E14E11F1A272E00411A67 /* ALAssetUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -647,6 +652,7 @@
 				2503920C1E65C758002062F0 /* main.m in Sources */,
 				2524D2D71E7D85D0001075C0 /* DDLogCustomFormatter.m in Sources */,
 				25A45C641F151DE3006299E0 /* UITextField+Padding.m in Sources */,
+				255E14E21F1A272E00411A67 /* ALAssetUtil.m in Sources */,
 				25A45C681F151DE3006299E0 /* LanguagTranslateUtil.m in Sources */,
 				2508F34C1E7D7AD400217772 /* AlbumPhotosViewController.m in Sources */,
 			);

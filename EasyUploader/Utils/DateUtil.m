@@ -112,11 +112,11 @@
 //    }
 //    return [self stringFromDate:date format:format];
 
-    time_t timep = [date timeIntervalSince1970];
 //    time_t timep;
 //    time(&timep);
+    time_t timep = [date timeIntervalSince1970];
     struct tm *ptm = localtime(&timep);
-    return [NSString stringWithFormat:@"%04d-%02d-%02d", ptm->tm_year+1900, ptm->tm_mon+1, ptm->tm_mday];
+    return [NSString stringWithFormat:@"%4d-%02d-%02d", ptm->tm_year+1900, ptm->tm_mon+1, ptm->tm_mday];
 }
 
 + (NSString *)MMddStringWithDate:(NSDate *)date {
