@@ -18,7 +18,6 @@
 		2508F3561E7D7B2500217772 /* ZyxPickAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3511E7D7B2500217772 /* ZyxPickAlbumViewController.m */; };
 		2508F3571E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */; };
 		2508F3581E7D7B2500217772 /* ZyxPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3551E7D7B2500217772 /* ZyxPhotosViewController.m */; };
-		2508F35B1E7D7BFF00217772 /* ZyxPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F35A1E7D7BFF00217772 /* ZyxPhotoManager.m */; };
 		2508F35D1E7D7C3600217772 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */; };
 		2524D2E91E817BDB001075C0 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E21E817BDB001075C0 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2524D2EA1E817BDB001075C0 /* IPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E51E817BDB001075C0 /* IPAddress.m */; };
@@ -29,6 +28,7 @@
 		255E14EC1F1D09BA00411A67 /* UINormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14E91F1D09BA00411A67 /* UINormalTableViewCell.m */; };
 		255E14F01F1D0B6F00411A67 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */; };
 		255E14F31F1D0B8B00411A67 /* QiniuResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14F21F1D0B8B00411A67 /* QiniuResourceManager.m */; };
+		255E14F61F1D0F2D00411A67 /* ZyxPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14F51F1D0F2D00411A67 /* ZyxPhotoManager.m */; };
 		25A45C641F151DE3006299E0 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C581F151DE3006299E0 /* UITextField+Padding.m */; };
 		25A45C651F151DE3006299E0 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5A1F151DE3006299E0 /* UIView+Frame.m */; };
 		25A45C661F151DE3006299E0 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5D1F151DE3006299E0 /* DateUtil.m */; };
@@ -84,8 +84,6 @@
 		2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		2508F3541E7D7B2500217772 /* ZyxPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotosViewController.h; sourceTree = "<group>"; };
 		2508F3551E7D7B2500217772 /* ZyxPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotosViewController.m; sourceTree = "<group>"; };
-		2508F3591E7D7BFF00217772 /* ZyxPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoManager.h; sourceTree = "<group>"; };
-		2508F35A1E7D7BFF00217772 /* ZyxPhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoManager.m; sourceTree = "<group>"; };
 		2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		2508F35E1E7D7E4800217772 /* ZyxSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxSingleton.h; sourceTree = "<group>"; };
 		2508F35F1E7D7EDA00217772 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -108,6 +106,8 @@
 		255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuUploadManager.m; sourceTree = "<group>"; };
 		255E14F11F1D0B8B00411A67 /* QiniuResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResourceManager.h; sourceTree = "<group>"; };
 		255E14F21F1D0B8B00411A67 /* QiniuResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResourceManager.m; sourceTree = "<group>"; };
+		255E14F41F1D0F2D00411A67 /* ZyxPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoManager.h; sourceTree = "<group>"; };
+		255E14F51F1D0F2D00411A67 /* ZyxPhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoManager.m; sourceTree = "<group>"; };
 		25A45C571F151DE3006299E0 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		25A45C581F151DE3006299E0 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		25A45C591F151DE3006299E0 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -242,8 +242,6 @@
 				2508F3511E7D7B2500217772 /* ZyxPickAlbumViewController.m */,
 				2508F3521E7D7B2500217772 /* ZyxPhotoCollectionViewCell.h */,
 				2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */,
-				2508F3591E7D7BFF00217772 /* ZyxPhotoManager.h */,
-				2508F35A1E7D7BFF00217772 /* ZyxPhotoManager.m */,
 				2508F3541E7D7B2500217772 /* ZyxPhotosViewController.h */,
 				2508F3551E7D7B2500217772 /* ZyxPhotosViewController.m */,
 				2508F35E1E7D7E4800217772 /* ZyxSingleton.h */,
@@ -305,6 +303,8 @@
 		255E14ED1F1D0B6F00411A67 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				255E14F41F1D0F2D00411A67 /* ZyxPhotoManager.h */,
+				255E14F51F1D0F2D00411A67 /* ZyxPhotoManager.m */,
 				255E14EE1F1D0B6F00411A67 /* QiniuUploadManager.h */,
 				255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */,
 				255E14F11F1D0B8B00411A67 /* QiniuResourceManager.h */,
@@ -656,10 +656,10 @@
 				2508F3561E7D7B2500217772 /* ZyxPickAlbumViewController.m in Sources */,
 				255E14EB1F1D09BA00411A67 /* DDLogCustomFormatter.m in Sources */,
 				2508F3581E7D7B2500217772 /* ZyxPhotosViewController.m in Sources */,
-				2508F35B1E7D7BFF00217772 /* ZyxPhotoManager.m in Sources */,
 				25A45C661F151DE3006299E0 /* DateUtil.m in Sources */,
 				2524D2EB1E817BDB001075C0 /* KeychainItemWrapper.m in Sources */,
 				25A45C691F151DE3006299E0 /* StringUtil.m in Sources */,
+				255E14F61F1D0F2D00411A67 /* ZyxPhotoManager.m in Sources */,
 				25A45C651F151DE3006299E0 /* UIView+Frame.m in Sources */,
 				2524D2EA1E817BDB001075C0 /* IPAddress.m in Sources */,
 				255E14F31F1D0B8B00411A67 /* QiniuResourceManager.m in Sources */,
