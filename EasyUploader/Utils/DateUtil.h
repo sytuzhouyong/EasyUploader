@@ -14,6 +14,7 @@
 
 + (NSString *)stringFromDate:(NSDate *)date format:(NSString *)format;
 + (NSString *)defaultStringWithDate:(NSDate *)date;
++ (NSString *)defaultUnderlineStringWithDate:(NSDate *)date;
 + (NSString *)yyyyMMddStringWithDate:(NSDate *)date;
 + (NSString *)MMddStringWithDate:(NSDate *)date;
 + (NSString *)intelligentDateStringWithDate:(NSDate *)date;

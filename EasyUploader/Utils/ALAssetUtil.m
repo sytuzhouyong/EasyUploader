@@ -21,7 +21,7 @@
 
 + (NSString *)defaultDateStringOfALAsset:(ALAsset *)asset {
     NSDate *date = [asset valueForProperty:ALAssetPropertyDate];
-    NSString *format = [DateUtil defaultStringWithDate:date];
+    NSString *format = [DateUtil defaultUnderlineStringWithDate:date];
     NSDateFormatter *formatter = [DateUtil sharedDateFormatter];
     formatter.dateFormat = format;
     return [formatter stringFromDate:date];

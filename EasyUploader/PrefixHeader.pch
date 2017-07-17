@@ -13,13 +13,16 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CommonCrypto/CommonCrypto.h>
 #import <UIKit/UIKit.h>
 
 #define DD_LEGACY_MACROS    0
 
 #import "CocoaLumberjack.h"
 #import "DDLogCustomFormatter.h"
+#import "GTMBase64.h"
 #import "Masonry.h"
+
 
 #import "AppDelegate.h"
 #import "UIView+Frame.h"
@@ -28,8 +31,8 @@
 #import "ZyxMacro.h"
 
 
+#import "ALAssetUtil.h"
 #import "LanguagTranslateUtil.h"
-#import "DateUtil.h"
 #import "DateUtil.h"
 #import "DeviceUtil.h"
 #import "StringUtil.h"

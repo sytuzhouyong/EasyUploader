@@ -19,10 +19,6 @@
 #define kUserDefaults           [NSUserDefaults standardUserDefaults]
 #define kWeakself               __weak __typeof(&*self) weakself = self
 
-#define kPhotoManager           [ZyxPhotoManager sharedInstance]
-#define kTranslateUtil          [LanguagTranslateUtil sharedInstance]
-#define kKeychainUtil           [KeychainUtil sharedInstance]
-
 
 #pragma mark - 简便函数宏
 
@@ -56,50 +52,11 @@
 #define ExecuteBlock2IfNotNil(_b, _v1, _v2)         !_b ?: _b(_v1, _v2)
 #define ExecuteBlock3IfNotNil(_b, _v1, _v2, _v3)    !_b ?: _b(_v1, _v2,_v3)
 
-
-#pragma mark - 常量宏
-
-#define kWindowFrame                        [[UIScreen mainScreen] bounds]
-#define kWindwoSize                         kWindowFrame.size
-#define kWindowWidth                        kWindwoSize.width
-#define kWindowHeight                       kWindwoSize.height
-#define kUIScale                            kWindowHeight / 667.0f  // UI按照375 x 667 切的图，在除了3.5英寸屏幕的其他分辨率下要等比缩放
-
-#define kNavigationBarColor                 RGB(0x18, 0x5C, 0xC1)
-#define kStatusBarHeight                    20
-#define kTitleContentViewHeight             44
-#define kBaseViewControllerTitleViewHeight  64
-#define kNavigationBarFontSize              15
-#define kFullDateFormat                     @"EEE, d MMM yyyy HH:mm:ss zzz"
-#define kFileTitleDateFormat                @"yyyy_MM_dd_HH:mm:ss"
-#define kBundleIdentifier                   @"com.zhouyong.XingHomecloud"
-#define kUDPPort                            40000
-#define kFunctionTip                        Text(@"ThisFunctionIsUnderDevelopment,it'sComingSoon")
-#define kMultiple                           5 //设置scrollview向无内容的左侧滑动整个窗口的几分之一时触发pop操作
-#define kLowestAvailableVersionCode         9999999
-
-#define kUpdateURL                          @"XHCUpdateURL"
-#define kLoginStateChangedNotification      @"XHCLoginStateChanged"
-#define kOperateTimeout                     60   //文件操作的超时时间
-
-#pragma mark - 简便类型宏
-
-typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
-#define DeviceArray             NSArray<HC100Device *>
-#define DeviceMutableArray      NSMutableArray<HC100Device *>
-#define NSStringArray           NSArray<NSString *>
-#define NSStringMutableArray    NSMutableArray<NSString *>
-
-#define NSStringDictionary      NSDictionary<NSString *, NSString *>
-
-#define GlobalErrorCode         @"GlobalErrorCode"
-
 #define CODETICK   NSDate *startTime = [NSDate date];
 #define CODETOCK   NSLog(@"Time Interval: %f", -[startTime timeIntervalSinceNow]);
 
-
 #define ImageNameOfSelectedState(_s) \
-    _s ? @"icon_round_selected_blue" : @"icon_round_unselected_gray"
+_s ? @"icon_round_selected_blue" : @"icon_round_unselected_gray"
 #define AddButtonEvent(_b, _e)  \
     [_b addTarget:self action:NSSelectorFromString(_e) forControlEvents:UIControlEventTouchUpInside]
 #define AddButtonEventTarget(_t, _b, _e) \
@@ -109,6 +66,36 @@ typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
 #define SetButtonImage(_b, _n) \
     [_b setImage:UIImageNamed(_n) forState:UIControlStateNormal]; \
     [_b setImage:UIImageNamed(_n@"_pressed") forState:UIControlStateHighlighted]
+
+#pragma mark - 简便取值宏
+
+#define kWindowFrame                        [[UIScreen mainScreen] bounds]
+#define kWindwoSize                         kWindowFrame.size
+#define kWindowWidth                        kWindwoSize.width
+#define kWindowHeight                       kWindwoSize.height
+// UI按照375 x 667 切的图，在除了3.5英寸屏幕的其他分辨率下要等比缩放
+#define kUIScale                            kWindowHeight / 667.0f
+#define kNavigationBarColor                 RGB(0x18, 0x5C, 0xC1)
+#define kStatusBarHeight                    20
+#define kTitleContentViewHeight             44
+#define kBaseViewControllerTitleViewHeight  64
+#define kNavigationBarFontSize              15
+#define kFullDateFormat                     @"EEE, d MMM yyyy HH:mm:ss zzz"
+#define kFileTitleDateFormat                @"yyyy_MM_dd_HH:mm:ss"
+#define kBundleIdentifier                   @"com.zhouyong.XingHomecloud"
+#define kFunctionTip                        Text(@"ThisFunctionIsUnderDevelopment,it'sComingSoon")
+#define kOperateTimeout                     60   //文件操作的超时时间
+
+
+#pragma mark - 简便类型宏
+
+typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
+#define DeviceArray             NSArray<HC100Device *>
+#define DeviceMutableArray      NSMutableArray<HC100Device *>
+#define NSStringArray           NSArray<NSString *>
+#define NSStringMutableArray    NSMutableArray<NSString *>
+#define NSStringDictionary      NSDictionary<NSString *, NSString *>
+
 
 #pragma mark - CocoaLog
 
@@ -128,5 +115,17 @@ typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
 #define DDLogInfoTag(tag, frmt, ...)    LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagInfo,    0, tag, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define DDLogDebugTag(tag, frmt, ...)   LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagDebug,   0, tag, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define DDLogVerboseTag(tag, frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagVerbose, 0, tag, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+
+
+#pragma mark - 项目相关宏
+
+#define kAccessKey              @"ebgn6Ab9Zk8mtWxycGT9ww2GHB3HI5-FTeXGTJTe"
+#define kSecretKey              @"aqF2ARHxYqekMsxyutZOgahXb_PdVmLeDHfNKh-0"
+#define kPhotoManager           [ZyxPhotoManager sharedInstance]
+#define kTranslateUtil          [LanguagTranslateUtil sharedInstance]
+#define kKeychainUtil           [KeychainUtil sharedInstance]
+#define kBucket                 @"easy-uploader"
+#define kQiniuResourceHost      @"rsf.qbox.me"
+
 
 #endif /* ZyxMacro_h */

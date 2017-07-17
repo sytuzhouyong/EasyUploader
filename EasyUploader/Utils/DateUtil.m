@@ -99,6 +99,10 @@
     return [self stringFromDate:date format:@"yyyy-MM-dd HH:mm:ss"];
 }
 
++ (NSString *)defaultUnderlineStringWithDate:(NSDate *)date {
+    return [self stringFromDate:date format:@"yyyy-MM-dd_HH:mm:ss"];
+}
+
 + (NSString *)yyyyMMddStringWithDate:(NSDate *)date {
     // 效率低
 //    static NSString *format = nil;

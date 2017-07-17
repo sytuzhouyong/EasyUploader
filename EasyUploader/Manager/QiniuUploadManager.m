@@ -7,14 +7,8 @@
 //
 
 #import "QiniuUploadManager.h"
-
-#import <CommonCrypto/CommonCrypto.h>
-#import "GTMBase64.h"
 #import "QNUploadManager.h"
-#import "StringUtil.h"
 
-#define kAccessKey  @"ebgn6Ab9Zk8mtWxycGT9ww2GHB3HI5-FTeXGTJTe"
-#define kSecretKey  @"aqF2ARHxYqekMsxyutZOgahXb_PdVmLeDHfNKh-0"
 
 
 @implementation QiniuUploadManager
@@ -28,7 +22,7 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
     deadline += 3600;   // +3600秒,即默认token保存1小时.
 
     NSDictionary *params = @{
-        @"scope": [NSString stringWithFormat:@"easy-uploader:%@", key],
+        @"scope": [NSString stringWithFormat:@"%@:%@", kBucket, key],
         @"deadline": @(deadline)
         };
     NSString *json = [StringUtil jsonStringFromObject:params];

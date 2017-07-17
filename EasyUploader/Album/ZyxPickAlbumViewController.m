@@ -10,6 +10,7 @@
 #import "ZyxPhotosViewController.h"
 #import "UINormalTableViewCell.h"
 #import "QiniuUploadManager.h"
+#import "ALAssetUtil.h"
 
 #define kCellIdentifier  @"ZyxPickAlbumViewControllerCell"
 
@@ -27,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (self.selectionMode == ZyxImagePickerSelectionModeMultiple) {
-        self.title = Text( @"SelectAlbum");
+        self.title = Text(@"SelectAlbum");
         [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectAllButtonPressed"];
     } else {
         self.title = Text(@"SelectAlbum");
@@ -192,7 +193,8 @@
 - (void)didSelectPhoto:(ALAsset *)asset atIndexPath:indexPath {
 //    [self.selectedPhotos addObject:asset];
 
-    [[QiniuUploadManager sharedInstance] uploadALAsset:asset withKey:@"ccc"];
+    NSString *key = [ALAssetUtil defaultDateStringOfALAsset:asset];
+    [[QiniuUploadManager sharedInstance] uploadALAsset:asset withKey:key];
 }
 
 - (void)didDeselectPhoto:(ALAsset *)asset atIndexPath:indexPath {
