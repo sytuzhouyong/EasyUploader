@@ -10,7 +10,7 @@
 
 
 #define SINGLETON_DECLEAR \
-    + (instancetype)sharedInstance;
+    + (instancetype)sharedInstance
 
 
 #if !__has_feature(objc_arc)

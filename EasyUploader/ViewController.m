@@ -17,12 +17,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+//    NSString *signingStr = @"/move/bmV3ZG9jczpmaW5kX21hbi50eHQ=/bmV3ZG9jczpmaW5kLm1hbi50eHQ=";
+//    NSString *result = [QiniuResourceManager signURL:signingStr andBody:@""];
+//    NSLog(@"%@", result);
+
+    [QiniuResourceManager queryResourcesWithPrefix:@"" limit:10 offset:0];
+
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    ZyxPickAlbumViewController *vc = [[ZyxPickAlbumViewController alloc] init];
-    vc.selectionMode = ZyxImagePickerSelectionModeNone;
-//    vc.imagePickerDelegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+//    ZyxPickAlbumViewController *vc = [[ZyxPickAlbumViewController alloc] init];
+//    vc.selectionMode = ZyxImagePickerSelectionModeNone;
+////    vc.imagePickerDelegate = self;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)zyxImagePickrController:(ZyxPickAlbumViewController *)picker didFinishPickingMedioWithInfos:(NSArray<NSDictionary *> *)infos {

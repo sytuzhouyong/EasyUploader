@@ -29,6 +29,8 @@
 		255E14F01F1D0B6F00411A67 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */; };
 		255E14F31F1D0B8B00411A67 /* QiniuResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14F21F1D0B8B00411A67 /* QiniuResourceManager.m */; };
 		255E14F61F1D0F2D00411A67 /* ZyxPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14F51F1D0F2D00411A67 /* ZyxPhotoManager.m */; };
+		255E14F71F1F875600411A67 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */; };
+		255E14F81F1F875900411A67 /* QiniuResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14F21F1D0B8B00411A67 /* QiniuResourceManager.m */; };
 		25A45C641F151DE3006299E0 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C581F151DE3006299E0 /* UITextField+Padding.m */; };
 		25A45C651F151DE3006299E0 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5A1F151DE3006299E0 /* UIView+Frame.m */; };
 		25A45C661F151DE3006299E0 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5D1F151DE3006299E0 /* DateUtil.m */; };
@@ -676,7 +678,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				255E14F81F1F875900411A67 /* QiniuResourceManager.m in Sources */,
 				250392251E65C758002062F0 /* EasyUploaderTests.m in Sources */,
+				255E14F71F1F875600411A67 /* QiniuUploadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

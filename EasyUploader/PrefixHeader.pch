@@ -29,7 +29,7 @@
 #import "Masonry.h"
 
 
-#pragma mark - Project Head File Include
+#pragma mark - Project
 #import "AppDelegate.h"
 #import "UIView+Frame.h"
 #import "ZyxSingleton.h"
@@ -43,6 +43,7 @@
 #import "DeviceUtil.h"
 #import "StringUtil.h"
 
-
+#import "QiniuUploadManager.h"
+#import "QiniuResourceManager.h"
 
 #endif /* PrefixHeader_pch */

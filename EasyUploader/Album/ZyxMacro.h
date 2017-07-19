@@ -124,8 +124,9 @@ typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
 #define kPhotoManager           [ZyxPhotoManager sharedInstance]
 #define kTranslateUtil          [LanguagTranslateUtil sharedInstance]
 #define kKeychainUtil           [KeychainUtil sharedInstance]
+#define kQiniuResourceManager   [QiniuResourceManager sharedInstance]
 #define kBucket                 @"easy-uploader"
-#define kQiniuResourceHost      @"rsf.qbox.me"
+#define kQiniuResourceHost      @"http://rsf.qbox.me"
 
 
 #endif /* ZyxMacro_h */

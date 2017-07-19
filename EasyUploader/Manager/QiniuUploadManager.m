@@ -35,11 +35,10 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
 
     NSString *encodedPolicy = [GTMBase64 stringByWebSafeEncodingData:policyData padded:TRUE];
     const char *encodedPolicyStr = [encodedPolicy cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *secretKeyStr = [kSecretKey UTF8String];
 
     char digestStr[CC_SHA1_DIGEST_LENGTH];
     bzero(digestStr, 0);
-
-    const char *secretKeyStr = [kSecretKey UTF8String];
     CCHmac(kCCHmacAlgSHA1, secretKeyStr, strlen(secretKeyStr), encodedPolicyStr, strlen(encodedPolicyStr), digestStr);
 
     NSString *encodedDigest = [GTMBase64 stringByWebSafeEncodingBytes:digestStr length:CC_SHA1_DIGEST_LENGTH padded:TRUE];
