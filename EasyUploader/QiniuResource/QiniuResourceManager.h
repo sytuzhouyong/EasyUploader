@@ -12,7 +12,7 @@
 
 //SINGLETON_DECLEAR;
 
-+ (void)queryResourcesWithPrefix:(NSString *)prefix limit:(int)limit offset:(int)offset;
-+ (NSString *)signURL:(NSString *)url andBody:(NSString *)body;
++ (void)queryResourcesWithPrefix:(NSString *)prefix limit:(int)limit;
++ (NSString *)authRequestPath:(NSString *)url andBody:(NSString *)body;
 
 @end

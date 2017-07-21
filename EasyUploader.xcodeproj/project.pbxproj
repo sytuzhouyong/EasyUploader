@@ -7,38 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2503920C1E65C758002062F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503920B1E65C758002062F0 /* main.m */; };
-		2503920F1E65C758002062F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503920E1E65C758002062F0 /* AppDelegate.m */; };
-		250392121E65C758002062F0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 250392111E65C758002062F0 /* ViewController.m */; };
-		250392171E65C758002062F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250392161E65C758002062F0 /* Assets.xcassets */; };
-		2503921A1E65C758002062F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250392181E65C758002062F0 /* LaunchScreen.storyboard */; };
 		250392251E65C758002062F0 /* EasyUploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250392241E65C758002062F0 /* EasyUploaderTests.m */; };
 		250392301E65C758002062F0 /* EasyUploaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503922F1E65C758002062F0 /* EasyUploaderUITests.m */; };
-		2508F34C1E7D7AD400217772 /* AlbumPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F34B1E7D7AD400217772 /* AlbumPhotosViewController.m */; };
-		2508F3561E7D7B2500217772 /* ZyxPickAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3511E7D7B2500217772 /* ZyxPickAlbumViewController.m */; };
-		2508F3571E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */; };
-		2508F3581E7D7B2500217772 /* ZyxPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2508F3551E7D7B2500217772 /* ZyxPhotosViewController.m */; };
 		2508F35D1E7D7C3600217772 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */; };
-		2524D2E91E817BDB001075C0 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E21E817BDB001075C0 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		2524D2EA1E817BDB001075C0 /* IPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E51E817BDB001075C0 /* IPAddress.m */; };
-		2524D2EB1E817BDB001075C0 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		255E14E21F1A272E00411A67 /* ALAssetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14E11F1A272E00411A67 /* ALAssetUtil.m */; };
-		255E14EA1F1D09BA00411A67 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14E51F1D09BA00411A67 /* BaseViewController.m */; };
-		255E14EB1F1D09BA00411A67 /* DDLogCustomFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14E71F1D09BA00411A67 /* DDLogCustomFormatter.m */; };
-		255E14EC1F1D09BA00411A67 /* UINormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14E91F1D09BA00411A67 /* UINormalTableViewCell.m */; };
-		255E14F01F1D0B6F00411A67 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */; };
-		255E14F31F1D0B8B00411A67 /* QiniuResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14F21F1D0B8B00411A67 /* QiniuResourceManager.m */; };
-		255E14F61F1D0F2D00411A67 /* ZyxPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14F51F1D0F2D00411A67 /* ZyxPhotoManager.m */; };
-		255E14F71F1F875600411A67 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */; };
-		255E14F81F1F875900411A67 /* QiniuResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14F21F1D0B8B00411A67 /* QiniuResourceManager.m */; };
-		25A45C641F151DE3006299E0 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C581F151DE3006299E0 /* UITextField+Padding.m */; };
-		25A45C651F151DE3006299E0 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5A1F151DE3006299E0 /* UIView+Frame.m */; };
-		25A45C661F151DE3006299E0 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5D1F151DE3006299E0 /* DateUtil.m */; };
-		25A45C671F151DE3006299E0 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C5F1F151DE3006299E0 /* DeviceUtil.m */; };
-		25A45C681F151DE3006299E0 /* LanguagTranslateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C611F151DE3006299E0 /* LanguagTranslateUtil.m */; };
-		25A45C691F151DE3006299E0 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A45C631F151DE3006299E0 /* StringUtil.m */; };
-		25D853011E95361300A6BA04 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25D853001E95361300A6BA04 /* zh-Hans.plist */; };
-		25D853031E95362D00A6BA04 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25D853021E95362D00A6BA04 /* en.plist */; };
+		255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FD1F2274B000411A67 /* UITextField+Padding.m */; };
+		255E15331F2274B000411A67 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FF1F2274B000411A67 /* UIView+Frame.m */; };
+		255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15021F2274B000411A67 /* DDLogCustomFormatter.m */; };
+		255E15351F2274B000411A67 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15091F2274B000411A67 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		255E15361F2274B000411A67 /* IPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E150C1F2274B000411A67 /* IPAddress.m */; };
+		255E15371F2274B000411A67 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E150F1F2274B000411A67 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		255E15381F2274B000411A67 /* ALAssetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15121F2274B000411A67 /* ALAssetUtil.m */; };
+		255E15391F2274B000411A67 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15141F2274B000411A67 /* DateUtil.m */; };
+		255E153A1F2274B000411A67 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15161F2274B000411A67 /* DeviceUtil.m */; };
+		255E153B1F2274B000411A67 /* LanguagTranslateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15181F2274B000411A67 /* LanguagTranslateUtil.m */; };
+		255E153C1F2274B000411A67 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E151A1F2274B000411A67 /* StringUtil.m */; };
+		255E153D1F2274B000411A67 /* UINormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E151D1F2274B000411A67 /* UINormalTableViewCell.m */; };
+		255E153E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */; };
+		255E153F1F2274B000411A67 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15221F2274B000411A67 /* BaseViewController.m */; };
+		255E15401F2274B000411A67 /* AlbumPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15261F2274B000411A67 /* AlbumPhotosViewController.m */; };
+		255E15411F2274B000411A67 /* ZyxPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15281F2274B000411A67 /* ZyxPhotosViewController.m */; };
+		255E15421F2274B000411A67 /* ZyxPickAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E152A1F2274B000411A67 /* ZyxPickAlbumViewController.m */; };
+		255E15431F2274B000411A67 /* ZyxPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E152C1F2274B000411A67 /* ZyxPhotoManager.m */; };
+		255E15441F2274B000411A67 /* QiniuResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E152F1F2274B000411A67 /* QiniuResourceManager.m */; };
+		255E15451F2274B000411A67 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15311F2274B000411A67 /* QiniuUploadManager.m */; };
+		255E15531F22778700411A67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15481F22778700411A67 /* AppDelegate.m */; };
+		255E15541F22778700411A67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255E15491F22778700411A67 /* Assets.xcassets */; };
+		255E15551F22778700411A67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255E154A1F22778700411A67 /* LaunchScreen.storyboard */; };
+		255E15561F22778700411A67 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E154C1F22778700411A67 /* en.plist */; };
+		255E15571F22778700411A67 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E154D1F22778700411A67 /* Info.plist */; };
+		255E15581F22778700411A67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E154E1F22778700411A67 /* main.m */; };
+		255E15591F22778700411A67 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15511F22778700411A67 /* ViewController.m */; };
+		255E155A1F22778700411A67 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E15521F22778700411A67 /* zh-Hans.plist */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
 		B2E4EFD313F359690997E2B5 /* libPods-EasyUploaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD63AFD981F83625EDC9589 /* libPods-EasyUploaderTests.a */; };
 		F89407846E1599FCA3F8E031 /* libPods-EasyUploaderUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B807D0790021F0E66A695D /* libPods-EasyUploaderUITests.a */; };
@@ -64,66 +63,66 @@
 /* Begin PBXFileReference section */
 		141355998B360EF108FD6CCF /* Pods-EasyUploaderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderTests/Pods-EasyUploaderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		250392071E65C758002062F0 /* EasyUploader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyUploader.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2503920B1E65C758002062F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2503920D1E65C758002062F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2503920E1E65C758002062F0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		250392101E65C758002062F0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		250392111E65C758002062F0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		250392161E65C758002062F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		250392191E65C758002062F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2503921B1E65C758002062F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		250392201E65C758002062F0 /* EasyUploaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyUploaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		250392241E65C758002062F0 /* EasyUploaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyUploaderTests.m; sourceTree = "<group>"; };
 		250392261E65C758002062F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2503922B1E65C758002062F0 /* EasyUploaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyUploaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2503922F1E65C758002062F0 /* EasyUploaderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyUploaderUITests.m; sourceTree = "<group>"; };
 		250392311E65C758002062F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2508F34A1E7D7AD400217772 /* AlbumPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumPhotosViewController.h; sourceTree = "<group>"; };
-		2508F34B1E7D7AD400217772 /* AlbumPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosViewController.m; sourceTree = "<group>"; };
-		2508F3501E7D7B2500217772 /* ZyxPickAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPickAlbumViewController.h; sourceTree = "<group>"; };
-		2508F3511E7D7B2500217772 /* ZyxPickAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPickAlbumViewController.m; sourceTree = "<group>"; };
-		2508F3521E7D7B2500217772 /* ZyxPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoCollectionViewCell.h; sourceTree = "<group>"; };
-		2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoCollectionViewCell.m; sourceTree = "<group>"; };
-		2508F3541E7D7B2500217772 /* ZyxPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotosViewController.h; sourceTree = "<group>"; };
-		2508F3551E7D7B2500217772 /* ZyxPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotosViewController.m; sourceTree = "<group>"; };
 		2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		2508F35E1E7D7E4800217772 /* ZyxSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxSingleton.h; sourceTree = "<group>"; };
-		2508F35F1E7D7EDA00217772 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		2524D2DE1E8178B5001075C0 /* ZyxMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZyxMacro.h; sourceTree = "<group>"; };
-		2524D2E11E817BDB001075C0 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
-		2524D2E21E817BDB001075C0 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
-		2524D2E41E817BDB001075C0 /* IPAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddress.h; sourceTree = "<group>"; };
-		2524D2E51E817BDB001075C0 /* IPAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddress.m; sourceTree = "<group>"; };
-		2524D2E71E817BDB001075C0 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
-		2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
-		255E14E01F1A272E00411A67 /* ALAssetUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAssetUtil.h; sourceTree = "<group>"; };
-		255E14E11F1A272E00411A67 /* ALAssetUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAssetUtil.m; sourceTree = "<group>"; };
-		255E14E41F1D09BA00411A67 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		255E14E51F1D09BA00411A67 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		255E14E61F1D09BA00411A67 /* DDLogCustomFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogCustomFormatter.h; sourceTree = "<group>"; };
-		255E14E71F1D09BA00411A67 /* DDLogCustomFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLogCustomFormatter.m; sourceTree = "<group>"; };
-		255E14E81F1D09BA00411A67 /* UINormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINormalTableViewCell.h; sourceTree = "<group>"; };
-		255E14E91F1D09BA00411A67 /* UINormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINormalTableViewCell.m; sourceTree = "<group>"; };
-		255E14EE1F1D0B6F00411A67 /* QiniuUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuUploadManager.h; sourceTree = "<group>"; };
-		255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuUploadManager.m; sourceTree = "<group>"; };
-		255E14F11F1D0B8B00411A67 /* QiniuResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResourceManager.h; sourceTree = "<group>"; };
-		255E14F21F1D0B8B00411A67 /* QiniuResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResourceManager.m; sourceTree = "<group>"; };
-		255E14F41F1D0F2D00411A67 /* ZyxPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoManager.h; sourceTree = "<group>"; };
-		255E14F51F1D0F2D00411A67 /* ZyxPhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoManager.m; sourceTree = "<group>"; };
-		25A45C571F151DE3006299E0 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
-		25A45C581F151DE3006299E0 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
-		25A45C591F151DE3006299E0 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
-		25A45C5A1F151DE3006299E0 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
-		25A45C5C1F151DE3006299E0 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
-		25A45C5D1F151DE3006299E0 /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
-		25A45C5E1F151DE3006299E0 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
-		25A45C5F1F151DE3006299E0 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtil.m; sourceTree = "<group>"; };
-		25A45C601F151DE3006299E0 /* LanguagTranslateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagTranslateUtil.h; sourceTree = "<group>"; };
-		25A45C611F151DE3006299E0 /* LanguagTranslateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagTranslateUtil.m; sourceTree = "<group>"; };
-		25A45C621F151DE3006299E0 /* StringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtil.h; sourceTree = "<group>"; };
-		25A45C631F151DE3006299E0 /* StringUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtil.m; sourceTree = "<group>"; };
-		25D853001E95361300A6BA04 /* zh-Hans.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "zh-Hans.plist"; sourceTree = "<group>"; };
-		25D853021E95362D00A6BA04 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
+		255E14FC1F2274B000411A67 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
+		255E14FD1F2274B000411A67 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
+		255E14FE1F2274B000411A67 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		255E14FF1F2274B000411A67 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		255E15011F2274B000411A67 /* DDLogCustomFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogCustomFormatter.h; sourceTree = "<group>"; };
+		255E15021F2274B000411A67 /* DDLogCustomFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLogCustomFormatter.m; sourceTree = "<group>"; };
+		255E15041F2274B000411A67 /* ZyxMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxMacro.h; sourceTree = "<group>"; };
+		255E15051F2274B000411A67 /* ZyxSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxSingleton.h; sourceTree = "<group>"; };
+		255E15081F2274B000411A67 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		255E15091F2274B000411A67 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		255E150B1F2274B000411A67 /* IPAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddress.h; sourceTree = "<group>"; };
+		255E150C1F2274B000411A67 /* IPAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddress.m; sourceTree = "<group>"; };
+		255E150E1F2274B000411A67 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		255E150F1F2274B000411A67 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		255E15111F2274B000411A67 /* ALAssetUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALAssetUtil.h; sourceTree = "<group>"; };
+		255E15121F2274B000411A67 /* ALAssetUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALAssetUtil.m; sourceTree = "<group>"; };
+		255E15131F2274B000411A67 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
+		255E15141F2274B000411A67 /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
+		255E15151F2274B000411A67 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
+		255E15161F2274B000411A67 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUtil.m; sourceTree = "<group>"; };
+		255E15171F2274B000411A67 /* LanguagTranslateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagTranslateUtil.h; sourceTree = "<group>"; };
+		255E15181F2274B000411A67 /* LanguagTranslateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagTranslateUtil.m; sourceTree = "<group>"; };
+		255E15191F2274B000411A67 /* StringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtil.h; sourceTree = "<group>"; };
+		255E151A1F2274B000411A67 /* StringUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtil.m; sourceTree = "<group>"; };
+		255E151C1F2274B000411A67 /* UINormalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UINormalTableViewCell.h; sourceTree = "<group>"; };
+		255E151D1F2274B000411A67 /* UINormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINormalTableViewCell.m; sourceTree = "<group>"; };
+		255E151E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		255E15211F2274B000411A67 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		255E15221F2274B000411A67 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		255E15251F2274B000411A67 /* AlbumPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumPhotosViewController.h; sourceTree = "<group>"; };
+		255E15261F2274B000411A67 /* AlbumPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosViewController.m; sourceTree = "<group>"; };
+		255E15271F2274B000411A67 /* ZyxPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotosViewController.h; sourceTree = "<group>"; };
+		255E15281F2274B000411A67 /* ZyxPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotosViewController.m; sourceTree = "<group>"; };
+		255E15291F2274B000411A67 /* ZyxPickAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPickAlbumViewController.h; sourceTree = "<group>"; };
+		255E152A1F2274B000411A67 /* ZyxPickAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPickAlbumViewController.m; sourceTree = "<group>"; };
+		255E152B1F2274B000411A67 /* ZyxPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoManager.h; sourceTree = "<group>"; };
+		255E152C1F2274B000411A67 /* ZyxPhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoManager.m; sourceTree = "<group>"; };
+		255E152E1F2274B000411A67 /* QiniuResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResourceManager.h; sourceTree = "<group>"; };
+		255E152F1F2274B000411A67 /* QiniuResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResourceManager.m; sourceTree = "<group>"; };
+		255E15301F2274B000411A67 /* QiniuUploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuUploadManager.h; sourceTree = "<group>"; };
+		255E15311F2274B000411A67 /* QiniuUploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuUploadManager.m; sourceTree = "<group>"; };
+		255E15471F22778700411A67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		255E15481F22778700411A67 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		255E15491F22778700411A67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		255E154B1F22778700411A67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		255E154C1F22778700411A67 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
+		255E154D1F22778700411A67 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		255E154E1F22778700411A67 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		255E154F1F22778700411A67 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		255E15501F22778700411A67 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		255E15511F22778700411A67 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		255E15521F22778700411A67 /* zh-Hans.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "zh-Hans.plist"; sourceTree = "<group>"; };
 		2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploader.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploader/Pods-EasyUploader.release.xcconfig"; sourceTree = "<group>"; };
 		3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F06F99B7DAEEABA4061A1A2 /* Pods-EasyUploaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderTests/Pods-EasyUploaderTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,23 +187,11 @@
 		250392091E65C758002062F0 /* EasyUploader */ = {
 			isa = PBXGroup;
 			children = (
-				255E14ED1F1D0B6F00411A67 /* Manager */,
-				2508F3491E7D7AD400217772 /* Album */,
-				2503920D1E65C758002062F0 /* AppDelegate.h */,
-				2503920E1E65C758002062F0 /* AppDelegate.m */,
-				250392161E65C758002062F0 /* Assets.xcassets */,
-				255E14E31F1D09BA00411A67 /* Custom */,
-				25D853021E95362D00A6BA04 /* en.plist */,
-				25A45C561F151DE3006299E0 /* Extensions */,
-				2503921B1E65C758002062F0 /* Info.plist */,
-				250392181E65C758002062F0 /* LaunchScreen.storyboard */,
-				2508F35F1E7D7EDA00217772 /* PrefixHeader.pch */,
+				255E15461F22778700411A67 /* AppMain */,
+				255E14FA1F2274B000411A67 /* Common */,
+				255E15231F2274B000411A67 /* LocalResource */,
+				255E152D1F2274B000411A67 /* QiniuResource */,
 				2503920A1E65C758002062F0 /* Supporting Files */,
-				2524D2DF1E817BDB001075C0 /* ThirdParty */,
-				25A45C5B1F151DE3006299E0 /* Utils */,
-				250392101E65C758002062F0 /* ViewController.h */,
-				250392111E65C758002062F0 /* ViewController.m */,
-				25D853001E95361300A6BA04 /* zh-Hans.plist */,
 			);
 			path = EasyUploader;
 			sourceTree = "<group>";
@@ -212,7 +199,6 @@
 		2503920A1E65C758002062F0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2503920B1E65C758002062F0 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -235,112 +221,173 @@
 			path = EasyUploaderUITests;
 			sourceTree = "<group>";
 		};
-		2508F3491E7D7AD400217772 /* Album */ = {
+		255E14FA1F2274B000411A67 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2508F34A1E7D7AD400217772 /* AlbumPhotosViewController.h */,
-				2508F34B1E7D7AD400217772 /* AlbumPhotosViewController.m */,
-				2508F3501E7D7B2500217772 /* ZyxPickAlbumViewController.h */,
-				2508F3511E7D7B2500217772 /* ZyxPickAlbumViewController.m */,
-				2508F3521E7D7B2500217772 /* ZyxPhotoCollectionViewCell.h */,
-				2508F3531E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m */,
-				2508F3541E7D7B2500217772 /* ZyxPhotosViewController.h */,
-				2508F3551E7D7B2500217772 /* ZyxPhotosViewController.m */,
-				2508F35E1E7D7E4800217772 /* ZyxSingleton.h */,
-				2524D2DE1E8178B5001075C0 /* ZyxMacro.h */,
+				255E14FB1F2274B000411A67 /* Extension */,
+				255E15001F2274B000411A67 /* Log */,
+				255E15031F2274B000411A67 /* Macro */,
+				255E15061F2274B000411A67 /* ThirdParty */,
+				255E15101F2274B000411A67 /* Utils */,
+				255E151B1F2274B000411A67 /* View */,
+				255E15201F2274B000411A67 /* ViewController */,
 			);
-			path = Album;
+			path = Common;
 			sourceTree = "<group>";
 		};
-		2524D2DF1E817BDB001075C0 /* ThirdParty */ = {
+		255E14FB1F2274B000411A67 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				2524D2E01E817BDB001075C0 /* GTMBase64 */,
-				2524D2E31E817BDB001075C0 /* IPAddress */,
-				2524D2E61E817BDB001075C0 /* KeychainWrapper */,
+				255E14FC1F2274B000411A67 /* UITextField+Padding.h */,
+				255E14FD1F2274B000411A67 /* UITextField+Padding.m */,
+				255E14FE1F2274B000411A67 /* UIView+Frame.h */,
+				255E14FF1F2274B000411A67 /* UIView+Frame.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		255E15001F2274B000411A67 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				255E15011F2274B000411A67 /* DDLogCustomFormatter.h */,
+				255E15021F2274B000411A67 /* DDLogCustomFormatter.m */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		255E15031F2274B000411A67 /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+				255E15041F2274B000411A67 /* ZyxMacro.h */,
+				255E15051F2274B000411A67 /* ZyxSingleton.h */,
+			);
+			path = Macro;
+			sourceTree = "<group>";
+		};
+		255E15061F2274B000411A67 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				255E15071F2274B000411A67 /* GTMBase64 */,
+				255E150A1F2274B000411A67 /* IPAddress */,
+				255E150D1F2274B000411A67 /* KeychainWrapper */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
 		};
-		2524D2E01E817BDB001075C0 /* GTMBase64 */ = {
+		255E15071F2274B000411A67 /* GTMBase64 */ = {
 			isa = PBXGroup;
 			children = (
-				2524D2E11E817BDB001075C0 /* GTMBase64.h */,
-				2524D2E21E817BDB001075C0 /* GTMBase64.m */,
+				255E15081F2274B000411A67 /* GTMBase64.h */,
+				255E15091F2274B000411A67 /* GTMBase64.m */,
 			);
 			path = GTMBase64;
 			sourceTree = "<group>";
 		};
-		2524D2E31E817BDB001075C0 /* IPAddress */ = {
+		255E150A1F2274B000411A67 /* IPAddress */ = {
 			isa = PBXGroup;
 			children = (
-				2524D2E41E817BDB001075C0 /* IPAddress.h */,
-				2524D2E51E817BDB001075C0 /* IPAddress.m */,
+				255E150B1F2274B000411A67 /* IPAddress.h */,
+				255E150C1F2274B000411A67 /* IPAddress.m */,
 			);
 			path = IPAddress;
 			sourceTree = "<group>";
 		};
-		2524D2E61E817BDB001075C0 /* KeychainWrapper */ = {
+		255E150D1F2274B000411A67 /* KeychainWrapper */ = {
 			isa = PBXGroup;
 			children = (
-				2524D2E71E817BDB001075C0 /* KeychainItemWrapper.h */,
-				2524D2E81E817BDB001075C0 /* KeychainItemWrapper.m */,
+				255E150E1F2274B000411A67 /* KeychainItemWrapper.h */,
+				255E150F1F2274B000411A67 /* KeychainItemWrapper.m */,
 			);
 			path = KeychainWrapper;
 			sourceTree = "<group>";
 		};
-		255E14E31F1D09BA00411A67 /* Custom */ = {
+		255E15101F2274B000411A67 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				255E14E41F1D09BA00411A67 /* BaseViewController.h */,
-				255E14E51F1D09BA00411A67 /* BaseViewController.m */,
-				255E14E61F1D09BA00411A67 /* DDLogCustomFormatter.h */,
-				255E14E71F1D09BA00411A67 /* DDLogCustomFormatter.m */,
-				255E14E81F1D09BA00411A67 /* UINormalTableViewCell.h */,
-				255E14E91F1D09BA00411A67 /* UINormalTableViewCell.m */,
-			);
-			path = Custom;
-			sourceTree = "<group>";
-		};
-		255E14ED1F1D0B6F00411A67 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				255E14F41F1D0F2D00411A67 /* ZyxPhotoManager.h */,
-				255E14F51F1D0F2D00411A67 /* ZyxPhotoManager.m */,
-				255E14EE1F1D0B6F00411A67 /* QiniuUploadManager.h */,
-				255E14EF1F1D0B6F00411A67 /* QiniuUploadManager.m */,
-				255E14F11F1D0B8B00411A67 /* QiniuResourceManager.h */,
-				255E14F21F1D0B8B00411A67 /* QiniuResourceManager.m */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		25A45C561F151DE3006299E0 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				25A45C571F151DE3006299E0 /* UITextField+Padding.h */,
-				25A45C581F151DE3006299E0 /* UITextField+Padding.m */,
-				25A45C591F151DE3006299E0 /* UIView+Frame.h */,
-				25A45C5A1F151DE3006299E0 /* UIView+Frame.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		25A45C5B1F151DE3006299E0 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				25A45C5C1F151DE3006299E0 /* DateUtil.h */,
-				25A45C5D1F151DE3006299E0 /* DateUtil.m */,
-				25A45C5E1F151DE3006299E0 /* DeviceUtil.h */,
-				25A45C5F1F151DE3006299E0 /* DeviceUtil.m */,
-				25A45C601F151DE3006299E0 /* LanguagTranslateUtil.h */,
-				25A45C611F151DE3006299E0 /* LanguagTranslateUtil.m */,
-				25A45C621F151DE3006299E0 /* StringUtil.h */,
-				25A45C631F151DE3006299E0 /* StringUtil.m */,
-				255E14E01F1A272E00411A67 /* ALAssetUtil.h */,
-				255E14E11F1A272E00411A67 /* ALAssetUtil.m */,
+				255E15111F2274B000411A67 /* ALAssetUtil.h */,
+				255E15121F2274B000411A67 /* ALAssetUtil.m */,
+				255E15131F2274B000411A67 /* DateUtil.h */,
+				255E15141F2274B000411A67 /* DateUtil.m */,
+				255E15151F2274B000411A67 /* DeviceUtil.h */,
+				255E15161F2274B000411A67 /* DeviceUtil.m */,
+				255E15171F2274B000411A67 /* LanguagTranslateUtil.h */,
+				255E15181F2274B000411A67 /* LanguagTranslateUtil.m */,
+				255E15191F2274B000411A67 /* StringUtil.h */,
+				255E151A1F2274B000411A67 /* StringUtil.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		255E151B1F2274B000411A67 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				255E151C1F2274B000411A67 /* UINormalTableViewCell.h */,
+				255E151D1F2274B000411A67 /* UINormalTableViewCell.m */,
+				255E151E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.h */,
+				255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		255E15201F2274B000411A67 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				255E15211F2274B000411A67 /* BaseViewController.h */,
+				255E15221F2274B000411A67 /* BaseViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		255E15231F2274B000411A67 /* LocalResource */ = {
+			isa = PBXGroup;
+			children = (
+				255E15241F2274B000411A67 /* Album */,
+				255E152B1F2274B000411A67 /* ZyxPhotoManager.h */,
+				255E152C1F2274B000411A67 /* ZyxPhotoManager.m */,
+			);
+			path = LocalResource;
+			sourceTree = "<group>";
+		};
+		255E15241F2274B000411A67 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				255E15251F2274B000411A67 /* AlbumPhotosViewController.h */,
+				255E15261F2274B000411A67 /* AlbumPhotosViewController.m */,
+				255E15271F2274B000411A67 /* ZyxPhotosViewController.h */,
+				255E15281F2274B000411A67 /* ZyxPhotosViewController.m */,
+				255E15291F2274B000411A67 /* ZyxPickAlbumViewController.h */,
+				255E152A1F2274B000411A67 /* ZyxPickAlbumViewController.m */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
+		255E152D1F2274B000411A67 /* QiniuResource */ = {
+			isa = PBXGroup;
+			children = (
+				255E152E1F2274B000411A67 /* QiniuResourceManager.h */,
+				255E152F1F2274B000411A67 /* QiniuResourceManager.m */,
+				255E15301F2274B000411A67 /* QiniuUploadManager.h */,
+				255E15311F2274B000411A67 /* QiniuUploadManager.m */,
+			);
+			path = QiniuResource;
+			sourceTree = "<group>";
+		};
+		255E15461F22778700411A67 /* AppMain */ = {
+			isa = PBXGroup;
+			children = (
+				255E15471F22778700411A67 /* AppDelegate.h */,
+				255E15481F22778700411A67 /* AppDelegate.m */,
+				255E15491F22778700411A67 /* Assets.xcassets */,
+				255E154C1F22778700411A67 /* en.plist */,
+				255E154D1F22778700411A67 /* Info.plist */,
+				255E154A1F22778700411A67 /* LaunchScreen.storyboard */,
+				255E154E1F22778700411A67 /* main.m */,
+				255E154F1F22778700411A67 /* PrefixHeader.pch */,
+				255E15501F22778700411A67 /* ViewController.h */,
+				255E15511F22778700411A67 /* ViewController.m */,
+				255E15521F22778700411A67 /* zh-Hans.plist */,
+			);
+			path = AppMain;
 			sourceTree = "<group>";
 		};
 		5D8780288547C981C44BD48A /* Pods */ = {
@@ -482,10 +529,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25D853011E95361300A6BA04 /* zh-Hans.plist in Resources */,
-				2503921A1E65C758002062F0 /* LaunchScreen.storyboard in Resources */,
-				25D853031E95362D00A6BA04 /* en.plist in Resources */,
-				250392171E65C758002062F0 /* Assets.xcassets in Resources */,
+				255E155A1F22778700411A67 /* zh-Hans.plist in Resources */,
+				255E15571F22778700411A67 /* Info.plist in Resources */,
+				255E15561F22778700411A67 /* en.plist in Resources */,
+				255E15541F22778700411A67 /* Assets.xcassets in Resources */,
+				255E15551F22778700411A67 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,29 +696,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25A45C671F151DE3006299E0 /* DeviceUtil.m in Sources */,
-				255E14EA1F1D09BA00411A67 /* BaseViewController.m in Sources */,
-				250392121E65C758002062F0 /* ViewController.m in Sources */,
-				2524D2E91E817BDB001075C0 /* GTMBase64.m in Sources */,
-				255E14EC1F1D09BA00411A67 /* UINormalTableViewCell.m in Sources */,
-				255E14F01F1D0B6F00411A67 /* QiniuUploadManager.m in Sources */,
-				2508F3571E7D7B2500217772 /* ZyxPhotoCollectionViewCell.m in Sources */,
-				2508F3561E7D7B2500217772 /* ZyxPickAlbumViewController.m in Sources */,
-				255E14EB1F1D09BA00411A67 /* DDLogCustomFormatter.m in Sources */,
-				2508F3581E7D7B2500217772 /* ZyxPhotosViewController.m in Sources */,
-				25A45C661F151DE3006299E0 /* DateUtil.m in Sources */,
-				2524D2EB1E817BDB001075C0 /* KeychainItemWrapper.m in Sources */,
-				25A45C691F151DE3006299E0 /* StringUtil.m in Sources */,
-				255E14F61F1D0F2D00411A67 /* ZyxPhotoManager.m in Sources */,
-				25A45C651F151DE3006299E0 /* UIView+Frame.m in Sources */,
-				2524D2EA1E817BDB001075C0 /* IPAddress.m in Sources */,
-				255E14F31F1D0B8B00411A67 /* QiniuResourceManager.m in Sources */,
-				2503920F1E65C758002062F0 /* AppDelegate.m in Sources */,
-				2503920C1E65C758002062F0 /* main.m in Sources */,
-				25A45C641F151DE3006299E0 /* UITextField+Padding.m in Sources */,
-				255E14E21F1A272E00411A67 /* ALAssetUtil.m in Sources */,
-				25A45C681F151DE3006299E0 /* LanguagTranslateUtil.m in Sources */,
-				2508F34C1E7D7AD400217772 /* AlbumPhotosViewController.m in Sources */,
+				255E15531F22778700411A67 /* AppDelegate.m in Sources */,
+				255E153C1F2274B000411A67 /* StringUtil.m in Sources */,
+				255E15431F2274B000411A67 /* ZyxPhotoManager.m in Sources */,
+				255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */,
+				255E15451F2274B000411A67 /* QiniuUploadManager.m in Sources */,
+				255E153E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m in Sources */,
+				255E15391F2274B000411A67 /* DateUtil.m in Sources */,
+				255E15441F2274B000411A67 /* QiniuResourceManager.m in Sources */,
+				255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */,
+				255E15381F2274B000411A67 /* ALAssetUtil.m in Sources */,
+				255E15581F22778700411A67 /* main.m in Sources */,
+				255E153F1F2274B000411A67 /* BaseViewController.m in Sources */,
+				255E15421F2274B000411A67 /* ZyxPickAlbumViewController.m in Sources */,
+				255E15331F2274B000411A67 /* UIView+Frame.m in Sources */,
+				255E15361F2274B000411A67 /* IPAddress.m in Sources */,
+				255E153D1F2274B000411A67 /* UINormalTableViewCell.m in Sources */,
+				255E15411F2274B000411A67 /* ZyxPhotosViewController.m in Sources */,
+				255E15591F22778700411A67 /* ViewController.m in Sources */,
+				255E153A1F2274B000411A67 /* DeviceUtil.m in Sources */,
+				255E15351F2274B000411A67 /* GTMBase64.m in Sources */,
+				255E15401F2274B000411A67 /* AlbumPhotosViewController.m in Sources */,
+				255E153B1F2274B000411A67 /* LanguagTranslateUtil.m in Sources */,
+				255E15371F2274B000411A67 /* KeychainItemWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,9 +726,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				255E14F81F1F875900411A67 /* QiniuResourceManager.m in Sources */,
 				250392251E65C758002062F0 /* EasyUploaderTests.m in Sources */,
-				255E14F71F1F875600411A67 /* QiniuUploadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,10 +754,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		250392181E65C758002062F0 /* LaunchScreen.storyboard */ = {
+		255E154A1F22778700411A67 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				250392191E65C758002062F0 /* Base */,
+				255E154B1F22778700411A67 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -814,8 +860,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
-				INFOPLIST_FILE = EasyUploader/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/AppMain/PrefixHeader.pch";
+				INFOPLIST_FILE = EasyUploader/AppMain/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sytuzhouyong.EasyUploader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -830,8 +876,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
-				INFOPLIST_FILE = EasyUploader/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/AppMain/PrefixHeader.pch";
+				INFOPLIST_FILE = EasyUploader/AppMain/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sytuzhouyong.EasyUploader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
