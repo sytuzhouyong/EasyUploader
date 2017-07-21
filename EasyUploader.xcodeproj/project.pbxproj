@@ -32,12 +32,13 @@
 		255E15451F2274B000411A67 /* QiniuUploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15311F2274B000411A67 /* QiniuUploadManager.m */; };
 		255E15531F22778700411A67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15481F22778700411A67 /* AppDelegate.m */; };
 		255E15541F22778700411A67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255E15491F22778700411A67 /* Assets.xcassets */; };
-		255E15551F22778700411A67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255E154A1F22778700411A67 /* LaunchScreen.storyboard */; };
 		255E15561F22778700411A67 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E154C1F22778700411A67 /* en.plist */; };
 		255E15571F22778700411A67 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E154D1F22778700411A67 /* Info.plist */; };
 		255E15581F22778700411A67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E154E1F22778700411A67 /* main.m */; };
 		255E15591F22778700411A67 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15511F22778700411A67 /* ViewController.m */; };
 		255E155A1F22778700411A67 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E15521F22778700411A67 /* zh-Hans.plist */; };
+		255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E155D1F227A5600411A67 /* QiniuBucket.m */; };
+		255E15611F227A6A00411A67 /* QiniuResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15601F227A6A00411A67 /* QiniuResource.m */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
 		B2E4EFD313F359690997E2B5 /* libPods-EasyUploaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD63AFD981F83625EDC9589 /* libPods-EasyUploaderTests.a */; };
 		F89407846E1599FCA3F8E031 /* libPods-EasyUploaderUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B807D0790021F0E66A695D /* libPods-EasyUploaderUITests.a */; };
@@ -115,7 +116,6 @@
 		255E15471F22778700411A67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		255E15481F22778700411A67 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		255E15491F22778700411A67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		255E154B1F22778700411A67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		255E154C1F22778700411A67 /* en.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = en.plist; sourceTree = "<group>"; };
 		255E154D1F22778700411A67 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		255E154E1F22778700411A67 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -123,6 +123,10 @@
 		255E15501F22778700411A67 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		255E15511F22778700411A67 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		255E15521F22778700411A67 /* zh-Hans.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "zh-Hans.plist"; sourceTree = "<group>"; };
+		255E155C1F227A5600411A67 /* QiniuBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuBucket.h; sourceTree = "<group>"; };
+		255E155D1F227A5600411A67 /* QiniuBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucket.m; sourceTree = "<group>"; };
+		255E155F1F227A6A00411A67 /* QiniuResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResource.h; sourceTree = "<group>"; };
+		255E15601F227A6A00411A67 /* QiniuResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResource.m; sourceTree = "<group>"; };
 		2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploader.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploader/Pods-EasyUploader.release.xcconfig"; sourceTree = "<group>"; };
 		3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F06F99B7DAEEABA4061A1A2 /* Pods-EasyUploaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderTests/Pods-EasyUploaderTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -191,16 +195,8 @@
 				255E14FA1F2274B000411A67 /* Common */,
 				255E15231F2274B000411A67 /* LocalResource */,
 				255E152D1F2274B000411A67 /* QiniuResource */,
-				2503920A1E65C758002062F0 /* Supporting Files */,
 			);
 			path = EasyUploader;
-			sourceTree = "<group>";
-		};
-		2503920A1E65C758002062F0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		250392231E65C758002062F0 /* EasyUploaderTests */ = {
@@ -364,6 +360,7 @@
 		255E152D1F2274B000411A67 /* QiniuResource */ = {
 			isa = PBXGroup;
 			children = (
+				255E155B1F227A4100411A67 /* Model */,
 				255E152E1F2274B000411A67 /* QiniuResourceManager.h */,
 				255E152F1F2274B000411A67 /* QiniuResourceManager.m */,
 				255E15301F2274B000411A67 /* QiniuUploadManager.h */,
@@ -380,7 +377,6 @@
 				255E15491F22778700411A67 /* Assets.xcassets */,
 				255E154C1F22778700411A67 /* en.plist */,
 				255E154D1F22778700411A67 /* Info.plist */,
-				255E154A1F22778700411A67 /* LaunchScreen.storyboard */,
 				255E154E1F22778700411A67 /* main.m */,
 				255E154F1F22778700411A67 /* PrefixHeader.pch */,
 				255E15501F22778700411A67 /* ViewController.h */,
@@ -388,6 +384,17 @@
 				255E15521F22778700411A67 /* zh-Hans.plist */,
 			);
 			path = AppMain;
+			sourceTree = "<group>";
+		};
+		255E155B1F227A4100411A67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				255E155C1F227A5600411A67 /* QiniuBucket.h */,
+				255E155D1F227A5600411A67 /* QiniuBucket.m */,
+				255E155F1F227A6A00411A67 /* QiniuResource.h */,
+				255E15601F227A6A00411A67 /* QiniuResource.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		5D8780288547C981C44BD48A /* Pods */ = {
@@ -533,7 +540,6 @@
 				255E15571F22778700411A67 /* Info.plist in Resources */,
 				255E15561F22778700411A67 /* en.plist in Resources */,
 				255E15541F22778700411A67 /* Assets.xcassets in Resources */,
-				255E15551F22778700411A67 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,10 +714,12 @@
 				255E15381F2274B000411A67 /* ALAssetUtil.m in Sources */,
 				255E15581F22778700411A67 /* main.m in Sources */,
 				255E153F1F2274B000411A67 /* BaseViewController.m in Sources */,
+				255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */,
 				255E15421F2274B000411A67 /* ZyxPickAlbumViewController.m in Sources */,
 				255E15331F2274B000411A67 /* UIView+Frame.m in Sources */,
 				255E15361F2274B000411A67 /* IPAddress.m in Sources */,
 				255E153D1F2274B000411A67 /* UINormalTableViewCell.m in Sources */,
+				255E15611F227A6A00411A67 /* QiniuResource.m in Sources */,
 				255E15411F2274B000411A67 /* ZyxPhotosViewController.m in Sources */,
 				255E15591F22778700411A67 /* ViewController.m in Sources */,
 				255E153A1F2274B000411A67 /* DeviceUtil.m in Sources */,
@@ -752,17 +760,6 @@
 			targetProxy = 2503922C1E65C758002062F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		255E154A1F22778700411A67 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				255E154B1F22778700411A67 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		250392321E65C758002062F0 /* Debug */ = {

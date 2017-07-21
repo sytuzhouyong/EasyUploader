@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "QiniuBucket.h"
 
 @interface QiniuResourceManager : NSObject
 
 //SINGLETON_DECLEAR;
 
+typedef void (^BucketsHandler)(NSArray<QiniuBucket *> *buckets);
+
+
 + (void)queryResourcesWithPrefix:(NSString *)prefix limit:(int)limit;
++ (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
+
 + (NSString *)authRequestPath:(NSString *)url andBody:(NSString *)body;
 
 @end

@@ -33,7 +33,7 @@
 }
 
 // 查询所有 buckets
-+ (void)queryBucketsWithBlock:(id)block {
++ (void)queryAllBucketsWithHandler:(BucketsHandler)handler {
     NSString *requestPath =  @"/buckets";
     NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
     NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];
@@ -41,7 +41,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setValue:requestPathAuthed forHTTPHeaderField:@"Authorization"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"rsf.qbox.me" forHTTPHeaderField:@"Host"];
+    [request setValue:@"rs.qbox.me" forHTTPHeaderField:@"Host"];
     NSLog(@"headers = %@", kHttpManager.requestSerializer.HTTPRequestHeaders);
 
     [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {

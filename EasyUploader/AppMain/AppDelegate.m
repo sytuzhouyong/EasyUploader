@@ -21,9 +21,9 @@
     [kTranslateUtil readLocalLanguageProfiles];
     
     ViewController *vc = [[ViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = nav;
+    self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     
     return YES;
