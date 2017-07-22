@@ -27,11 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = Text(@"SelectAlbum");
     if (self.selectionMode == ZyxImagePickerSelectionModeMultiple) {
-        self.title = Text(@"SelectAlbum");
         [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectAllButtonPressed"];
-    } else {
-        self.title = Text(@"SelectAlbum");
     }
     
     [self addSubviews];
@@ -46,6 +44,9 @@
     for (NSUInteger i=0; i<self.groups.count; i++) {
         [_selectFlags addObject:@(NO)];
     }
+
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 }
 
 - (void)addSubviews {
@@ -219,8 +220,6 @@
     UITableView *tableView = [[UITableView alloc] init];
     _tableView = tableView;
     tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
-    tableView.dataSource = self;
-    tableView.delegate = self;
     tableView.backgroundColor = self.view.backgroundColor;
     tableView.tableFooterView = [UIView new];
     return tableView;

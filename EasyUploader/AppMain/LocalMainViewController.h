@@ -1,0 +1,13 @@
+//
+//  LocalMainViewController.h
+//  EasyUploader
+//
+//  Created by zhouyong on 17/7/22.
+//  Copyright © 2017年 zhouyong. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface LocalMainViewController : BaseViewController
+
+@end

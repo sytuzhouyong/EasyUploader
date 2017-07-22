@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  QiniuMainViewController.h
 //  EasyUploader
 //
 //  Created by zhouyong on 17/2/28.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface QiniuMainViewController : BaseViewController
 
 
 @end

@@ -1,19 +1,19 @@
 //
-//  ViewController.m
+//  QiniuResourceMainViewController.m
 //  EasyUploader
 //
 //  Created by zhouyong on 17/2/28.
 //  Copyright © 2017年 zhouyong. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "QiniuMainViewController.h"
 #import "ZyxPickAlbumViewController.h"
 
-@interface ViewController ()
+@interface QiniuMainViewController ()
 
 @end
 
-@implementation ViewController 
+@implementation QiniuMainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

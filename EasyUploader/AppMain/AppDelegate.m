@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "QiniuMainViewController.h"
+#import "LocalMainViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,11 +20,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [kTranslateUtil readLocalLanguageProfiles];
-    
-    ViewController *vc = [[ViewController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+
+    UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
+
+    QiniuMainViewController *qiniuVC = [QiniuMainViewController new];
+    LocalMainViewController *localVC = [LocalMainViewController new];
+    UINavigationController *qiniuNav = [[UINavigationController alloc] initWithRootViewController:qiniuVC];
+    UINavigationController *localNav = [[UINavigationController alloc] initWithRootViewController:localVC];
+    tabBarController.viewControllers = @[qiniuNav, localNav];
+    qiniuNav.tabBarItem.title = @"七牛云";
+    localNav.tabBarItem.title = @"本地";
+
+
+//    UINavigationController *nav =
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = vc;
+    self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
     
     return YES;
