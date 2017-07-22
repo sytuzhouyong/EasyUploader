@@ -36,17 +36,17 @@
     return [self.class jsonStringFromObject:object options:NSJSONWritingPrettyPrinted];
 }
 
-+ (NSDictionary *)dictFromJsonString:(NSString *)jsonString {
++ (id)objectFromJsonString:(NSString *)jsonString {
     NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
     NSError *error;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+    id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
     if (error != nil) {
-        DDLogError(@"json[%@] to dict failed, error = %@", jsonString, error);
+        DDLogError(@"json[%@] to object failed, error = %@", jsonString, error);
         return nil;
     }
     
-    return dict;
+    return object;
 }
 
 + (NSString *)documentsPath {
