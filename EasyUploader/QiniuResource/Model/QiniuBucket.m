@@ -17,6 +17,16 @@
     return self;
 }
 
++ (NSArray<QiniuBucket *> *)instancesOfJSONString:(NSString *)json {
+    NSMutableArray<QiniuBucket *> *buckets = [NSMutableArray array];
 
+    NSArray<NSString *> *bucketsString = (NSArray<NSString *> *)[StringUtil objectFromJsonString:json];
+    for (NSString *name in bucketsString) {
+        QiniuBucket *bucket = [[QiniuBucket alloc] initWithName:name];
+        [buckets addObject:bucket];
+    }
+
+    return buckets;
+}
 
 @end
