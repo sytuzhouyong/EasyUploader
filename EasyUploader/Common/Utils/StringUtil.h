@@ -12,7 +12,7 @@
 
 + (NSString *)jsonStringFromObject:(id)object options:(NSJSONWritingOptions)options;
 + (NSString *)jsonStringFromObject:(id)object;
-+ (NSDictionary *)dictFromJsonString:(NSString *)jsonString;
++ (id)objectFromJsonString:(NSString *)jsonString;
 
 + (NSString *)documentsPath;
 // 缓存目录
