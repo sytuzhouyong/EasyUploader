@@ -15,12 +15,14 @@
     [super viewDidLoad];
 
     ZyxPickAlbumViewController *vc = [[ZyxPickAlbumViewController alloc] init];
-    [self.navigationController setViewControllers:@[vc] animated:NO];
-//    [self.view addSubview:vc.view];
-//
-//    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self.view).insets(UIEdgeInsetsZero);
-//    }];
+//    [self.navigationController setViewControllers:@[vc] animated:NO];
+    [self.view addSubview:vc.view];
+
+    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsZero);
+    }];
+
+    [self setLeftBarButtonTitle:@""];
 }
 
 @end

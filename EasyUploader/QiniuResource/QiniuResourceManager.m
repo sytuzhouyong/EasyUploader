@@ -45,8 +45,13 @@
     NSLog(@"headers = %@", kHttpManager.requestSerializer.HTTPRequestHeaders);
 
     [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        NSLog(@"response = %@", responseObject);
-        NSLog(@"error = %@", error);
+        if (error != nil) {
+            NSLog(@"query buckets failed");
+            return;
+        }
+
+        NSArray<QiniuBucket *> *buckets = [QiniuBucket instancesOfJSONStrings:responseObject];
+        ExecuteBlock1IfNotNil(handler, buckets);
     }] resume];
 }
 

@@ -31,11 +31,16 @@
 
 #pragma mark - Project
 #import "AppDelegate.h"
+#import "ZyxSingleton.h"
+#import "ZyxMacro.h"
+
+#import "QiniuResourceManager.h"
+#import "QiniuUploadManager.h"
+#import "ZyxPhotoManager.h"
+
 #import "BaseViewController.h"
 #import "UIView+Frame.h"
-#import "ZyxSingleton.h"
-#import "ZyxPhotoManager.h"
-#import "ZyxMacro.h"
+#import "UINormalTableViewCell.h"
 
 #pragma mark - Utils Header File Include
 #import "ALAssetUtil.h"
