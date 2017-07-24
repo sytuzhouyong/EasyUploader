@@ -15,8 +15,8 @@
 //SINGLETON_IMPLEMENTATION(QiniuResourceManager);
 
 // 查询指定 bucket 的资源
-+ (void)queryResourcesWithPrefix:(NSString *)prefix limit:(int)limit {
-    NSString *requestPath = [NSString stringWithFormat:@"/list?limit=10&bucket=%@", kBucket];
++ (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit {
+    NSString *requestPath = [NSString stringWithFormat:@"/list?limit=%d&bucket=%@", limit, bucket];
     NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
     NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];
 

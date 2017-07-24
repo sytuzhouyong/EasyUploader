@@ -10,4 +10,9 @@
 
 @interface QiniuResource : NSObject
 
+//@property (nonatomic, copy) NSString *
+//@property (nonatomic, copy) NSString *
+//@property (nonatomic, copy) NSString *
+//@property (nonatomic, copy) NSString *
+
 @end

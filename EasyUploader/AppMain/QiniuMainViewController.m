@@ -71,9 +71,9 @@
     return cell;
 }
 
-- (IBAction)buttonClicked:(id)sender {
-//    [QiniuResourceManager queryResourcesWithPrefix:@"" limit:10];
-    [QiniuResourceManager queryAllBucketsWithHandler:nil];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QiniuBucket *bucket = self.buckets[indexPath.row];
+    [QiniuResourceManager queryResourcesInBucket:bucket.name withPrefix:@"" limit:10];
 }
 
 

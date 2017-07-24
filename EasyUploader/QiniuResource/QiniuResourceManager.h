@@ -16,7 +16,7 @@
 typedef void (^BucketsHandler)(NSArray<QiniuBucket *> *buckets);
 
 
-+ (void)queryResourcesWithPrefix:(NSString *)prefix limit:(int)limit;
++ (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit;
 + (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
 
 + (NSString *)authRequestPath:(NSString *)url andBody:(NSString *)body;
