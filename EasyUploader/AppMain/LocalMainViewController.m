@@ -23,6 +23,7 @@
     }];
 
     [self setLeftBarButtonTitle:@""];
+    [self setLeftBarButtonWidth:0];
 }
 
 @end

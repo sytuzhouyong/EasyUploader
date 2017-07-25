@@ -8,6 +8,34 @@
 
 #import "QiniuResource.h"
 
+#define SetPropertyInDict(prop_name, key_name) \
+    if (dict[key_name]) { \
+        [resource setValue:dict[key_name] forKey:prop_name]; \
+    }
+
 @implementation QiniuResource
+
+
++ (instancetype)resourceWithDict:(NSDictionary *)dict {
+    QiniuResource *resource = [[QiniuResource alloc] init];
+
+    SetPropertyInDict(@"name", @"key");
+    SetPropertyInDict(@"hashString", @"hash");
+    SetPropertyInDict(@"mimeType", @"mimeType");
+    SetPropertyInDict(@"createTime", @"putTime");
+    SetPropertyInDict(@"size", @"fsize");
+
+    return resource;
+}
+
++ (NSArray<QiniuResource *> *)resourcesWithDicts:(NSArray<NSDictionary *> *)dicts {
+    NSMutableArray *resources = [NSMutableArray array];
+    for (NSDictionary *dict in dicts) {
+        QiniuResource *resource = [self.class resourceWithDict:dict];
+        [resources addObject:resource];
+    }
+    return resources;
+}
+
 
 @end

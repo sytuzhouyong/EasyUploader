@@ -15,7 +15,7 @@
 //SINGLETON_IMPLEMENTATION(QiniuResourceManager);
 
 // 查询指定 bucket 的资源
-+ (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit {
++ (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
     NSString *requestPath = [NSString stringWithFormat:@"/list?limit=%d&bucket=%@", limit, bucket];
     NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
     NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];
@@ -27,8 +27,14 @@
     NSLog(@"headers = %@", kHttpManager.requestSerializer.HTTPRequestHeaders);
 
     [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        NSLog(@"response = %@", responseObject);
-        NSLog(@"error = %@", error);
+        if (error != nil) {
+            NSLog(@"query resource in bucket %@ failed, error = %@", bucket, error);
+            return;
+        }
+
+        NSArray<QiniuResource *> *resources = [QiniuResource resourcesWithDicts:responseObject[@"items"]];
+        ExecuteBlock1IfNotNil(handler, resources);
+
     }] resume];
 }
 
@@ -46,20 +52,20 @@
 
     [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"query buckets failed");
+            NSLog(@"query buckets failed, error = %@", error);
             return;
         }
 
-        NSArray<QiniuBucket *> *buckets = [QiniuBucket instancesOfJSONStrings:responseObject];
+        NSArray<QiniuBucket *> *buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
         ExecuteBlock1IfNotNil(handler, buckets);
     }] resume];
 }
 
 // 添加 bucket
 + (void)addBucketWithName:(NSString *)name {
-    NSString *requestPath =  @"/buckets";
-    NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
-    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];
+//    NSString *requestPath =  @"/buckets";
+//    NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
+//    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];
     ;
 }
 

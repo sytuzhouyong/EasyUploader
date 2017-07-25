@@ -21,11 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [button setTitle:@"请求" forState: UIControlStateNormal];
-    button.frame = CGRectMake(100, 200, 60, 40);
-    [self.view addSubview:button];
-    [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [QiniuResourceManager queryResourcesInBucket:@"easy-uploader" withPrefix:@"" limit:10];
 
     [self addSubviews];
     // Do any additional setup after loading the view, typically from a nib.
@@ -73,7 +69,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QiniuBucket *bucket = self.buckets[indexPath.row];
-    [QiniuResourceManager queryResourcesInBucket:bucket.name withPrefix:@"" limit:10];
+    [QiniuResourceManager queryResourcesInBucket:bucket.name withPrefix:@"" limit:10 handler:^(NSArray<QiniuResource *> *resources) {
+        if (resources.count == 0) {
+            return;
+        }
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ;
+        });
+    }];
 }
 
 

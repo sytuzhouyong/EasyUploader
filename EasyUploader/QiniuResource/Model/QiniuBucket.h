@@ -14,7 +14,7 @@
 //@property (nonatomic, copy) NSString *
 
 + (instancetype)bucketWithJSONString:(NSString *)json;
-+ (NSArray<QiniuBucket *> *)instancesOfJSONString:(NSString *)json;
-+ (NSArray<QiniuBucket *> *)instancesOfJSONStrings:(NSArray<NSString *> *)jsons;
++ (NSArray<QiniuBucket *> *)instancesWithJSONString:(NSString *)json;
++ (NSArray<QiniuBucket *> *)instancesWithJSONStrings:(NSArray<NSString *> *)jsons;
 
 @end
