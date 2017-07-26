@@ -17,48 +17,24 @@
 // 查询指定 bucket 的资源
 + (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
     NSString *requestPath = [NSString stringWithFormat:@"/list?limit=%d&bucket=%@", limit, bucket];
-    NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
-    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    [request setValue:requestPathAuthed forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"rsf.qbox.me" forHTTPHeaderField:@"Host"];
-    NSLog(@"headers = %@", kHttpManager.requestSerializer.HTTPRequestHeaders);
-
-    [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"query resource in bucket %@ failed, error = %@", bucket, error);
-            return;
+    [self.class sendRequestWithPath:requestPath body:@"" andHandler:^(BOOL success, id responseObject) {
+        NSArray<QiniuResource *> *resources = nil;
+        if (success) {
+            resources = [QiniuResource resourcesWithDicts:responseObject[@"items"]];
         }
-
-        NSArray<QiniuResource *> *resources = [QiniuResource resourcesWithDicts:responseObject[@"items"]];
         ExecuteBlock1IfNotNil(handler, resources);
-
-    }] resume];
+    }];
 }
 
 // 查询所有 buckets
 + (void)queryAllBucketsWithHandler:(BucketsHandler)handler {
-    NSString *requestPath =  @"/buckets";
-    NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
-    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    [request setValue:requestPathAuthed forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"rs.qbox.me" forHTTPHeaderField:@"Host"];
-    NSLog(@"headers = %@", kHttpManager.requestSerializer.HTTPRequestHeaders);
-
-    [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"query buckets failed, error = %@", error);
-            return;
+    [self.class sendRequestWithPath:@"/buckets" body:@"" andHandler:^(BOOL success, id responseObject) {
+        NSArray<QiniuBucket *> *buckets = nil;
+        if (success) {
+            buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
         }
-
-        NSArray<QiniuBucket *> *buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
         ExecuteBlock1IfNotNil(handler, buckets);
-    }] resume];
+    }];
 }
 
 // 添加 bucket
@@ -67,6 +43,25 @@
 //    NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
 //    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];
     ;
+}
+
++ (void)sendRequestWithPath:(NSString *)path body:(NSString *)body andHandler:(RequestHandler)handler {
+    NSString *authedPath = [self.class authRequestPath:path andBody:body];
+    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, path];
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    [request setValue:authedPath forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"rs.qbox.me" forHTTPHeaderField:@"Host"];
+    
+    [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        BOOL success = YES;
+        if (error != nil) {
+            success = NO;
+            NSLog(@"resquest [%@] failed, error = %@", path, error);
+        }
+        ExecuteBlock2IfNotNil(handler, success, responseObject);
+    }] resume];
 }
 
 // 生成指定请求的 URL 的管理凭证
