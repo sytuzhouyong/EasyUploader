@@ -10,6 +10,7 @@
 		250392251E65C758002062F0 /* EasyUploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250392241E65C758002062F0 /* EasyUploaderTests.m */; };
 		250392301E65C758002062F0 /* EasyUploaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503922F1E65C758002062F0 /* EasyUploaderUITests.m */; };
 		2508F35D1E7D7C3600217772 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */; };
+		250F02181F28C3AB00438141 /* QiniuResouresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 250F02171F28C3AB00438141 /* QiniuResouresViewController.m */; };
 		255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FD1F2274B000411A67 /* UITextField+Padding.m */; };
 		255E15331F2274B000411A67 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FF1F2274B000411A67 /* UIView+Frame.m */; };
 		255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15021F2274B000411A67 /* DDLogCustomFormatter.m */; };
@@ -74,6 +75,8 @@
 		250392311E65C758002062F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		250F02151F28C16900438141 /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
+		250F02161F28C3AB00438141 /* QiniuResouresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResouresViewController.h; sourceTree = "<group>"; };
+		250F02171F28C3AB00438141 /* QiniuResouresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResouresViewController.m; sourceTree = "<group>"; };
 		255E14FC1F2274B000411A67 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		255E14FD1F2274B000411A67 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		255E14FE1F2274B000411A67 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -123,16 +126,16 @@
 		255E154D1F22778700411A67 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		255E154E1F22778700411A67 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		255E154F1F22778700411A67 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		255E15501F22778700411A67 /* QiniuMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuMainViewController.h; sourceTree = "<group>"; };
-		255E15511F22778700411A67 /* QiniuMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuMainViewController.m; sourceTree = "<group>"; };
+		255E15501F22778700411A67 /* QiniuMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QiniuMainViewController.h; path = ../AppMain/QiniuMainViewController.h; sourceTree = "<group>"; };
+		255E15511F22778700411A67 /* QiniuMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QiniuMainViewController.m; path = ../AppMain/QiniuMainViewController.m; sourceTree = "<group>"; };
 		255E15521F22778700411A67 /* zh-Hans.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "zh-Hans.plist"; sourceTree = "<group>"; };
 		255E155C1F227A5600411A67 /* QiniuBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuBucket.h; sourceTree = "<group>"; };
 		255E155D1F227A5600411A67 /* QiniuBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucket.m; sourceTree = "<group>"; };
 		255E155F1F227A6A00411A67 /* QiniuResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResource.h; sourceTree = "<group>"; };
 		255E15601F227A6A00411A67 /* QiniuResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResource.m; sourceTree = "<group>"; };
 		25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		25A1D0101F23739F0018888F /* LocalMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalMainViewController.h; sourceTree = "<group>"; };
-		25A1D0111F23739F0018888F /* LocalMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalMainViewController.m; sourceTree = "<group>"; };
+		25A1D0101F23739F0018888F /* LocalMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalMainViewController.h; path = ../AppMain/LocalMainViewController.h; sourceTree = "<group>"; };
+		25A1D0111F23739F0018888F /* LocalMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalMainViewController.m; path = ../AppMain/LocalMainViewController.m; sourceTree = "<group>"; };
 		2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploader.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploader/Pods-EasyUploader.release.xcconfig"; sourceTree = "<group>"; };
 		3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F06F99B7DAEEABA4061A1A2 /* Pods-EasyUploaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderTests/Pods-EasyUploaderTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -345,6 +348,8 @@
 			isa = PBXGroup;
 			children = (
 				255E15241F2274B000411A67 /* Album */,
+				25A1D0101F23739F0018888F /* LocalMainViewController.h */,
+				25A1D0111F23739F0018888F /* LocalMainViewController.m */,
 				255E152B1F2274B000411A67 /* ZyxPhotoManager.h */,
 				255E152C1F2274B000411A67 /* ZyxPhotoManager.m */,
 			);
@@ -368,8 +373,12 @@
 			isa = PBXGroup;
 			children = (
 				255E155B1F227A4100411A67 /* Model */,
+				255E15501F22778700411A67 /* QiniuMainViewController.h */,
+				255E15511F22778700411A67 /* QiniuMainViewController.m */,
 				255E152E1F2274B000411A67 /* QiniuResourceManager.h */,
 				255E152F1F2274B000411A67 /* QiniuResourceManager.m */,
+				250F02161F28C3AB00438141 /* QiniuResouresViewController.h */,
+				250F02171F28C3AB00438141 /* QiniuResouresViewController.m */,
 				255E15301F2274B000411A67 /* QiniuUploadManager.h */,
 				255E15311F2274B000411A67 /* QiniuUploadManager.m */,
 			);
@@ -386,12 +395,8 @@
 				255E154D1F22778700411A67 /* Info.plist */,
 				255E154E1F22778700411A67 /* main.m */,
 				255E154F1F22778700411A67 /* PrefixHeader.pch */,
-				255E15501F22778700411A67 /* QiniuMainViewController.h */,
-				255E15511F22778700411A67 /* QiniuMainViewController.m */,
 				255E15521F22778700411A67 /* zh-Hans.plist */,
 				25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */,
-				25A1D0101F23739F0018888F /* LocalMainViewController.h */,
-				25A1D0111F23739F0018888F /* LocalMainViewController.m */,
 			);
 			path = AppMain;
 			sourceTree = "<group>";
@@ -736,6 +741,7 @@
 				255E15591F22778700411A67 /* QiniuMainViewController.m in Sources */,
 				255E153A1F2274B000411A67 /* DeviceUtil.m in Sources */,
 				255E15351F2274B000411A67 /* GTMBase64.m in Sources */,
+				250F02181F28C3AB00438141 /* QiniuResouresViewController.m in Sources */,
 				255E15401F2274B000411A67 /* AlbumPhotosViewController.m in Sources */,
 				255E153B1F2274B000411A67 /* LanguagTranslateUtil.m in Sources */,
 				255E15371F2274B000411A67 /* KeychainItemWrapper.m in Sources */,

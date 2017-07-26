@@ -44,9 +44,10 @@
     for (NSUInteger i=0; i<self.groups.count; i++) {
         [_selectFlags addObject:@(NO)];
     }
+}
 
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)addSubviews {
@@ -176,7 +177,7 @@
     ZyxPhotosViewController *vc = [[ZyxPhotosViewController alloc] initWithAssetsGroup:group];
     vc.selectionMode = ZyxImagePickerSelectionModeMultiple;
     vc.selectDelegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -222,6 +223,8 @@
     tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
     tableView.backgroundColor = self.view.backgroundColor;
     tableView.tableFooterView = [UIView new];
+    tableView.dataSource = self;
+    tableView.delegate = self;
     return tableView;
 }
 

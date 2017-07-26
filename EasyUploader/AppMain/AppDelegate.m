@@ -10,7 +10,7 @@
 #import "QiniuMainViewController.h"
 #import "LocalMainViewController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <UITabBarControllerDelegate>
 
 @end
 
@@ -28,6 +28,7 @@
     UINavigationController *qiniuNav = [[UINavigationController alloc] initWithRootViewController:qiniuVC];
     UINavigationController *localNav = [[UINavigationController alloc] initWithRootViewController:localVC];
     tabBarController.viewControllers = @[qiniuNav, localNav];
+    tabBarController.delegate = self;
     qiniuNav.tabBarItem.title = @"七牛云";
     localNav.tabBarItem.title = @"本地";
 
@@ -38,6 +39,9 @@
     return YES;
 }
 
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

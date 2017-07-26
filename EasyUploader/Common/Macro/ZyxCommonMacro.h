@@ -42,10 +42,11 @@
 
 #define UIImageNamed(_n)            [UIImage imageNamed:_n]
 #define UIFontOfSize(_s)            [UIFont systemFontOfSize:_s]
-#define Text(_k)                    [kTranslateUtil stringForKey:_k]
 #define InfoPlistValueForKey(_k)    [[NSBundle mainBundle] infoDictionary][_k]
 #define kAppVersion                 InfoPlistValueForKey(@"CFBundleVersion")
 #define kDeviceId                   [DeviceUtil deviceUniqueId]
+
+#define ShowBorder(_view, _color)   _view.layer.borderWidth = 0.5; _view.layer.borderColor = [UIColor _color].CGColor
 
 #define ExecuteBlockIfNotNil(_b)                    !_b ?: _b()
 #define ExecuteBlock1IfNotNil(_b, _v1)              !_b ?: _b(_v1)
@@ -97,7 +98,7 @@ typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
 #define kPhotoManager           [ZyxPhotoManager sharedInstance]
 #define kTranslateUtil          [LanguagTranslateUtil sharedInstance]
 #define kKeychainUtil           [KeychainUtil sharedInstance]
-
+#define Text(_k)                [kTranslateUtil stringForKey:_k]
 
 #pragma mark - CocoaLog
 

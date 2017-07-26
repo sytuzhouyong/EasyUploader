@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZyxPickAlbumViewController.h"
 
-@interface LocalMainViewController : BaseViewController
+@interface LocalMainViewController : ZyxPickAlbumViewController
 
 @end
