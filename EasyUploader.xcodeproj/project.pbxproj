@@ -77,6 +77,7 @@
 		250F02151F28C16900438141 /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		250F02161F28C3AB00438141 /* QiniuResouresViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResouresViewController.h; sourceTree = "<group>"; };
 		250F02171F28C3AB00438141 /* QiniuResouresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResouresViewController.m; sourceTree = "<group>"; };
+		250F02191F28F60B00438141 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		255E14FC1F2274B000411A67 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		255E14FD1F2274B000411A67 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		255E14FE1F2274B000411A67 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -229,6 +230,7 @@
 		255E14FA1F2274B000411A67 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				250F02191F28F60B00438141 /* Common.h */,
 				255E14FB1F2274B000411A67 /* Extension */,
 				255E15001F2274B000411A67 /* Log */,
 				255E15031F2274B000411A67 /* Macro */,

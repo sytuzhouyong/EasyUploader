@@ -6,8 +6,52 @@
 //  Copyright © 2017年 zhouyong. All rights reserved.
 //
 
-#ifndef Common_h
-#define Common_h
+#import <UIKit/UIKit.h>
+
+#define DD_LEGACY_MACROS    0
+
+# pragma mark - System Library Include
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <CommonCrypto/CommonCrypto.h>
+#import <UIKit/UIKit.h>
+
+# pragma mark - Pods Library Include
+#import "AFNetworking.h"
+#import "CocoaLumberjack.h"
+#import "DDLogCustomFormatter.h"
+#import "GTMBase64.h"
+#import "Masonry.h"
+
+# pragma mark - Project
+#import "AppDelegate.h"
+#import "ZyxSingleton.h"
+#import "ZyxCommonMacro.h"
+#import "Macro.h"
+
+#import "QiniuResourceManager.h"
+#import "QiniuUploadManager.h"
+#import "ZyxPhotoManager.h"
 
 
-#endif /* Common_h */
+typedef NS_ENUM(NSUInteger, ZyxImagePickerSelectionMode) {
+    ZyxImagePickerSelectionModeNone,
+    ZyxImagePickerSelectionModeSingle,
+    ZyxImagePickerSelectionModeMultiple,
+};
+
+#import "BaseViewController.h"
+#import "UIView+Frame.h"
+#import "UINormalTableViewCell.h"
+#import "ZyxPhotoCollectionViewCell.h"
+
+# pragma mark - Utils Header File Include
+#import "ALAssetUtil.h"
+#import "LanguagTranslateUtil.h"
+#import "DateUtil.h"
+#import "DeviceUtil.h"
+#import "StringUtil.h"
+
+#import "QiniuUploadManager.h"
+#import "QiniuResourceManager.h"
+
+

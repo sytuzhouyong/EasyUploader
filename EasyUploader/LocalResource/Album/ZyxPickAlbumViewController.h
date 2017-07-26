@@ -9,12 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-typedef NS_ENUM(NSUInteger, ZyxImagePickerSelectionMode) {
-    ZyxImagePickerSelectionModeNone,
-    ZyxImagePickerSelectionModeSingle,
-    ZyxImagePickerSelectionModeMultiple,
-};
-
 @class ZyxPickAlbumViewController;
 
 

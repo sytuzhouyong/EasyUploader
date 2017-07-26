@@ -14,6 +14,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"相册列表";
+    self.leftBarButtonWidth = 0;
 }
 
 @end

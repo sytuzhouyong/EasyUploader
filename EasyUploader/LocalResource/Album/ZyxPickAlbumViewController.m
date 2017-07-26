@@ -46,10 +46,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
 - (void)addSubviews {
     MASViewAttribute *attribute = nil;
     
@@ -177,7 +173,7 @@
     ZyxPhotosViewController *vc = [[ZyxPhotosViewController alloc] initWithAssetsGroup:group];
     vc.selectionMode = ZyxImagePickerSelectionModeMultiple;
     vc.selectDelegate = self;
-//    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -195,8 +191,8 @@
 - (void)didSelectPhoto:(ALAsset *)asset atIndexPath:indexPath {
 //    [self.selectedPhotos addObject:asset];
 
-    NSString *key = [ALAssetUtil defaultDateStringOfALAsset:asset];
-    [[QiniuUploadManager sharedInstance] uploadALAsset:asset withKey:key];
+//    NSString *key = [ALAssetUtil defaultDateStringOfALAsset:asset];
+//    [[QiniuUploadManager sharedInstance] uploadALAsset:asset withKey:key];
 }
 
 - (void)didDeselectPhoto:(ALAsset *)asset atIndexPath:indexPath {

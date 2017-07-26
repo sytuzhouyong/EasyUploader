@@ -51,9 +51,8 @@
 }
 
 - (void)selectButtonPressed {
-    self.rightBarButtonTitle = Text(self.isSelectAll ? @"CancelSelectAll" : @"SelectAll");
     self.isSelectAll = !self.isSelectAll;
-//    self.selectedPhotos = [self selectedPhotos];
+    self.rightBarButtonTitle = Text(self.isSelectAll ? @"CancelSelectAll" : @"SelectAll");
 }
 
 - (void)viewDidLayoutSubviews {
