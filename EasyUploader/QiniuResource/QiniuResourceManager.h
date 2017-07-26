@@ -16,6 +16,7 @@
 
 typedef void (^BucketsHandler)(NSArray<QiniuBucket *> *buckets);
 typedef void (^ResourcesHandler)(NSArray<QiniuResource *> *resources);
+typedef void (^RequestHandler)(BOOL success, id responseObject);
 
 
 + (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
