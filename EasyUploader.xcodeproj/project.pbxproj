@@ -73,13 +73,14 @@
 		2503922F1E65C758002062F0 /* EasyUploaderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasyUploaderUITests.m; sourceTree = "<group>"; };
 		250392311E65C758002062F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		250F02151F28C16900438141 /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		255E14FC1F2274B000411A67 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		255E14FD1F2274B000411A67 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		255E14FE1F2274B000411A67 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
 		255E14FF1F2274B000411A67 /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
 		255E15011F2274B000411A67 /* DDLogCustomFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogCustomFormatter.h; sourceTree = "<group>"; };
 		255E15021F2274B000411A67 /* DDLogCustomFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLogCustomFormatter.m; sourceTree = "<group>"; };
-		255E15041F2274B000411A67 /* ZyxMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxMacro.h; sourceTree = "<group>"; };
+		255E15041F2274B000411A67 /* ZyxCommonMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxCommonMacro.h; sourceTree = "<group>"; };
 		255E15051F2274B000411A67 /* ZyxSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxSingleton.h; sourceTree = "<group>"; };
 		255E15081F2274B000411A67 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		255E15091F2274B000411A67 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
@@ -259,8 +260,9 @@
 		255E15031F2274B000411A67 /* Macro */ = {
 			isa = PBXGroup;
 			children = (
-				255E15041F2274B000411A67 /* ZyxMacro.h */,
+				255E15041F2274B000411A67 /* ZyxCommonMacro.h */,
 				255E15051F2274B000411A67 /* ZyxSingleton.h */,
+				250F02151F28C16900438141 /* Macro.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";

@@ -21,8 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    [QiniuResourceManager queryResourcesInBucket:@"easy-uploader" withPrefix:@"" limit:10];
-
+    self.title = @"我的七牛云";
     [self addSubviews];
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor cyanColor];
@@ -30,7 +29,7 @@
 //    vc.selectionMode = ZyxImagePickerSelectionModeNone;
 //    vc.imagePickerDelegate = self;
 //    [self.navigationController pushViewController:vc animated:YES];
-
+    self.leftBarButtonWidth = 0;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 

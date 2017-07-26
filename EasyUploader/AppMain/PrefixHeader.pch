@@ -32,7 +32,8 @@
 #pragma mark - Project
 #import "AppDelegate.h"
 #import "ZyxSingleton.h"
-#import "ZyxMacro.h"
+#import "ZyxCommonMacro.h"
+#import "Macro.h"
 
 #import "QiniuResourceManager.h"
 #import "QiniuUploadManager.h"

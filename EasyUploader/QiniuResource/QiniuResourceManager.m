@@ -17,7 +17,7 @@
 // 查询指定 bucket 的资源
 + (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
     NSString *requestPath = [NSString stringWithFormat:@"/list?limit=%d&bucket=%@", limit, bucket];
-    [self.class sendRequestWithPath:requestPath body:@"" andHandler:^(BOOL success, id responseObject) {
+    [self.class sendRequestWithPath:requestPath body:@"" host:kQiniuResourceHost andHandler:^(BOOL success, id responseObject) {
         NSArray<QiniuResource *> *resources = nil;
         if (success) {
             resources = [QiniuResource resourcesWithDicts:responseObject[@"items"]];
@@ -28,7 +28,7 @@
 
 // 查询所有 buckets
 + (void)queryAllBucketsWithHandler:(BucketsHandler)handler {
-    [self.class sendRequestWithPath:@"/buckets" body:@"" andHandler:^(BOOL success, id responseObject) {
+    [self.class sendRequestWithPath:@"/buckets" body:@"" host:kQiniuBucketHost andHandler:^(BOOL success, id responseObject) {
         NSArray<QiniuBucket *> *buckets = nil;
         if (success) {
             buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
@@ -45,14 +45,14 @@
     ;
 }
 
-+ (void)sendRequestWithPath:(NSString *)path body:(NSString *)body andHandler:(RequestHandler)handler {
++ (void)sendRequestWithPath:(NSString *)path body:(NSString *)body host:(NSString *)host andHandler:(RequestHandler)handler {
     NSString *authedPath = [self.class authRequestPath:path andBody:body];
-    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, path];
+    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuBaseRequestURL, path];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setValue:authedPath forHTTPHeaderField:@"Authorization"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"rs.qbox.me" forHTTPHeaderField:@"Host"];
+    [request setValue:host forHTTPHeaderField:@"Host"];
     
     [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         BOOL success = YES;

@@ -16,6 +16,7 @@
 SINGLETON_IMPLEMENTATION(QiniuUploadManager);
 
 // https://developer.qiniu.com/kodo/manual/1208/upload-token
+// key: 上传的文件名
 - (NSString *)defaultUploadPolicyWithKey:(NSString *)key {
     time_t deadline;
     time(&deadline);    // 返回当前系统时间

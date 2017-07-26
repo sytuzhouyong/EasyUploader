@@ -1,5 +1,5 @@
 //
-//  ZyxMacro.h
+//  ZyxCommonMacro.h
 //  EasyUploader
 //
 //  Created by zhouyong on 17/3/21.
@@ -90,11 +90,13 @@ _s ? @"icon_round_selected_blue" : @"icon_round_unselected_gray"
 #pragma mark - 简便类型宏
 
 typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
-#define DeviceArray             NSArray<HC100Device *>
-#define DeviceMutableArray      NSMutableArray<HC100Device *>
 #define NSStringArray           NSArray<NSString *>
 #define NSStringMutableArray    NSMutableArray<NSString *>
 #define NSStringDictionary      NSDictionary<NSString *, NSString *>
+
+#define kPhotoManager           [ZyxPhotoManager sharedInstance]
+#define kTranslateUtil          [LanguagTranslateUtil sharedInstance]
+#define kKeychainUtil           [KeychainUtil sharedInstance]
 
 
 #pragma mark - CocoaLog
@@ -115,18 +117,6 @@ typedef void (^ConstraintBlock)(MASConstraintMaker *maker);
 #define DDLogInfoTag(tag, frmt, ...)    LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagInfo,    0, tag, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define DDLogDebugTag(tag, frmt, ...)   LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagDebug,   0, tag, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 #define DDLogVerboseTag(tag, frmt, ...) LOG_MAYBE(LOG_ASYNC_ENABLED, LOG_LEVEL_DEF, DDLogFlagVerbose, 0, tag, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
-
-
-#pragma mark - 项目相关宏
-
-#define kAccessKey              @"ebgn6Ab9Zk8mtWxycGT9ww2GHB3HI5-FTeXGTJTe"
-#define kSecretKey              @"aqF2ARHxYqekMsxyutZOgahXb_PdVmLeDHfNKh-0"
-#define kPhotoManager           [ZyxPhotoManager sharedInstance]
-#define kTranslateUtil          [LanguagTranslateUtil sharedInstance]
-#define kKeychainUtil           [KeychainUtil sharedInstance]
-#define kQiniuResourceManager   [QiniuResourceManager sharedInstance]
-#define kBucket                 @"easy-uploader"
-#define kQiniuResourceHost      @"http://rsf.qbox.me"
 
 
 #endif /* ZyxMacro_h */
