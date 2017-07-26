@@ -435,12 +435,13 @@
     _titleContentView = contentView;
     [self.titleSubview addSubview:contentView];
     [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.leftBarButton.mas_trailing);
-        make.trailing.equalTo(self.rightBarButton.mas_leading);
-        make.top.equalTo(self.titleSubview);
-        make.height.mas_equalTo(contentViewHeight);
+        CGFloat offset = MAX(self.leftBarButtonWidth, self.rightBarButtonWidth);
+        make.leading.equalTo(_titleSubview).offset(offset + _leftBarButtonLeadingOffset.x);
+        make.trailing.equalTo(_titleSubview).offset(-offset - _rightBarButtonTrailingOffset.x);
+        make.top.equalTo(_titleSubview);
+        make.bottom.equalTo(_titleSubview);
     }];
-    
+
     // 更新titleView的高度，并且刷新界面
     _titleViewHeight = contentViewHeight + kStatusBarHeight;
     [self.titleView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -661,9 +662,11 @@
     [button mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(size);
     }];
-    CGFloat deltaX = self.rightBarButtonWidth - self.leftBarButtonWidth;
+    
     [self.titleContentSubview mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.titleContentView).offset(deltaX / 2.0);
+        CGFloat offset = MAX(self.leftBarButtonWidth, self.rightBarButtonWidth);
+        make.leading.equalTo(_titleSubview).offset(offset + _leftBarButtonLeadingOffset.x);
+        make.trailing.equalTo(_titleSubview).offset(-offset - _rightBarButtonTrailingOffset.x);
     }];
 
     [self.titleSubview layoutIfNeeded];
