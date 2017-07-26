@@ -18,6 +18,8 @@
 @property (nonatomic, weak  ) UIControl *focusedView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 
+@property (nonatomic, assign) BOOL needUpdateTitleView;
+
 @end
 
 @implementation BaseViewController
@@ -44,6 +46,7 @@
         _isKeyboardObserver = NO;
         _editable = NO;
         _isAllSelected = NO;
+        _needUpdateTitleView = NO;
     }
     return self;
 }
@@ -73,6 +76,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self addObserver];
+    if (self.needUpdateTitleView) {
+        self.needUpdateTitleView = NO;
+        [self.titleView updateConstraintsIfNeeded];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -394,8 +401,9 @@
         
         [subview addSubview:self.titleContentView];
         [_titleContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.leftBarButton.mas_trailing);
-            make.trailing.equalTo(self.rightBarButton.mas_leading).offset(_rightBarButtonTrailingOffset.x);
+            CGFloat offset = MAX(self.leftBarButtonWidth, self.rightBarButtonWidth);
+            make.leading.equalTo(subview).offset(offset + _leftBarButtonLeadingOffset.x);
+            make.trailing.equalTo(subview).offset(-offset - _rightBarButtonTrailingOffset.x);
             make.top.equalTo(subview);
             make.bottom.equalTo(subview);
         }];
@@ -495,12 +503,13 @@
 }
 
 - (void)makeTitleLabelConstraintsWithWidth:(CGFloat)width {
-    CGFloat deltaX = self.rightBarButtonWidth - self.leftBarButtonWidth;
-    
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.titleContentView).offset(deltaX / 2.0);
-        make.top.equalTo(self.titleContentView);
-        make.width.equalTo(@(width));
+        // 不能用 centerx，因为两者的 centerx 不相等
+//        make.centerX.equalTo(self.titleContentView);
+//        make.width.equalTo(@(width));
+        make.leading.equalTo(self.titleContentView);
+        make.trailing.equalTo(self.titleContentView);
+        make.top.equalTo(self.titleContentView);    // 为了让标题显示在顶部
         make.height.equalTo(@(kTitleContentViewHeight));
     }];
 }
@@ -576,7 +585,7 @@
 
 - (void)setLeftBarButtonTitle:(NSString *)title {
     _leftBarButtonTitle = title;
-    
+
     [self.leftBarButton setTitle:title forState:UIControlStateNormal];
     [self resetLeftBarButtonImageSettings];
     // 更新按钮宽度
@@ -655,7 +664,9 @@
     [self.titleContentSubview mas_updateConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.titleContentView).offset(deltaX / 2.0);
     }];
+
     [self.titleSubview layoutIfNeeded];
+    self.needUpdateTitleView = YES;
 }
 
 // 更新button的偏移量，居中对齐时，偏移量失效；上对齐时，offset对应左上角，下对齐时，offset对应右下角
