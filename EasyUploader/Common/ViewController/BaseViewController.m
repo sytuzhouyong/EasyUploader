@@ -347,7 +347,8 @@
 }
 
 - (void)setTitle:(NSString *)title {
-    [super setTitle:title];
+    // 不能有，否则 tabbaritem的 title 也会被设置，why?
+//    [super setTitle:title];
     
     // 如果只是设置title，没有设置过_titleContentSubview，就直接改text就可以了
     if (_titleContentSubview != _titleLabel) {
