@@ -14,6 +14,7 @@
 @property (nonatomic, assign) CGSize cellSize;
 
 @property (nonatomic, strong) NSArray<QiniuResource *> *resouces;
+@property (nonatomic, strong) NSString *bucket;
 
 @end
 
@@ -31,6 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    [QiniuResourceManager queryResourcesInBucket:self.bucket withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
+        ;
+    }];
 }
 
 - (void)viewDidLayoutSubviews {
