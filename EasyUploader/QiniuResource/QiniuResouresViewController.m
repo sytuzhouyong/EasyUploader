@@ -20,8 +20,9 @@
 
 @implementation QiniuResouresViewController
 
-- (instancetype)init {
+- (instancetype)initWithBucket:(NSString *)bucket {
     if (self = [super initWithNibName:nil bundle:nil]) {
+        self.bucket = bucket;
         self.numberOfCellsPerLine = 4;
         self.cellSpacing = 5;
         self.isSelectAll = NO;
@@ -32,9 +33,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self addSubviews];
 
-    [QiniuResourceManager queryResourcesInBucket:self.bucket withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
-        ;
+    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.resouces = resources;
+            [self.collectionView reloadData];
+        });
     }];
 }
 

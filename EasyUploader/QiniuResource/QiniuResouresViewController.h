@@ -15,4 +15,6 @@
 @property (nonatomic, assign) BOOL isSelectAll;
 @property (nonatomic, assign) ZyxImagePickerSelectionMode selectionMode;
 
+- (instancetype)initWithBucket:(NSString *)bucket;
+
 @end

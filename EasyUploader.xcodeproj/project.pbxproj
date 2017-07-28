@@ -40,6 +40,7 @@
 		255E155A1F22778700411A67 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E15521F22778700411A67 /* zh-Hans.plist */; };
 		255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E155D1F227A5600411A67 /* QiniuBucket.m */; };
 		255E15611F227A6A00411A67 /* QiniuResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15601F227A6A00411A67 /* QiniuResource.m */; };
+		259A36101F2B71B200F10298 /* QiniuBucketViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */; };
 		25A1D00F1F23705E0018888F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */; };
 		25A1D0121F23739F0018888F /* LocalMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A1D0111F23739F0018888F /* LocalMainViewController.m */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
@@ -134,6 +135,8 @@
 		255E155D1F227A5600411A67 /* QiniuBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucket.m; sourceTree = "<group>"; };
 		255E155F1F227A6A00411A67 /* QiniuResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResource.h; sourceTree = "<group>"; };
 		255E15601F227A6A00411A67 /* QiniuResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResource.m; sourceTree = "<group>"; };
+		259A360E1F2B71B200F10298 /* QiniuBucketViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuBucketViewModel.h; sourceTree = "<group>"; };
+		259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucketViewModel.m; sourceTree = "<group>"; };
 		25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25A1D0101F23739F0018888F /* LocalMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalMainViewController.h; path = ../AppMain/LocalMainViewController.h; sourceTree = "<group>"; };
 		25A1D0111F23739F0018888F /* LocalMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalMainViewController.m; path = ../AppMain/LocalMainViewController.m; sourceTree = "<group>"; };
@@ -407,6 +410,8 @@
 			isa = PBXGroup;
 			children = (
 				255E155C1F227A5600411A67 /* QiniuBucket.h */,
+				259A360E1F2B71B200F10298 /* QiniuBucketViewModel.h */,
+				259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */,
 				255E155D1F227A5600411A67 /* QiniuBucket.m */,
 				255E155F1F227A6A00411A67 /* QiniuResource.h */,
 				255E15601F227A6A00411A67 /* QiniuResource.m */,
@@ -724,6 +729,7 @@
 				255E153C1F2274B000411A67 /* StringUtil.m in Sources */,
 				255E15431F2274B000411A67 /* ZyxPhotoManager.m in Sources */,
 				255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */,
+				259A36101F2B71B200F10298 /* QiniuBucketViewModel.m in Sources */,
 				255E15451F2274B000411A67 /* QiniuUploadManager.m in Sources */,
 				255E153E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m in Sources */,
 				255E15391F2274B000411A67 /* DateUtil.m in Sources */,

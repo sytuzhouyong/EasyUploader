@@ -56,9 +56,9 @@
         [self.group setAssetsFilter:[ALAssetsFilter allAssets]];
         [self.group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
             if (asset == nil) {
-                NSString *title1 = [NSString stringWithFormat:@"%@ (%@)", Text(@"NotUpload"), @(unuploadCount)];
-                NSString *title2 = [NSString stringWithFormat:@"%@ (%@)", Text(@"All"), @(allCount)];
-                
+//                NSString *title1 = [NSString stringWithFormat:@"%@ (%@)", Text(@"NotUpload"), @(unuploadCount)];
+//                NSString *title2 = [NSString stringWithFormat:@"%@ (%@)", Text(@"All"), @(allCount)];
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.allPhotosVC addAssetsDict:allAssetsDict dateStringsDict:dateStringsDict];
                     [self.unuploadPhotosVC addAssetsDict:unuploadAssetsDict dateStringsDict:dateStringsDict];
@@ -66,7 +66,7 @@
                 return;
             }
             
-            NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+//            NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
             NSDate *date = [asset valueForProperty:ALAssetPropertyDate];
             NSString *yyyyMMdd = [DateUtil yyyyMMddStringWithDate:date];
             dateStringsDict[yyyyMMdd] = date;
@@ -91,8 +91,8 @@
             }
             
             if ((index % 200) == 0) {
-                NSString *title1 = [NSString stringWithFormat:@"%@ (%@)", Text(@"NotUpload"), @(unuploadCount)];
-                NSString *title2 = [NSString stringWithFormat:@"%@ (%@)", Text(@"All"), @(allCount)];
+//                NSString *title1 = [NSString stringWithFormat:@"%@ (%@)", Text(@"NotUpload"), @(unuploadCount)];
+//                NSString *title2 = [NSString stringWithFormat:@"%@ (%@)", Text(@"All"), @(allCount)];
                 
                 // 这边必须要用dispatch_sync，不能用dispatch_async
                 // 因为这边有清除allAssetsDict和unuploadAssetsDict数据，而这两个数据实在后台线程中修改的
@@ -134,11 +134,11 @@
 - (void)uploadButtonPressed {
     NSMutableArray *infos = [NSMutableArray array];
     
-    for (ALAsset *asset in self.selectedPhotos) {
+//    for (ALAsset *asset in self.selectedPhotos) {
 //        NSDictionary *info = [Common uploadFileInfoFromAsset:asset];
 //        [infos addObject:info];
-    }
-    
+//    }
+
     if ([_imagePickerDelegate respondsToSelector:@selector(zyxImagePickrController:didFinishPickingMedioWithInfos:)]) {
         ZyxPickAlbumViewController *picker = (ZyxPickAlbumViewController *)self.parentViewController;
         [_imagePickerDelegate zyxImagePickrController:picker didFinishPickingMedioWithInfos:infos];

@@ -8,11 +8,14 @@
 
 #import "QiniuMainViewController.h"
 #import "ZyxPickAlbumViewController.h"
+#import "QiniuBucketViewModel.h"
+
+#define kAccessoryButtonTag 1000
 
 @interface QiniuMainViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray<QiniuBucket *> *buckets;
+@property (nonatomic, strong) QiniuBucketViewModel *viewModel;
 
 @end
 
@@ -25,17 +28,13 @@
     [self addSubviews];
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor cyanColor];
-//    ZyxPickAlbumViewController *vc = [[ZyxPickAlbumViewController alloc] init];
-//    vc.selectionMode = ZyxImagePickerSelectionModeNone;
-//    vc.imagePickerDelegate = self;
-//    [self.navigationController pushViewController:vc animated:YES];
     self.leftBarButtonWidth = 0;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 
     [QiniuResourceManager queryAllBucketsWithHandler:^(NSArray<QiniuBucket *> *buckets) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.buckets = [NSMutableArray arrayWithArray:buckets];
+            self.viewModel = [[QiniuBucketViewModel alloc] initWithBuckets:buckets];
             [self.tableView reloadData];
         });
     }];
@@ -49,7 +48,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.buckets.count;
+    return self.viewModel.cellModels.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QiniubucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
+    return cellModel.expand ? 70 : 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,15 +64,23 @@
         cell = [[UINormalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
     }
 
-    QiniuBucket *bucket = self.buckets[indexPath.row];
-    cell.textLabel.text = bucket.name;
+    QiniubucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
+    cell.textLabel.text = cellModel.bucket.name;
+    cell.imageView.image = UIImageNamed(@"icon_round_selected_blue");
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.size = CGSizeMake(17, 10);
+    button.tag = kAccessoryButtonTag + indexPath.row;
+    [button setImage:UIImageNamed(@"icon_arrow_down") forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(cellButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    cell.accessoryView = button;
 
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    QiniuBucket *bucket = self.buckets[indexPath.row];
-    [QiniuResourceManager queryResourcesInBucket:bucket.name withPrefix:@"" limit:10 handler:^(NSArray<QiniuResource *> *resources) {
+    QiniuBucket *bucket = self.viewModel.cellModels[indexPath.row].bucket;
+    [QiniuResourceManager queryResourcesInBucket:bucket.name withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
         if (resources.count == 0) {
             return;
         }
@@ -79,6 +91,11 @@
     }];
 }
 
+- (void)cellButtonClicked:(UIButton *)button {
+    NSInteger index = button.tag - kAccessoryButtonTag;
+    [self.viewModel updateExpandStateAtRow:index];
+    [self.tableView reloadRowsAtIndexPaths:@[NSIndexPath(0, index)] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
 - (void)zyxImagePickrController:(ZyxPickAlbumViewController *)picker didFinishPickingMedioWithInfos:(NSArray<NSDictionary *> *)infos {
     NSLog(@"111111");
@@ -86,7 +103,7 @@
 
 - (void)viewDidLayoutSubviews {
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,10,0,0)];
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
     }
 
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -105,6 +122,10 @@
     tableView.backgroundColor = self.view.backgroundColor;
     tableView.tableFooterView = [UIView new];
     return tableView;
+}
+
+- (UIView *)cellToolView {
+    return nil;
 }
 
 - (void)didReceiveMemoryWarning {
