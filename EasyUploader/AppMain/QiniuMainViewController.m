@@ -59,7 +59,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     QiniubucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
-    return cellModel.expand ? 84 : 44;
+    return cellModel.expand ? 88 : 44;
 }
 
 - (ToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

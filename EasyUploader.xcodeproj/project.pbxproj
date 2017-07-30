@@ -42,6 +42,7 @@
 		255E15611F227A6A00411A67 /* QiniuResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15601F227A6A00411A67 /* QiniuResource.m */; };
 		259A36101F2B71B200F10298 /* QiniuBucketViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */; };
 		259A36131F2DA95C00F10298 /* ToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36121F2DA95C00F10298 /* ToolCell.m */; };
+		259A36161F2DECE700F10298 /* ZyxImageTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */; };
 		25A1D00F1F23705E0018888F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */; };
 		25A1D0121F23739F0018888F /* LocalMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A1D0111F23739F0018888F /* LocalMainViewController.m */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
@@ -140,6 +141,8 @@
 		259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucketViewModel.m; sourceTree = "<group>"; };
 		259A36111F2DA95C00F10298 /* ToolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolCell.h; sourceTree = "<group>"; };
 		259A36121F2DA95C00F10298 /* ToolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolCell.m; sourceTree = "<group>"; };
+		259A36141F2DECE700F10298 /* ZyxImageTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxImageTitleButton.h; sourceTree = "<group>"; };
+		259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxImageTitleButton.m; sourceTree = "<group>"; };
 		25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25A1D0101F23739F0018888F /* LocalMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalMainViewController.h; path = ../AppMain/LocalMainViewController.h; sourceTree = "<group>"; };
 		25A1D0111F23739F0018888F /* LocalMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalMainViewController.m; path = ../AppMain/LocalMainViewController.m; sourceTree = "<group>"; };
@@ -335,6 +338,8 @@
 		255E151B1F2274B000411A67 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				259A36141F2DECE700F10298 /* ZyxImageTitleButton.h */,
+				259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */,
 				255E151C1F2274B000411A67 /* UINormalTableViewCell.h */,
 				255E151D1F2274B000411A67 /* UINormalTableViewCell.m */,
 				255E151E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.h */,
@@ -748,6 +753,7 @@
 				255E15331F2274B000411A67 /* UIView+Frame.m in Sources */,
 				25A1D0121F23739F0018888F /* LocalMainViewController.m in Sources */,
 				255E15361F2274B000411A67 /* IPAddress.m in Sources */,
+				259A36161F2DECE700F10298 /* ZyxImageTitleButton.m in Sources */,
 				255E153D1F2274B000411A67 /* UINormalTableViewCell.m in Sources */,
 				255E15611F227A6A00411A67 /* QiniuResource.m in Sources */,
 				255E15411F2274B000411A67 /* ZyxPhotosViewController.m in Sources */,

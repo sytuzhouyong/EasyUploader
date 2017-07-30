@@ -7,6 +7,7 @@
 //
 
 #import "ToolCell.h"
+#import "ZyxImageTitleButton.h"
 
 @implementation ToolCell
 
@@ -67,7 +68,7 @@
 
 - (void)updateExpandState:(BOOL)expand {
     [self.toolView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(expand ? 40 : 0);
+        make.height.mas_equalTo(expand ? 44 : 0);
     }];
     [self.contentView updateConstraintsIfNeeded];
 }
@@ -75,6 +76,7 @@
 - (UIView *)toolViewWithToolButtonCount:(NSInteger)count {
     UIView *view = [[UIView alloc] init];
     view.clipsToBounds = YES;
+    view.backgroundColor = RGB(0xEE, 0xEE, 0xEE);
     [self.contentView addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.contentView);
@@ -89,11 +91,16 @@
     for (NSInteger i=0; i<count; i++) {
         CGFloat x = padding * i + padding;
 
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundImage:UIImageNamed(@"icon_trash") forState:UIControlStateNormal];
+        ZyxImageTitleButton *button = [ZyxImageTitleButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:UIImageNamed(@"icon_trash") forState:UIControlStateNormal];
+        [button setTitle:@"删除" forState: UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:10];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        button.layout = ZyxImageTitleButtonLayoutTypeVertical;
+        button.spacing = 3;
         [view addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(imageSize);
+            make.size.mas_equalTo(CGSize(44, 44));
             make.centerY.equalTo(view);
             make.leading.equalTo(view).offset(x);
         }];
