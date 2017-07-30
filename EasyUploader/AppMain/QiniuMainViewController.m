@@ -9,13 +9,19 @@
 #import "QiniuMainViewController.h"
 #import "ZyxPickAlbumViewController.h"
 #import "QiniuBucketViewModel.h"
+#import "ToolCell.h"
 
-#define kAccessoryButtonTag 1000
+#define kExpandButtonTag        1000
+#define kLabelTag               2000
+#define kCellToolViewTag        3000
+
+#define kCellIdentifier         @"ToolCell"
 
 @interface QiniuMainViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) QiniuBucketViewModel *viewModel;
+@property (nonatomic, strong) NSIndexPath *lastIndexPath;
 
 @end
 
@@ -53,28 +59,29 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     QiniubucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
-    return cellModel.expand ? 70 : 40;
+    return cellModel.expand ? 84 : 44;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"BucketCell";
+- (ToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ToolCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    NSInteger row = indexPath.row;
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell == nil) {
-        cell = [[UINormalTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
-    }
+    cell.expandHandler = ^(UIButton *button) {
+        NSArray *indexPaths = @[indexPath];
+        if (self.lastIndexPath != nil && self.lastIndexPath.row != row) {
+            indexPaths = @[indexPath, self.lastIndexPath];
+            [self.viewModel updateExpandStateAtRow:self.lastIndexPath.row];
+        }
 
-    QiniubucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
-    cell.textLabel.text = cellModel.bucket.name;
-    cell.imageView.image = UIImageNamed(@"icon_round_selected_blue");
+        [self.viewModel updateExpandStateAtRow:row];
+        [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        self.lastIndexPath = indexPath;
+    };
 
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.size = CGSizeMake(17, 10);
-    button.tag = kAccessoryButtonTag + indexPath.row;
-    [button setImage:UIImageNamed(@"icon_arrow_down") forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(cellButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    cell.accessoryView = button;
-
+    QiniubucketCellModel *cellModel = self.viewModel.cellModels[row];
+    cell.label.text = cellModel.bucket.name;
+    [cell updateExpandState:cellModel.expand];
+    
     return cell;
 }
 
@@ -91,21 +98,11 @@
     }];
 }
 
-- (void)cellButtonClicked:(UIButton *)button {
-    NSInteger index = button.tag - kAccessoryButtonTag;
-    [self.viewModel updateExpandStateAtRow:index];
-    [self.tableView reloadRowsAtIndexPaths:@[NSIndexPath(0, index)] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-- (void)zyxImagePickrController:(ZyxPickAlbumViewController *)picker didFinishPickingMedioWithInfos:(NSArray<NSDictionary *> *)infos {
-    NSLog(@"111111");
-}
 
 - (void)viewDidLayoutSubviews {
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
     }
-
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
         [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
     }
@@ -121,12 +118,11 @@
     tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
     tableView.backgroundColor = self.view.backgroundColor;
     tableView.tableFooterView = [UIView new];
+    [tableView registerClass:ToolCell.class forCellReuseIdentifier:kCellIdentifier];
     return tableView;
 }
 
-- (UIView *)cellToolView {
-    return nil;
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -136,3 +132,6 @@
 
 
 @end
+
+#undef kCellIdentifier
+
