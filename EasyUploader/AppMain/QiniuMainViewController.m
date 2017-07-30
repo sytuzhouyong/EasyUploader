@@ -64,21 +64,20 @@
 
 - (ToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ToolCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-    NSInteger row = indexPath.row;
 
     cell.expandHandler = ^(UIButton *button) {
         NSArray *indexPaths = @[indexPath];
-        if (self.lastIndexPath != nil && self.lastIndexPath.row != row) {
+        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtRow:self.lastIndexPath.row]) {
             indexPaths = @[indexPath, self.lastIndexPath];
             [self.viewModel updateExpandStateAtRow:self.lastIndexPath.row];
         }
 
-        [self.viewModel updateExpandStateAtRow:row];
+        [self.viewModel updateExpandStateAtRow:indexPath.row];
         [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         self.lastIndexPath = indexPath;
     };
 
-    QiniubucketCellModel *cellModel = self.viewModel.cellModels[row];
+    QiniubucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
     cell.label.text = cellModel.bucket.name;
     [cell updateExpandState:cellModel.expand];
     

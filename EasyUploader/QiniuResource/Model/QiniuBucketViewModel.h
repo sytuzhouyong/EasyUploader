@@ -25,6 +25,7 @@
 
 - (instancetype)initWithBuckets:(NSArray *)buckets;
 
+- (BOOL)isExpandAtRow:(NSInteger)row;
 - (void)updateExpandStateAtRow:(NSInteger)row;
 
 @end

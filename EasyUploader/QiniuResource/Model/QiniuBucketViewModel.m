@@ -32,6 +32,10 @@
     self.cellModels[row].expand = !self.cellModels[row].expand;
 }
 
+- (BOOL)isExpandAtRow:(NSInteger)row {
+    return self.cellModels[row].expand;
+}
+
 @end
 
 

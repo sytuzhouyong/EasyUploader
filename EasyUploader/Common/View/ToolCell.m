@@ -17,6 +17,8 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.image = UIImageNamed(@"icon_round_selected_blue");
         [self.contentView addSubview:imageView];
@@ -27,13 +29,14 @@
         }];
 
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         [button setImage:UIImageNamed(@"icon_arrow_down") forState:UIControlStateNormal];
         [button addTarget:self action:@selector(expandButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView).offset(10);
             make.trailing.equalTo(self.contentView).offset(-10);
-            make.size.mas_equalTo(CGSizeMake(17, 10));
+            make.size.mas_equalTo(CGSizeMake(34, 24));
         }];
 
         UILabel *label = [[UILabel alloc] init];
@@ -54,10 +57,10 @@
         self.button = button;
         self.toolView = toolView;
 
-        ShowBorder(toolView, greenColor);
-        ShowBorder(imageView, redColor);
-        ShowBorder(button, greenColor);
-        ShowBorder(label, yellowColor);
+//        ShowBorder(toolView, greenColor);
+//        ShowBorder(imageView, redColor);
+//        ShowBorder(button, greenColor);
+//        ShowBorder(label, yellowColor);
     }
     return self;
 }
@@ -71,16 +74,18 @@
 
 - (UIView *)toolViewWithToolButtonCount:(NSInteger)count {
     UIView *view = [[UIView alloc] init];
+    view.clipsToBounds = YES;
     [self.contentView addSubview:view];
     [view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.contentView);
         make.trailing.equalTo(self.contentView);
-        make.top.equalTo(self.contentView).offset(44);
-        make.height.mas_equalTo(40);
+        make.bottom.equalTo(self.contentView);
+        make.height.mas_equalTo(0);
     }];
 
-    CGFloat padding = self.contentView.width / count;
     CGSize imageSize = CGSize(24, 24);
+    CGFloat padding = (self.contentView.width - imageSize.width * count)  / (count + 1);
+
     for (NSInteger i=0; i<count; i++) {
         CGFloat x = padding * i + padding;
 
@@ -89,8 +94,8 @@
         [view addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(imageSize);
-            make.top.equalTo(self.contentView);
-            make.leading.equalTo(self.contentView).offset(x);
+            make.centerY.equalTo(view);
+            make.leading.equalTo(view).offset(x);
         }];
     }
 
