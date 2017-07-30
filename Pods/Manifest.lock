@@ -14,17 +14,20 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - CocoaLumberjack (3.1.0):
-    - CocoaLumberjack/Default (= 3.1.0)
-    - CocoaLumberjack/Extensions (= 3.1.0)
-  - CocoaLumberjack/Default (3.1.0)
-  - CocoaLumberjack/Extensions (3.1.0):
+  - CocoaLumberjack (3.2.0):
+    - CocoaLumberjack/Default (= 3.2.0)
+    - CocoaLumberjack/Extensions (= 3.2.0)
+  - CocoaLumberjack/Default (3.2.0)
+  - CocoaLumberjack/Extensions (3.2.0):
     - CocoaLumberjack/Default
   - HappyDNS (0.3.10)
   - Masonry (1.0.2)
   - Qiniu (7.0.20):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
+  - RaptureXML (1.0.1)
+  - UIImage+SVG (0.1):
+    - RaptureXML (~> 1.0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -32,6 +35,7 @@ DEPENDENCIES:
   - HappyDNS (~> 0.3)
   - Masonry
   - Qiniu (from `https://github.com/qiniu/objc-sdk.git`, branch `AFNetworking-3.x`)
+  - UIImage+SVG (~> 0.1)
 
 EXTERNAL SOURCES:
   Qiniu:
@@ -45,11 +49,13 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
+  CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   Qiniu: 4dbf1e6acb3236c4d7251046a17d08b16d21fcfe
+  RaptureXML: b5c33c04c1a4adfd8ad0d5463329a31820596e82
+  UIImage+SVG: 23a2edbb60b0f4c083068963086e309ebd8be592
 
-PODFILE CHECKSUM: 7827e0b94726472b50e9fb55fee62072d4dc3667
+PODFILE CHECKSUM: 0aba01b2f084b0daf5e950c8c016a82359daa5d3
 
 COCOAPODS: 1.2.0

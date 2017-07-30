@@ -21,6 +21,7 @@
 #import "DDLogCustomFormatter.h"
 #import "GTMBase64.h"
 #import "Masonry.h"
+#import <UIImage+SVG.h>
 
 # pragma mark - Project
 #import "AppDelegate.h"

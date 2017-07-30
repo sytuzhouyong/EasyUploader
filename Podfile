@@ -10,6 +10,7 @@ pod "Qiniu", :git => 'https://github.com/qiniu/objc-sdk.git', :branch => 'AFNetw
 pod 'HappyDNS', '~> 0.3'
 pod 'CocoaLumberjack'
 pod 'Masonry'
+pod 'UIImage+SVG', '~> 0.1'
 
 target 'EasyUploader' do
 	
