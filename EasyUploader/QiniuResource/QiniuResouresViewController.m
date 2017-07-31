@@ -10,8 +10,7 @@
 
 @interface QiniuResouresViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, assign) CGSize cellSize;
+@property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSArray<QiniuResource *> *resouces;
 @property (nonatomic, strong) NSString *bucket;
@@ -23,9 +22,6 @@
 - (instancetype)initWithBucket:(NSString *)bucket {
     if (self = [super initWithNibName:nil bundle:nil]) {
         self.bucket = bucket;
-        self.numberOfCellsPerLine = 4;
-        self.cellSpacing = 5;
-        self.isSelectAll = NO;
     }
     return self;
 }
@@ -38,17 +34,30 @@
     [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.resouces = resources;
-            [self.collectionView reloadData];
+            [self.tableView reloadData];
         });
     }];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.resouces.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 44;
+}
+
+- (ToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return nil;
+}
+
 - (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    CGFloat width = _collectionView.frame.size.width;
-    UIEdgeInsets insets = ((UICollectionViewFlowLayout *)_collectionView.collectionViewLayout).sectionInset;
-    CGFloat cellWidth = (width - (_numberOfCellsPerLine - 1) * _cellSpacing - insets.left - insets.right) / _numberOfCellsPerLine;
-    self.cellSize = CGSizeMake(cellWidth, cellWidth);
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
 }
 
 - (void)addSubviews {
