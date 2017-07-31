@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QiniubucketCellModel : NSObject
+@interface QiniuBucketCellModel : NSObject
 
 @property (nonatomic, strong) QiniuBucket *bucket;
 @property (nonatomic, assign) BOOL expand;
@@ -21,7 +21,7 @@
 
 @interface QiniuBucketViewModel : NSObject
 
-@property (nonatomic, readonly, strong) NSMutableArray<QiniubucketCellModel *> *cellModels;
+@property (nonatomic, readonly, strong) NSMutableArray<QiniuBucketCellModel *> *cellModels;
 
 - (instancetype)initWithBuckets:(NSArray *)buckets;
 

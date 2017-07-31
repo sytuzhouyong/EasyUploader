@@ -44,6 +44,7 @@
 		259A36131F2DA95C00F10298 /* ToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36121F2DA95C00F10298 /* ToolCell.m */; };
 		259A36161F2DECE700F10298 /* ZyxImageTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */; };
 		259A36191F2E329D00F10298 /* qiniu_bucket.svg in Resources */ = {isa = PBXBuildFile; fileRef = 259A36181F2E329D00F10298 /* qiniu_bucket.svg */; };
+		259A362D1F2F8B2F00F10298 /* ResourceToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A362C1F2F8B2F00F10298 /* ResourceToolCell.m */; };
 		25A1D00F1F23705E0018888F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */; };
 		25A1D0121F23739F0018888F /* LocalMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A1D0111F23739F0018888F /* LocalMainViewController.m */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
@@ -145,6 +146,8 @@
 		259A36141F2DECE700F10298 /* ZyxImageTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxImageTitleButton.h; sourceTree = "<group>"; };
 		259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxImageTitleButton.m; sourceTree = "<group>"; };
 		259A36181F2E329D00F10298 /* qiniu_bucket.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = qiniu_bucket.svg; sourceTree = "<group>"; };
+		259A362B1F2F8B2F00F10298 /* ResourceToolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceToolCell.h; sourceTree = "<group>"; };
+		259A362C1F2F8B2F00F10298 /* ResourceToolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceToolCell.m; sourceTree = "<group>"; };
 		25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25A1D0101F23739F0018888F /* LocalMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalMainViewController.h; path = ../AppMain/LocalMainViewController.h; sourceTree = "<group>"; };
 		25A1D0111F23739F0018888F /* LocalMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalMainViewController.m; path = ../AppMain/LocalMainViewController.m; sourceTree = "<group>"; };
@@ -340,14 +343,16 @@
 		255E151B1F2274B000411A67 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				259A36141F2DECE700F10298 /* ZyxImageTitleButton.h */,
-				259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */,
-				255E151C1F2274B000411A67 /* UINormalTableViewCell.h */,
-				255E151D1F2274B000411A67 /* UINormalTableViewCell.m */,
-				255E151E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.h */,
-				255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */,
+				259A362B1F2F8B2F00F10298 /* ResourceToolCell.h */,
+				259A362C1F2F8B2F00F10298 /* ResourceToolCell.m */,
 				259A36111F2DA95C00F10298 /* ToolCell.h */,
 				259A36121F2DA95C00F10298 /* ToolCell.m */,
+				255E151C1F2274B000411A67 /* UINormalTableViewCell.h */,
+				255E151D1F2274B000411A67 /* UINormalTableViewCell.m */,
+				259A36141F2DECE700F10298 /* ZyxImageTitleButton.h */,
+				259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */,
+				255E151E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.h */,
+				255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -423,9 +428,9 @@
 			isa = PBXGroup;
 			children = (
 				255E155C1F227A5600411A67 /* QiniuBucket.h */,
+				255E155D1F227A5600411A67 /* QiniuBucket.m */,
 				259A360E1F2B71B200F10298 /* QiniuBucketViewModel.h */,
 				259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */,
-				255E155D1F227A5600411A67 /* QiniuBucket.m */,
 				255E155F1F227A6A00411A67 /* QiniuResource.h */,
 				255E15601F227A6A00411A67 /* QiniuResource.m */,
 			);
@@ -756,6 +761,7 @@
 				255E153E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m in Sources */,
 				255E15391F2274B000411A67 /* DateUtil.m in Sources */,
 				255E15441F2274B000411A67 /* QiniuResourceManager.m in Sources */,
+				259A362D1F2F8B2F00F10298 /* ResourceToolCell.m in Sources */,
 				255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */,
 				255E15381F2274B000411A67 /* ALAssetUtil.m in Sources */,
 				255E15581F22778700411A67 /* main.m in Sources */,
@@ -905,11 +911,19 @@
 			baseConfigurationReference = 57B3ED3706C1B5A374CAAA99 /* Pods-EasyUploader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyUploader/Common/ThirdParty",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/AppMain/PrefixHeader.pch";
 				INFOPLIST_FILE = EasyUploader/AppMain/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyUploader/Common/ThirdParty",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sytuzhouyong.EasyUploader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "-Wno-deprecated-declarations";
@@ -921,11 +935,19 @@
 			baseConfigurationReference = 2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyUploader/Common/ThirdParty",
+				);
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/AppMain/PrefixHeader.pch";
 				INFOPLIST_FILE = EasyUploader/AppMain/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyUploader/Common/ThirdParty",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sytuzhouyong.EasyUploader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "-Wno-deprecated-declarations";

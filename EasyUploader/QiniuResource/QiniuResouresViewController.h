@@ -10,11 +10,6 @@
 
 @interface QiniuResouresViewController : BaseViewController
 
-@property (nonatomic, assign) NSInteger numberOfCellsPerLine;
-@property (nonatomic, assign) CGFloat cellSpacing;
-@property (nonatomic, assign) BOOL isSelectAll;
-@property (nonatomic, assign) ZyxImagePickerSelectionMode selectionMode;
-
-- (instancetype)initWithBucket:(NSString *)bucket;
+- (instancetype)initWithBucket:(QiniuBucket *)bucket;
 
 @end

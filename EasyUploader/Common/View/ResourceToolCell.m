@@ -25,7 +25,7 @@
             make.leading.equalTo(self.label);
             make.trailing.equalTo(self.label);
             make.top.equalTo(self.label.mas_bottom).offset(2);
-            make.height.equalTo(self.lable);
+            make.height.equalTo(self.label);
         }];
 
         UILabel *label2 = [[UILabel alloc] init];
@@ -36,7 +36,7 @@
             make.leading.equalTo(self.label);
             make.trailing.equalTo(self.label);
             make.top.equalTo(self.label.mas_bottom).offset(2);
-            make.height.equalTo(self.lable);
+            make.height.equalTo(self.label);
         }];
 
         self.detailLabel = label1;
@@ -45,8 +45,10 @@
     return self;
 }
 
-- (void)configWithModel:(id)model {
-    
+- (void)configWithQiniuResource:(QiniuResource *)resource {
+    self.label.text = resource.name;
+    self.detailLabel.text = @(resource.createTime).stringValue;
+    self.sizeLabel.text = @(resource.size).stringValue;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

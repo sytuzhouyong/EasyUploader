@@ -8,6 +8,7 @@
 
 #import "QiniuMainViewController.h"
 #import "ZyxPickAlbumViewController.h"
+#import "QiniuResouresViewController.h"
 #import "QiniuBucketViewModel.h"
 #import "ToolCell.h"
 
@@ -58,7 +59,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    QiniubucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
+    QiniuBucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
     return cellModel.expand ? 88 : 44;
 }
 
@@ -77,7 +78,7 @@
         self.lastIndexPath = indexPath;
     };
 
-    QiniubucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
+    QiniuBucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
     cell.label.text = cellModel.bucket.name;
     [cell updateExpandState:cellModel.expand];
     
@@ -86,15 +87,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QiniuBucket *bucket = self.viewModel.cellModels[indexPath.row].bucket;
-    [QiniuResourceManager queryResourcesInBucket:bucket.name withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
-        if (resources.count == 0) {
-            return;
-        }
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            ;
-        });
-    }];
+    QiniuResouresViewController *vc = [[QiniuResouresViewController alloc] initWithBucket:bucket];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

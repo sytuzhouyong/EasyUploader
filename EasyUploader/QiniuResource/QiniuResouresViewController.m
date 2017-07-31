@@ -7,21 +7,24 @@
 //
 
 #import "QiniuResouresViewController.h"
+#import "ResourceToolCell.h"
 
-@interface QiniuResouresViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+#define kCellIdentifier @"ResourceCellIdentifier"
+
+@interface QiniuResouresViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-
-@property (nonatomic, strong) NSArray<QiniuResource *> *resouces;
-@property (nonatomic, strong) NSString *bucket;
+@property (nonatomic, strong) NSMutableArray<QiniuResource *> *resouces;
+@property (nonatomic, strong) QiniuBucket *bucket;
 
 @end
 
 @implementation QiniuResouresViewController
 
-- (instancetype)initWithBucket:(NSString *)bucket {
+- (instancetype)initWithBucket:(QiniuBucket *)bucket {
     if (self = [super initWithNibName:nil bundle:nil]) {
         self.bucket = bucket;
+        self.resouces = [NSMutableArray arrayWithCapacity:20];
     }
     return self;
 }
@@ -31,24 +34,38 @@
     // Do any additional setup after loading the view.
     [self addSubviews];
 
-    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
+    [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.resouces = resources;
+            [self.resouces addObjectsFromArray:resources];
             [self.tableView reloadData];
         });
     }];
 }
+
+- (void)addSubviews {
+    [self.view addSubview:self.tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.equalTo(self.view);
+        make.top.equalTo(self.titleView.mas_bottom);
+    }];
+}
+
+#pragma mark - UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.resouces.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 60;
 }
 
-- (ToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+- (ResourceToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ResourceToolCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+
+    QiniuResource *resource = self.resouces[indexPath.row];
+    [cell configWithQiniuResource:resource];
+    return cell;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -60,42 +77,23 @@
     }
 }
 
-- (void)addSubviews {
-    [self.view addSubview:self.collectionView];
-    [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.bottom.equalTo(self.view);
-        make.top.equalTo(self.titleView.mas_bottom);
-    }];
+
+- (UITableView *)tableView {
+    if (_tableView != nil) {
+        return _tableView;
+    }
+
+    UITableView *tableView = [[UITableView alloc] init];
+    _tableView = tableView;
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
+    tableView.backgroundColor = self.view.backgroundColor;
+    tableView.tableFooterView = [UIView new];
+    [tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kCellIdentifier];
+    return tableView;
 }
 
-#pragma mark - UICollectionView Delegate Methods
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return _resouces.count;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    NSString *key = _dateDescs[section];
-//    NSInteger count =_assetsDict[key].count;
-//    return count;
-    return 0;
-}
-
-- (ZyxPhotoCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ZyxPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ResourceCell" forIndexPath:indexPath];
-    cell.mode = ZyxImagePickerSelectionModeMultiple;
-
-//    ALAsset *asset = [self assetAtIndexPath:indexPath];
-//    [cell configCellWithAsset:asset];
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([_selectDelegate respondsToSelector:@selector(didSelectPhoto:atIndexPath:)]) {
-//        ALAsset *asset = [self assetAtIndexPath:indexPath];
-//        [_selectDelegate didSelectPhoto:asset atIndexPath:indexPath];
-//    }
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

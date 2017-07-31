@@ -8,6 +8,7 @@
 
 #import "ToolCell.h"
 #import "ZyxImageTitleButton.h"
+//#import <SVGKit/SVGKit.h>
 
 @implementation ToolCell
 
@@ -21,6 +22,10 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         UIImageView *imageView = [[UIImageView alloc] init];
+
+//        SVGKImage *svgImage = [SVGKImage imageNamed:@"qiniu_bucket"];
+//        UIImage *image = [UIImage imageWithSVGNamed:@"qiniu_bucket.svg" targetSize:CGSizeMake(24, 24) fillColor:[UIColor blueColor]];
+//        imageView.image = svgImage.UIImage;
         imageView.image = UIImageNamed(@"icon_round_selected_blue");
         [self.contentView addSubview:imageView];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {

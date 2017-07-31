@@ -15,4 +15,6 @@
 @property (nonatomic, strong) UILabel *sizeLabel;
 
 
+- (void)configWithQiniuResource:(QiniuResource *)resource;
+
 @end
