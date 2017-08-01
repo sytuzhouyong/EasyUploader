@@ -151,7 +151,7 @@
     UInt64 leftBytes = number - now * weight;
     CGFloat decimal = leftBytes * 1.0f / weight;
     CGFloat value = now + decimal;
-    return [NSString stringWithFormat:@"%.1f", value];
+    return [NSString stringWithFormat:@"%.2f", value];
 }
 
 + (NSString *)descriptionOfSpace:(UInt64)space {

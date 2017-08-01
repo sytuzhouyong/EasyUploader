@@ -57,8 +57,8 @@
 
 - (void)configWithQiniuResource:(QiniuResource *)resource {
     self.label.text = resource.name;
-    self.detailLabel.text = @(resource.createTime).stringValue;
-    self.sizeLabel.text = @(resource.size).stringValue;
+    self.detailLabel.text = resource.createTimeDesc;
+    self.sizeLabel.text = resource.sizeDesc;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

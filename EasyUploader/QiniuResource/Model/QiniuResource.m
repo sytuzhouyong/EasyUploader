@@ -22,9 +22,17 @@
     SetPropertyInDict(@"name", @"key");
     SetPropertyInDict(@"hashString", @"hash");
     SetPropertyInDict(@"mimeType", @"mimeType");
-    SetPropertyInDict(@"createTime", @"putTime");
     SetPropertyInDict(@"size", @"fsize");
 
+    if (dict[@"putTime"]) {
+        unsigned long long timestamp = [dict[@"putTime"] unsignedLongLongValue];
+        timestamp = timestamp / 10000000;
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+        resource.createTimeDesc = [DateUtil defaultStringWithDate:date];
+        resource.createTime = date;
+    }
+
+    resource.sizeDesc = [StringUtil descriptionOfSpace:resource.size];
     return resource;
 }
 

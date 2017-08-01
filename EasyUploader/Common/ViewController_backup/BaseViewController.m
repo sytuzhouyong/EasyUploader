@@ -11,13 +11,6 @@
 
 @interface BaseViewController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UIView *presentedView;
-@property (nonatomic, strong) UIButton *presentedBackgroundButton;
-@property (nonatomic, assign) UIViewLayoutType layout;
-
-@property (nonatomic, weak  ) UIControl *focusedView;
-@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
-
 @property (nonatomic, assign) BOOL needUpdateTitleView;
 
 @end
@@ -43,7 +36,6 @@
         _rightBarButtonHeight = kTitleContentViewHeight;
         _rightBarButtonSize = CGSizeE(kTitleContentViewHeight);
         _rightBarButtonTrailingOffset = CGPointZero;
-        _isKeyboardObserver = NO;
         _editable = NO;
         _isAllSelected = NO;
         _needUpdateTitleView = NO;
@@ -67,25 +59,25 @@
     }
     
     [self addTitleView];
-//    [self addGestureRecognizers];
+//    [self addLongPressGestureRecognizers];
     
     self.barButtonVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.isKeyboardHideWhenTapOnView = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self addObserver];
+
     if (self.needUpdateTitleView) {
         self.needUpdateTitleView = NO;
         [self.titleView updateConstraintsIfNeeded];
     }
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [self removeObserver];
-    [self hideKeyboard];
+- (void)addLongPressGestureRecognizers {
+    // 返回按钮长按事件
+    UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnLeftBarButton:)];
+    gesture.delegate = self;
+    [self.leftBarButton addGestureRecognizer:gesture];
 }
 
 #pragma mark - Dealloc
@@ -98,14 +90,6 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
-}
-
-- (void)backgroundButtonPressed {
-    if (self.focusedView != nil) {
-        [self hideKeyboard];
-    } else if (_presentedView != nil) {
-        [self dismissPresentedView];
-    }
 }
 
 - (void)longPressOnLeftBarButton:(UILongPressGestureRecognizer *)gesture {
@@ -124,25 +108,6 @@
     }];
 }
 
-- (void)addObserver {
-    [self removeObserver];
-    [kNotificationCenter addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [kNotificationCenter addObserver:self selector:@selector(inputableViewFocused:) name:UITextFieldTextDidBeginEditingNotification object:nil];
-    [kNotificationCenter addObserver:self selector:@selector(inputableViewFocused:) name:UITextViewTextDidBeginEditingNotification object:nil];
-}
-
-- (void)removeObserver {
-    [kNotificationCenter removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
-    [kNotificationCenter removeObserver:self name:UITextFieldTextDidBeginEditingNotification object:nil];
-    [kNotificationCenter removeObserver:self name:UITextViewTextDidBeginEditingNotification object:nil];
-}
-
-- (void)addGestureRecognizers {
-    // 返回按钮长按事件
-    UILongPressGestureRecognizer *gesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressOnLeftBarButton:)];
-    gesture.delegate = self;
-    [self.leftBarButton addGestureRecognizer:gesture];
-}
 
 #pragma mark - Button Click Methods
 
@@ -177,43 +142,6 @@
     return 0;
 }
 
-#pragma mark - Notification Handler
-
-- (void)keyboardWillChangeFrame:(NSNotification *)notification {
-    NSDictionary *info = [notification userInfo];
-    CGRect beginFrame, endFrame;
-    [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&beginFrame];
-    [[info objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&endFrame];
-    
-    NSTimeInterval duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    duration = MAX(duration, 0.25f);
-    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    [UIView animateWithDuration:duration delay:0 options:(curve << 16) animations:^{
-        BOOL isHidden = endFrame.origin.y == kWindowHeight;
-        [self keyboardWillChangeFrameFrom:beginFrame to:endFrame isHidden:isHidden];
-    } completion:nil];
-}
-
-- (void)keyboardWillChangeFrameFrom:(CGRect)beginFrame to:(CGRect)endFrame isHidden:(BOOL)isHidden {
-    CGRect frame = [kKeyWindow convertRect:self.focusedView.frame fromView:self.focusedView.superview];
-    CGFloat inputViewY = CGRectGetMaxY(frame);
-    CGFloat keyboardY = endFrame.origin.y;
-    if (keyboardY >= inputViewY && !isHidden) {
-        return;
-    }
-    
-    frame = self.view.frame;
-    if (!isHidden) {
-        frame.origin.y += keyboardY - inputViewY - 1;
-    } else {
-        frame.origin = CGPointZero;
-    }
-    self.view.frame = frame;
-}
-
-- (void)inputableViewFocused:(NSNotification *)notification {
-    self.focusedView = (UIControl *)notification.object;
-}
 
 #pragma mark - Util Methods
 
@@ -312,13 +240,6 @@
     return width;
 }
 
-- (void)hideKeyboard {
-    if (self.focusedView != nil) {
-        [self.focusedView resignFirstResponder];
-        self.focusedView = nil;
-    }
-}
-
 // 解决手势与UITableView和UICollectionView的cell点击事件冲突
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     UIView *view = touch.view;
@@ -332,19 +253,6 @@
 }
 
 #pragma mark - Getter and Setter
-
-- (void)setIsKeyboardHideWhenTapOnView:(BOOL)isKeyboardHideWhenTapOnView {
-    _isKeyboardHideWhenTapOnView = isKeyboardHideWhenTapOnView;
-    
-//    if (isKeyboardHideWhenTapOnView) {
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
-//        tap.delegate = self;
-//        [self.view addGestureRecognizer: tap];
-//        self.tapGesture = tap;
-//    } else {
-//        [self.view removeGestureRecognizer:self.tapGesture];
-//    }
-}
 
 - (void)setTitle:(NSString *)title {
     // 不能有，否则 tabbaritem的 title 也会被设置，why?
@@ -665,8 +573,8 @@
     
     [self.titleContentSubview mas_updateConstraints:^(MASConstraintMaker *make) {
         CGFloat offset = MAX(self.leftBarButtonWidth, self.rightBarButtonWidth);
-        make.leading.equalTo(_titleSubview).offset(offset + _leftBarButtonLeadingOffset.x);
-        make.trailing.equalTo(_titleSubview).offset(-offset - _rightBarButtonTrailingOffset.x);
+        make.leading.equalTo(self.titleSubview).offset(offset + _leftBarButtonLeadingOffset.x);
+        make.trailing.equalTo(self.titleSubview).offset(-offset - _rightBarButtonTrailingOffset.x);
     }];
 
     [self.titleSubview layoutIfNeeded];
@@ -687,138 +595,6 @@
     [self.titleView layoutIfNeeded];
 }
 
-- (void)presentView:(UIView *)view layout:(UIViewLayoutType)layout {
-    if (_presentedView != nil) {
-        [self dismissPresentedViewWithCompletion:^{
-            [self showView:view layout:layout];
-        }];
-    } else {
-        [self showView:view layout:layout];
-    }
-}
-
-- (void)showView:(UIView *)view layout:(UIViewLayoutType)layout {
-    CGFloat viewWidth = view.width;
-    CGFloat viewHeight = view.height;
-    if (viewWidth == 0) {
-        viewWidth = kWindowWidth;
-    }
-
-    UIButton *backgroundButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backgroundButton.frame = self.view.bounds;
-    backgroundButton.backgroundColor = [UIColor blackColor];
-    backgroundButton.alpha = 0.6f;
-    AddButtonEvent(backgroundButton, @"backgroundButtonPressed");
-    
-    // 为了让titleview不被遮挡
-    if ((layout & UIViewLayoutTypeTop) && !_isTitleViewHidden) {
-        [self.view bringSubviewToFront:_titleView];
-        [self.view insertSubview:backgroundButton belowSubview:self.titleView];
-    } else {
-        [self.view addSubview:backgroundButton];
-    }
-    
-    NSArray<NSValue *> *points = [self pointsWithPresentView:view andLayoutType:layout];
-    CGPoint startPoint = [points.firstObject CGPointValue];
-    CGPoint endPoint = [points.lastObject CGPointValue];
-    view.frame = CGRect(startPoint.x, startPoint.y, viewWidth, viewHeight);
-    view.alpha = 0;
-    [self.view insertSubview:view aboveSubview:backgroundButton];
-    
-    [UIView animateWithDuration:0.3f animations:^{
-        view.frame = CGRect(endPoint.x, endPoint.y, viewWidth, viewHeight);
-        view.alpha = 1;
-    }];
-    
-    self.presentedBackgroundButton = backgroundButton;
-    self.presentedView = view;
-    self.layout = layout;
-}
-
-- (void)dismissPresentedViewWithCompletion:(void (^)())completion {
-    NSArray<NSValue *> *points = [self pointsWithPresentView:_presentedView andLayoutType:_layout];
-    CGPoint endPoint = [points.firstObject CGPointValue];
-    
-    CGRect frame = _presentedView.frame;
-    frame.origin = endPoint;
-    
-    kWeakself;
-    [UIView animateWithDuration:.4f animations:^{
-        _presentedView.frame = frame;
-        _presentedView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [_presentedView removeFromSuperview];
-        [_presentedBackgroundButton removeFromSuperview];
-        weakself.presentedView = nil;
-        weakself.presentedBackgroundButton = nil;
-        weakself.layout = UIViewLayoutTypeNone;
-        
-        ExecuteBlockIfNotNil(completion);
-    }];
-}
-
-- (void)dismissPresentedView {
-    [self dismissPresentedViewWithCompletion:nil];
-}
-
-- (UIView *)presentedView {
-    return _presentedView;
-}
-
-- (NSArray<NSValue *> *)pointsWithPresentView:(UIView *)view andLayoutType:(UIViewLayoutType)layout {
-    CGFloat viewWidth = view.width;
-    CGFloat viewHeight = view.height;
-    if (viewWidth == 0) {
-        viewWidth = kWindowWidth;
-    }
-    
-    CGFloat centerX = (self.view.width - viewWidth) / 2.f;
-    CGFloat centerY = (self.view.height - viewHeight) / 2.f;
-    CGPoint startPoint = CGPointZero;
-    CGPoint endPoint = CGPointZero;
-    
-    switch (layout) {
-        case UIViewLayoutTypeTopLeft:
-            startPoint = CGPoint(self.view.x - viewWidth, self.view.y - viewHeight);
-            endPoint   = CGPoint(self.view.x, self.view.y);
-            break;
-        case UIViewLayoutTypeTopCenter:
-            startPoint = CGPoint(centerX, self.view.y - viewHeight);
-            endPoint   = CGPoint(centerX, self.titleView.bottomY);
-            break;
-        case UIViewLayoutTypeTopRight:
-            startPoint = CGPoint(self.view.rightX, self.view.y - viewHeight);
-            endPoint   = CGPoint(self.view.rightX - viewWidth, self.titleView.bottomY);
-            break;
-        case UIViewLayoutTypeCenterLeft:
-            startPoint = CGPoint(self.view.x - viewWidth, centerY);
-            endPoint = CGPoint(self.view.x, centerY);
-            break;
-        case UIViewLayoutTypeCenter:
-            startPoint = CGPoint(centerX, self.view.y - viewHeight);
-            endPoint   = CGPoint(centerX, centerY);
-            break;
-        case UIViewLayoutTypeCenterRight:
-            startPoint = CGPoint(self.view.rightX, centerY);
-            endPoint   = CGPoint(self.view.rightX - viewWidth, centerY);
-            break;
-        case UIViewLayoutTypeBottomLeft:
-            startPoint = CGPoint(self.view.x - viewWidth, self.view.bottomY - viewHeight);
-            endPoint   = CGPoint(self.view.x - viewWidth, self.view.bottomY);
-            break;
-        case UIViewLayoutTypeBottomCenter:
-            startPoint = CGPoint(centerX, self.view.bottomY);
-            endPoint   = CGPoint(centerX, self.view.bottomY - viewHeight);
-            break;
-        case UIViewLayoutTypeBottomRight:
-            startPoint = CGPoint(self.view.rightX, self.view.bottomY);
-            endPoint   = CGPoint(self.view.rightX - viewWidth, self.view.bottomY - viewHeight);
-            break;
-        default:
-            break;
-    }
-    return @[[NSValue valueWithCGPoint:startPoint], [NSValue valueWithCGPoint:endPoint]];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

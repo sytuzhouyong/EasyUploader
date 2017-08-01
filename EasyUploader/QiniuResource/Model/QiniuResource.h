@@ -13,8 +13,10 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *hashString;
 @property (nonatomic, copy) NSString *mimeType;
-@property (nonatomic, assign) NSTimeInterval createTime;
+@property (nonatomic, strong) NSDate *createTime;
+@property (nonatomic, copy) NSString *createTimeDesc;
 @property (nonatomic, assign) NSInteger size;
+@property (nonatomic, copy) NSString *sizeDesc;
 
 + (instancetype)resourceWithDict:(NSDictionary *)dict;
 + (NSArray<QiniuResource *> *)resourcesWithDicts:(NSArray<NSDictionary *> *)dicts;
