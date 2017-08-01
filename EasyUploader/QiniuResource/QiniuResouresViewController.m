@@ -69,6 +69,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"xx");
+}
+
 - (void)viewDidLayoutSubviews {
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
@@ -88,7 +92,7 @@
     _tableView = tableView;
     tableView.delegate = self;
     tableView.dataSource = self;
-    tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
+//    tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
     tableView.backgroundColor = self.view.backgroundColor;
     tableView.tableFooterView = [UIView new];
     [tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kCellIdentifier];

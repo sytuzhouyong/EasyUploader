@@ -36,8 +36,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor cyanColor];
     self.leftBarButtonWidth = 0;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
 
     [QiniuResourceManager queryAllBucketsWithHandler:^(NSArray<QiniuBucket *> *buckets) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -108,7 +106,9 @@
 
     UITableView *tableView = [[UITableView alloc] init];
     _tableView = tableView;
-    tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
+    tableView.dataSource = self;
+    tableView.delegate = self;
+//    tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
     tableView.backgroundColor = self.view.backgroundColor;
     tableView.tableFooterView = [UIView new];
     [tableView registerClass:ToolCell.class forCellReuseIdentifier:kCellIdentifier];
