@@ -100,12 +100,12 @@
         [button setImage:UIImageNamed(@"icon_trash") forState:UIControlStateNormal];
         [button setTitle:@"删除" forState: UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:10];
-        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
         button.layout = ZyxImageTitleButtonLayoutTypeVertical;
         button.spacing = 3;
         [view addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSize(44, 44));
+            make.size.mas_equalTo(CGSize(44, 40));
             make.centerY.equalTo(view);
             make.leading.equalTo(view).offset(x);
         }];

@@ -9,7 +9,7 @@
 #import "QiniuMainViewController.h"
 #import "ZyxPickAlbumViewController.h"
 #import "QiniuResouresViewController.h"
-#import "QiniuBucketViewModel.h"
+#import "QiniuViewModel.h"
 #import "ToolCell.h"
 
 #define kExpandButtonTag        1000

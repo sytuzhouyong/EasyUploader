@@ -24,11 +24,11 @@
             imageViewFrame.origin.x = 0;
             imageViewFrame.origin.y = 0;
             imageViewFrame.size.width = size.width;
-            imageViewFrame.size.height = size.height * 0.7f;
+            imageViewFrame.size.height = size.height * 0.6f;
             labelFrame.origin.x = 0;
-            labelFrame.origin.y = CGRectGetMaxY(imageViewFrame);
+            labelFrame.origin.y = CGRectGetMaxY(imageViewFrame) + self.spacing;
             labelFrame.size.width = size.width;
-            labelFrame.size.height = size.height * 0.3f;
+            labelFrame.size.height = size.height * 0.4f - self.spacing;
             break;
         default:
             break;

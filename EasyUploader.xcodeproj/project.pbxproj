@@ -40,7 +40,7 @@
 		255E155A1F22778700411A67 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E15521F22778700411A67 /* zh-Hans.plist */; };
 		255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E155D1F227A5600411A67 /* QiniuBucket.m */; };
 		255E15611F227A6A00411A67 /* QiniuResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15601F227A6A00411A67 /* QiniuResource.m */; };
-		259A36101F2B71B200F10298 /* QiniuBucketViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */; };
+		259A36101F2B71B200F10298 /* QiniuViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A360F1F2B71B200F10298 /* QiniuViewModel.m */; };
 		259A36131F2DA95C00F10298 /* ToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36121F2DA95C00F10298 /* ToolCell.m */; };
 		259A36161F2DECE700F10298 /* ZyxImageTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */; };
 		259A36191F2E329D00F10298 /* qiniu_bucket.svg in Resources */ = {isa = PBXBuildFile; fileRef = 259A36181F2E329D00F10298 /* qiniu_bucket.svg */; };
@@ -140,8 +140,8 @@
 		255E155D1F227A5600411A67 /* QiniuBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucket.m; sourceTree = "<group>"; };
 		255E155F1F227A6A00411A67 /* QiniuResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResource.h; sourceTree = "<group>"; };
 		255E15601F227A6A00411A67 /* QiniuResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResource.m; sourceTree = "<group>"; };
-		259A360E1F2B71B200F10298 /* QiniuBucketViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuBucketViewModel.h; sourceTree = "<group>"; };
-		259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucketViewModel.m; sourceTree = "<group>"; };
+		259A360E1F2B71B200F10298 /* QiniuViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuViewModel.h; sourceTree = "<group>"; };
+		259A360F1F2B71B200F10298 /* QiniuViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuViewModel.m; sourceTree = "<group>"; };
 		259A36111F2DA95C00F10298 /* ToolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolCell.h; sourceTree = "<group>"; };
 		259A36121F2DA95C00F10298 /* ToolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolCell.m; sourceTree = "<group>"; };
 		259A36141F2DECE700F10298 /* ZyxImageTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxImageTitleButton.h; sourceTree = "<group>"; };
@@ -434,8 +434,8 @@
 			children = (
 				255E155C1F227A5600411A67 /* QiniuBucket.h */,
 				255E155D1F227A5600411A67 /* QiniuBucket.m */,
-				259A360E1F2B71B200F10298 /* QiniuBucketViewModel.h */,
-				259A360F1F2B71B200F10298 /* QiniuBucketViewModel.m */,
+				259A360E1F2B71B200F10298 /* QiniuViewModel.h */,
+				259A360F1F2B71B200F10298 /* QiniuViewModel.m */,
 				255E155F1F227A6A00411A67 /* QiniuResource.h */,
 				255E15601F227A6A00411A67 /* QiniuResource.m */,
 			);
@@ -761,7 +761,7 @@
 				255E153C1F2274B000411A67 /* StringUtil.m in Sources */,
 				255E15431F2274B000411A67 /* ZyxPhotoManager.m in Sources */,
 				255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */,
-				259A36101F2B71B200F10298 /* QiniuBucketViewModel.m in Sources */,
+				259A36101F2B71B200F10298 /* QiniuViewModel.m in Sources */,
 				255E15451F2274B000411A67 /* QiniuUploadManager.m in Sources */,
 				255E153E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m in Sources */,
 				255E15391F2274B000411A67 /* DateUtil.m in Sources */,

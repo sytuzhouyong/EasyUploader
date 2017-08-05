@@ -1,5 +1,5 @@
 //
-//  QiniuBucketViewModel.h
+//  QiniuViewModel.h
 //  EasyUploader
 //
 //  Created by zhouyong on 17/7/28.
@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#pragma mark - Qiniu Bucket
 
 @interface QiniuBucketCellModel : NSObject
 
@@ -30,4 +32,25 @@
 
 @end
 
+#pragma mark - Qiniu Resource
 
+@interface QiniuResourceCellModel : NSObject
+
+@property (nonatomic, strong) QiniuResource *resource;
+@property (nonatomic, assign) BOOL expand;
+
+- (instancetype)initWithResource:(QiniuResource *)resource;
+
+@end
+
+
+@interface QiniuResourceViewModel : NSObject
+
+@property (nonatomic, readonly, strong) NSMutableArray<QiniuResourceCellModel *> *cellModels;
+
+- (instancetype)initWithResources:(NSArray *)resources;
+
+- (BOOL)isExpandAtRow:(NSInteger)row;
+- (void)updateExpandStateAtRow:(NSInteger)row;
+
+@end
