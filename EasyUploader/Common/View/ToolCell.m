@@ -26,12 +26,12 @@
 //        SVGKImage *svgImage = [SVGKImage imageNamed:@"qiniu_bucket"];
 //        UIImage *image = [UIImage imageWithSVGNamed:@"qiniu_bucket.svg" targetSize:CGSizeMake(24, 24) fillColor:[UIColor blueColor]];
 //        imageView.image = svgImage.UIImage;
-        imageView.image = UIImageNamed(@"icon_round_selected_blue");
+        imageView.image = UIImageNamed(@"icon_bucket");
         [self.contentView addSubview:imageView];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView).offset(10);
+            make.top.equalTo(self.contentView).offset(4);
             make.leading.equalTo(self.contentView).offset(10);
-            make.size.mas_equalTo(CGSize(24, 24));
+            make.size.mas_equalTo(CGSize(36, 36));
         }];
 
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

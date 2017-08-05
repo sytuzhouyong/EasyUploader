@@ -91,7 +91,7 @@
 #pragma mark - Dealloc
 
 - (void)dealloc {
-    DDLogInfo(@"nice, %@ dealloc!", NSStringFromClass(self.class));
+    NSLog(@"nice, %@ dealloc!", NSStringFromClass(self.class));
 }
 
 #pragma mark - Override Methods

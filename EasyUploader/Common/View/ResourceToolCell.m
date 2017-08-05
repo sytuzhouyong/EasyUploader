@@ -17,6 +17,11 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.iconImageView.image = UIImageNamed(@"icon_image");
+        [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView).offset(7);
+        }];
+
         [self.label mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.iconImageView.mas_trailing).offset(10);
             make.top.equalTo(self.iconImageView);

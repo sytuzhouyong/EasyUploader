@@ -45,6 +45,7 @@
 		259A36161F2DECE700F10298 /* ZyxImageTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */; };
 		259A36191F2E329D00F10298 /* qiniu_bucket.svg in Resources */ = {isa = PBXBuildFile; fileRef = 259A36181F2E329D00F10298 /* qiniu_bucket.svg */; };
 		259A362D1F2F8B2F00F10298 /* ResourceToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A362C1F2F8B2F00F10298 /* ResourceToolCell.m */; };
+		259A36371F30E72400F10298 /* QiniuDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36361F30E72400F10298 /* QiniuDownloadManager.m */; };
 		25A1D00F1F23705E0018888F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */; };
 		25A1D0121F23739F0018888F /* LocalMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A1D0111F23739F0018888F /* LocalMainViewController.m */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
@@ -148,6 +149,8 @@
 		259A36181F2E329D00F10298 /* qiniu_bucket.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = qiniu_bucket.svg; sourceTree = "<group>"; };
 		259A362B1F2F8B2F00F10298 /* ResourceToolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceToolCell.h; sourceTree = "<group>"; };
 		259A362C1F2F8B2F00F10298 /* ResourceToolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceToolCell.m; sourceTree = "<group>"; };
+		259A36351F30E72400F10298 /* QiniuDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuDownloadManager.h; sourceTree = "<group>"; };
+		259A36361F30E72400F10298 /* QiniuDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuDownloadManager.m; sourceTree = "<group>"; };
 		25A1D00E1F23705E0018888F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25A1D0101F23739F0018888F /* LocalMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalMainViewController.h; path = ../AppMain/LocalMainViewController.h; sourceTree = "<group>"; };
 		25A1D0111F23739F0018888F /* LocalMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalMainViewController.m; path = ../AppMain/LocalMainViewController.m; sourceTree = "<group>"; };
@@ -403,6 +406,8 @@
 				250F02171F28C3AB00438141 /* QiniuResouresViewController.m */,
 				255E15301F2274B000411A67 /* QiniuUploadManager.h */,
 				255E15311F2274B000411A67 /* QiniuUploadManager.m */,
+				259A36351F30E72400F10298 /* QiniuDownloadManager.h */,
+				259A36361F30E72400F10298 /* QiniuDownloadManager.m */,
 			);
 			path = QiniuResource;
 			sourceTree = "<group>";
@@ -762,6 +767,7 @@
 				255E15391F2274B000411A67 /* DateUtil.m in Sources */,
 				255E15441F2274B000411A67 /* QiniuResourceManager.m in Sources */,
 				259A362D1F2F8B2F00F10298 /* ResourceToolCell.m in Sources */,
+				259A36371F30E72400F10298 /* QiniuDownloadManager.m in Sources */,
 				255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */,
 				255E15381F2274B000411A67 /* ALAssetUtil.m in Sources */,
 				255E15581F22778700411A67 /* main.m in Sources */,
