@@ -8,14 +8,16 @@
 
 #import "QiniuResouresViewController.h"
 #import "ResourceToolCell.h"
+#import "QiniuViewModel.h"
 
 #define kCellIdentifier @"ResourceCellIdentifier"
 
 @interface QiniuResouresViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray<QiniuResource *> *resouces;
 @property (nonatomic, strong) QiniuBucket *bucket;
+@property (nonatomic, strong) QiniuResourceViewModel *viewModel;
+@property (nonatomic, strong) NSIndexPath *lastIndexPath;
 
 @end
 
@@ -24,7 +26,6 @@
 - (instancetype)initWithBucket:(QiniuBucket *)bucket {
     if (self = [super initWithNibName:nil bundle:nil]) {
         self.bucket = bucket;
-        self.resouces = [NSMutableArray arrayWithCapacity:20];
     }
     return self;
 }
@@ -37,7 +38,7 @@
 
     [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.resouces addObjectsFromArray:resources];
+            self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources];
             [self.tableView reloadData];
         });
     }];
@@ -54,18 +55,32 @@
 #pragma mark - UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.resouces.count;
+    return self.viewModel.cellModels.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    QiniuResourceCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
+    return cellModel.expand ? 94 : 50;
 }
 
 - (ResourceToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ResourceToolCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    cell.expandHandler = ^(UIButton *button) {
+        NSArray *indexPaths = @[indexPath];
+        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtRow:self.lastIndexPath.row]) {
+            indexPaths = @[indexPath, self.lastIndexPath];
+            [self.viewModel updateExpandStateAtRow:self.lastIndexPath.row];
+        }
 
-    QiniuResource *resource = self.resouces[indexPath.row];
-    [cell configWithQiniuResource:resource];
+        [self.viewModel updateExpandStateAtRow:indexPath.row];
+        [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        self.lastIndexPath = indexPath;
+    };
+
+    QiniuResourceCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
+    [cell configWithQiniuResource:cellModel.resource];
+    [cell updateExpandState:cellModel.expand];
+    
     return cell;
 }
 

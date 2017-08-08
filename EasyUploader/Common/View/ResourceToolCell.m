@@ -37,7 +37,7 @@
         [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.label);
             make.trailing.equalTo(self.label);
-            make.top.equalTo(self.label.mas_bottom).offset(4);
+            make.top.equalTo(self.label.mas_bottom).offset(0);
             make.height.equalTo(self.label);
         }];
 

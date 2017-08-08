@@ -398,6 +398,8 @@
 			isa = PBXGroup;
 			children = (
 				255E155B1F227A4100411A67 /* Model */,
+				259A36351F30E72400F10298 /* QiniuDownloadManager.h */,
+				259A36361F30E72400F10298 /* QiniuDownloadManager.m */,
 				255E15501F22778700411A67 /* QiniuMainViewController.h */,
 				255E15511F22778700411A67 /* QiniuMainViewController.m */,
 				255E152E1F2274B000411A67 /* QiniuResourceManager.h */,
@@ -406,8 +408,6 @@
 				250F02171F28C3AB00438141 /* QiniuResouresViewController.m */,
 				255E15301F2274B000411A67 /* QiniuUploadManager.h */,
 				255E15311F2274B000411A67 /* QiniuUploadManager.m */,
-				259A36351F30E72400F10298 /* QiniuDownloadManager.h */,
-				259A36361F30E72400F10298 /* QiniuDownloadManager.m */,
 			);
 			path = QiniuResource;
 			sourceTree = "<group>";

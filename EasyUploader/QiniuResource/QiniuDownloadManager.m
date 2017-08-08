@@ -12,10 +12,19 @@
 
 
 - (void)downloadResourceWithKey:(NSString *)key {
-    NSString *url = [NSString stringWithFormat:@"%@/%@", @"", key];
+    NSString *url = [NSString stringWithFormat:@"%@/%@", kQiniuResourceDownloadURL, key];
     NSString *token = [self makeDownloadTokenWithURL:url];
-    
-    ;
+    NSString *downloadURL = [NSString stringWithFormat:@"%@?e=1451491200&token=%@", url, token];
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
+    [[AFHTTPSessionManager manager] downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress) {
+        NSLog(@"progress = %lld / %lld", [downloadProgress completedUnitCount], [downloadProgress totalUnitCount]);
+    } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSString *basePath = [StringUtil documentsPath];
+        return [NSURL fileURLWithPath:basePath];
+    } completionHandler:^(NSURLResponse *response, NSURL * filePath, NSError *error) {
+        ;
+    }];
 }
 
 - (NSString *)makeDownloadTokenWithURL:(NSString *)url {

@@ -56,7 +56,7 @@
             make.trailing.equalTo(button.mas_leading).offset(-10);
         }];
 
-        UIView *toolView = [self toolViewWithToolButtonCount:1];
+        UIView *toolView = [self toolView];
 
         self.iconImageView = imageView;
         self.label = label;
@@ -71,6 +71,11 @@
     return self;
 }
 
+- (NSArray<ToolButtonInfo *> *)toolButtons {
+    ToolButtonInfo *info =[[ToolButtonInfo alloc] initWithTitle:@"删除" imageName:@"icon_trash" handler:nil];
+    return @[info];
+}
+
 - (void)updateExpandState:(BOOL)expand {
     [self.toolView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(expand ? 44 : 0);
@@ -78,7 +83,7 @@
     [self.contentView updateConstraintsIfNeeded];
 }
 
-- (UIView *)toolViewWithToolButtonCount:(NSInteger)count {
+- (UIView *)toolView {
     UIView *view = [[UIView alloc] init];
     view.clipsToBounds = YES;
     view.backgroundColor = RGB(0xEE, 0xEE, 0xEE);
@@ -90,15 +95,19 @@
         make.height.mas_equalTo(0);
     }];
 
+    NSArray *buttonInfos = [self toolButtons];
+    NSUInteger count = buttonInfos.count;
+
     CGSize imageSize = CGSize(24, 24);
     CGFloat padding = (self.contentView.width - imageSize.width * count)  / (count + 1);
 
     for (NSInteger i=0; i<count; i++) {
         CGFloat x = padding * i + padding;
 
+        ToolButtonInfo *buttonInfo = buttonInfos[i];
         ZyxImageTitleButton *button = [ZyxImageTitleButton buttonWithType:UIButtonTypeCustom];
-        [button setImage:UIImageNamed(@"icon_trash") forState:UIControlStateNormal];
-        [button setTitle:@"删除" forState: UIControlStateNormal];
+        [button setImage:UIImageNamed(buttonInfo.imageName) forState:UIControlStateNormal];
+        [button setTitle:buttonInfo.imageName forState: UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:10];
         [button setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
         button.layout = ZyxImageTitleButtonLayoutTypeVertical;
@@ -125,3 +134,18 @@
 }
 
 @end
+
+
+@implementation ToolButtonInfo
+
+- (instancetype)initWithTitle:(NSString *)title imageName:(NSString *)imageName handler:(ButtonHandler)handler {
+    if (self = [super init]) {
+        self.title = title;
+        self.imageName = imageName;
+        self.handler = handler;
+    }
+    return self;
+}
+
+@end
+
