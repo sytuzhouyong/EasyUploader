@@ -107,17 +107,20 @@
         ToolButtonInfo *buttonInfo = buttonInfos[i];
         ZyxImageTitleButton *button = [ZyxImageTitleButton buttonWithType:UIButtonTypeCustom];
         [button setImage:UIImageNamed(buttonInfo.imageName) forState:UIControlStateNormal];
-        [button setTitle:buttonInfo.imageName forState: UIControlStateNormal];
+        [button setTitle:buttonInfo.title forState: UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:10];
         [button setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
         button.layout = ZyxImageTitleButtonLayoutTypeVertical;
-        button.spacing = 3;
+        button.spacing = 1;
         [view addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSize(44, 40));
             make.centerY.equalTo(view);
             make.leading.equalTo(view).offset(x);
         }];
+
+        button.tag = kToolCellButtonTag + i;
+        [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
 
     return view;
@@ -125,6 +128,11 @@
 
 - (void)expandButtonClicked:(UIButton *)button {
     ExecuteBlock1IfNotNil(self.expandHandler, button);
+}
+
+- (void)buttonClicked:(UIButton *)button {
+    // 因为只有一个，所以是删除按钮
+    ExecuteBlock1IfNotNil(self.deleteHandler, button);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

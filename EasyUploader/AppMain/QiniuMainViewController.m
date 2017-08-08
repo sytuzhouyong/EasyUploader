@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) QiniuBucketViewModel *viewModel;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
+@property (nonatomic, copy) ExpandButtonHandler expandHandler;
 
 @end
 
@@ -36,6 +37,21 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor cyanColor];
     self.leftBarButtonWidth = 0;
+
+    kWeakself;
+    self.expandHandler = ^(UIButton *button) {
+        CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
+        NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
+        NSArray *indexPaths = @[indexPath];
+        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtRow:self.lastIndexPath.row]) {
+            indexPaths = @[indexPath, self.lastIndexPath];
+            [weakself.viewModel updateExpandStateAtRow:weakself.lastIndexPath.row];
+        }
+
+        [weakself.viewModel updateExpandStateAtRow:indexPath.row];
+        [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        weakself.lastIndexPath = indexPath;
+    };
 
     [QiniuResourceManager queryAllBucketsWithHandler:^(NSArray<QiniuBucket *> *buckets) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -63,18 +79,7 @@
 
 - (ToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ToolCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-
-    cell.expandHandler = ^(UIButton *button) {
-        NSArray *indexPaths = @[indexPath];
-        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtRow:self.lastIndexPath.row]) {
-            indexPaths = @[indexPath, self.lastIndexPath];
-            [self.viewModel updateExpandStateAtRow:self.lastIndexPath.row];
-        }
-
-        [self.viewModel updateExpandStateAtRow:indexPath.row];
-        [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        self.lastIndexPath = indexPath;
-    };
+    cell.expandHandler = self.expandHandler;
 
     QiniuBucketCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
     cell.label.text = cellModel.bucket.name;

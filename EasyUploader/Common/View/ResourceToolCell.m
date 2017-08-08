@@ -60,10 +60,30 @@
     return self;
 }
 
+- (NSArray<ToolButtonInfo *> *)toolButtons {
+    ToolButtonInfo *info1 = [[ToolButtonInfo alloc] initWithTitle:@"下载" imageName:@"icon_trash" handler:nil];
+    ToolButtonInfo *info2 = [[ToolButtonInfo alloc] initWithTitle:@"删除" imageName:@"icon_trash" handler:nil];
+    return @[info1, info2];
+}
+
 - (void)configWithQiniuResource:(QiniuResource *)resource {
     self.label.text = resource.name;
     self.detailLabel.text = resource.createTimeDesc;
     self.sizeLabel.text = resource.sizeDesc;
+}
+
+- (void)buttonClicked:(UIButton *)button {
+    switch (button.tag - kToolCellButtonTag) {
+        case 0:
+            ExecuteBlock1IfNotNil(self.downloadHandler, button);
+            break;
+        case 1:
+            ExecuteBlock1IfNotNil(self.deleteHandler, button);
+            break;
+        default:
+            break;
+    }
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

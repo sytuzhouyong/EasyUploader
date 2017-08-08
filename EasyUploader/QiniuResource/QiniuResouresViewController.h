@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "ToolCell.h"
 
 @interface QiniuResouresViewController : BaseViewController
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class ToolButtonInfo;
+#define kToolCellButtonTag  1000
 
 typedef void (^ButtonHandler) (UIButton *button);
 typedef ButtonHandler ExpandButtonHandler;
@@ -21,6 +22,7 @@ typedef ButtonHandler ExpandButtonHandler;
 @property (nonatomic, strong) UIView *toolView;
 @property (nonatomic, copy) ExpandButtonHandler expandHandler;
 @property (nonatomic, strong) NSArray *toolButtons;
+@property (nonatomic, copy) ButtonHandler deleteHandler;
 
 - (void)updateExpandState:(BOOL)expand;
 - (NSArray<ToolButtonInfo *> *)toolButtons;
@@ -37,3 +39,4 @@ typedef ButtonHandler ExpandButtonHandler;
 - (instancetype)initWithTitle:(NSString *)title imageName:(NSString *)imageName handler:(ButtonHandler)handler;
 
 @end
+

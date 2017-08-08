@@ -18,6 +18,7 @@
 @property (nonatomic, strong) QiniuBucket *bucket;
 @property (nonatomic, strong) QiniuResourceViewModel *viewModel;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
+@property (nonatomic, copy) ExpandButtonHandler expandHandler;
 
 @end
 
@@ -35,6 +36,21 @@
     // Do any additional setup after loading the view.
     self.title = self.bucket.name;
     [self addSubviews];
+
+    kWeakself;
+    self.expandHandler = ^(UIButton *button) {
+        CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
+        NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
+        NSArray *indexPaths = @[indexPath];
+        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtRow:self.lastIndexPath.row]) {
+            indexPaths = @[indexPath, self.lastIndexPath];
+            [weakself.viewModel updateExpandStateAtRow:weakself.lastIndexPath.row];
+        }
+
+        [weakself.viewModel updateExpandStateAtRow:indexPath.row];
+        [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        weakself.lastIndexPath = indexPath;
+    };
 
     [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -65,17 +81,8 @@
 
 - (ResourceToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ResourceToolCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-    cell.expandHandler = ^(UIButton *button) {
-        NSArray *indexPaths = @[indexPath];
-        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtRow:self.lastIndexPath.row]) {
-            indexPaths = @[indexPath, self.lastIndexPath];
-            [self.viewModel updateExpandStateAtRow:self.lastIndexPath.row];
-        }
-
-        [self.viewModel updateExpandStateAtRow:indexPath.row];
-        [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        self.lastIndexPath = indexPath;
-    };
+    cell.expandHandler = self.expandHandler;
+    cell.deleteHandler = nil;
 
     QiniuResourceCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
     [cell configWithQiniuResource:cellModel.resource];

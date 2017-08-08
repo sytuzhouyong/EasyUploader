@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UILabel *detailLabel;
 @property (nonatomic, strong) UILabel *sizeLabel;
+@property (nonatomic, copy) ButtonHandler downloadHandler;
 
 
 - (void)configWithQiniuResource:(QiniuResource *)resource;
