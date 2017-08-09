@@ -22,20 +22,18 @@ PODS:
     - CocoaLumberjack/Default
   - HappyDNS (0.3.10)
   - Masonry (1.0.2)
+  - MJRefresh (3.1.12)
   - Qiniu (7.0.20):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
-  - RaptureXML (1.0.1)
-  - UIImage+SVG (0.1):
-    - RaptureXML (~> 1.0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - CocoaLumberjack
   - HappyDNS (~> 0.3)
   - Masonry
+  - MJRefresh
   - Qiniu (from `https://github.com/qiniu/objc-sdk.git`, branch `AFNetworking-3.x`)
-  - UIImage+SVG (~> 0.1)
 
 EXTERNAL SOURCES:
   Qiniu:
@@ -52,10 +50,9 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   Qiniu: 4dbf1e6acb3236c4d7251046a17d08b16d21fcfe
-  RaptureXML: b5c33c04c1a4adfd8ad0d5463329a31820596e82
-  UIImage+SVG: 23a2edbb60b0f4c083068963086e309ebd8be592
 
-PODFILE CHECKSUM: 0aba01b2f084b0daf5e950c8c016a82359daa5d3
+PODFILE CHECKSUM: bb3698b83d1c0b34c8ac6842f59c74cdd341a02d
 
 COCOAPODS: 1.2.0

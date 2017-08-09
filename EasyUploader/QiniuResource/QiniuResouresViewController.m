@@ -9,6 +9,7 @@
 #import "QiniuResouresViewController.h"
 #import "ResourceToolCell.h"
 #import "QiniuViewModel.h"
+#import <MJRefresh/MJRefresh.h>
 
 #define kCellIdentifier @"ResourceCellIdentifier"
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) QiniuResourceViewModel *viewModel;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, copy) ExpandButtonHandler expandHandler;
+@property (nonatomic, copy) ExpandButtonHandler downloadHandler;
 
 @end
 
@@ -58,6 +60,8 @@
             [self.tableView reloadData];
         });
     }];
+
+//    [self.tableView.header beginRefreshing];
 }
 
 - (void)addSubviews {
@@ -66,6 +70,10 @@
         make.leading.trailing.bottom.equalTo(self.view);
         make.top.equalTo(self.titleView.mas_bottom);
     }];
+}
+
+- (void)loadMore:(id)obj {
+    [self.tableView.mj_header endRefreshing];
 }
 
 #pragma mark - UITableView
@@ -118,6 +126,7 @@
     tableView.backgroundColor = self.view.backgroundColor;
     tableView.tableFooterView = [UIView new];
     [tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kCellIdentifier];
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
     return tableView;
 }
 
