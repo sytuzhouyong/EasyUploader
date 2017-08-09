@@ -10,6 +10,8 @@
 
 @interface QiniuDownloadManager : NSObject
 
+SINGLETON_DECLEAR;
+
 - (void)downloadResourceWithKey:(NSString *)key;
 
 @end

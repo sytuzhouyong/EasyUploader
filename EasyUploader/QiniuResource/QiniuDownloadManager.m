@@ -10,25 +10,31 @@
 
 @implementation QiniuDownloadManager
 
+SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 
 - (void)downloadResourceWithKey:(NSString *)key {
     NSString *url = [NSString stringWithFormat:@"%@/%@", kQiniuResourceDownloadURL, key];
-    NSString *token = [self makeDownloadTokenWithURL:url];
-    NSString *downloadURL = [NSString stringWithFormat:@"%@?e=1451491200&token=%@", url, token];
+    NSString *downloadURL = [self makeDownloadTokenWithURL:url];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
-    [[AFHTTPSessionManager manager] downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress) {
+    [[[AFHTTPSessionManager manager] downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress) {
         NSLog(@"progress = %lld / %lld", [downloadProgress completedUnitCount], [downloadProgress totalUnitCount]);
     } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         NSString *basePath = [StringUtil documentsPath];
-        return [NSURL fileURLWithPath:basePath];
+        NSString *destPath = [NSString stringWithFormat:@"%@/%@", basePath, key];
+        NSLog(@"path = %@", basePath);
+        return [NSURL fileURLWithPath:destPath];
     } completionHandler:^(NSURLResponse *response, NSURL * filePath, NSError *error) {
-        ;
-    }];
+        NSLog(@"path = %@", filePath);
+    }] resume];
 }
 
 - (NSString *)makeDownloadTokenWithURL:(NSString *)url {
-    NSString *tokenURL = [NSString stringWithFormat:@"%@?e=1451491200", url];
+    time_t deadline;
+    time(&deadline);    // 返回当前系统时间
+    deadline += 3600;   // +3600秒,即默认token保存1小时.
+
+    NSString *tokenURL = [NSString stringWithFormat:@"%@?e=%ld", url, deadline];
 
     char digestStr[CC_SHA1_DIGEST_LENGTH];
     bzero(digestStr, 0);

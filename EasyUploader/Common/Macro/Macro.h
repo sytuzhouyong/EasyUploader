@@ -21,5 +21,6 @@
 #define kQiniuResourceDownloadURL   @"http://onzw106di.bkt.clouddn.com"
 
 #define kQiniuResourceManager       [QiniuResourceManager sharedInstance]
+#define kQiniuDownloadManager       [QiniuDownloadManager sharedInstance]
 
 #endif /* Macro_h */

@@ -127,16 +127,6 @@
 }
 
 - (void)expandButtonClicked:(UIButton *)button {
-    static BOOL expand = NO;
-    [UIView animateWithDuration:0.4 animations:^{
-//        if (expand) {
-            button.transform = CGAffineTransformRotate(button.transform, -0.000001 + M_PI);
-//        } else  {
-//            button.transform = CGAffineTransformIdentity;
-//        }
-//        expand = !expand;
-    }];
-
     ExecuteBlock1IfNotNil(self.expandHandler, button);
 }
 

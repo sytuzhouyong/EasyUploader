@@ -53,6 +53,13 @@
         [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         weakself.lastIndexPath = indexPath;
     };
+    self.downloadHandler = ^(UIButton *button) {
+        CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
+        NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
+
+        QiniuResource *resource = weakself.viewModel.cellModels[indexPath.row].resource;
+        [kQiniuDownloadManager downloadResourceWithKey:resource.name];
+    };
 
     [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -60,8 +67,6 @@
             [self.tableView reloadData];
         });
     }];
-
-//    [self.tableView.header beginRefreshing];
 }
 
 - (void)addSubviews {
@@ -90,7 +95,7 @@
 - (ResourceToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ResourceToolCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     cell.expandHandler = self.expandHandler;
-    cell.deleteHandler = nil;
+    cell.downloadHandler = self.downloadHandler;
 
     QiniuResourceCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
     [cell configWithQiniuResource:cellModel.resource];

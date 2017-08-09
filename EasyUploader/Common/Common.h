@@ -52,6 +52,7 @@ typedef NS_ENUM(NSUInteger, ZyxImagePickerSelectionMode) {
 #import "StringUtil.h"
 
 #import "QiniuUploadManager.h"
+#import "QiniuDownloadManager.h"
 #import "QiniuResourceManager.h"
 
 
