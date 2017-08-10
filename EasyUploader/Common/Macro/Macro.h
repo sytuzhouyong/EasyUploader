@@ -18,6 +18,7 @@
 #define kQiniuBaseRequestURL        @"http://rsf.qbox.me"
 #define kQiniuBucketHost            @"rs.qbox.me"
 #define kQiniuResourceHost          @"rsf.qbox.me"
+#define kQiniuResourceDownloadHost  @"onzw106di.bkt.clouddn.com"
 #define kQiniuResourceDownloadURL   @"http://onzw106di.bkt.clouddn.com"
 
 #define kQiniuResourceManager       [QiniuResourceManager sharedInstance]

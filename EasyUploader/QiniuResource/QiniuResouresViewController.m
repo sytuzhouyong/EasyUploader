@@ -58,7 +58,9 @@
         NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
 
         QiniuResource *resource = weakself.viewModel.cellModels[indexPath.row].resource;
-        [kQiniuDownloadManager downloadResourceWithKey:resource.name];
+        [kQiniuDownloadManager downloadResourceThumbnailWithKey:resource.name handler:^(BOOL success, NSURL *destURL) {
+            ;
+        }];
     };
 
     [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {

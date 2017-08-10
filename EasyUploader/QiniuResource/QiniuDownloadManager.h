@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^DonwloadResourceHandler)(BOOL success, NSURL *destURL);
+
 @interface QiniuDownloadManager : NSObject
 
 SINGLETON_DECLEAR;
 
-- (void)downloadResourceWithKey:(NSString *)key;
+- (void)downloadResourceWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler;
+- (void)downloadResourceThumbnailWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler;
 
 @end
