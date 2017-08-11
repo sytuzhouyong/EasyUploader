@@ -16,7 +16,8 @@
 
 // 查询指定 bucket 的资源
 + (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
-    NSString *requestPath = [NSString stringWithFormat:@"/list?limit=%d&bucket=%@", limit, bucket];
+//    NSString *requestPath = [NSString stringWithFormat:@"/list?bucket=%@&limit=%d&delimiter=%%2F", bucket, limit];
+    NSString *requestPath = [NSString stringWithFormat:@"/list?bucket=%@&limit=%d&delimiter=", bucket, limit];
     [self.class sendRequestWithPath:requestPath body:@"" host:kQiniuResourceHost andHandler:^(BOOL success, id responseObject) {
         NSArray<QiniuResource *> *resources = nil;
         if (success) {

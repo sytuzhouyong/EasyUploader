@@ -11,6 +11,8 @@ pod 'HappyDNS', '~> 0.3'
 pod 'CocoaLumberjack'
 pod 'Masonry'
 pod 'MJRefresh'
+pod 'SDWebImage'
+pod 'MBProgressHUD'
 
 target 'EasyUploader' do
 	

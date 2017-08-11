@@ -11,6 +11,7 @@
 @interface QiniuDownloadManager ()
 
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
+@property (nonatomic, strong) NSMutableDictionary *downloadURLDict;
 
 @end
 
@@ -21,13 +22,14 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 - (instancetype)init {
     if (self = [super init]) {
         self.manager = [AFHTTPSessionManager manager];
+        self.downloadURLDict = [NSMutableDictionary dictionary];
     }
     return self;
 }
 
 - (void)downloadResourceWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler {
     NSString *url = [NSString stringWithFormat:@"%@/%@", kQiniuResourceDownloadURL, key];
-    NSString *downloadURL = [self makeDownloadTokenWithURL:url];
+    NSString *downloadURL = [self makeDownloadTokenOfKey:key url:url];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
     [[self.manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress) {
@@ -45,10 +47,9 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 }
 
 - (void)downloadResourceThumbnailWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler {
-    NSString *url = [NSString stringWithFormat:@"%@/%@?imageView2/1/w/80/h/80/format/jpg/q/75|imageslim", kQiniuResourceDownloadURL, key];
-    NSString *downloadURL = [self makeDownloadTokenWithURL:url];
+    NSURL *downloadURL = [self resourceThumbnailURLWithKey:key];
+    NSURLRequest *request = [NSURLRequest requestWithURL:downloadURL];
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
     [[self.manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress) {
         NSLog(@"progress = %lld / %lld", [downloadProgress completedUnitCount], [downloadProgress totalUnitCount]);
     } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
@@ -63,12 +64,22 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
     }] resume];
 }
 
-- (NSString *)makeDownloadTokenWithURL:(NSString *)url {
+- (NSURL *)resourceThumbnailURLWithKey:(NSString *)key {
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@-resource_thumbnail", kQiniuResourceDownloadURL, key];
+    NSString *downloadURLString = [self makeDownloadTokenOfKey:key url:urlString];
+    return [NSURL URLWithString:downloadURLString];
+}
+
+- (NSString *)makeDownloadTokenOfKey:(NSString *)key url:(NSString *)url {
+    if (self.downloadURLDict[key]) {
+        return self.downloadURLDict[key];
+    }
+
     time_t deadline;
     time(&deadline);    // 返回当前系统时间
     deadline += 3600;   // +3600秒,即默认token保存1小时.
 
-    NSString *tokenURL = [NSString stringWithFormat:@"%@&e=%ld", url, deadline];
+    NSString *tokenURL = [NSString stringWithFormat:@"%@?e=%ld", url, deadline];
 
     char digestStr[CC_SHA1_DIGEST_LENGTH];
     bzero(digestStr, 0);
@@ -78,6 +89,8 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 
     NSString *encodedDigest = [GTMBase64 stringByWebSafeEncodingBytes:digestStr length:CC_SHA1_DIGEST_LENGTH padded:TRUE];
     NSString *token = [NSString stringWithFormat:@"%@&token=%@:%@", tokenURL, kAccessKey, encodedDigest];
+    self.downloadURLDict[key] = token;
+
     return token;
 }
 

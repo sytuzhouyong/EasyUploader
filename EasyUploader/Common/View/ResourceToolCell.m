@@ -7,6 +7,7 @@
 //
 
 #import "ResourceToolCell.h"
+#import <UIImageView+WebCache.h>
 
 @implementation ResourceToolCell
 
@@ -70,6 +71,9 @@
     self.label.text = resource.name;
     self.detailLabel.text = resource.createTimeDesc;
     self.sizeLabel.text = resource.sizeDesc;
+
+    NSURL *url = [kQiniuDownloadManager resourceThumbnailURLWithKey:resource.name];
+    [self.iconImageView sd_setImageWithURL:url placeholderImage:UIImageNamed(@"icon_image")];
 }
 
 - (void)buttonClicked:(UIButton *)button {

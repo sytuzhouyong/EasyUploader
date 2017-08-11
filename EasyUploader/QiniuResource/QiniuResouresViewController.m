@@ -63,7 +63,7 @@
         }];
     };
 
-    [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:20 handler:^(NSArray<QiniuResource *> *resources) {
+    [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:4 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources];
             [self.tableView reloadData];
