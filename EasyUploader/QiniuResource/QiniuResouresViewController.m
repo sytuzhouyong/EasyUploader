@@ -92,6 +92,7 @@
 
 - (void)uploadButtonClicked {
     LocalMainViewController *vc = [[LocalMainViewController alloc] init];
+//    vc.leftBarButtonWidth = 44;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

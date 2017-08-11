@@ -28,11 +28,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = Text(@"SelectAlbum");
+    [self addSubviews];
+
     if (self.selectionMode == ZyxImagePickerSelectionModeMultiple) {
         [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectAllButtonPressed"];
     }
-    
-    [self addSubviews];
     
     if (![DeviceUtil isPhotoAuthorized]) {
         [kAppDelegate showPhotoAuthorizationAlertView];

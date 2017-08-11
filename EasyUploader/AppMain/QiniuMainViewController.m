@@ -49,13 +49,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
+//    self.hidesBottomBarWhenPushed = NO;
+//    self.tabBarController.tabBar.hidden = NO;
 }
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-}
+//
+//- (void)viewDidDisappear:(BOOL)animated {
+//    [super viewDidDisappear:animated];
+//    self.tabBarController.tabBar.hidden = YES;
+//}
 
 
 - (void)addSubviews {
@@ -119,7 +120,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QiniuBucket *bucket = self.viewModel.cellModels[indexPath.row].bucket;
     QiniuResouresViewController *vc = [[QiniuResouresViewController alloc] initWithBucket:bucket];
-    self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
