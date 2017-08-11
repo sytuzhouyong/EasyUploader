@@ -9,7 +9,7 @@
 #import "QiniuResouresViewController.h"
 #import "ResourceToolCell.h"
 #import "QiniuViewModel.h"
-#import <MJRefresh/MJRefresh.h>
+#import "LocalMainViewController.h"
 
 #define kCellIdentifier @"ResourceCellIdentifier"
 
@@ -38,7 +38,27 @@
     // Do any additional setup after loading the view.
     self.title = self.bucket.name;
     [self addSubviews];
+    [self initHandlers];
 
+    [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:100 handler:^(NSArray<QiniuResource *> *resources) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources];
+            [self.tableView reloadData];
+        });
+    }];
+}
+
+- (void)addSubviews {
+    [self createRightBarButtonWithTitle:@"上传" action:@"uploadButtonClicked"];
+
+    [self.view addSubview:self.tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.equalTo(self.view);
+        make.top.equalTo(self.titleView.mas_bottom);
+    }];
+}
+
+- (void)initHandlers {
     kWeakself;
     self.expandHandler = ^(UIButton *button) {
         CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
@@ -58,29 +78,21 @@
         NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
 
         QiniuResource *resource = weakself.viewModel.cellModels[indexPath.row].resource;
-        [kQiniuDownloadManager downloadResourceThumbnailWithKey:resource.name handler:^(BOOL success, NSURL *destURL) {
+        [kQiniuDownloadManager downloadResourceWithKey:resource.name handler:^(BOOL success, NSURL *destURL) {
             ;
         }];
     };
-
-    [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:4 handler:^(NSArray<QiniuResource *> *resources) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources];
-            [self.tableView reloadData];
-        });
-    }];
-}
-
-- (void)addSubviews {
-    [self.view addSubview:self.tableView];
-    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.bottom.equalTo(self.view);
-        make.top.equalTo(self.titleView.mas_bottom);
-    }];
 }
 
 - (void)loadMore:(id)obj {
     [self.tableView.mj_header endRefreshing];
+}
+
+#pragma mark - Button Event
+
+- (void)uploadButtonClicked {
+    LocalMainViewController *vc = [[LocalMainViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableView
@@ -119,6 +131,7 @@
     }
 }
 
+# pragma mark - Getter and Setter
 
 - (UITableView *)tableView {
     if (_tableView != nil) {

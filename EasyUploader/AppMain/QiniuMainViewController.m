@@ -33,11 +33,39 @@
     [super viewDidLoad];
 
     self.title = @"我的七牛云";
-    [self addSubviews];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.view.backgroundColor = [UIColor cyanColor];
+//    self.view.backgroundColor = [UIColor cyanColor];
     self.leftBarButtonWidth = 0;
 
+    [self addSubviews];
+    [self initHandlers];
+
+    [QiniuResourceManager queryAllBucketsWithHandler:^(NSArray<QiniuBucket *> *buckets) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.viewModel = [[QiniuBucketViewModel alloc] initWithBuckets:buckets];
+            [self.tableView reloadData];
+        });
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+
+- (void)addSubviews {
+    [self.view addSubview:self.tableView];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).insets(UIEdgeInsets(kBaseViewControllerTitleViewHeight, 0, 0, 0));
+    }];
+}
+
+- (void)initHandlers {
     kWeakself;
     self.expandHandler = ^(UIButton *button) {
         CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
@@ -64,21 +92,9 @@
         [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         weakself.lastIndexPath = indexPath;
     };
-
-    [QiniuResourceManager queryAllBucketsWithHandler:^(NSArray<QiniuBucket *> *buckets) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.viewModel = [[QiniuBucketViewModel alloc] initWithBuckets:buckets];
-            [self.tableView reloadData];
-        });
-    }];
 }
 
-- (void)addSubviews {
-    [self.view addSubview:self.tableView];
-    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsets(kBaseViewControllerTitleViewHeight, 0, 0, 0));
-    }];
-}
+#pragma mark - UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.viewModel.cellModels.count;
@@ -103,6 +119,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QiniuBucket *bucket = self.viewModel.cellModels[indexPath.row].bucket;
     QiniuResouresViewController *vc = [[QiniuResouresViewController alloc] initWithBucket:bucket];
+    self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
