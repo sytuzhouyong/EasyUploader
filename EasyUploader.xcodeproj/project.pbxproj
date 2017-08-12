@@ -48,6 +48,7 @@
 		25F253161F3E13CA0007D104 /* LocalMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F2530F1F3E13CA0007D104 /* LocalMainViewController.m */; };
 		25F253171F3E13CA0007D104 /* ZyxPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F253111F3E13CA0007D104 /* ZyxPhotosViewController.m */; };
 		25F253181F3E13CA0007D104 /* ZyxPickAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F253131F3E13CA0007D104 /* ZyxPickAlbumViewController.m */; };
+		25F2531C1F3E151C0007D104 /* SelectUploadPathToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F2531B1F3E151C0007D104 /* SelectUploadPathToolView.m */; };
 		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
 		B2E4EFD313F359690997E2B5 /* libPods-EasyUploaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD63AFD981F83625EDC9589 /* libPods-EasyUploaderTests.a */; };
 		F89407846E1599FCA3F8E031 /* libPods-EasyUploaderUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B807D0790021F0E66A695D /* libPods-EasyUploaderUITests.a */; };
@@ -154,6 +155,8 @@
 		25F253111F3E13CA0007D104 /* ZyxPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotosViewController.m; sourceTree = "<group>"; };
 		25F253121F3E13CA0007D104 /* ZyxPickAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPickAlbumViewController.h; sourceTree = "<group>"; };
 		25F253131F3E13CA0007D104 /* ZyxPickAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPickAlbumViewController.m; sourceTree = "<group>"; };
+		25F2531A1F3E151C0007D104 /* SelectUploadPathToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectUploadPathToolView.h; sourceTree = "<group>"; };
+		25F2531B1F3E151C0007D104 /* SelectUploadPathToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectUploadPathToolView.m; sourceTree = "<group>"; };
 		2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploader.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploader/Pods-EasyUploader.release.xcconfig"; sourceTree = "<group>"; };
 		3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F06F99B7DAEEABA4061A1A2 /* Pods-EasyUploaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderTests/Pods-EasyUploaderTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -372,6 +375,7 @@
 		255E15231F2274B000411A67 /* LocalResource */ = {
 			isa = PBXGroup;
 			children = (
+				25F253191F3E14E70007D104 /* View */,
 				25F253081F3E13CA0007D104 /* Manager */,
 				25F2530B1F3E13CA0007D104 /* ViewController */,
 			);
@@ -472,6 +476,15 @@
 				25F253131F3E13CA0007D104 /* ZyxPickAlbumViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		25F253191F3E14E70007D104 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				25F2531A1F3E151C0007D104 /* SelectUploadPathToolView.h */,
+				25F2531B1F3E151C0007D104 /* SelectUploadPathToolView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5D8780288547C981C44BD48A /* Pods */ = {
@@ -806,6 +819,7 @@
 				25F253071F3E13BC0007D104 /* QiniuResouresViewController.m in Sources */,
 				255E15611F227A6A00411A67 /* QiniuResource.m in Sources */,
 				25F253001F3E135A0007D104 /* QiniuUploadManager.m in Sources */,
+				25F2531C1F3E151C0007D104 /* SelectUploadPathToolView.m in Sources */,
 				25F253181F3E13CA0007D104 /* ZyxPickAlbumViewController.m in Sources */,
 				255E153A1F2274B000411A67 /* DeviceUtil.m in Sources */,
 				255E15351F2274B000411A67 /* GTMBase64.m in Sources */,

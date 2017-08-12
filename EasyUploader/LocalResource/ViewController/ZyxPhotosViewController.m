@@ -9,6 +9,7 @@
 #import "ZyxPhotosViewController.h"
 #import "ZyxPhotoManager.h"
 #import "ZyxPhotoCollectionViewCell.h"
+#import "SelectUploadPathToolView.h"
 
 #define kPhotoCellIdentifier            @"ZyxPhotoCell"
 #define kPhotoSectionHeaderIdentifier   @"ZyxPhotoSectionHeader"
@@ -23,6 +24,8 @@
 @property (nonatomic, strong) NSMutableArray<NSString *> *dateDescs;    // 有序
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSDate *> *datesDict;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray<ALAsset *> *> *assetsDict;
+
+@property (nonatomic, strong) SelectUploadPathToolView *toolView;
 
 @end
 
@@ -64,10 +67,17 @@
 }
 
 - (void)addSubviews {
+    [self.view addSubview:self.toolView];
+    [_toolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.bottom.equalTo(self.view);
+        make.height.mas_equalTo(52);
+    }];
+
     [self.view addSubview:self.collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.bottom.equalTo(self.view);
+        make.leading.trailing.equalTo(self.view);
         make.top.equalTo(self.titleView.mas_bottom);
+        make.bottom.equalTo(self.toolView.mas_top);
     }];
 }
 
@@ -297,6 +307,14 @@
     view.dataSource = self;
     view.backgroundColor = [UIColor whiteColor];
     view.allowsMultipleSelection = (self.selectionMode == ZyxImagePickerSelectionModeMultiple);
+    return view;
+}
+
+- (SelectUploadPathToolView *)toolView {
+    ReturnObjectIfNotNil(_toolView);
+
+    SelectUploadPathToolView *view = [[SelectUploadPathToolView alloc] init];
+    _toolView = view;
     return view;
 }
 
