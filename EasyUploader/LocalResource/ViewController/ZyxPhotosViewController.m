@@ -50,12 +50,7 @@
     self.title = [kZyxPhotoManager nameOfGroup:self.group];
     // Do any additional setup after loading the view.
     [self addSubviews];
-    [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectButtonPressed"];
-}
-
-- (void)selectButtonPressed {
-    self.isSelectAll = !self.isSelectAll;
-    self.rightBarButtonTitle = Text(self.isSelectAll ? @"CancelSelectAll" : @"SelectAll");
+    [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectAllButtonPressed"];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -79,7 +74,11 @@
         make.top.equalTo(self.titleView.mas_bottom);
         make.bottom.equalTo(self.toolView.mas_top);
     }];
+
+//    self.toolView.uploadButton rac
 }
+
+# pragma mark - Resource Enum
 
 - (void)enumPhotosInGroup:(ALAssetsGroup *)group {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -136,6 +135,12 @@
     return assets;
 }
 
+- (BOOL)isSelectAnyResource {
+    NSArray<NSIndexPath *> *indexPaths = [_collectionView indexPathsForSelectedItems];
+    return indexPaths.count != 0;
+}
+
+// delete specified url of asset
 - (void)removePhototOfURLString:(NSString *)urlString {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [_dateDescs enumerateObjectsUsingBlock:^(NSString *key1, NSUInteger i1, BOOL *stop1) {
@@ -186,6 +191,11 @@
 }
 
 #pragma mark - Button Action
+
+- (void)selectAllButtonPressed {
+    self.isSelectAll = !self.isSelectAll;
+    self.rightBarButtonTitle = Text(self.isSelectAll ? @"CancelSelectAll" : @"SelectAll");
+}
 
 - (void)setIsSelectAll:(BOOL)isSelectAll {
     _isSelectAll = isSelectAll;

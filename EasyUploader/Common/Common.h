@@ -22,6 +22,7 @@
 #import "GTMBase64.h"
 #import "Masonry.h"
 #import <MJRefresh/MJRefresh.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 # pragma mark - Project
 #import "AppDelegate.h"

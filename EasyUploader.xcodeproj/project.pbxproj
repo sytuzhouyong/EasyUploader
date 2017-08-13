@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14BAC3D109122A97402B1C51 /* libPods-EasyUploaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF6B7DCCDFE0971CC5B4A00 /* libPods-EasyUploaderTests.a */; };
 		250392251E65C758002062F0 /* EasyUploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250392241E65C758002062F0 /* EasyUploaderTests.m */; };
 		250392301E65C758002062F0 /* EasyUploaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503922F1E65C758002062F0 /* EasyUploaderUITests.m */; };
 		2508F35D1E7D7C3600217772 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */; };
@@ -49,9 +50,8 @@
 		25F253171F3E13CA0007D104 /* ZyxPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F253111F3E13CA0007D104 /* ZyxPhotosViewController.m */; };
 		25F253181F3E13CA0007D104 /* ZyxPickAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F253131F3E13CA0007D104 /* ZyxPickAlbumViewController.m */; };
 		25F2531C1F3E151C0007D104 /* SelectUploadPathToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F2531B1F3E151C0007D104 /* SelectUploadPathToolView.m */; };
-		498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */; };
-		B2E4EFD313F359690997E2B5 /* libPods-EasyUploaderTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD63AFD981F83625EDC9589 /* libPods-EasyUploaderTests.a */; };
-		F89407846E1599FCA3F8E031 /* libPods-EasyUploaderUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43B807D0790021F0E66A695D /* libPods-EasyUploaderUITests.a */; };
+		CB18FB60328393E3F6074121 /* libPods-EasyUploaderUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4465C8544B1594639417BF6 /* libPods-EasyUploaderUITests.a */; };
+		FF1FA9172B9FAD33A95065BB /* libPods-EasyUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C939FBEDF90B35607015E82E /* libPods-EasyUploader.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,12 +158,12 @@
 		25F2531A1F3E151C0007D104 /* SelectUploadPathToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectUploadPathToolView.h; sourceTree = "<group>"; };
 		25F2531B1F3E151C0007D104 /* SelectUploadPathToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectUploadPathToolView.m; sourceTree = "<group>"; };
 		2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploader.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploader/Pods-EasyUploader.release.xcconfig"; sourceTree = "<group>"; };
-		3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F06F99B7DAEEABA4061A1A2 /* Pods-EasyUploaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderTests/Pods-EasyUploaderTests.release.xcconfig"; sourceTree = "<group>"; };
-		43B807D0790021F0E66A695D /* libPods-EasyUploaderUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploaderUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B3ED3706C1B5A374CAAA99 /* Pods-EasyUploader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploader/Pods-EasyUploader.debug.xcconfig"; sourceTree = "<group>"; };
+		B4465C8544B1594639417BF6 /* libPods-EasyUploaderUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploaderUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDF4CA43941228D9001A3ED /* Pods-EasyUploaderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderUITests/Pods-EasyUploaderUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		CFD63AFD981F83625EDC9589 /* libPods-EasyUploaderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploaderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C939FBEDF90B35607015E82E /* libPods-EasyUploader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDF6B7DCCDFE0971CC5B4A00 /* libPods-EasyUploaderTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EasyUploaderTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7E73488722F1D84565EC9FB /* Pods-EasyUploaderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyUploaderUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyUploaderUITests/Pods-EasyUploaderUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,7 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2508F35D1E7D7C3600217772 /* AssetsLibrary.framework in Frameworks */,
-				498AA4796EED233602E72FF4 /* libPods-EasyUploader.a in Frameworks */,
+				FF1FA9172B9FAD33A95065BB /* libPods-EasyUploader.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2E4EFD313F359690997E2B5 /* libPods-EasyUploaderTests.a in Frameworks */,
+				14BAC3D109122A97402B1C51 /* libPods-EasyUploaderTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F89407846E1599FCA3F8E031 /* libPods-EasyUploaderUITests.a in Frameworks */,
+				CB18FB60328393E3F6074121 /* libPods-EasyUploaderUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +225,7 @@
 				255E14FA1F2274B000411A67 /* Common */,
 				255E15231F2274B000411A67 /* LocalResource */,
 				255E152D1F2274B000411A67 /* QiniuResource */,
+				25C23DDF1F40A7D300CDA984 /* Thirdparty */,
 			);
 			path = EasyUploader;
 			sourceTree = "<group>";
@@ -430,6 +431,13 @@
 			path = svg;
 			sourceTree = "<group>";
 		};
+		25C23DDF1F40A7D300CDA984 /* Thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Thirdparty;
+			sourceTree = "<group>";
+		};
 		25F252F71F3E135A0007D104 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,9 +512,9 @@
 			isa = PBXGroup;
 			children = (
 				2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */,
-				3C6103D32F9C3DE5A512B5EF /* libPods-EasyUploader.a */,
-				CFD63AFD981F83625EDC9589 /* libPods-EasyUploaderTests.a */,
-				43B807D0790021F0E66A695D /* libPods-EasyUploaderUITests.a */,
+				C939FBEDF90B35607015E82E /* libPods-EasyUploader.a */,
+				DDF6B7DCCDFE0971CC5B4A00 /* libPods-EasyUploaderTests.a */,
+				B4465C8544B1594639417BF6 /* libPods-EasyUploaderUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

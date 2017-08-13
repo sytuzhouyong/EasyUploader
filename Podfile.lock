@@ -27,18 +27,25 @@ PODS:
   - Qiniu (7.0.20):
     - AFNetworking (~> 3)
     - HappyDNS (~> 0.3)
+  - ReactiveCocoa (2.1.8):
+    - ReactiveCocoa/Core (= 2.1.8)
+    - ReactiveCocoa/no-arc (= 2.1.8)
+  - ReactiveCocoa/Core (2.1.8):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.1.8)
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
-  - CocoaLumberjack
+  - CocoaLumberjack (~> 3.2.0)
   - HappyDNS (~> 0.3)
-  - Masonry
-  - MBProgressHUD
-  - MJRefresh
+  - Masonry (~> 1.0.2)
+  - MBProgressHUD (~> 1.0.0)
+  - MJRefresh (~> 3.1.12)
   - Qiniu (from `https://github.com/qiniu/objc-sdk.git`, branch `AFNetworking-3.x`)
+  - ReactiveCocoa (~> 2.1.8)
   - SDWebImage
 
 EXTERNAL SOURCES:
@@ -59,8 +66,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   Qiniu: 4dbf1e6acb3236c4d7251046a17d08b16d21fcfe
+  ReactiveCocoa: f89f2e009a87951b50321bf9feb958823fcc617e
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
 
-PODFILE CHECKSUM: 1e0b9e3c2f99ea1c93e6abff227de6945e7f36ad
+PODFILE CHECKSUM: d9f00c52deb2d3a4c9c7e10cbec50ac8c90e92f5
 
 COCOAPODS: 1.2.0
