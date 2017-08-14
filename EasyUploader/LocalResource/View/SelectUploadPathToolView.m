@@ -44,7 +44,7 @@
 
         UIButton *pathButton = [UIButton buttonWithType:UIButtonTypeCustom];
         pathButton.layer.cornerRadius = 3;
-        pathButton.titleLabel.font = UIFontOfSize(12);
+        pathButton.titleLabel.font = UIFontOfSize(16);
         [pathButton setBackgroundColor: [UIColor grayColor]];
         [pathButton setImage:UIImageNamed(@"icon_bucket") forState:UIControlStateNormal];
         [self addSubview:pathButton];

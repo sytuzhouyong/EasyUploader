@@ -354,6 +354,7 @@
     ReturnObjectIfNotNil(_toolView);
 
     SelectUploadPathToolView *view = [[SelectUploadPathToolView alloc] init];
+    [view.selectPathButon setTitle:kQiniuResourceManager.selectedBucket.name forState:UIControlStateNormal];
     _toolView = view;
     return view;
 }

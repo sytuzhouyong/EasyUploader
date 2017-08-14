@@ -12,12 +12,13 @@
 
 @interface QiniuResourceManager : NSObject
 
-//SINGLETON_DECLEAR;
+SINGLETON_DECLEAR;
 
 typedef void (^BucketsHandler)(NSArray<QiniuBucket *> *buckets);
 typedef void (^ResourcesHandler)(NSArray<QiniuResource *> *resources);
 typedef void (^RequestHandler)(BOOL success, id responseObject);
 
+@property (nonatomic, strong) QiniuBucket *selectedBucket;
 
 + (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
 + (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler;

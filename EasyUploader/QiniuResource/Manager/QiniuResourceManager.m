@@ -12,7 +12,7 @@
 
 @implementation QiniuResourceManager
 
-//SINGLETON_IMPLEMENTATION(QiniuResourceManager);
+SINGLETON_IMPLEMENTATION(QiniuResourceManager);
 
 // 查询指定 bucket 的资源
 + (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {

@@ -119,6 +119,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QiniuBucket *bucket = self.viewModel.cellModels[indexPath.row].bucket;
+    kQiniuResourceManager.selectedBucket = bucket;
     QiniuResouresViewController *vc = [[QiniuResouresViewController alloc] initWithBucket:bucket];
     [self.navigationController pushViewController:vc animated:YES];
 }
