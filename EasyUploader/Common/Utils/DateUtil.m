@@ -103,6 +103,10 @@
     return [self stringFromDate:date format:@"yyyy-MM-dd_HH:mm:ss"];
 }
 
++ (NSString *)millisecondPreciseUnderlineStringWithDate:(NSDate *)date {
+    return [self stringFromDate:date format:@"yyyy-MM-dd_HH:mm:ss.SSS"];
+}
+
 + (NSString *)yyyyMMddStringWithDate:(NSDate *)date {
     // 效率低
 //    static NSString *format = nil;

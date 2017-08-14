@@ -10,5 +10,11 @@
 	<string>全选</string>
 	<key>CancelSelectAll</key>
 	<string>取消全选</string>
+	<key>Today</key>
+	<string>今天</string>
+	<key>Yesterday</key>
+	<string>昨天</string>
+	<key>DayBeforeYesterday</key>
+	<string>前天</string>
 </dict>
 </plist>

@@ -29,7 +29,7 @@
 
 - (instancetype)initWithAssetsGroup:(ALAssetsGroup *)group;
 
-- (NSMutableSet<ALAsset *> *)selectedPhotos;
+- (NSArray<ALAsset *> *)selectedPhotos;
 - (void)removePhototOfURLString:(NSString *)urlString;
 
 - (void)addAssetsDict:(NSDictionary<NSString *, NSArray<ALAsset *> *> *)assetsDict dateStringsDict:(NSDictionary<NSString *, NSDate *> *)dateStringsDict;

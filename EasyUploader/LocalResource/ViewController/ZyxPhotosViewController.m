@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray<ALAsset *> *> *assetsDict;
 
 @property (nonatomic, strong) SelectUploadPathToolView *toolView;
+@property (nonatomic, assign) BOOL isSelectAnyResource;
 
 @end
 
@@ -51,6 +52,27 @@
     // Do any additional setup after loading the view.
     [self addSubviews];
     [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectAllButtonPressed"];
+
+    [[self.toolView.uploadButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        NSArray<ALAsset *> *selectedResources = [self selectedPhotos];
+        for (ALAsset *asset in selectedResources) {
+            NSString *key = [ALAssetUtil millisecondDateStringOfALAsset:asset];
+            NSLog(@"key = %@", key);
+            [[QiniuUploadManager sharedInstance] uploadALAsset:asset withKey:key];
+        }
+    }];
+
+    [[self rac_signalForSelector:@selector(collectionView:didSelectItemAtIndexPath:)] subscribeNext:^(id x) {
+        self.isSelectAnyResource = [self isSelectAnyResource];
+    }];
+    [[self rac_signalForSelector:@selector(collectionView:didDeselectItemAtIndexPath:)] subscribeNext:^(id x) {
+        self.isSelectAnyResource = [self isSelectAnyResource];
+    }];
+
+    [RACObserve(self, isSelectAnyResource) subscribeNext: ^(id object){
+        self.toolView.uploadButton.enabled = [object boolValue];
+    }];
+
 }
 
 - (void)viewDidLayoutSubviews {
@@ -125,8 +147,8 @@
 }
 
 
-- (NSMutableSet<ALAsset *> *)selectedPhotos {
-    NSMutableSet<ALAsset *> *assets = [NSMutableSet set];
+- (NSArray<ALAsset *> *)selectedPhotos {
+    NSMutableArray<ALAsset *> *assets = [NSMutableArray array];
     NSArray<NSIndexPath *> *indexPaths = [_collectionView indexPathsForSelectedItems];
     for (NSIndexPath *indexPath in indexPaths) {
         ALAsset *asset = [self assetAtIndexPath:indexPath];
@@ -195,6 +217,7 @@
 - (void)selectAllButtonPressed {
     self.isSelectAll = !self.isSelectAll;
     self.rightBarButtonTitle = Text(self.isSelectAll ? @"CancelSelectAll" : @"SelectAll");
+    self.isSelectAnyResource = self.isSelectAll;
 }
 
 - (void)setIsSelectAll:(BOOL)isSelectAll {
@@ -234,7 +257,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([_selectDelegate respondsToSelector:@selector(didSelectPhoto:atIndexPath:)]) {
+   if ([_selectDelegate respondsToSelector:@selector(didSelectPhoto:atIndexPath:)]) {
         ALAsset *asset = [self assetAtIndexPath:indexPath];
         [_selectDelegate didSelectPhoto:asset atIndexPath:indexPath];
     }
@@ -264,8 +287,14 @@
     return _cellSpacing;
 }
 
+// section 的顶端与边缘的距离
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(0, 32);
+    return CGSizeMake(0, 25);
+}
+
+// section 的底端与边缘的距离
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    return CGSizeMake(0, 5);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -315,6 +344,7 @@
     [view registerClass:UICollectionReusableView.class forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:kPhotoSectionFooterIdentifier];
     view.delegate = self;
     view.dataSource = self;
+    view.alwaysBounceVertical = YES;
     view.backgroundColor = [UIColor whiteColor];
     view.allowsMultipleSelection = (self.selectionMode == ZyxImagePickerSelectionModeMultiple);
     return view;

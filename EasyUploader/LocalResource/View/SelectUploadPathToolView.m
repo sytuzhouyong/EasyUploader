@@ -31,6 +31,8 @@
         uploadButton.layer.cornerRadius = 3;
         uploadButton.titleLabel.font = UIFontOfSize(12);
         [uploadButton setBackgroundColor: [UIColor grayColor]];
+        [uploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [uploadButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         [uploadButton setTitle:@"上传" forState:UIControlStateNormal];
         [self addSubview:uploadButton];
         [uploadButton mas_makeConstraints:^(MASConstraintMaker *make) {

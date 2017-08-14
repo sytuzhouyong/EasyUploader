@@ -27,4 +27,12 @@
     return [formatter stringFromDate:date];
 }
 
++ (NSString *)millisecondDateStringOfALAsset:(ALAsset *)asset {
+    NSDate *date = [asset valueForProperty:ALAssetPropertyDate];
+    NSString *format = [DateUtil millisecondPreciseUnderlineStringWithDate:date];
+    NSDateFormatter *formatter = [DateUtil sharedDateFormatter];
+    formatter.dateFormat = format;
+    return [formatter stringFromDate:date];
+}
+
 @end

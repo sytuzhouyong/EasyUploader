@@ -12,5 +12,6 @@
 
 + (NSString *)dateStringOfALAsset:(ALAsset *)asset withFormat:(NSString *)format;
 + (NSString *)defaultDateStringOfALAsset:(ALAsset *)asset;
++ (NSString *)millisecondDateStringOfALAsset:(ALAsset *)asset;
 
 @end
