@@ -30,7 +30,7 @@
     tabBarController.viewControllers = @[qiniuNav, localNav];
     tabBarController.delegate = self;
     qiniuNav.tabBarItem.title = @"七牛云";
-    localNav.tabBarItem.title = @"本地";
+    localNav.tabBarItem.title = @"本地相册";
 
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = tabBarController;

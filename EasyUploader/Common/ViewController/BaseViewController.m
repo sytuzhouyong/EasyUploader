@@ -76,6 +76,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self addObserver];
+
+    // 设置 title
+    self.titleLabel.text = self.title;
+    [self makeTitleLabelConstraintsWithWidth:[self calcTitleWidth]];
+    [self.titleContentView layoutIfNeeded];
+
     if (self.needUpdateTitleView) {
         self.needUpdateTitleView = NO;
         [self.titleView updateConstraintsIfNeeded];
@@ -348,22 +354,19 @@
 
 - (void)setTitle:(NSString *)title {
     // 不能有，否则 tabbaritem的 title 也会被设置，why?
-//    [super setTitle:title];
-    
+    [super setTitle:title];
+
     // 如果只是设置title，没有设置过_titleContentSubview，就直接改text就可以了
     if (_titleContentSubview != _titleLabel) {
         [_titleContentSubview removeFromSuperview];
         _titleContentSubview = nil;
     }
     
-    self.titleLabel.text = title;
+
     if (_titleLabel.superview == nil) {
         [self.titleContentView addSubview:self.titleLabel];
         _titleContentSubview = _titleLabel;
     }
-    
-    [self makeTitleLabelConstraintsWithWidth:[self calcTitleWidth]];
-    [self.titleContentView layoutIfNeeded];
 }
 
 - (void)setTitleViewHidden:(BOOL)isTitleViewHidden {

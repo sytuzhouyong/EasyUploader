@@ -13,7 +13,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"相册列表";
+    self.title = @"本地相册";
 //    self.leftBarButtonWidth = 0;
 }
 

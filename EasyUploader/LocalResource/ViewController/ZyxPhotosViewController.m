@@ -10,6 +10,7 @@
 #import "ZyxPhotoManager.h"
 #import "ZyxPhotoCollectionViewCell.h"
 #import "SelectUploadPathToolView.h"
+#import "QiniuMainViewController.h"
 
 #define kPhotoCellIdentifier            @"ZyxPhotoCell"
 #define kPhotoSectionHeaderIdentifier   @"ZyxPhotoSectionHeader"
@@ -97,7 +98,11 @@
         make.bottom.equalTo(self.toolView.mas_top);
     }];
 
-//    self.toolView.uploadButton rac
+    [[self.toolView.selectPathButon rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        QiniuMainViewController *vc = [[QiniuMainViewController alloc] init];
+        vc.title = @"选择目录";
+        [self.navigationController presentViewController:vc animated:YES completion:nil];
+    }];
 }
 
 # pragma mark - Resource Enum

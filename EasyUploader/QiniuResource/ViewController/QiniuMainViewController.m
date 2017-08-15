@@ -34,7 +34,9 @@
 
     self.title = @"我的七牛云";
 //    self.view.backgroundColor = [UIColor cyanColor];
-    self.leftBarButtonWidth = 0;
+    if (self.navigationController.viewControllers.lastObject == self) {
+        self.leftBarButtonWidth = 0;
+    }
 
     [self addSubviews];
     [self initHandlers];

@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, UIViewLayoutType) {
 @property (nonatomic, assign) BOOL editable;    // 编辑模式，实现全选，取消全选等的UI变化，具体数据需要重载函数
 @property (nonatomic, assign) BOOL isAllSelected; // 是否全选中
 
+- (void)createDefaultLeftBarButton;
 - (void)createLeftBarButtonWithTitle:(NSString *)title;
 - (void)createLeftBarButtonWithImageName:(NSString *)imageName;
 - (void)createLeftBarButtonWithTitle:(NSString *)title action:(NSString *)action;
