@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 **Copyright (c) 2012 - 2013, GitHub, Inc.**
+=======
+**Copyright (c) 2012 - 2016, GitHub, Inc.**
+>>>>>>> 7ad3b09d147445edeb3ca4d2011fd2a9ca06fbf9
 **All rights reserved.**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
