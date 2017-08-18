@@ -6,10 +6,9 @@
 //  Copyright © 2016 zhouyong. All rights reserved.
 //
 
-#import "BaseViewController.h"
 #import "ZyxPickAlbumViewController.h"
 
-@interface AlbumPhotosViewController : BaseViewController
+@interface AlbumPhotosViewController : UIViewController
 
 @property (nonatomic, strong) ALAssetsGroup *group;
 @property (nonatomic, weak  ) id<ZyxPickAlbumViewControllerDelegate> imagePickerDelegate;

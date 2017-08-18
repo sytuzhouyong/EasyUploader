@@ -45,7 +45,6 @@
 		25F253061F3E13BC0007D104 /* QiniuMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F253031F3E13BC0007D104 /* QiniuMainViewController.m */; };
 		25F253071F3E13BC0007D104 /* QiniuResouresViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F253051F3E13BC0007D104 /* QiniuResouresViewController.m */; };
 		25F253141F3E13CA0007D104 /* ZyxPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F2530A1F3E13CA0007D104 /* ZyxPhotoManager.m */; };
-		25F253151F3E13CA0007D104 /* AlbumPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F2530D1F3E13CA0007D104 /* AlbumPhotosViewController.m */; };
 		25F253161F3E13CA0007D104 /* LocalMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F2530F1F3E13CA0007D104 /* LocalMainViewController.m */; };
 		25F253171F3E13CA0007D104 /* ZyxPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F253111F3E13CA0007D104 /* ZyxPhotosViewController.m */; };
 		25F253181F3E13CA0007D104 /* ZyxPickAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F253131F3E13CA0007D104 /* ZyxPickAlbumViewController.m */; };
@@ -147,8 +146,6 @@
 		25F253051F3E13BC0007D104 /* QiniuResouresViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResouresViewController.m; sourceTree = "<group>"; };
 		25F253091F3E13CA0007D104 /* ZyxPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoManager.h; sourceTree = "<group>"; };
 		25F2530A1F3E13CA0007D104 /* ZyxPhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoManager.m; sourceTree = "<group>"; };
-		25F2530C1F3E13CA0007D104 /* AlbumPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumPhotosViewController.h; sourceTree = "<group>"; };
-		25F2530D1F3E13CA0007D104 /* AlbumPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPhotosViewController.m; sourceTree = "<group>"; };
 		25F2530E1F3E13CA0007D104 /* LocalMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalMainViewController.h; sourceTree = "<group>"; };
 		25F2530F1F3E13CA0007D104 /* LocalMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalMainViewController.m; sourceTree = "<group>"; };
 		25F253101F3E13CA0007D104 /* ZyxPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotosViewController.h; sourceTree = "<group>"; };
@@ -474,8 +471,6 @@
 		25F2530B1F3E13CA0007D104 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				25F2530C1F3E13CA0007D104 /* AlbumPhotosViewController.h */,
-				25F2530D1F3E13CA0007D104 /* AlbumPhotosViewController.m */,
 				25F2530E1F3E13CA0007D104 /* LocalMainViewController.h */,
 				25F2530F1F3E13CA0007D104 /* LocalMainViewController.m */,
 				25F253101F3E13CA0007D104 /* ZyxPhotosViewController.h */,
@@ -817,7 +812,6 @@
 				255E15581F22778700411A67 /* main.m in Sources */,
 				25F253161F3E13CA0007D104 /* LocalMainViewController.m in Sources */,
 				255E153F1F2274B000411A67 /* BaseViewController.m in Sources */,
-				25F253151F3E13CA0007D104 /* AlbumPhotosViewController.m in Sources */,
 				25F253171F3E13CA0007D104 /* ZyxPhotosViewController.m in Sources */,
 				255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */,
 				255E15331F2274B000411A67 /* UIView+Frame.m in Sources */,

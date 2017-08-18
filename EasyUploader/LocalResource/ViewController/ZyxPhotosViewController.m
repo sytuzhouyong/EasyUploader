@@ -52,7 +52,8 @@
     self.title = [kZyxPhotoManager nameOfGroup:self.group];
     // Do any additional setup after loading the view.
     [self addSubviews];
-    [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectAllButtonPressed"];
+
+
 
     [[self.toolView.uploadButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSArray<ALAsset *> *selectedResources = [self selectedPhotos];
@@ -85,6 +86,9 @@
 }
 
 - (void)addSubviews {
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllButtonPressed)];
+    self.navigationController.navigationItem.rightBarButtonItem = button;
+
     [self.view addSubview:self.toolView];
     [_toolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self.view);
@@ -94,14 +98,18 @@
     [self.view addSubview:self.collectionView];
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.view);
-        make.top.equalTo(self.titleView.mas_bottom);
+        make.top.equalTo(self.view).offset(64);
         make.bottom.equalTo(self.toolView.mas_top);
     }];
 
     [[self.toolView.selectPathButon rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        QiniuMainViewController *vc = [[QiniuMainViewController alloc] init];
+        QiniuMainViewController *vc = [QiniuMainViewController new];
         vc.title = @"选择目录";
-        [self.navigationController presentViewController:vc animated:YES completion:nil];
+
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+
+        [self presentViewController:nav animated:YES completion:nil];
     }];
 }
 
@@ -221,7 +229,7 @@
 
 - (void)selectAllButtonPressed {
     self.isSelectAll = !self.isSelectAll;
-    self.rightBarButtonTitle = Text(self.isSelectAll ? @"CancelSelectAll" : @"SelectAll");
+    self.navigationController.navigationItem.rightBarButtonItem.title = self.isSelectAll ? @"取消全选" : @"全选";
     self.isSelectAnyResource = self.isSelectAll;
 }
 

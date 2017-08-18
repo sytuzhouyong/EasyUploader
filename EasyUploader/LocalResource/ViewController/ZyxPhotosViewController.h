@@ -6,7 +6,6 @@
 //  Copyright © 2015 zhouyong. All rights reserved.
 //
 
-#import "BaseViewController.h"
 #import "ZyxPickAlbumViewController.h"
 
 @class ALAssetsGroup;
@@ -18,7 +17,7 @@
 
 @end
 
-@interface ZyxPhotosViewController : BaseViewController
+@interface ZyxPhotosViewController : UIViewController
 
 @property (nonatomic, assign) NSInteger numberOfCellsPerLine;
 @property (nonatomic, assign) CGFloat cellSpacing;

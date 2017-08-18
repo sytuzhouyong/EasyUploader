@@ -31,6 +31,9 @@
     tabBarController.delegate = self;
     qiniuNav.tabBarItem.title = @"七牛云";
     localNav.tabBarItem.title = @"本地相册";
+    //    qiniuNav.navigationController.navigationBar.barTintColor = kNavigationBarColor;
+    qiniuNav.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    localNav.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = tabBarController;

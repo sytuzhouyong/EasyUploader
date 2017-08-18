@@ -32,10 +32,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = @"我的七牛云";
-//    self.view.backgroundColor = [UIColor cyanColor];
-    if (self.navigationController.viewControllers.lastObject == self) {
-        self.leftBarButtonWidth = 0;
+    self.title = @"七牛云";
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
+    // 不为空说明是选择上传路径界面
+    if (self.presentingViewController != nil) {
+        UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithImage:UIImageNamed(@"icon_arrow_left") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonPressed)];
+        self.navigationItem.leftBarButtonItem = buttonItem;
     }
 
     [self addSubviews];
@@ -49,23 +52,15 @@
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-//    self.hidesBottomBarWhenPushed = NO;
-//    self.tabBarController.tabBar.hidden = NO;
-}
-//
-//- (void)viewDidDisappear:(BOOL)animated {
-//    [super viewDidDisappear:animated];
-//    self.tabBarController.tabBar.hidden = YES;
-//}
-
-
 - (void)addSubviews {
     [self.view addSubview:self.tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsets(kBaseViewControllerTitleViewHeight, 0, 0, 0));
+        make.edges.equalTo(self.view);
     }];
+}
+
+- (void)cancelButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)initHandlers {
@@ -123,6 +118,7 @@
     QiniuBucket *bucket = self.viewModel.cellModels[indexPath.row].bucket;
     kQiniuResourceManager.selectedBucket = bucket;
     QiniuResouresViewController *vc = [[QiniuResouresViewController alloc] initWithBucket:bucket];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

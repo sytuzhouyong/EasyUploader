@@ -6,10 +6,9 @@
 //  Copyright © 2017年 zhouyong. All rights reserved.
 //
 
-#import "BaseViewController.h"
 #import "ToolCell.h"
 
-@interface QiniuResouresViewController : BaseViewController
+@interface QiniuResouresViewController : UIViewController
 
 - (instancetype)initWithBucket:(QiniuBucket *)bucket;
 

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
 
 @class ZyxPickAlbumViewController;
 
@@ -23,7 +22,7 @@
 
 
 
-@interface ZyxPickAlbumViewController : BaseViewController
+@interface ZyxPickAlbumViewController : UIViewController
 
 @property (nonatomic, assign) ZyxImagePickerSelectionMode selectionMode;
 @property (nonatomic, weak  ) id<ZyxPickAlbumViewControllerDelegate> imagePickerDelegate;

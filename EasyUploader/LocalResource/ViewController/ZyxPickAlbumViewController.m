@@ -28,10 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = Text(@"SelectAlbum");
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     [self addSubviews];
 
     if (self.selectionMode == ZyxImagePickerSelectionModeMultiple) {
-        [self createRightBarButtonWithTitle:Text(@"SelectAll") action:@"selectAllButtonPressed"];
+        UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllButtonPressed)];
+        self.navigationController.navigationItem.rightBarButtonItem = button;
     }
     
     if (![DeviceUtil isPhotoAuthorized]) {
@@ -47,18 +49,11 @@
 }
 
 - (void)addSubviews {
-    MASViewAttribute *attribute = nil;
-    
-    if (self.selectionMode != ZyxImagePickerSelectionModeNone) {
-    } else {
-        attribute = self.view.mas_bottom;
-    }
-    
     [self.view addSubview:self.tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.and.trailing.equalTo(self.view);
-        make.top.equalTo(self.titleView.mas_bottom);
-        make.bottom.equalTo(attribute);
+        make.top.equalTo(self.view.mas_top);
+        make.bottom.equalTo(self.view.mas_bottom);
     }];
 }
 
@@ -96,7 +91,7 @@
     isSelectAll = !isSelectAll;
     
     NSString *title = isSelectAll ? Text(@"CancelSelectAll") : Text(@"SelectAll");
-    self.rightBarButtonTitle = title;
+    self.navigationItem.rightBarButtonItem.title = title;
     self.title = isSelectAll ? [NSString stringWithFormat:Text(@"SelectedItemsCount"), @(self.groups.count)] : Text(@"SelectedUploadItems");
     
     for (NSInteger i=0; i<_selectFlags.count; i++) {
@@ -172,7 +167,8 @@
     ALAssetsGroup *group = _groups[indexPath.row];
     ZyxPhotosViewController *vc = [[ZyxPhotosViewController alloc] initWithAssetsGroup:group];
     vc.selectionMode = ZyxImagePickerSelectionModeMultiple;
-    vc.selectDelegate = self;
+//    vc.selectDelegate = self;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

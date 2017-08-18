@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface QiniuMainViewController : BaseViewController
+@interface QiniuMainViewController : UIViewController
 
 @end
 

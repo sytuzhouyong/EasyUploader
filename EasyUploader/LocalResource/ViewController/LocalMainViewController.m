@@ -19,7 +19,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    self.hidesBottomBarWhenPushed = NO;
 //    self.tabBarController.tabBar.hidden = NO;
 }
 

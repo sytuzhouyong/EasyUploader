@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, ZyxImagePickerSelectionMode) {
     ZyxImagePickerSelectionModeMultiple,
 };
 
-#import "BaseViewController.h"
+//#import "BaseViewController.h"
 #import "UIView+Frame.h"
 #import "UINormalTableViewCell.h"
 #import "ZyxPhotoCollectionViewCell.h"

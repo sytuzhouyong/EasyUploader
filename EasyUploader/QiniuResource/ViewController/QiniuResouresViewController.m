@@ -37,6 +37,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = self.bucket.name;
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.tabBarController.tabBar.hidden = YES;
+//    UINavigationControllerHideShowBarDuration
+
     [self addSubviews];
     [self initHandlers];
 
@@ -49,12 +53,13 @@
 }
 
 - (void)addSubviews {
-    [self createRightBarButtonWithTitle:@"上传" action:@"uploadButtonClicked"];
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(uploadButtonClicked)];
+    self.navigationController.navigationItem.rightBarButtonItem = button;
 
     [self.view addSubview:self.tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self.view);
-        make.top.equalTo(self.titleView.mas_bottom);
+        make.top.equalTo(self.view);
     }];
 }
 
