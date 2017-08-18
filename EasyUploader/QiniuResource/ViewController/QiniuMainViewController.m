@@ -37,6 +37,8 @@
 
     // 不为空说明是选择上传路径界面
     if (self.presentingViewController != nil) {
+        self.title = @"选择目录";
+
         UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithImage:UIImageNamed(@"icon_arrow_left") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonPressed)];
         self.navigationItem.leftBarButtonItem = buttonItem;
     }
@@ -46,6 +48,7 @@
 
     [QiniuResourceManager queryAllBucketsWithHandler:^(NSArray<QiniuBucket *> *buckets) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            kQiniuResourceManager.selectedBucket = buckets.lastObject;
             self.viewModel = [[QiniuBucketViewModel alloc] initWithBuckets:buckets];
             [self.tableView reloadData];
         });

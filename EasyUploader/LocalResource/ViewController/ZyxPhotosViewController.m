@@ -53,8 +53,6 @@
     // Do any additional setup after loading the view.
     [self addSubviews];
 
-
-
     [[self.toolView.uploadButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSArray<ALAsset *> *selectedResources = [self selectedPhotos];
         for (ALAsset *asset in selectedResources) {
@@ -104,11 +102,8 @@
 
     [[self.toolView.selectPathButon rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         QiniuMainViewController *vc = [QiniuMainViewController new];
-        vc.title = @"选择目录";
-
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-
         [self presentViewController:nav animated:YES completion:nil];
     }];
 }
