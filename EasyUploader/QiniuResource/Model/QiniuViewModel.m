@@ -42,12 +42,21 @@
     return self;
 }
 
-- (void)updateExpandStateAtRow:(NSInteger)row {
-    self.cellModels[row].expand = !self.cellModels[row].expand;
+- (QiniuBucket *)bucketAtIndexPath:(NSIndexPath *)indexPath {
+    return self.cellModels[indexPath.row].bucket;
 }
 
-- (BOOL)isExpandAtRow:(NSInteger)row {
-    return self.cellModels[row].expand;
+- (NSUInteger)numberOfResources {
+    return self.cellModels.count;
+}
+
+- (void)updateExpandStateAtIndexPath:(NSIndexPath *)indexPath; {
+    QiniuBucketCellModel *cellModel = self.cellModels[indexPath.row];
+    cellModel.expand = !cellModel.expand;
+}
+
+- (BOOL)isExpandAtIndexPath:(NSIndexPath *)indexPath {
+    return self.cellModels[indexPath.row].expand;
 }
 
 @end
@@ -86,13 +95,23 @@
     return self;
 }
 
-- (void)updateExpandStateAtRow:(NSInteger)row {
-    self.cellModels[row].expand = !self.cellModels[row].expand;
+- (QiniuResource *)resourceAtIndexPath:(NSIndexPath *)indexPath {
+    return self.cellModels[indexPath.row].resource;
 }
 
-- (BOOL)isExpandAtRow:(NSInteger)row {
-    return self.cellModels[row].expand;
+- (NSUInteger)numberOfResources {
+    return self.cellModels.count;
 }
+
+
+- (void)updateExpandStateAtIndexPath:(NSIndexPath *)indexPath {
+    self.cellModels[indexPath.row].expand = !self.cellModels[indexPath.row].expand;
+}
+
+- (BOOL)isExpandAtIndexPath:(NSIndexPath *)indexPath {
+    return self.cellModels[indexPath.row].expand;
+}
+
 
 @end
 

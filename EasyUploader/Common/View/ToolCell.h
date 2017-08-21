@@ -11,6 +11,9 @@
 @class ToolButtonInfo;
 #define kToolCellButtonTag  1000
 
+#define kDirCellIdentifier      @"DirResourceCellIdentifier"
+#define kFileCellIdentifier     @"FileResourceCellIdentifier"
+
 typedef void (^ButtonHandler) (UIButton *button);
 typedef ButtonHandler ExpandButtonHandler;
 

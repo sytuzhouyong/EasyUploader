@@ -15,9 +15,9 @@
 
 @implementation QiniuResource
 
-
 + (instancetype)resourceWithDict:(NSDictionary *)dict {
     QiniuResource *resource = [[QiniuResource alloc] init];
+    resource.type = QiniuResourceTypeFile;
 
     SetPropertyInDict(@"name", @"key");
     SetPropertyInDict(@"hashString", @"hash");
@@ -33,12 +33,32 @@
     }
 
     resource.sizeDesc = [StringUtil descriptionOfSpace:resource.size];
+
     return resource;
 }
 
-+ (NSArray<QiniuResource *> *)resourcesWithDicts:(NSArray<NSDictionary *> *)dicts {
++ (instancetype)resourceWithDirName:(NSString *)dir {
+    QiniuResource *resource = [[QiniuResource alloc] init];
+    resource.name = dir;
+    resource.type = QiniuResourceTypeDir;
+    return resource;
+}
+
++ (NSArray<QiniuResource *> *)resourcesWithDict:(NSDictionary *)dict {
     NSMutableArray *resources = [NSMutableArray array];
-    for (NSDictionary *dict in dicts) {
+
+    // 目录
+    NSArray *dirs = dict[@"commonPrefixes"];
+    if (dirs) {
+        for (NSString *dir in dirs) {
+            QiniuResource *resource = [QiniuResource resourceWithDirName:dir];
+            [resources addObject:resource];
+        }
+    }
+
+    // 文件
+    NSArray *files = dict[@"items"];
+    for (NSDictionary *dict in files) {
         QiniuResource *resource = [self.class resourceWithDict:dict];
         [resources addObject:resource];
     }

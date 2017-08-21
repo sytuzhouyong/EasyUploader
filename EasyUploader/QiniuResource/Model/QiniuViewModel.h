@@ -27,8 +27,10 @@
 
 - (instancetype)initWithBuckets:(NSArray *)buckets;
 
-- (BOOL)isExpandAtRow:(NSInteger)row;
-- (void)updateExpandStateAtRow:(NSInteger)row;
+- (QiniuBucket *)resourceAtIndexPath:(NSIndexPath *)indexPath;
+- (NSUInteger)numberOfBuckets;
+- (BOOL)isExpandAtIndexPath:(NSIndexPath *)indexPath;
+- (void)updateExpandStateAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -46,11 +48,11 @@
 
 @interface QiniuResourceViewModel : NSObject
 
-@property (nonatomic, readonly, strong) NSMutableArray<QiniuResourceCellModel *> *cellModels;
-
 - (instancetype)initWithResources:(NSArray *)resources;
 
-- (BOOL)isExpandAtRow:(NSInteger)row;
-- (void)updateExpandStateAtRow:(NSInteger)row;
+- (QiniuResource *)resourceAtIndexPath:(NSIndexPath *)indexPath;
+- (NSUInteger)numberOfResources;
+- (BOOL)isExpandAtIndexPath:(NSIndexPath *)indexPath;
+- (void)updateExpandStateAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

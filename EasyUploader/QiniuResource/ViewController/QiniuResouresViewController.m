@@ -11,7 +11,6 @@
 #import "QiniuViewModel.h"
 #import "LocalMainViewController.h"
 
-#define kCellIdentifier @"ResourceCellIdentifier"
 
 @interface QiniuResouresViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -69,12 +68,12 @@
         CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
         NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
         NSArray *indexPaths = @[indexPath];
-        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtRow:self.lastIndexPath.row]) {
+        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtIndexPath:self.lastIndexPath]) {
             indexPaths = @[indexPath, self.lastIndexPath];
-            [weakself.viewModel updateExpandStateAtRow:weakself.lastIndexPath.row];
+            [weakself.viewModel updateExpandStateAtIndexPath:weakself.lastIndexPath];
         }
 
-        [weakself.viewModel updateExpandStateAtRow:indexPath.row];
+        [weakself.viewModel updateExpandStateAtIndexPath:indexPath];
         [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         weakself.lastIndexPath = indexPath;
     };
@@ -82,7 +81,7 @@
         CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
         NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
 
-        QiniuResource *resource = weakself.viewModel.cellModels[indexPath.row].resource;
+        QiniuResource *resource = [weakself.viewModel resourceAtIndexPath:indexPath];
         [kQiniuDownloadManager downloadResourceWithKey:resource.name handler:^(BOOL success, NSURL *destURL) {
             ;
         }];
@@ -104,22 +103,25 @@
 #pragma mark - UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.viewModel.cellModels.count;
+    return [self.viewModel numberOfResources];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    QiniuResourceCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
-    return cellModel.expand ? 94 : 50;
+    BOOL expand = [self.viewModel isExpandAtIndexPath:indexPath];
+    return expand ? 94 : 50;
 }
 
 - (ResourceToolCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResourceToolCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    QiniuResource *resource = [self.viewModel resourceAtIndexPath:indexPath];
+    BOOL expand = [self.viewModel isExpandAtIndexPath:indexPath];
+
+    NSString *identifier = resource.type == QiniuResourceTypeDir ? kDirCellIdentifier : kFileCellIdentifier;
+    ResourceToolCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.expandHandler = self.expandHandler;
     cell.downloadHandler = self.downloadHandler;
 
-    QiniuResourceCellModel *cellModel = self.viewModel.cellModels[indexPath.row];
-    [cell configWithQiniuResource:cellModel.resource];
-    [cell updateExpandState:cellModel.expand];
+    [cell configWithQiniuResource:resource];
+    [cell updateExpandState:expand];
     
     return cell;
 }
@@ -151,7 +153,8 @@
 //    tableView.allowsMultipleSelection = YES;    // 支持全选功能必须要开启多选，想想也明白啊
     tableView.backgroundColor = self.view.backgroundColor;
     tableView.tableFooterView = [UIView new];
-    [tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kCellIdentifier];
+    [tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kFileCellIdentifier];
+    [tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kDirCellIdentifier];
     tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
     return tableView;
 }

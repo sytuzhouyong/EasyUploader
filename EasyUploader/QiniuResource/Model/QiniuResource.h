@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, QiniuResourceType) {
+    QiniuResourceTypeDir,
+    QiniuResourceTypeFile,
+};
+
+
 @interface QiniuResource : NSObject
 
 @property (nonatomic, copy) NSString *name;
@@ -17,8 +23,9 @@
 @property (nonatomic, copy) NSString *createTimeDesc;
 @property (nonatomic, assign) NSInteger size;
 @property (nonatomic, copy) NSString *sizeDesc;
+@property (nonatomic, assign) QiniuResourceType type;
 
 + (instancetype)resourceWithDict:(NSDictionary *)dict;
-+ (NSArray<QiniuResource *> *)resourcesWithDicts:(NSArray<NSDictionary *> *)dicts;
++ (NSArray<QiniuResource *> *)resourcesWithDict:(NSDictionary *)dict;
 
 @end

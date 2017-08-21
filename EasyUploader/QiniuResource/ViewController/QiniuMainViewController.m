@@ -71,7 +71,7 @@
     self.expandHandler = ^(UIButton *button) {
         CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
         NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
-        BOOL expand = [weakself.viewModel isExpandAtRow:indexPath.row];
+        BOOL expand = [weakself.viewModel isExpandAtIndexPath:indexPath];
         [UIView animateWithDuration:0.3 animations:^{
             if (!expand) {
                 button.transform = CGAffineTransformRotate(button.transform, -M_PI*0.0000001);
@@ -84,12 +84,12 @@
 
 
         NSArray *indexPaths = @[indexPath];
-        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtRow:self.lastIndexPath.row]) {
+        if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtIndexPath:self.lastIndexPath]) {
             indexPaths = @[indexPath, self.lastIndexPath];
-            [weakself.viewModel updateExpandStateAtRow:weakself.lastIndexPath.row];
+            [weakself.viewModel updateExpandStateAtIndexPath:weakself.lastIndexPath];
         }
 
-        [weakself.viewModel updateExpandStateAtRow:indexPath.row];
+        [weakself.viewModel updateExpandStateAtIndexPath:indexPath];
         [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         weakself.lastIndexPath = indexPath;
     };

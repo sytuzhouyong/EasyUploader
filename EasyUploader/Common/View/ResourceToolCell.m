@@ -18,6 +18,10 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(nullable NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        if (![reuseIdentifier isEqualToString:kFileCellIdentifier]) {
+            return self;
+        }
+
         self.iconImageView.image = UIImageNamed(@"icon_image");
         [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView).offset(7);
@@ -72,8 +76,10 @@
     self.detailLabel.text = resource.createTimeDesc;
     self.sizeLabel.text = resource.sizeDesc;
 
-    NSURL *url = [kQiniuDownloadManager resourceThumbnailURLWithKey:resource.name];
-    [self.iconImageView sd_setImageWithURL:url placeholderImage:UIImageNamed(@"icon_image")];
+    if ([resource.mimeType isEqualToString:@"image/jpeg"]) {
+        NSURL *url = [kQiniuDownloadManager resourceThumbnailURLWithKey:resource.name];
+        [self.iconImageView sd_setImageWithURL:url placeholderImage:UIImageNamed(@"icon_image")];
+    }
 }
 
 - (void)buttonClicked:(UIButton *)button {
