@@ -43,7 +43,7 @@
     [self addSubviews];
     [self initHandlers];
 
-    [QiniuResourceManager queryResourcesInBucket:_bucket.name withPrefix:@"" limit:100 handler:^(NSArray<QiniuResource *> *resources) {
+    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:@"" limit:100 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources];
             [self.tableView reloadData];
@@ -127,6 +127,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QiniuResource *resource = [self.viewModel resourceAtIndexPath:indexPath];
+    if (resource.type == QiniuResourceTypeFile) {
+        return;
+    }
+
+    [QiniuResourceManager queryResourcesInBucket:self.bucket withPrefix:resource.name limit:20 handler:^(NSArray<QiniuResource *> *resources) {
+        NSLog(@"%@", resources);
+    }];
     NSLog(@"xx");
 }
 

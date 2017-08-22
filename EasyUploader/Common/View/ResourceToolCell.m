@@ -72,7 +72,7 @@
 }
 
 - (void)configWithQiniuResource:(QiniuResource *)resource {
-    self.label.text = resource.name;
+    self.label.text = [resource.name substringToIndex:resource.name.length - 1];
     self.detailLabel.text = resource.createTimeDesc;
     self.sizeLabel.text = resource.sizeDesc;
 

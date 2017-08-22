@@ -15,10 +15,12 @@
 SINGLETON_IMPLEMENTATION(QiniuResourceManager);
 
 // 查询指定 bucket 的资源
-+ (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
-    NSString *requestPath = [NSString stringWithFormat:@"/list?bucket=%@&limit=%d&delimiter=/", bucket, limit];
++ (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
+    NSString *requestPath = [NSString stringWithFormat:@"/list?bucket=%@&prefix=%@&limit=%d&delimiter=/", bucket.name, prefix, limit];
+    NSLog(@"request url = %@", requestPath);
 //    NSString *requestPath = [NSString stringWithFormat:@"/list?bucket=%@&limit=%d&delimiter=", bucket, limit];
     [self.class sendRequestWithPath:requestPath body:@"" host:kQiniuResourceHost andHandler:^(BOOL success, id responseObject) {
+        NSLog(@"response = %@", responseObject);
         NSArray<QiniuResource *> *resources = nil;
         if (success) {
             resources = [QiniuResource resourcesWithDict:responseObject];

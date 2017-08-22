@@ -21,7 +21,7 @@ typedef void (^RequestHandler)(BOOL success, id responseObject);
 @property (nonatomic, strong) QiniuBucket *selectedBucket;
 
 + (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
-+ (void)queryResourcesInBucket:(NSString *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler;
++ (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler;
 
 + (NSString *)authRequestPath:(NSString *)url andBody:(NSString *)body;
 
