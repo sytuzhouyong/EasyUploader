@@ -11,6 +11,8 @@
 		250392251E65C758002062F0 /* EasyUploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 250392241E65C758002062F0 /* EasyUploaderTests.m */; };
 		250392301E65C758002062F0 /* EasyUploaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2503922F1E65C758002062F0 /* EasyUploaderUITests.m */; };
 		2508F35D1E7D7C3600217772 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */; };
+		252E31341F4F1E0700A78F21 /* PathButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E31331F4F1E0700A78F21 /* PathButton.m */; };
+		252E315D1F4F327600A78F21 /* PathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E315C1F4F327600A78F21 /* PathView.m */; };
 		255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FD1F2274B000411A67 /* UITextField+Padding.m */; };
 		255E15331F2274B000411A67 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FF1F2274B000411A67 /* UIView+Frame.m */; };
 		255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15021F2274B000411A67 /* DDLogCustomFormatter.m */; };
@@ -82,6 +84,10 @@
 		2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		250F02151F28C16900438141 /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		250F02191F28F60B00438141 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		252E31321F4F1E0700A78F21 /* PathButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathButton.h; sourceTree = "<group>"; };
+		252E31331F4F1E0700A78F21 /* PathButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathButton.m; sourceTree = "<group>"; };
+		252E315B1F4F327600A78F21 /* PathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathView.h; sourceTree = "<group>"; };
+		252E315C1F4F327600A78F21 /* PathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathView.m; sourceTree = "<group>"; };
 		255E14FC1F2274B000411A67 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		255E14FD1F2274B000411A67 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		255E14FE1F2274B000411A67 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -357,6 +363,10 @@
 				259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */,
 				255E151E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.h */,
 				255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */,
+				252E31321F4F1E0700A78F21 /* PathButton.h */,
+				252E31331F4F1E0700A78F21 /* PathButton.m */,
+				252E315B1F4F327600A78F21 /* PathView.h */,
+				252E315C1F4F327600A78F21 /* PathView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -806,6 +816,7 @@
 				255E153E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m in Sources */,
 				255E15391F2274B000411A67 /* DateUtil.m in Sources */,
 				25F253141F3E13CA0007D104 /* ZyxPhotoManager.m in Sources */,
+				252E315D1F4F327600A78F21 /* PathView.m in Sources */,
 				259A362D1F2F8B2F00F10298 /* ResourceToolCell.m in Sources */,
 				255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */,
 				255E15381F2274B000411A67 /* ALAssetUtil.m in Sources */,
@@ -816,6 +827,7 @@
 				255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */,
 				255E15331F2274B000411A67 /* UIView+Frame.m in Sources */,
 				255E15361F2274B000411A67 /* IPAddress.m in Sources */,
+				252E31341F4F1E0700A78F21 /* PathButton.m in Sources */,
 				259A36161F2DECE700F10298 /* ZyxImageTitleButton.m in Sources */,
 				255E153D1F2274B000411A67 /* UINormalTableViewCell.m in Sources */,
 				25F253071F3E13BC0007D104 /* QiniuResouresViewController.m in Sources */,
