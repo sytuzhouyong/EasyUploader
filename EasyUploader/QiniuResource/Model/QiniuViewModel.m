@@ -46,7 +46,7 @@
     return self.cellModels[indexPath.row].bucket;
 }
 
-- (NSUInteger)numberOfResources {
+- (NSUInteger)numberOfBuckets {
     return self.cellModels.count;
 }
 

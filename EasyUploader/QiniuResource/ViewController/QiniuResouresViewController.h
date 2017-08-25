@@ -11,5 +11,6 @@
 @interface QiniuResouresViewController : UIViewController
 
 - (instancetype)initWithBucket:(QiniuBucket *)bucket;
+- (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths;
 
 @end

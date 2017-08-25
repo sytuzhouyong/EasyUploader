@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PathView : UIScrollView
+@interface PathView : UIView
 
 - (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths;
 

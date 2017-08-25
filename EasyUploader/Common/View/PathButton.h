@@ -11,7 +11,7 @@
 @interface PathButton : UIButton
 
 - (instancetype)initWithFrame:(CGRect)frame isRootPath:(BOOL)isRootPath;
-+ (instancetype)buttonWithType:(UIButtonType)type isRootPath:(BOOL)isRootPath;
++ (instancetype)buttonWithPath:(NSString *)path isRootPath:(BOOL)isRootPath;
 
 @property (nonatomic, strong) UIColor *borderColor;
 @property (nonatomic, assign) CGFloat borderWidth;

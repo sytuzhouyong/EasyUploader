@@ -36,8 +36,9 @@
     return self;
 }
 
-+ (instancetype)buttonWithType:(UIButtonType)type isRootPath:(BOOL)isRootPath {
-    PathButton *button = [super buttonWithType:type];
++ (instancetype)buttonWithPath:(NSString *)path isRootPath:(BOOL)isRootPath {
+    PathButton *button = [super buttonWithType:UIButtonTypeCustom];
+    [button setTitle:path forState:UIControlStateNormal];
     [button initConfig];
     return button;
 }

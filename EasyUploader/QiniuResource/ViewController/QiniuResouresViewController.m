@@ -22,16 +22,27 @@
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, copy) ExpandButtonHandler expandHandler;
 @property (nonatomic, copy) ExpandButtonHandler downloadHandler;
+@property (nonatomic, strong) NSMutableArray *paths;
 
 @end
 
 @implementation QiniuResouresViewController
 
-- (instancetype)initWithBucket:(QiniuBucket *)bucket {
+- (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths {
     if (self = [super initWithNibName:nil bundle:nil]) {
         self.bucket = bucket;
+
+        if (paths.count == 0) {
+            self.paths = [NSMutableArray arrayWithObject:bucket.name];
+        } else {
+            self.paths = [NSMutableArray arrayWithArray:paths];
+        }
     }
     return self;
+}
+
+- (instancetype)initWithBucket:(QiniuBucket *)bucket {
+    return [self initWithBucket:bucket paths:nil];
 }
 
 - (void)viewDidLoad {
@@ -56,10 +67,18 @@
     UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(uploadButtonClicked)];
     self.navigationController.navigationItem.rightBarButtonItem = button;
 
+    self.pathView = [[PathView alloc] initWithResourePaths:self.paths];
+    [self.view addSubview:self.pathView];
+    [self.pathView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.trailing.equalTo(self.view);
+        make.top.equalTo(self.view).offset(64);
+        make.height.mas_equalTo(36);
+    }];
+
     [self.view addSubview:self.tableView];
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self.view);
-        make.top.equalTo(self.view);
+        make.top.equalTo(self.pathView.mas_bottom);
     }];
 }
 
@@ -144,16 +163,6 @@
 }
 
 # pragma mark - Getter and Setter
-
-- (PathView *)pathView {
-    if (_pathView) {
-        return _pathView;
-    }
-
-    PathView *view = [[PathView alloc] initWithResourePaths:nil];
-
-    return view;
-}
 
 - (UITableView *)tableView {
     if (_tableView != nil) {

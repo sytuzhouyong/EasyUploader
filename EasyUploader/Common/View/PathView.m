@@ -32,18 +32,18 @@
     if (CGSizeEqualToSize(self.bounds.size, self.lastSize)) {
         return;
     }
+    self.lastSize = self.bounds.size;
 
     UIFont *font = [UIFont systemFontOfSize:13];
     NSDictionary *dict = @{NSFontAttributeName:font};
 
-    BOOL root = YES;
     __block CGFloat x = 0;
-    for (NSString *path in self.paths) {
-
+    [self.paths enumerateObjectsUsingBlock:^(NSString *path, NSUInteger idx, BOOL *stop) {
         CGFloat width = [path sizeWithAttributes:dict].width;
-        width += root ? 10.0f : 20.0f;
+        width = floor(width + 0.5f);
+        width += idx == 0 ? 10.0f : 20.0f;
 
-        PathButton *button = [PathButton buttonWithType:UIButtonTypeCustom isRootPath:root];
+        PathButton *button = [PathButton buttonWithPath:path isRootPath:idx == 0];
         [self addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self).offset(x);
@@ -52,11 +52,9 @@
             make.bottom.equalTo(self).offset(-1);
             x += width;
         }];
-
-        root = NO;
-    }
+    }];
     
-    self.contentSize = CGSizeMake(x, self.bounds.size.height);
+//    self.contentSize = CGSizeMake(x, self.bounds.size.height);
 }
 
 @end

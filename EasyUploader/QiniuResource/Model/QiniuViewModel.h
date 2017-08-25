@@ -27,7 +27,7 @@
 
 - (instancetype)initWithBuckets:(NSArray *)buckets;
 
-- (QiniuBucket *)resourceAtIndexPath:(NSIndexPath *)indexPath;
+- (QiniuBucket *)bucketAtIndexPath:(NSIndexPath *)indexPath;
 - (NSUInteger)numberOfBuckets;
 - (BOOL)isExpandAtIndexPath:(NSIndexPath *)indexPath;
 - (void)updateExpandStateAtIndexPath:(NSIndexPath *)indexPath;
