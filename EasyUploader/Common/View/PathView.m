@@ -9,26 +9,54 @@
 #import "PathView.h"
 #import "PathButton.h"
 
+@interface PathView ()
+
+@property (nonatomic, strong) NSMutableArray<NSString *> *paths;
+@property (nonatomic, assign) CGSize lastSize;
+
+@end
+
 @implementation PathView
 
-- (instancetype)initWithFrame:(CGRect)frame paths:(NSArray<NSString *> *)paths {
-    if (self = [super initWithFrame:frame]) {
-        BOOL root = YES;
-        CGFloat x = 0;
-        for (NSString *path in paths) {
-            UIFont *font = [UIFont systemFontOfSize:13];
-            NSDictionary *dict = @{NSFontAttributeName:font};
-
-            CGFloat width = [path sizeWithAttributes:dict].width;
-            width += root ? 10.0f : 20.0f;
-
-            CGRect frame = CGRectMake(x, 0, 0, 0);
-            PathButton *button = [[PathButton alloc] initWithFrame:frame isRootPath:root];
-
-            root = NO;
-        }
+- (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths {
+    if (self = [super initWithFrame:CGRectZero]) {
+        self.paths = [NSMutableArray arrayWithArray:paths];
+        self.lastSize = CGSizeZero;
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+
+    if (CGSizeEqualToSize(self.bounds.size, self.lastSize)) {
+        return;
+    }
+
+    UIFont *font = [UIFont systemFontOfSize:13];
+    NSDictionary *dict = @{NSFontAttributeName:font};
+
+    BOOL root = YES;
+    __block CGFloat x = 0;
+    for (NSString *path in self.paths) {
+
+        CGFloat width = [path sizeWithAttributes:dict].width;
+        width += root ? 10.0f : 20.0f;
+
+        PathButton *button = [PathButton buttonWithType:UIButtonTypeCustom isRootPath:root];
+        [self addSubview:button];
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self).offset(x);
+            make.width.mas_equalTo(width);
+            make.top.equalTo(self).offset(1);
+            make.bottom.equalTo(self).offset(-1);
+            x += width;
+        }];
+
+        root = NO;
+    }
+    
+    self.contentSize = CGSizeMake(x, self.bounds.size.height);
 }
 
 @end

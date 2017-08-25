@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PathView : UIView
+@interface PathView : UIScrollView
 
-- (instancetype)initWithFrame:(CGRect)frame paths:(NSArray<NSString *> *)paths;
+- (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths;
 
 @end

@@ -11,10 +11,18 @@
 @interface PathButton ()
 
 @property (nonatomic, assign) BOOL isRootPath;
+@property (nonatomic, assign) CGSize lastSize;
+@property (nonatomic, strong) CAShapeLayer *maskLayer;
 
 @end
 
 @implementation PathButton
+
+- (void)initConfig {
+    self.borderColor = [UIColor orangeColor];
+    self.borderWidth = 4;
+    self.lastSize = CGSizeZero;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     return [self initWithFrame:frame isRootPath:YES];
@@ -22,12 +30,16 @@
 
 - (instancetype)initWithFrame:(CGRect)frame isRootPath:(BOOL)isRootPath {
     if (self = [super initWithFrame:frame]) {
-        self.borderColor = [UIColor orangeColor];
-        self.borderWidth = 4;
+        [self initConfig];
         self.isRootPath = isRootPath;
-        [self setMaskLayerWithUIBezierPath:[self maskPath]];
     }
     return self;
+}
+
++ (instancetype)buttonWithType:(UIButtonType)type isRootPath:(BOOL)isRootPath {
+    PathButton *button = [super buttonWithType:type];
+    [button initConfig];
+    return button;
 }
 
 // determine the condition of touch event happening
@@ -40,10 +52,19 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    NSLog(@"frame = %@", NSStringFromCGRect(self.frame));
+    [self setMaskLayerWithUIBezierPath:[self maskPath]];
+    NSLog(@"frame2 = %@", NSStringFromCGRect(self.frame));
 }
 
-- (void)setMaskLayerWithUIBezierPath:(UIBezierPath *)bezierPath{
+- (void)setMaskLayerWithUIBezierPath:(UIBezierPath *)bezierPath {
+    if (self.maskLayer != nil) {
+        if (CGSizeEqualToSize(self.maskLayer.frame.size, self.lastSize)) {
+            NSLog(@"size are equal, so reuse last mask layer!");
+            return;
+        }
+        [self.maskLayer removeFromSuperlayer];
+    }
+
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.path = [bezierPath CGPath];
     maskLayer.fillColor = [[UIColor redColor] CGColor]; // content color
@@ -51,6 +72,8 @@
     maskLayer.lineWidth = self.borderWidth;             // border width
     maskLayer.frame = self.bounds;
     [self.layer addSublayer: maskLayer];
+    self.maskLayer = maskLayer;
+    self.lastSize = self.bounds.size;
 }
 
 - (UIBezierPath *)maskPath {

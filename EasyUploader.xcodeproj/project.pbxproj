@@ -26,7 +26,6 @@
 		255E153C1F2274B000411A67 /* StringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E151A1F2274B000411A67 /* StringUtil.m */; };
 		255E153D1F2274B000411A67 /* UINormalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E151D1F2274B000411A67 /* UINormalTableViewCell.m */; };
 		255E153E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */; };
-		255E153F1F2274B000411A67 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15221F2274B000411A67 /* BaseViewController.m */; };
 		255E15531F22778700411A67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15481F22778700411A67 /* AppDelegate.m */; };
 		255E15541F22778700411A67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 255E15491F22778700411A67 /* Assets.xcassets */; };
 		255E15561F22778700411A67 /* en.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E154C1F22778700411A67 /* en.plist */; };
@@ -116,8 +115,6 @@
 		255E151D1F2274B000411A67 /* UINormalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UINormalTableViewCell.m; sourceTree = "<group>"; };
 		255E151E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZyxPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZyxPhotoCollectionViewCell.m; sourceTree = "<group>"; };
-		255E15211F2274B000411A67 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		255E15221F2274B000411A67 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		255E15471F22778700411A67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		255E15481F22778700411A67 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		255E15491F22778700411A67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -353,6 +350,10 @@
 		255E151B1F2274B000411A67 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				252E31321F4F1E0700A78F21 /* PathButton.h */,
+				252E31331F4F1E0700A78F21 /* PathButton.m */,
+				252E315B1F4F327600A78F21 /* PathView.h */,
+				252E315C1F4F327600A78F21 /* PathView.m */,
 				259A362B1F2F8B2F00F10298 /* ResourceToolCell.h */,
 				259A362C1F2F8B2F00F10298 /* ResourceToolCell.m */,
 				259A36111F2DA95C00F10298 /* ToolCell.h */,
@@ -363,10 +364,6 @@
 				259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */,
 				255E151E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.h */,
 				255E151F1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m */,
-				252E31321F4F1E0700A78F21 /* PathButton.h */,
-				252E31331F4F1E0700A78F21 /* PathButton.m */,
-				252E315B1F4F327600A78F21 /* PathView.h */,
-				252E315C1F4F327600A78F21 /* PathView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -374,8 +371,6 @@
 		255E15201F2274B000411A67 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				255E15211F2274B000411A67 /* BaseViewController.h */,
-				255E15221F2274B000411A67 /* BaseViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -822,7 +817,6 @@
 				255E15381F2274B000411A67 /* ALAssetUtil.m in Sources */,
 				255E15581F22778700411A67 /* main.m in Sources */,
 				25F253161F3E13CA0007D104 /* LocalMainViewController.m in Sources */,
-				255E153F1F2274B000411A67 /* BaseViewController.m in Sources */,
 				25F253171F3E13CA0007D104 /* ZyxPhotosViewController.m in Sources */,
 				255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */,
 				255E15331F2274B000411A67 /* UIView+Frame.m in Sources */,

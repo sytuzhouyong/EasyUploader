@@ -7,13 +7,15 @@
 //
 
 #import "QiniuResouresViewController.h"
+#import "LocalMainViewController.h"
 #import "ResourceToolCell.h"
 #import "QiniuViewModel.h"
-#import "LocalMainViewController.h"
+#import "PathView.h"
 
 
 @interface QiniuResouresViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) PathView *pathView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) QiniuBucket *bucket;
 @property (nonatomic, strong) QiniuResourceViewModel *viewModel;
@@ -38,7 +40,6 @@
     self.title = self.bucket.name;
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tabBarController.tabBar.hidden = YES;
-//    UINavigationControllerHideShowBarDuration
 
     [self addSubviews];
     [self initHandlers];
@@ -96,7 +97,6 @@
 
 - (void)uploadButtonClicked {
     LocalMainViewController *vc = [[LocalMainViewController alloc] init];
-//    vc.leftBarButtonWidth = 44;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -139,15 +139,21 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
-    }
+    [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
 }
 
 # pragma mark - Getter and Setter
+
+- (PathView *)pathView {
+    if (_pathView) {
+        return _pathView;
+    }
+
+    PathView *view = [[PathView alloc] initWithResourePaths:nil];
+
+    return view;
+}
 
 - (UITableView *)tableView {
     if (_tableView != nil) {
@@ -167,20 +173,9 @@
     return tableView;
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
