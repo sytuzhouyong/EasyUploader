@@ -14,18 +14,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"本地相册";
-//    self.leftBarButtonWidth = 0;
+
+    // 不为空说明是选择上传路径界面
+    if (self.presentingViewController != nil) {
+        self.title = @"选择目录";
+
+        UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithImage:UIImageNamed(@"icon_arrow_left") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonPressed)];
+        self.navigationItem.leftBarButtonItem = buttonItem;
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-//    self.tabBarController.tabBar.hidden = NO;
+- (void)cancelButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-//- (void)viewDidDisappear:(BOOL)animated {
-//    [super viewDidDisappear:animated];
-//    self.tabBarController.tabBar.hidden = YES;
-//}
 
 
 @end

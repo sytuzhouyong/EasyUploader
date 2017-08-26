@@ -13,6 +13,7 @@
 		2508F35D1E7D7C3600217772 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2508F35C1E7D7C3600217772 /* AssetsLibrary.framework */; };
 		252E31341F4F1E0700A78F21 /* PathButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E31331F4F1E0700A78F21 /* PathButton.m */; };
 		252E315D1F4F327600A78F21 /* PathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E315C1F4F327600A78F21 /* PathView.m */; };
+		252E31601F51CC5700A78F21 /* QiniuResourceContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E315F1F51CC5700A78F21 /* QiniuResourceContentViewController.m */; };
 		255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FD1F2274B000411A67 /* UITextField+Padding.m */; };
 		255E15331F2274B000411A67 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FF1F2274B000411A67 /* UIView+Frame.m */; };
 		255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15021F2274B000411A67 /* DDLogCustomFormatter.m */; };
@@ -87,6 +88,8 @@
 		252E31331F4F1E0700A78F21 /* PathButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathButton.m; sourceTree = "<group>"; };
 		252E315B1F4F327600A78F21 /* PathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathView.h; sourceTree = "<group>"; };
 		252E315C1F4F327600A78F21 /* PathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathView.m; sourceTree = "<group>"; };
+		252E315E1F51CC5700A78F21 /* QiniuResourceContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResourceContentViewController.h; sourceTree = "<group>"; };
+		252E315F1F51CC5700A78F21 /* QiniuResourceContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResourceContentViewController.m; sourceTree = "<group>"; };
 		255E14FC1F2274B000411A67 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		255E14FD1F2274B000411A67 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		255E14FE1F2274B000411A67 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -460,6 +463,8 @@
 				25F253031F3E13BC0007D104 /* QiniuMainViewController.m */,
 				25F253041F3E13BC0007D104 /* QiniuResouresViewController.h */,
 				25F253051F3E13BC0007D104 /* QiniuResouresViewController.m */,
+				252E315E1F51CC5700A78F21 /* QiniuResourceContentViewController.h */,
+				252E315F1F51CC5700A78F21 /* QiniuResourceContentViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -817,6 +822,7 @@
 				255E15381F2274B000411A67 /* ALAssetUtil.m in Sources */,
 				255E15581F22778700411A67 /* main.m in Sources */,
 				25F253161F3E13CA0007D104 /* LocalMainViewController.m in Sources */,
+				252E31601F51CC5700A78F21 /* QiniuResourceContentViewController.m in Sources */,
 				25F253171F3E13CA0007D104 /* ZyxPhotosViewController.m in Sources */,
 				255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */,
 				255E15331F2274B000411A67 /* UIView+Frame.m in Sources */,
