@@ -39,11 +39,15 @@
 
     __block CGFloat x = 0;
     [self.paths enumerateObjectsUsingBlock:^(NSString *path, NSUInteger idx, BOOL *stop) {
-        CGFloat width = [path sizeWithAttributes:dict].width;
-        width = floor(width + 0.5f);
+        CGFloat width = floor([path sizeWithAttributes:dict].width);
         width += idx == 0 ? 10.0f : 20.0f;
 
-        PathButton *button = [PathButton buttonWithPath:path isRootPath:idx == 0];
+        BOOL isRoot = idx == 0;
+
+        PathButton *button = [PathButton buttonWithPath:path isRootPath:isRoot];
+        button.titleLabel.font = font;
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, isRoot ? 2 : 10, 0, 0);
+        button.backgroundColor = kNavigationBarColor;
         [self addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self).offset(x);

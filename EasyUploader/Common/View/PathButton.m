@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign) BOOL isRootPath;
 @property (nonatomic, assign) CGSize lastSize;
-@property (nonatomic, strong) CAShapeLayer *maskLayer;
+@property (nonatomic, strong) CAShapeLayer *borderLayer;
 
 @end
 
@@ -37,8 +37,10 @@
 }
 
 + (instancetype)buttonWithPath:(NSString *)path isRootPath:(BOOL)isRootPath {
-    PathButton *button = [super buttonWithType:UIButtonTypeCustom];
+    PathButton *button = [super buttonWithType:UIButtonTypeSystem];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [button setTitle:path forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button initConfig];
     return button;
 }
@@ -53,28 +55,32 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    if (CGSizeEqualToSize(self.bounds.size, self.lastSize)) {
+        return;
+    }
     [self setMaskLayerWithUIBezierPath:[self maskPath]];
-    NSLog(@"frame2 = %@", NSStringFromCGRect(self.frame));
 }
 
 - (void)setMaskLayerWithUIBezierPath:(UIBezierPath *)bezierPath {
-    if (self.maskLayer != nil) {
-        if (CGSizeEqualToSize(self.maskLayer.frame.size, self.lastSize)) {
-            NSLog(@"size are equal, so reuse last mask layer!");
-            return;
-        }
-        [self.maskLayer removeFromSuperlayer];
-    }
+    self.layer.mask = nil;
+    [self.borderLayer removeFromSuperlayer];
+    self.lastSize = self.bounds.size;
 
+    //蒙版
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.path = [bezierPath CGPath];
-    maskLayer.fillColor = [[UIColor redColor] CGColor]; // content color
-    maskLayer.strokeColor = [self.borderColor CGColor]; // border color
-    maskLayer.lineWidth = self.borderWidth;             // border width
+    maskLayer.fillColor = [[UIColor brownColor] CGColor];
     maskLayer.frame = self.bounds;
-    [self.layer addSublayer: maskLayer];
-    self.maskLayer = maskLayer;
-    self.lastSize = self.bounds.size;
+    self.layer.mask = maskLayer;
+    //边框蒙版
+    CAShapeLayer *maskBorderLayer = [CAShapeLayer layer];
+    maskBorderLayer.path = [bezierPath CGPath];
+    maskBorderLayer.fillColor = [[UIColor clearColor] CGColor];
+    maskBorderLayer.strokeColor = [[UIColor redColor] CGColor];//边框颜色
+    maskBorderLayer.lineWidth = 2; //边框宽度
+    [self.layer addSublayer:maskBorderLayer];
+
+    self.borderLayer = maskBorderLayer;
 }
 
 - (UIBezierPath *)maskPath {
