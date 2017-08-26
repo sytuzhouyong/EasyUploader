@@ -10,6 +10,6 @@
 
 @interface QiniuResourceContentViewController : UITableViewController
 
-- (instancetype)initWithBucket:(QiniuBucket *)bucket;
+- (instancetype)initWithBucket:(QiniuBucket *)bucket parentVC:(UIViewController *)parentVC;
 
 @end

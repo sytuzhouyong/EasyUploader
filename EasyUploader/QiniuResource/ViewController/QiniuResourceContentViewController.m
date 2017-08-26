@@ -7,6 +7,7 @@
 //
 
 #import "QiniuResourceContentViewController.h"
+#import "QiniuResouresViewController.h"
 #import "ResourceToolCell.h"
 #import "QiniuViewModel.h"
 
@@ -17,14 +18,16 @@
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, copy) ExpandButtonHandler expandHandler;
 @property (nonatomic, copy) ExpandButtonHandler downloadHandler;
+@property (nonatomic, weak) QiniuResouresViewController *parentVC;
 
 @end
 
 @implementation QiniuResourceContentViewController
 
-- (instancetype)initWithBucket:(QiniuBucket *)bucket {
+- (instancetype)initWithBucket:(QiniuBucket *)bucket parentVC:(QiniuResouresViewController *)parentVC {
     if ( self = [super initWithStyle:UITableViewStylePlain]) {
         self.bucket = bucket;
+        self.parentVC = parentVC;
     }
     return self;
 }
@@ -39,6 +42,7 @@
     [self.tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kFileCellIdentifier];
     [self.tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kDirCellIdentifier];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
+    self.tableView.backgroundColor = RGB(random()%255, random()%255, random()%255);
 
     [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:@"" limit:100 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -110,10 +114,16 @@
         return;
     }
 
-//    [QiniuResourceManager queryResourcesInBucket:self.bucket withPrefix:resource.name limit:20 handler:^(NSArray<QiniuResource *> *resources) {
-//        NSLog(@"%@", resources);
-//    }];
-//    NSLog(@"xx");
+    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket parentVC:self.parentVC];
+    [self.view.superview addSubview:vc.view];
+    vc.view.frame = CGRectOffset(self.view.frame, kWindowWidth, 0);
+
+    [UIView animateWithDuration:0.5 animations:^{
+        self.view.frame = CGRectOffset(self.view.frame, -kWindowWidth, 0);
+        vc.view.frame = CGRectOffset(vc.view.frame, -kWindowWidth, 0);
+    } completion:^(BOOL finished) {
+        ;
+    }];
 }
 
 - (void)viewDidLayoutSubviews {

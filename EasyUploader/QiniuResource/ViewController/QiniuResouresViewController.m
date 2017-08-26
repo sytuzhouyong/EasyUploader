@@ -71,7 +71,7 @@
         make.top.equalTo(self.pathView.mas_bottom);
     }];
 
-    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket];
+    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket parentVC:self];
     [self.contentView addSubview:vc.view];
     [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(5, 5, 5, 5));
