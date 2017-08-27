@@ -71,8 +71,8 @@
     return @[info1, info2];
 }
 
-- (void)configWithQiniuResource:(QiniuResource *)resource {
-    self.label.text = [resource.name substringToIndex:resource.name.length - 1];
+- (void)configWithQiniuResource:(QiniuResource *)resource prefix:(NSString *)prefix {
+    self.label.text = [resource.name substringWithRange:NSMakeRange(prefix.length, resource.name.length - prefix.length)];
     self.detailLabel.text = resource.createTimeDesc;
     self.sizeLabel.text = resource.sizeDesc;
 

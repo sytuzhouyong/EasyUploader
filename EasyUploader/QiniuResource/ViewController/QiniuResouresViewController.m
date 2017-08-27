@@ -64,6 +64,7 @@
     }];
 
     self.contentView = [[UIView alloc] init];
+    self.contentView.clipsToBounds = YES;
     self.contentView.backgroundColor = [UIColor orangeColor];
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -89,6 +90,11 @@
 }
 
 # pragma mark - Getter and Setter
+
+- (void)enterSubpath:(NSString *)path {
+    [_paths addObject:path];
+    [self.pathView appendPath:path];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

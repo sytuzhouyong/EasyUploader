@@ -24,4 +24,6 @@
 #define kQiniuResourceManager       [QiniuResourceManager sharedInstance]
 #define kQiniuDownloadManager       [QiniuDownloadManager sharedInstance]
 
+#define kQiniuPathDelimiter          @"/"
+
 #endif /* Macro_h */

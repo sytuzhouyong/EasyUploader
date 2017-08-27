@@ -19,6 +19,7 @@
 @property (nonatomic, copy) ExpandButtonHandler expandHandler;
 @property (nonatomic, copy) ExpandButtonHandler downloadHandler;
 @property (nonatomic, weak) QiniuResouresViewController *parentVC;
+@property (nonatomic, copy) NSString *currentPath;
 
 @end
 
@@ -44,7 +45,8 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
     self.tableView.backgroundColor = RGB(random()%255, random()%255, random()%255);
 
-    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:@"" limit:100 handler:^(NSArray<QiniuResource *> *resources) {
+    self.currentPath = [self prefixFromPaths:self.parentVC.paths];
+    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:100 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources];
             [self.tableView reloadData];
@@ -102,7 +104,7 @@
     cell.expandHandler = self.expandHandler;
     cell.downloadHandler = self.downloadHandler;
 
-    [cell configWithQiniuResource:resource];
+    [cell configWithQiniuResource:resource prefix:self.currentPath];
     [cell updateExpandState:expand];
 
     return cell;
@@ -114,21 +116,35 @@
         return;
     }
 
-    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket parentVC:self.parentVC];
-    [self.view.superview addSubview:vc.view];
-    vc.view.frame = CGRectOffset(self.view.frame, kWindowWidth, 0);
+    [self.parentVC enterSubpath:resource.name];
 
-    [UIView animateWithDuration:0.5 animations:^{
-        self.view.frame = CGRectOffset(self.view.frame, -kWindowWidth, 0);
-        vc.view.frame = CGRectOffset(vc.view.frame, -kWindowWidth, 0);
-    } completion:^(BOOL finished) {
-        ;
-    }];
+    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket parentVC:self.parentVC];
+    vc.view.frame = CGRectOffset(self.view.frame, kWindowWidth, 0);
+    [self.view.superview insertSubview:vc.view belowSubview:self.view];
+
+    // notice: must have a delay, because vc.view must has benn in view hierarchy
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:0.5 animations:^{
+            self.view.frame = CGRectOffset(self.view.frame, -kWindowWidth, 0);
+            vc.view.frame = CGRectOffset(vc.view.frame, -kWindowWidth, 0);
+        } completion:nil];
+    });
+
 }
 
 - (void)viewDidLayoutSubviews {
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
     [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+}
+
+- (NSString *)prefixFromPaths:(NSArray *)paths {
+    NSMutableString *path = [NSMutableString string];
+    [paths enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        if (idx != 0) {
+            [path appendString:obj];
+        }
+    }];
+    return path;
 }
 
 - (void)didReceiveMemoryWarning {

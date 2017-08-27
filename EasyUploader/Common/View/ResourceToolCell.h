@@ -16,6 +16,6 @@
 @property (nonatomic, copy) ButtonHandler downloadHandler;
 
 
-- (void)configWithQiniuResource:(QiniuResource *)resource;
+- (void)configWithQiniuResource:(QiniuResource *)resource prefix:(NSString *)prefix ;
 
 @end

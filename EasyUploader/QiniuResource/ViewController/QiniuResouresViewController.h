@@ -10,7 +10,11 @@
 
 @interface QiniuResouresViewController : UIViewController
 
+@property (nonatomic, strong, readonly) NSArray *paths;
+
 - (instancetype)initWithBucket:(QiniuBucket *)bucket;
 - (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths;
+
+- (void)enterSubpath:(NSString *)path;
 
 @end

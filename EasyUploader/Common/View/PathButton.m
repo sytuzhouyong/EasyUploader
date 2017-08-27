@@ -8,6 +8,8 @@
 
 #import "PathButton.h"
 
+#define kPathButtonFontSize     13
+
 @interface PathButton ()
 
 @property (nonatomic, assign) BOOL isRootPath;
@@ -38,6 +40,10 @@
 
 + (instancetype)buttonWithPath:(NSString *)path isRootPath:(BOOL)isRootPath {
     PathButton *button = [super buttonWithType:UIButtonTypeSystem];
+    button.isRootPath = isRootPath;
+    button.titleLabel.font = [UIFont systemFontOfSize:kPathButtonFontSize];
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, isRootPath ? 2 : 12, 0, 0);
+    button.backgroundColor = kNavigationBarColor;
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [button setTitle:path forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

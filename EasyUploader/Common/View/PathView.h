@@ -11,5 +11,7 @@
 @interface PathView : UIView
 
 - (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths;
+- (void)appendPath:(NSString *)path;
+
 
 @end
