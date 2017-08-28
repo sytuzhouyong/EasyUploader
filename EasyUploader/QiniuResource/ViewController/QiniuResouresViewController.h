@@ -15,6 +15,6 @@
 - (instancetype)initWithBucket:(QiniuBucket *)bucket;
 - (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths;
 
-- (void)enterSubpath:(NSString *)path;
+- (void)enterSubContentVC:(UIViewController *)vc named:(NSString *)path;
 
 @end

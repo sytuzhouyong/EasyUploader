@@ -15,10 +15,12 @@
 @interface QiniuResouresViewController ()
 
 @property (nonatomic, strong) PathView *pathView;
+@property (nonatomic, strong) UIView *contentView;  // 容纳多个contentVC的父 view
+
 @property (nonatomic, strong) QiniuBucket *bucket;
 @property (nonatomic, strong) NSMutableArray *paths;
-@property (nonatomic, strong) UIView *contentView;  // 容纳多个contentVC的父 view
 @property (nonatomic, strong) NSMutableArray *contentVCs;
+@property (nonatomic, assign) NSUInteger currentPathIndex;
 
 @end
 
@@ -27,12 +29,8 @@
 - (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths {
     if (self = [super initWithNibName:nil bundle:nil]) {
         self.bucket = bucket;
-
-        if (paths.count == 0) {
-            self.paths = [NSMutableArray arrayWithObject:bucket.name];
-        } else {
-            self.paths = [NSMutableArray arrayWithArray:paths];
-        }
+        self.paths = [NSMutableArray array];
+        self.contentVCs = [NSMutableArray array];
     }
     return self;
 }
@@ -49,13 +47,36 @@
     self.tabBarController.tabBar.hidden = YES;
 
     [self addSubviews];
+    self.currentPathIndex = self.paths.count - 1;
 }
 
 - (void)addSubviews {
     UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(uploadButtonClicked)];
     self.navigationItem.rightBarButtonItem = button;
 
-    self.pathView = [[PathView alloc] initWithResourePaths:self.paths];
+    kWeakself;
+    self.pathView = [[PathView alloc] initWithResourePaths:self.paths pathSelectHandler:^(NSUInteger index) {
+        if (index == self.currentPathIndex) {
+            return;
+        }
+
+        UIViewController *dstVC = self.contentVCs[index];
+        UIViewController *srcVC = self.contentVCs[self.currentPathIndex];
+        // why could not add this code, or error animation with forwar case
+//        [weakself.contentView bringSubviewToFront:dstVC.view];
+
+        BOOL forward = index > self.currentPathIndex;
+        CGRect dstVCBeginFrame = CGRectOffset(srcVC.view.frame, (forward ? 1 : -1) * kWindowWidth, 0);
+        dstVC.view.frame = dstVCBeginFrame;
+
+        [UIView animateWithDuration:0.5 animations:^{
+            dstVC.view.frame = CGRectOffset(dstVC.view.frame, (forward ? -1 : 1) * kWindowWidth, 0);
+            srcVC.view.frame = CGRectOffset(srcVC.view.frame, (forward ? -1 : 1) * kWindowWidth, 0);
+            [weakself.pathView updateUIWhenSelectPathButtonChangedTo:index];
+        } completion:nil];
+
+        weakself.currentPathIndex = index;
+    }];
     [self.view addSubview:self.pathView];
     [self.pathView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.view);
@@ -72,12 +93,11 @@
         make.top.equalTo(self.pathView.mas_bottom);
     }];
 
-    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket parentVC:self];
+    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket resourceName:self.bucket.name parentVC:self];
     [self.contentView addSubview:vc.view];
     [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(5, 5, 5, 5));
     }];
-    self.contentVCs = [NSMutableArray arrayWithObject:vc];
 }
 
 #pragma mark - Button Event
@@ -91,9 +111,11 @@
 
 # pragma mark - Getter and Setter
 
-- (void)enterSubpath:(NSString *)path {
+- (void)enterSubContentVC:(UIViewController *)vc named:(NSString *)path {
+    self.currentPathIndex = _paths.count;
     [_paths addObject:path];
     [self.pathView appendPath:path];
+    [self.contentVCs addObject:vc];
 }
 
 - (void)didReceiveMemoryWarning {

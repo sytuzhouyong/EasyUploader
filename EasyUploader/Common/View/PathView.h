@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^PathSelectHandler)(NSUInteger index);
+
 @interface PathView : UIView
 
-- (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths;
+- (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths pathSelectHandler:(PathSelectHandler)handler;
 - (void)appendPath:(NSString *)path;
+- (void)updateUIWhenSelectPathButtonChangedTo:(NSUInteger)index;
 
 
 @end

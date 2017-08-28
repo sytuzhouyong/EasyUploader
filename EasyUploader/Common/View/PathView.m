@@ -9,10 +9,12 @@
 #import "PathView.h"
 #import "PathButton.h"
 
+#define kPathButtonTag  1000
 
 @interface PathView ()
 
 @property (nonatomic, strong) NSMutableArray<NSString *> *paths;
+@property (nonatomic, copy) PathSelectHandler handler;
 @property (nonatomic, assign) CGSize lastSize;
 @property (nonatomic, assign) CGFloat offset;
 
@@ -20,9 +22,10 @@
 
 @implementation PathView
 
-- (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths {
+- (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths pathSelectHandler:(PathSelectHandler)handler {
     if (self = [super initWithFrame:CGRectZero]) {
         self.paths = [NSMutableArray arrayWithArray:paths];
+        self.handler = handler;
         self.lastSize = CGSizeZero;
     }
     return self;
@@ -37,22 +40,11 @@
     self.lastSize = self.bounds.size;
     self.offset = 0;
 
-    __block CGFloat x = 0;
+    kWeakself;
     [self.paths enumerateObjectsUsingBlock:^(NSString *path, NSUInteger idx, BOOL *stop) {
-        BOOL isRoot = idx == 0;
-        PathButton *button = [PathButton buttonWithPath:path isRootPath:isRoot];
-        CGFloat width = [self widthOfPathButton:button isRoot:isRoot];
-        [self addSubview:button];
-
-        [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self).offset(x);
-            make.width.mas_equalTo(width);
-            make.top.equalTo(self).offset(1);
-            make.bottom.equalTo(self).offset(-1);
-        }];
-        x += width;
+        CGFloat width = [weakself insertButtonWithPath:path atIndex:idx];
+        weakself.offset += width;
     }];
-    self.offset = x;
     
 //    self.contentSize = CGSizeMake(x, self.bounds.size.height);
 }
@@ -61,8 +53,26 @@
     [self.paths addObject:path];
     path = [path substringToIndex:path.length - 1];
 
-    BOOL isRoot = self.offset > 1.0f ? NO : YES;
+    CGFloat width = [self insertButtonWithPath:path atIndex:self.paths.count - 1];
+    self.offset += width;
+}
+
+- (void)updateUIWhenSelectPathButtonChangedTo:(NSUInteger)index {
+    for (NSUInteger i = index + 1; i < self.paths.count; i++) {
+        UIButton *button = [self viewWithTag:kPathButtonTag + i];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    }
+    for (NSUInteger i = 0; i <= index; i++) {
+        UIButton *button = [self viewWithTag:kPathButtonTag + i];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+}
+
+
+- (CGFloat)insertButtonWithPath:(NSString *)path atIndex:(NSUInteger)index {
+    BOOL isRoot = index == 0;
     PathButton *button = [PathButton buttonWithPath:path isRootPath:isRoot];
+    button.tag = kPathButtonTag + index;
     CGFloat width = [self widthOfPathButton:button isRoot:isRoot];
     [self addSubview:button];
 
@@ -72,9 +82,12 @@
         make.top.equalTo(self).offset(1);
         make.bottom.equalTo(self).offset(-1);
     }];
-    self.offset += width;
-}
 
+    [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        ExecuteBlock1IfNotNil(self.handler, index);
+    }];
+    return width;
+}
 
 - (CGFloat)widthOfPathButton:(PathButton *)button isRoot:(BOOL)isRoot {
     NSString *path = [button titleForState:UIControlStateNormal];

@@ -25,10 +25,11 @@
 
 @implementation QiniuResourceContentViewController
 
-- (instancetype)initWithBucket:(QiniuBucket *)bucket parentVC:(QiniuResouresViewController *)parentVC {
+- (instancetype)initWithBucket:(QiniuBucket *)bucket resourceName:(NSString *)name parentVC:(UIViewController *)parentVC {
     if ( self = [super initWithStyle:UITableViewStylePlain]) {
         self.bucket = bucket;
-        self.parentVC = parentVC;
+        self.parentVC = (QiniuResouresViewController *)parentVC;
+        [self.parentVC enterSubContentVC:self named:name];
     }
     return self;
 }
@@ -116,9 +117,7 @@
         return;
     }
 
-    [self.parentVC enterSubpath:resource.name];
-
-    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket parentVC:self.parentVC];
+    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket resourceName:resource.name parentVC:self.parentVC];
     vc.view.frame = CGRectOffset(self.view.frame, kWindowWidth, 0);
     [self.view.superview insertSubview:vc.view belowSubview:self.view];
 
@@ -129,7 +128,6 @@
             vc.view.frame = CGRectOffset(vc.view.frame, -kWindowWidth, 0);
         } completion:nil];
     });
-
 }
 
 - (void)viewDidLayoutSubviews {
