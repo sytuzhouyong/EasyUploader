@@ -68,7 +68,6 @@
     }
 }
 
-
 - (CGFloat)insertButtonWithPath:(NSString *)path atIndex:(NSUInteger)index {
     BOOL isRoot = index == 0;
     PathButton *button = [PathButton buttonWithPath:path isRootPath:isRoot];

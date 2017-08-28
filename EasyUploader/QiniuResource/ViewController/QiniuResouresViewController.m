@@ -59,23 +59,7 @@
         if (index == self.currentPathIndex) {
             return;
         }
-
-        UIViewController *dstVC = self.contentVCs[index];
-        UIViewController *srcVC = self.contentVCs[self.currentPathIndex];
-        // why could not add this code, or error animation with forwar case
-//        [weakself.contentView bringSubviewToFront:dstVC.view];
-
-        BOOL forward = index > self.currentPathIndex;
-        CGRect dstVCBeginFrame = CGRectOffset(srcVC.view.frame, (forward ? 1 : -1) * kWindowWidth, 0);
-        dstVC.view.frame = dstVCBeginFrame;
-
-        [UIView animateWithDuration:0.5 animations:^{
-            dstVC.view.frame = CGRectOffset(dstVC.view.frame, (forward ? -1 : 1) * kWindowWidth, 0);
-            srcVC.view.frame = CGRectOffset(srcVC.view.frame, (forward ? -1 : 1) * kWindowWidth, 0);
-            [weakself.pathView updateUIWhenSelectPathButtonChangedTo:index];
-        } completion:nil];
-
-        weakself.currentPathIndex = index;
+        [weakself updateUIWhenEnterContentVCAtIndex:index];
     }];
     [self.view addSubview:self.pathView];
     [self.pathView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,7 +77,7 @@
         make.top.equalTo(self.pathView.mas_bottom);
     }];
 
-    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket resourceName:self.bucket.name parentVC:self];
+    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:self.bucket.name parentVC:self];
     [self.contentView addSubview:vc.view];
     [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(5, 5, 5, 5));
@@ -111,11 +95,45 @@
 
 # pragma mark - Getter and Setter
 
-- (void)enterSubContentVC:(UIViewController *)vc named:(NSString *)path {
-    self.currentPathIndex = _paths.count;
+- (void)enterNewContentVC:(UIViewController *)vc named:(NSString *)path {
     [_paths addObject:path];
     [self.pathView appendPath:path];
     [self.contentVCs addObject:vc];
+}
+
+- (NSInteger)haveEnteredConentVCNamed:(NSString *)path {
+    __block NSInteger index = -1;
+    [self.paths enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isEqualToString:path]) {
+            index = idx;
+            *stop = YES;
+        }
+    }];
+    return index;
+}
+
+- (void)updateUIWhenEnterContentVCAtIndex:(NSUInteger)index {
+    [self.pathView updateUIWhenSelectPathButtonChangedTo:index];
+
+    UIViewController *dstVC = self.contentVCs[index];
+    UIViewController *srcVC = self.contentVCs[self.currentPathIndex];
+    // why could not add this code, or error animation with forwar case
+//        [weakself.contentView bringSubviewToFront:dstVC.view];
+
+    BOOL forward = index > self.currentPathIndex;
+    CGRect dstVCBeginFrame = CGRectOffset(srcVC.view.frame, (forward ? 1 : -1) * kWindowWidth, 0);
+    dstVC.view.frame = dstVCBeginFrame;
+
+    [UIView animateWithDuration:0.5 animations:^{
+        dstVC.view.frame = CGRectOffset(dstVC.view.frame, (forward ? -1 : 1) * kWindowWidth, 0);
+        srcVC.view.frame = CGRectOffset(srcVC.view.frame, (forward ? -1 : 1) * kWindowWidth, 0);
+    } completion:nil];
+
+    self.currentPathIndex = index;
+}
+
+- (void)updateUIWhenEnterNewContentVC {
+    [self updateUIWhenEnterContentVCAtIndex:self.paths.count-1];
 }
 
 - (void)didReceiveMemoryWarning {

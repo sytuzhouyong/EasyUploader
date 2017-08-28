@@ -25,11 +25,11 @@
 
 @implementation QiniuResourceContentViewController
 
-- (instancetype)initWithBucket:(QiniuBucket *)bucket resourceName:(NSString *)name parentVC:(UIViewController *)parentVC {
+- (instancetype)initWithBucket:(QiniuBucket *)bucket path:(NSString *)name parentVC:(UIViewController *)parentVC {
     if ( self = [super initWithStyle:UITableViewStylePlain]) {
         self.bucket = bucket;
         self.parentVC = (QiniuResouresViewController *)parentVC;
-        [self.parentVC enterSubContentVC:self named:name];
+        [self.parentVC enterNewContentVC:self named:name];
     }
     return self;
 }
@@ -117,17 +117,19 @@
         return;
     }
 
-    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket resourceName:resource.name parentVC:self.parentVC];
-    vc.view.frame = CGRectOffset(self.view.frame, kWindowWidth, 0);
-    [self.view.superview insertSubview:vc.view belowSubview:self.view];
-
-    // notice: must have a delay, because vc.view must has benn in view hierarchy
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:0.5 animations:^{
-            self.view.frame = CGRectOffset(self.view.frame, -kWindowWidth, 0);
-            vc.view.frame = CGRectOffset(vc.view.frame, -kWindowWidth, 0);
-        } completion:nil];
-    });
+    // first judge whether have entered content vc
+    NSInteger enteredIndex = [self.parentVC haveEnteredConentVCNamed:resource.name];
+    if (enteredIndex != -1) {
+        [self.parentVC updateUIWhenEnterContentVCAtIndex:enteredIndex];
+    } else {
+        UIViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:resource.name parentVC:self.parentVC];
+        vc.view.frame = CGRectOffset(self.view.frame, kWindowWidth, 0);
+        [self.view.superview addSubview:vc.view];
+        // notice: must have a delay, because vc.view must has benn in view hierarchy
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.parentVC updateUIWhenEnterNewContentVC];
+        });
+    }
 }
 
 - (void)viewDidLayoutSubviews {
