@@ -15,9 +15,9 @@
 - (instancetype)initWithBucket:(QiniuBucket *)bucket;
 - (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths;
 
-- (void)enterNewContentVC:(UIViewController *)vc named:(NSString *)path;
+- (void)addNewContentVC:(UIViewController *)vc named:(NSString *)path;
 - (NSInteger)haveEnteredConentVCNamed:(NSString *)path;
-
+- (void)enterContentVCNamed:(NSString *)name;
 
 - (void)updateUIWhenEnterNewContentVC;
 - (void)updateUIWhenEnterContentVCAtIndex:(NSUInteger)index;

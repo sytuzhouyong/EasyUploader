@@ -29,7 +29,7 @@
     if ( self = [super initWithStyle:UITableViewStylePlain]) {
         self.bucket = bucket;
         self.parentVC = (QiniuResouresViewController *)parentVC;
-        [self.parentVC enterNewContentVC:self named:name];
+        [self.parentVC addNewContentVC:self named:name];
     }
     return self;
 }
@@ -117,19 +117,8 @@
         return;
     }
 
-    // first judge whether have entered content vc
-    NSInteger enteredIndex = [self.parentVC haveEnteredConentVCNamed:resource.name];
-    if (enteredIndex != -1) {
-        [self.parentVC updateUIWhenEnterContentVCAtIndex:enteredIndex];
-    } else {
-        UIViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:resource.name parentVC:self.parentVC];
-        vc.view.frame = CGRectOffset(self.view.frame, kWindowWidth, 0);
-        [self.view.superview addSubview:vc.view];
-        // notice: must have a delay, because vc.view must has benn in view hierarchy
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.parentVC updateUIWhenEnterNewContentVC];
-        });
-    }
+    // TODO: 不存在说明 1.是新的 2.是同级的其他目录
+    [self.parentVC enterContentVCNamed:resource.name];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -151,7 +140,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 @end

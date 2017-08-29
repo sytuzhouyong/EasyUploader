@@ -93,9 +93,9 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-# pragma mark - Getter and Setter
+# pragma mark - Enter Content View
 
-- (void)enterNewContentVC:(UIViewController *)vc named:(NSString *)path {
+- (void)addNewContentVC:(UIViewController *)vc named:(NSString *)path {
     [_paths addObject:path];
     [self.pathView appendPath:path];
     [self.contentVCs addObject:vc];
@@ -110,6 +110,22 @@
         }
     }];
     return index;
+}
+
+- (void)enterContentVCNamed:(NSString *)name {
+    // first judge whether have entered content vc
+    NSInteger enteredIndex = [self haveEnteredConentVCNamed:name];
+    if (enteredIndex != -1) {
+        [self updateUIWhenEnterContentVCAtIndex:enteredIndex];
+    } else {
+        UIViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:name parentVC:self];
+        vc.view.frame = CGRectOffset(CGRectInset(self.contentView.bounds, 5, 5), kWindowWidth, 0);
+        [self.contentView addSubview:vc.view];
+        // notice: must have a delay, because vc.view must has benn in view hierarchy
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self updateUIWhenEnterNewContentVC];
+        });
+    }
 }
 
 - (void)updateUIWhenEnterContentVCAtIndex:(NSUInteger)index {
