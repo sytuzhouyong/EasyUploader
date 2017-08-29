@@ -77,7 +77,7 @@
         make.top.equalTo(self.pathView.mas_bottom);
     }];
 
-    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:self.bucket.name parentVC:self];
+    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:@"" parentVC:self];
     [self.contentView addSubview:vc.view];
     [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(5, 5, 5, 5));
@@ -96,8 +96,13 @@
 # pragma mark - Enter Content View
 
 - (void)addNewContentVC:(UIViewController *)vc named:(NSString *)path {
-    [_paths addObject:path];
-    [self.pathView appendPath:path];
+    NSString *fixedPath = self.bucket.name;
+    if (path.length != 0) {
+        fixedPath = [path componentsSeparatedByString:@"/"].lastObject;
+    }
+
+    [_paths addObject:fixedPath];
+    [self.pathView appendPath:fixedPath];
     [self.contentVCs addObject:vc];
 }
 
@@ -112,19 +117,36 @@
     return index;
 }
 
+- (void)enterNewContentVCNamed:(NSString *)name {
+    UIViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:name parentVC:self];
+    vc.view.frame = CGRectOffset(CGRectInset(self.contentView.bounds, 5, 5), kWindowWidth, 0);
+    [self.contentView addSubview:vc.view];
+    // notice: must have a delay, because vc.view must has benn in view hierarchy
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self updateUIWhenEnterNewContentVC];
+    });
+}
+
 - (void)enterContentVCNamed:(NSString *)name {
     // first judge whether have entered content vc
     NSInteger enteredIndex = [self haveEnteredConentVCNamed:name];
+    // backward existed content vc
     if (enteredIndex != -1) {
         [self updateUIWhenEnterContentVCAtIndex:enteredIndex];
-    } else {
-        UIViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:name parentVC:self];
-        vc.view.frame = CGRectOffset(CGRectInset(self.contentView.bounds, 5, 5), kWindowWidth, 0);
-        [self.contentView addSubview:vc.view];
-        // notice: must have a delay, because vc.view must has benn in view hierarchy
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self updateUIWhenEnterNewContentVC];
-        });
+    }
+    // enter new content vc
+    else if (self.currentPathIndex == self.paths.count - 1) {
+        [self enterNewContentVCNamed:name];
+    }
+    // backward not existed content vc
+    else {
+        NSUInteger location = self.currentPathIndex + 1;
+        NSRange removeRange = NSMakeRange(location, _paths.count - location);
+        [_paths removeObjectsInRange:removeRange];
+        [self.contentVCs removeObjectsInRange:removeRange];
+        [self.pathView removePathsInRange:removeRange];
+
+        [self enterNewContentVCNamed:name];
     }
 }
 

@@ -30,6 +30,7 @@
         self.bucket = bucket;
         self.parentVC = (QiniuResouresViewController *)parentVC;
         [self.parentVC addNewContentVC:self named:name];
+        self.currentPath = name.length == 0 ? @"" : [NSString stringWithFormat:@"%@/", name];
     }
     return self;
 }
@@ -46,7 +47,6 @@
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
     self.tableView.backgroundColor = RGB(random()%255, random()%255, random()%255);
 
-    self.currentPath = [self prefixFromPaths:self.parentVC.paths];
     [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:100 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources];

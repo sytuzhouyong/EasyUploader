@@ -51,10 +51,16 @@
 
 - (void)appendPath:(NSString *)path {
     [self.paths addObject:path];
-    path = [path substringToIndex:path.length - 1];
+    self.offset += [self insertButtonWithPath:path atIndex:self.paths.count - 1];
+}
 
-    CGFloat width = [self insertButtonWithPath:path atIndex:self.paths.count - 1];
-    self.offset += width;
+- (void)removePathsInRange:(NSRange)range {
+    [self.paths removeObjectsInRange:range];
+    for (NSUInteger i=0; i<range.length; i++) {
+        PathButton *button = (PathButton *)[self viewWithTag:kPathButtonTag + range.location + i];
+        self.offset -= [self widthOfPathButton:button isRoot:NO];
+        [button removeFromSuperview];
+    }
 }
 
 - (void)updateUIWhenSelectPathButtonChangedTo:(NSUInteger)index {

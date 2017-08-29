@@ -15,6 +15,7 @@ typedef void (^PathSelectHandler)(NSUInteger index);
 - (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths pathSelectHandler:(PathSelectHandler)handler;
 - (void)appendPath:(NSString *)path;
 - (void)updateUIWhenSelectPathButtonChangedTo:(NSUInteger)index;
+- (void)removePathsInRange:(NSRange)range;
 
 
 @end

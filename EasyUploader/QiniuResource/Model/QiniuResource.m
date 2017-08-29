@@ -39,7 +39,7 @@
 
 + (instancetype)resourceWithDirName:(NSString *)dir {
     QiniuResource *resource = [[QiniuResource alloc] init];
-    resource.name = dir;
+    resource.name = [dir substringToIndex:dir.length - 1];
     resource.type = QiniuResourceTypeDir;
     return resource;
 }
