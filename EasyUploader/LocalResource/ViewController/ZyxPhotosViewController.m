@@ -90,7 +90,7 @@
     [self.view addSubview:self.toolView];
     [_toolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self.view);
-        make.height.mas_equalTo(52);
+        make.height.mas_equalTo(72);
     }];
 
     [self.view addSubview:self.collectionView];

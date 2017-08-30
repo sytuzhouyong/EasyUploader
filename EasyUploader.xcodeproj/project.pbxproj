@@ -35,6 +35,7 @@
 		255E155A1F22778700411A67 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E15521F22778700411A67 /* zh-Hans.plist */; };
 		255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E155D1F227A5600411A67 /* QiniuBucket.m */; };
 		255E15611F227A6A00411A67 /* QiniuResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15601F227A6A00411A67 /* QiniuResource.m */; };
+		258ADFDE1F571A0900766E6B /* ConfirmUploadPathToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 258ADFDD1F571A0900766E6B /* ConfirmUploadPathToolView.m */; };
 		259A36101F2B71B200F10298 /* QiniuViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A360F1F2B71B200F10298 /* QiniuViewModel.m */; };
 		259A36131F2DA95C00F10298 /* ToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36121F2DA95C00F10298 /* ToolCell.m */; };
 		259A36161F2DECE700F10298 /* ZyxImageTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36151F2DECE700F10298 /* ZyxImageTitleButton.m */; };
@@ -130,6 +131,8 @@
 		255E155D1F227A5600411A67 /* QiniuBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucket.m; sourceTree = "<group>"; };
 		255E155F1F227A6A00411A67 /* QiniuResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResource.h; sourceTree = "<group>"; };
 		255E15601F227A6A00411A67 /* QiniuResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResource.m; sourceTree = "<group>"; };
+		258ADFDC1F571A0900766E6B /* ConfirmUploadPathToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmUploadPathToolView.h; sourceTree = "<group>"; };
+		258ADFDD1F571A0900766E6B /* ConfirmUploadPathToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmUploadPathToolView.m; sourceTree = "<group>"; };
 		259A360E1F2B71B200F10298 /* QiniuViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuViewModel.h; sourceTree = "<group>"; };
 		259A360F1F2B71B200F10298 /* QiniuViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuViewModel.m; sourceTree = "<group>"; };
 		259A36111F2DA95C00F10298 /* ToolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolCell.h; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 			children = (
 				25F2531A1F3E151C0007D104 /* SelectUploadPathToolView.h */,
 				25F2531B1F3E151C0007D104 /* SelectUploadPathToolView.m */,
+				258ADFDC1F571A0900766E6B /* ConfirmUploadPathToolView.h */,
+				258ADFDD1F571A0900766E6B /* ConfirmUploadPathToolView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -600,6 +605,7 @@
 				TargetAttributes = {
 					250392061E65C758002062F0 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 8W2L7M8DY3;
 						ProvisioningStyle = Automatic;
 					};
 					2503921F1E65C758002062F0 = {
@@ -834,6 +840,7 @@
 				255E15611F227A6A00411A67 /* QiniuResource.m in Sources */,
 				25F253001F3E135A0007D104 /* QiniuUploadManager.m in Sources */,
 				25F2531C1F3E151C0007D104 /* SelectUploadPathToolView.m in Sources */,
+				258ADFDE1F571A0900766E6B /* ConfirmUploadPathToolView.m in Sources */,
 				25F253181F3E13CA0007D104 /* ZyxPickAlbumViewController.m in Sources */,
 				255E153A1F2274B000411A67 /* DeviceUtil.m in Sources */,
 				255E15351F2274B000411A67 /* GTMBase64.m in Sources */,
@@ -969,6 +976,7 @@
 			baseConfigurationReference = 57B3ED3706C1B5A374CAAA99 /* Pods-EasyUploader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8W2L7M8DY3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EasyUploader/Common/ThirdParty",
@@ -993,6 +1001,7 @@
 			baseConfigurationReference = 2F42ACAF98A07D299C55D3BD /* Pods-EasyUploader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8W2L7M8DY3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EasyUploader/Common/ThirdParty",

@@ -10,6 +10,7 @@
 #import "LocalMainViewController.h"
 #import "QiniuResourceContentViewController.h"
 #import "PathView.h"
+#import "ConfirmUploadPathToolView.h"
 
 #define kContentInset   0
 
@@ -17,11 +18,13 @@
 
 @property (nonatomic, strong) PathView *pathView;
 @property (nonatomic, strong) UIView *contentView;  // 容纳多个contentVC的父 view
+@property (nonatomic, strong) UIView *pathSelectView;
 
 @property (nonatomic, strong) QiniuBucket *bucket;
 @property (nonatomic, strong) NSMutableArray *paths;
 @property (nonatomic, strong) NSMutableArray *contentVCs;
 @property (nonatomic, assign) NSUInteger currentPathIndex;
+@property (nonatomic, assign) BOOL isPathSelecting;
 
 @end
 
@@ -32,6 +35,7 @@
         self.bucket = bucket;
         self.paths = [NSMutableArray array];
         self.contentVCs = [NSMutableArray array];
+        self.isPathSelecting = NO;
     }
     return self;
 }
@@ -69,12 +73,25 @@
         make.height.mas_equalTo(36);
     }];
 
+    MASViewAttribute *attr = self.view.mas_bottom;
+
+    if (self.isPathSelecting) {
+        ConfirmUploadPathToolView *toolView = [ConfirmUploadPathToolView new];
+        [self.view addSubview:toolView];
+        [toolView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.trailing.bottom.equalTo(self.view);
+            make.height.mas_equalTo(48);
+        }];
+        attr = toolView.mas_top;
+    }
+
     self.contentView = [[UIView alloc] init];
     self.contentView.clipsToBounds = YES;
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.bottom.equalTo(self.view);
+        make.leading.trailing.equalTo(self.view);
         make.top.equalTo(self.pathView.mas_bottom);
+        make.bottom.equalTo(attr);
     }];
 
     QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:@"" parentVC:self];
@@ -82,6 +99,10 @@
     [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(kContentInset, kContentInset, kContentInset, kContentInset));
     }];
+}
+
+- (void)setSelectPathFlag:(BOOL)isSelectPath {
+    self.isPathSelecting = isSelectPath;
 }
 
 #pragma mark - Button Event

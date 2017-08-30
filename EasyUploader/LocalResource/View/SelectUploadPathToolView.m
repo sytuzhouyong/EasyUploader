@@ -23,8 +23,9 @@
         [self addSubview:tipLabel];
         [tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self).offset(5);
-            make.top.and.trailing.equalTo(self);
-            make.height.mas_equalTo(20);
+            make.top.equalTo(self).offset(2);
+            make.trailing.equalTo(self);
+            make.height.mas_equalTo(32);
         }];
 
         UIButton *uploadButton = [UIButton buttonWithType:UIButtonTypeCustom];
