@@ -441,10 +441,19 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
 #pragma mark - 保存数据到指定相册
 
 - (void)addGroupNamed:(NSString *)name withSuccessBlock:(ZyxPhotoAddGroupSuccessHandler)successBlock failureBlock:(ZyxPhotoAddGroupFailHandler)failureBlock {
+    if (name ==nil || name.length == 0) {
+        DDLogError(@"could not add group with an empty name!");
+        NSError *error = [NSError errorWithDomain:@"Photo" code:400 userInfo:@{@"msg": @"add group with empty name"}];
+        ExecuteBlock2IfNotNil(failureBlock, name, error);
+        return;
+    }
+
+
     // 先判断有没有权限
     if (![DeviceUtil isPhotoAuthorized]) {
         DDLogError(@"oh no, photo is not authorized");
-        ExecuteBlock2IfNotNil(failureBlock, name, nil);
+        NSError *error = [NSError errorWithDomain:@"Photo" code:400 userInfo:@{@"msg": @"not authorized"}];
+        ExecuteBlock2IfNotNil(failureBlock, name, error);
         return;
     }
     
@@ -464,7 +473,7 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
             }
             
             NSString *groupName = [group valueForProperty:ALAssetsGroupPropertyName];
-            if ([name isEqualToString:groupName]) {
+            if (groupName && [name isEqualToString:groupName]) {
                 theGroup = group;
                 DDLogInfo(@"yes, find group[%@]!", name);
                 *stop = YES;
