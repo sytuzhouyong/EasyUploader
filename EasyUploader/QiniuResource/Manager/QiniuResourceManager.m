@@ -10,15 +10,24 @@
 
 #define kHttpManager    [AFHTTPSessionManager manager]
 
+@interface QiniuResourceManager ()
+
+@property (nonatomic, strong) NSMutableDictionary *domainDict;
+
+@end
+
 @implementation QiniuResourceManager
 
-SINGLETON_IMPLEMENTATION(QiniuResourceManager);
+SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
+
+- (void)init_additional {
+    self.domainDict = [NSMutableDictionary dictionary];
+}
 
 // 查询指定 bucket 的资源
 + (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
     NSString *requestPath = [NSString stringWithFormat:@"/list?bucket=%@&prefix=%@&limit=%d&delimiter=/", bucket.name, prefix, limit];
     NSLog(@"request url = %@", requestPath);
-//    NSString *requestPath = [NSString stringWithFormat:@"/list?bucket=%@&limit=%d&delimiter=", bucket, limit];
     [self.class sendRequestWithPath:requestPath body:@"" host:kQiniuResourceHost andHandler:^(BOOL success, id responseObject) {
         NSLog(@"response = %@", responseObject);
         NSArray<QiniuResource *> *resources = nil;
@@ -40,6 +49,16 @@ SINGLETON_IMPLEMENTATION(QiniuResourceManager);
     }];
 }
 
+- (void)queryDomainOfBucket:(QiniuBucket *)bucket withHandler:(StringArrayHandler)handler {
+    NSString *url = [NSString stringWithFormat:@"/v6/domain/list?tbl=%@", bucket.name];
+    [self.class sendRequestWithPath:url baseURL:kQiniuBaseRequestURL body:@"" host:kQiniuAPIHost andHandler:^(BOOL success, id responseObject) {
+        NSLog(@"response = %@", responseObject);
+        if (success) {
+            self.domainDict[bucket.name] = responseObject;
+        }
+    }];
+}
+
 // 添加 bucket
 + (void)addBucketWithName:(NSString *)name {
 //    NSString *requestPath =  @"/buckets";
@@ -48,15 +67,15 @@ SINGLETON_IMPLEMENTATION(QiniuResourceManager);
     ;
 }
 
-+ (void)sendRequestWithPath:(NSString *)path body:(NSString *)body host:(NSString *)host andHandler:(RequestHandler)handler {
++ (void)sendRequestWithPath:(NSString *)path baseURL:(NSString *)baseURL body:(NSString *)body host:(NSString *)host andHandler:(RequestHandler)handler {
     NSString *authedPath = [self.class authRequestPath:path andBody:body];
-    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuBaseRequestURL, path];
+    NSString *url = [NSString stringWithFormat:@"%@%@", baseURL, path];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [request setValue:authedPath forHTTPHeaderField:@"Authorization"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setValue:host forHTTPHeaderField:@"Host"];
-    
+
     [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         BOOL success = YES;
         if (error != nil) {
@@ -65,6 +84,10 @@ SINGLETON_IMPLEMENTATION(QiniuResourceManager);
         }
         ExecuteBlock2IfNotNil(handler, success, responseObject);
     }] resume];
+}
+
++ (void)sendRequestWithPath:(NSString *)path body:(NSString *)body host:(NSString *)host andHandler:(RequestHandler)handler {
+    [self.class sendRequestWithPath:path baseURL:kQiniuBaseRequestURL body:body host:host andHandler:handler];
 }
 
 // 生成指定请求的 URL 的管理凭证

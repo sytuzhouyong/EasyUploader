@@ -12,6 +12,6 @@
 
 SINGLETON_DECLEAR;
 
-- (void)uploadALAsset:(ALAsset *)asset withKey:(NSString *)key;
+- (void)uploadALAsset:(ALAsset *)asset toBucket:(NSString *)bucket withKey:(NSString *)key;
 
 @end

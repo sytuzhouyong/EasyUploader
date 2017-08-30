@@ -58,7 +58,7 @@
         for (ALAsset *asset in selectedResources) {
             NSString *key = [ALAssetUtil millisecondDateStringOfALAsset:asset];
             NSLog(@"key = %@", key);
-            [[QiniuUploadManager sharedInstance] uploadALAsset:asset withKey:key];
+            [[QiniuUploadManager sharedInstance] uploadALAsset:asset toBucket:@"" withKey:key];
         }
     }];
 
