@@ -29,7 +29,7 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 
 - (void)downloadResourceWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler {
     NSString *url = [NSString stringWithFormat:@"%@/%@", kQiniuResourceDownloadURL, key];
-    NSString *downloadURL = [self makeDownloadTokenOfKey:key url:url];
+    NSString *downloadURL = [self makeDownloadTokenOfKey:key url:url containParam:NO];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
     [[self.manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress) {
@@ -65,12 +65,12 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 }
 
 - (NSURL *)resourceThumbnailURLWithKey:(NSString *)key {
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@-resource_thumbnail", kQiniuResourceDownloadURL, key];
-    NSString *downloadURLString = [self makeDownloadTokenOfKey:key url:urlString];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?imageView2/1/w/80/h/80/format/jpg/q/100", kQiniuResourceDownloadURL, key];
+    NSString *downloadURLString = [self makeDownloadTokenOfKey:key url:urlString containParam:YES];
     return [NSURL URLWithString:downloadURLString];
 }
 
-- (NSString *)makeDownloadTokenOfKey:(NSString *)key url:(NSString *)url {
+- (NSString *)makeDownloadTokenOfKey:(NSString *)key url:(NSString *)url containParam:(BOOL)containParam {
     if (self.downloadURLDict[key]) {
         return self.downloadURLDict[key];
     }
@@ -79,7 +79,8 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
     time(&deadline);    // 返回当前系统时间
     deadline += 3600;   // +3600秒,即默认token保存1小时.
 
-    NSString *tokenURL = [NSString stringWithFormat:@"%@?e=%ld", url, deadline];
+    NSString *paramConnector = containParam ? @"&" : @"?";
+    NSString *tokenURL = [NSString stringWithFormat:@"%@%@e=%ld", url, paramConnector, deadline];
 
     char digestStr[CC_SHA1_DIGEST_LENGTH];
     bzero(digestStr, 0);
