@@ -82,7 +82,7 @@
     CAShapeLayer *maskBorderLayer = [CAShapeLayer layer];
     maskBorderLayer.path = [bezierPath CGPath];
     maskBorderLayer.fillColor = [[UIColor clearColor] CGColor];
-    maskBorderLayer.strokeColor = [[UIColor redColor] CGColor];//边框颜色
+    maskBorderLayer.strokeColor = [[UIColor clearColor] CGColor];//边框颜色
     maskBorderLayer.lineWidth = 2; //边框宽度
     [self.layer addSublayer:maskBorderLayer];
 

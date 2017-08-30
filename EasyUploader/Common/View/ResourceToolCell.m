@@ -49,10 +49,10 @@
         UILabel *label2 = [[UILabel alloc] init];
         label2.font = [UIFont systemFontOfSize:11];
         label2.textColor = [UIColor lightGrayColor];
-        label2.textAlignment = NSTextAlignmentLeft;
+        label2.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:label2];
         [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(40);
+            make.width.mas_equalTo(80);
             make.trailing.equalTo(self.button.mas_leading).offset(-5);
             make.top.equalTo(label1);
             make.height.equalTo(label1);

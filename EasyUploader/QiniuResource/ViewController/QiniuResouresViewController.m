@@ -11,6 +11,7 @@
 #import "QiniuResourceContentViewController.h"
 #import "PathView.h"
 
+#define kContentInset   0
 
 @interface QiniuResouresViewController ()
 
@@ -70,7 +71,6 @@
 
     self.contentView = [[UIView alloc] init];
     self.contentView.clipsToBounds = YES;
-    self.contentView.backgroundColor = [UIColor orangeColor];
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.bottom.equalTo(self.view);
@@ -80,7 +80,7 @@
     QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:@"" parentVC:self];
     [self.contentView addSubview:vc.view];
     [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(5, 5, 5, 5));
+        make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(kContentInset, kContentInset, kContentInset, kContentInset));
     }];
 }
 
@@ -119,7 +119,7 @@
 
 - (void)enterNewContentVCNamed:(NSString *)name {
     UIViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:name parentVC:self];
-    vc.view.frame = CGRectOffset(CGRectInset(self.contentView.bounds, 5, 5), kWindowWidth, 0);
+    vc.view.frame = CGRectOffset(CGRectInset(self.contentView.bounds, kContentInset, kContentInset), kWindowWidth, 0);
     [self.contentView addSubview:vc.view];
     // notice: must have a delay, because vc.view must has benn in view hierarchy
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
