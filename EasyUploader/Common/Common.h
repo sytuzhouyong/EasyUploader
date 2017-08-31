@@ -34,13 +34,6 @@
 #import "QiniuUploadManager.h"
 #import "ZyxPhotoManager.h"
 
-
-typedef NS_ENUM(NSUInteger, ZyxImagePickerSelectionMode) {
-    ZyxImagePickerSelectionModeNone,
-    ZyxImagePickerSelectionModeSingle,
-    ZyxImagePickerSelectionModeMultiple,
-};
-
 //#import "BaseViewController.h"
 #import "UIView+Frame.h"
 #import "UINormalTableViewCell.h"

@@ -10,7 +10,7 @@
 
 @interface ConfirmUploadPathToolView : UIView
 
-@property (nonatomic, strong) UIButton *addDirButon;
-@property (nonatomic, strong) UIButton *confirmButton;
+@property (nonatomic, copy) ButtonHandler addDirHandler;
+@property (nonatomic, copy) ButtonHandler confirmPathHandler;
 
 @end

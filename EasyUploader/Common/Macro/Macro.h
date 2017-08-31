@@ -26,4 +26,12 @@
 
 #define kQiniuPathDelimiter          @"/"
 
+typedef void (^ButtonHandler) (UIButton *button);
+
+typedef NS_ENUM(NSUInteger, ZyxImagePickerSelectionMode) {
+    ZyxImagePickerSelectionModeNone,
+    ZyxImagePickerSelectionModeSingle,
+    ZyxImagePickerSelectionModeMultiple,
+};
+
 #endif /* Macro_h */

@@ -14,7 +14,6 @@
 #define kDirCellIdentifier      @"DirResourceCellIdentifier"
 #define kFileCellIdentifier     @"FileResourceCellIdentifier"
 
-typedef void (^ButtonHandler) (UIButton *button);
 typedef ButtonHandler ExpandButtonHandler;
 
 @interface ToolCell : UITableViewCell

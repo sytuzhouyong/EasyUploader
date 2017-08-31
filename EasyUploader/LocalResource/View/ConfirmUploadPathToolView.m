@@ -8,6 +8,10 @@
 
 #import "ConfirmUploadPathToolView.h"
 
+@interface ConfirmUploadPathToolView ()
+
+@end
+
 @implementation ConfirmUploadPathToolView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -29,6 +33,13 @@
             make.leading.equalTo(addButton.mas_trailing).offset(10);
             make.trailing.equalTo(self).offset(-10);
             make.width.equalTo(addButton);
+        }];
+
+        [[addButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            ExecuteBlock1IfNotNil(self.addDirHandler, x);
+        }];
+        [[confirmButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            ExecuteBlock1IfNotNil(self.confirmPathHandler, x);
         }];
     }
     return self;

@@ -10,7 +10,7 @@
 
 @interface QiniuResourceContentViewController : UITableViewController
 
-@property (nonatomic, assign) NSUInteger depth;
+@property (nonatomic, copy, readonly) NSString *currentPath;
 
 - (instancetype)initWithBucket:(QiniuBucket *)bucket path:(NSString *)path parentVC:(UIViewController *)parentVC;
 

@@ -21,8 +21,8 @@
 @property (nonatomic, strong) UIView *pathSelectView;
 
 @property (nonatomic, strong) QiniuBucket *bucket;
-@property (nonatomic, strong) NSMutableArray *paths;
-@property (nonatomic, strong) NSMutableArray *contentVCs;
+@property (nonatomic, strong) NSMutableArray<NSString *> *paths;
+@property (nonatomic, strong) NSMutableArray<QiniuResourceContentViewController *> *contentVCs;
 @property (nonatomic, assign) NSUInteger currentPathIndex;
 
 @end
@@ -75,6 +75,13 @@
 
     if (kAppDelegate.isUnderPathSelectMode) {
         ConfirmUploadPathToolView *toolView = [ConfirmUploadPathToolView new];
+        toolView.addDirHandler = ^(UIButton *btn) {
+        };
+        toolView.confirmPathHandler = ^(UIButton *btn) {
+            NSString *path = self.contentVCs[self.currentPathIndex].currentPath;
+            NSLog(@"path = %@", path);
+        };
+
         [self.view addSubview:toolView];
         [toolView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.trailing.bottom.equalTo(self.view);
