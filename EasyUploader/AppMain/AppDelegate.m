@@ -19,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.isUnderPathSelectMode = NO;
     [kTranslateUtil readLocalLanguageProfiles];
 
     UITabBarController *tabBarController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];

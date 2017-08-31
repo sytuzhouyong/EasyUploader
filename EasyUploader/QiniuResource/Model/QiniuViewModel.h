@@ -48,7 +48,7 @@
 
 @interface QiniuResourceViewModel : NSObject
 
-- (instancetype)initWithResources:(NSArray *)resources;
+- (instancetype)initWithResources:(NSArray *)resources type:(QiniuResourceType)type;
 
 - (QiniuResource *)resourceAtIndexPath:(NSIndexPath *)indexPath;
 - (NSUInteger)numberOfResources;

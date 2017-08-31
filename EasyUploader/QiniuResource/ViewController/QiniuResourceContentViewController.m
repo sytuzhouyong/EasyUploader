@@ -48,7 +48,8 @@
 
     [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:100 handler:^(NSArray<QiniuResource *> *resources) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources];
+            QiniuResourceType type = kAppDelegate.isUnderPathSelectMode ? QiniuResourceTypeDir : QiniuResourceTypeAll;
+            self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources type:type];
             [self.tableView reloadData];
         });
     }];

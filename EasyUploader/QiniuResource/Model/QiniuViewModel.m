@@ -85,12 +85,17 @@
 
 @implementation QiniuResourceViewModel
 
-- (instancetype)initWithResources:(NSArray *)resources {
+- (instancetype)initWithResources:(NSArray *)resources type:(QiniuResourceType)type {
     if (self = [super init]) {
         self.cellModels = [NSMutableArray arrayWithCapacity:resources.count];
-        for (int i=0; i<resources.count; i++) {
-            [self.cellModels addObject:[[QiniuResourceCellModel alloc] initWithResource:resources[i]]];
-        }
+        [resources enumerateObjectsUsingBlock:^(QiniuResource *obj, NSUInteger idx, BOOL *stop) {
+            if ((type & QiniuResourceTypeDir) && obj.type == QiniuResourceTypeDir) {
+                [self.cellModels addObject:[[QiniuResourceCellModel alloc] initWithResource:obj]];
+            }
+            if ((type & QiniuResourceTypeFile) && obj.type == QiniuResourceTypeFile) {
+                [self.cellModels addObject:[[QiniuResourceCellModel alloc] initWithResource:obj]];
+            }
+        }];
     }
     return self;
 }

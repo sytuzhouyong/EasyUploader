@@ -14,18 +14,8 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor darkGrayColor];
 
-        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        addButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [addButton setBackgroundColor:[UIColor lightGrayColor]];
-        [addButton setTitle:@"新建文件夹" forState:UIControlStateNormal];
-        [addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
-        UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        confirmButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [confirmButton setBackgroundColor:kNavigationBarColor];
-        [confirmButton setTitle:@"选定" forState:UIControlStateNormal];
-        [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
+        UIButton *addButton = [self.class buttonWithTitle:@"新建文件夹" backgroundColor:[UIColor lightGrayColor]];
+        UIButton *confirmButton = [self.class buttonWithTitle:@"选定" backgroundColor:kNavigationBarColor];
         [self addSubview:addButton];
         [self addSubview:confirmButton];
         [addButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -40,9 +30,18 @@
             make.trailing.equalTo(self).offset(-10);
             make.width.equalTo(addButton);
         }];
-
     }
     return self;
+}
+
++ (UIButton *)buttonWithTitle:(NSString *)title backgroundColor:(UIColor *)color {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.layer.cornerRadius = 4;
+    button.titleLabel.font = [UIFont systemFontOfSize:14];
+    [button setBackgroundColor:color];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    return button;
 }
 
 @end

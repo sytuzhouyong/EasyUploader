@@ -15,7 +15,6 @@
 - (instancetype)initWithBucket:(QiniuBucket *)bucket;
 - (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths;
 
-- (void)setSelectPathFlag:(BOOL)isSelectPath;
 
 - (void)addNewContentVC:(UIViewController *)vc named:(NSString *)path;
 - (NSInteger)haveEnteredConentVCNamed:(NSString *)path;

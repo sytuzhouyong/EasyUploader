@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, QiniuResourceType) {
-    QiniuResourceTypeDir,
-    QiniuResourceTypeFile,
+    QiniuResourceTypeDir    = 0x01,
+    QiniuResourceTypeFile   = 0x02,
+    QiniuResourceTypeAll    = 0x03,
 };
 
 

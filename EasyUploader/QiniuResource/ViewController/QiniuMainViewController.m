@@ -24,7 +24,6 @@
 @property (nonatomic, strong) QiniuBucketViewModel *viewModel;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, copy) ExpandButtonHandler expandHandler;
-@property (nonatomic, assign) BOOL isSelectingPath;
 
 @end
 
@@ -38,7 +37,7 @@
 
     // 不为空说明是选择上传路径界面
     if (self.presentingViewController != nil) {
-        self.isSelectingPath = YES;
+        kAppDelegate.isUnderPathSelectMode = YES;
         self.title = @"选择目录";
 
         UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithImage:UIImageNamed(@"icon_arrow_left") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonPressed)];
@@ -66,6 +65,7 @@
 
 - (void)cancelButtonPressed {
     [self dismissViewControllerAnimated:YES completion:nil];
+    kAppDelegate.isUnderPathSelectMode = NO;
 }
 
 - (void)initHandlers {
@@ -122,12 +122,11 @@
     QiniuBucket *bucket = self.viewModel.cellModels[indexPath.row].bucket;
     kQiniuResourceManager.selectedBucket = bucket;
 
-//    [kQiniuResourceManager queryDomainOfBucket:bucket withHandler:^(NSArray<NSString *> *strings) {
-//        ;
-//    }];
+    [kQiniuResourceManager queryDomainOfBucket:bucket withHandler:^(NSArray<NSString *> *strings) {
+        ;
+    }];
 
     QiniuResouresViewController *vc = [[QiniuResouresViewController alloc] initWithBucket:bucket];
-    [vc setSelectPathFlag:self.isSelectingPath];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

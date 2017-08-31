@@ -24,7 +24,6 @@
 @property (nonatomic, strong) NSMutableArray *paths;
 @property (nonatomic, strong) NSMutableArray *contentVCs;
 @property (nonatomic, assign) NSUInteger currentPathIndex;
-@property (nonatomic, assign) BOOL isPathSelecting;
 
 @end
 
@@ -35,7 +34,6 @@
         self.bucket = bucket;
         self.paths = [NSMutableArray array];
         self.contentVCs = [NSMutableArray array];
-        self.isPathSelecting = NO;
     }
     return self;
 }
@@ -75,7 +73,7 @@
 
     MASViewAttribute *attr = self.view.mas_bottom;
 
-    if (self.isPathSelecting) {
+    if (kAppDelegate.isUnderPathSelectMode) {
         ConfirmUploadPathToolView *toolView = [ConfirmUploadPathToolView new];
         [self.view addSubview:toolView];
         [toolView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,10 +97,6 @@
     [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(kContentInset, kContentInset, kContentInset, kContentInset));
     }];
-}
-
-- (void)setSelectPathFlag:(BOOL)isSelectPath {
-    self.isPathSelecting = isSelectPath;
 }
 
 #pragma mark - Button Event
