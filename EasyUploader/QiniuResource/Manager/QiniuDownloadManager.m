@@ -66,11 +66,13 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 
 - (NSURL *)resourceThumbnailURLWithKey:(NSString *)key {
     NSString *urlString = [NSString stringWithFormat:@"%@/%@?imageView2/1/w/80/h/80/format/jpg/q/100", kQiniuResourceDownloadURL, key];
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *downloadURLString = [self makeDownloadTokenOfKey:key url:urlString containParam:YES];
     return [NSURL URLWithString:downloadURLString];
 }
 
 - (NSString *)makeDownloadTokenOfKey:(NSString *)key url:(NSString *)url containParam:(BOOL)containParam {
+    // reuse token with key
     if (self.downloadURLDict[key]) {
         return self.downloadURLDict[key];
     }
