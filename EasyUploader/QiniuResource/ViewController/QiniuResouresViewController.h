@@ -8,6 +8,8 @@
 
 #import "ToolCell.h"
 
+@class QiniuResourceContentViewController;
+
 @interface QiniuResouresViewController : UIViewController
 
 @property (nonatomic, strong, readonly) NSArray *paths;
@@ -16,7 +18,7 @@
 - (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths;
 
 
-- (void)addNewContentVC:(UIViewController *)vc named:(NSString *)path;
+- (void)addNewContentVC:(QiniuResourceContentViewController *)vc named:(NSString *)path;
 - (NSInteger)haveEnteredConentVCNamed:(NSString *)path;
 - (void)enterContentVCNamed:(NSString *)name;
 

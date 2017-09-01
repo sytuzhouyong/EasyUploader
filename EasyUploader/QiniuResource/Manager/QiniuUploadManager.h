@@ -12,6 +12,8 @@
 
 SINGLETON_DECLEAR;
 
+@property (nonatomic, copy) NSString *uploadPath;
+
 - (void)uploadALAsset:(ALAsset *)asset toBucket:(NSString *)bucket withKey:(NSString *)key;
 
 @end

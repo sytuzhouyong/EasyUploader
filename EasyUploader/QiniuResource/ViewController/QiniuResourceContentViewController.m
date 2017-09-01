@@ -116,24 +116,12 @@
     if (resource.type == QiniuResourceTypeFile) {
         return;
     }
-
-    // TODO: 不存在说明 1.是新的 2.是同级的其他目录
     [self.parentVC enterContentVCNamed:resource.name];
 }
 
 - (void)viewDidLayoutSubviews {
     [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
     [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
-}
-
-- (NSString *)prefixFromPaths:(NSArray *)paths {
-    NSMutableString *path = [NSMutableString string];
-    [paths enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
-        if (idx != 0) {
-            [path appendString:obj];
-        }
-    }];
-    return path;
 }
 
 - (void)didReceiveMemoryWarning {

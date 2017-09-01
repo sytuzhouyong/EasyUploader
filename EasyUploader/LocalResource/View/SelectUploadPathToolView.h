@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^SelectPathHandler) ();
+
 @interface SelectUploadPathToolView : UIView
 
-@property (nonatomic, strong) UILabel *pathTipLabel;
-@property (nonatomic, strong) UIButton *selectPathButon;
-@property (nonatomic, strong) UIButton *uploadButton;
+@property (nonatomic, copy) SelectPathHandler selectPathHandler;
+@property (nonatomic, copy) ButtonHandler uploadHandler;
+
+- (instancetype)initWithFrame:(CGRect)frame uploadPath:(NSString *)path;
+
+- (void)enableUploadButton:(BOOL)enable;
+- (void)updatePath:(NSString *)path;
 
 @end

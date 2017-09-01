@@ -10,6 +10,7 @@
 #import "QiniuBucket.h"
 #import "QiniuResource.h"
 
+
 @interface QiniuResourceManager : NSObject
 
 SINGLETON_DECLEAR;

@@ -9,9 +9,16 @@
 #import "SelectUploadPathToolView.h"
 #import "ZyxImageTitleButton.h"
 
+@interface SelectUploadPathToolView ()
+
+@property (nonatomic, strong) UIButton *selectPathButon;
+@property (nonatomic, strong) UIButton *uploadButton;
+
+@end
+
 @implementation SelectUploadPathToolView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame uploadPath:(NSString *)path {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor darkGrayColor];
 
@@ -56,11 +63,25 @@
             make.bottom.equalTo(self).offset(-5);
         }];
 
-        self.pathTipLabel = tipLabel;
         self.uploadButton = uploadButton;
         self.selectPathButon = pathButton;
+
+        [[uploadButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            ExecuteBlock1IfNotNil(self.uploadHandler, x);
+        }];
+        [[pathButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            ExecuteBlock1IfNotNil(self.selectPathHandler, path);
+        }];
     }
     return self;
+}
+
+- (void)enableUploadButton:(BOOL)enable {
+    self.uploadButton.enabled = enable;
+}
+
+- (void)updatePath:(NSString *)path {
+    [self.selectPathButon setTitle:path forState:UIControlStateNormal];
 }
 
 @end

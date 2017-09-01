@@ -49,20 +49,23 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tabBarController.tabBar.hidden = YES;
 
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(uploadButtonClicked)];
+
     [self addSubviews];
     self.currentPathIndex = self.paths.count - 1;
 }
 
 - (void)addSubviews {
-    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(uploadButtonClicked)];
-    self.navigationItem.rightBarButtonItem = button;
-
     kWeakself;
     self.pathView = [[PathView alloc] initWithResourePaths:self.paths pathSelectHandler:^(NSUInteger index) {
         if (index == self.currentPathIndex) {
             return;
         }
         [weakself updateUIWhenEnterContentVCAtIndex:index];
+
+        if (kAppDelegate.isUnderPathSelectMode) {
+            kQiniuUploadManager.uploadPath = [self selectActivePath];
+        }
     }];
     [self.view addSubview:self.pathView];
     [self.pathView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -109,6 +112,8 @@
 #pragma mark - Button Event
 
 - (void)uploadButtonClicked {
+    kQiniuUploadManager.uploadPath = [self selectActivePath];
+
     LocalMainViewController *vc = [[LocalMainViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -117,7 +122,7 @@
 
 # pragma mark - Enter Content View
 
-- (void)addNewContentVC:(UIViewController *)vc named:(NSString *)path {
+- (void)addNewContentVC:(QiniuResourceContentViewController *)vc named:(NSString *)path {
     NSString *fixedPath = self.bucket.name;
     if (path.length != 0) {
         fixedPath = [path componentsSeparatedByString:@"/"].lastObject;
@@ -194,6 +199,38 @@
 
 - (void)updateUIWhenEnterNewContentVC {
     [self updateUIWhenEnterContentVCAtIndex:self.paths.count-1];
+}
+
+#pragma mark - Path Select
+
+typedef BOOL (^PathPredict)(NSUInteger pathIndex);
+
+- (NSString *)currentFullPathWithPredict:(PathPredict)predict {
+    NSMutableString *path = [NSMutableString string];
+    [self.paths enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        BOOL passed = predict ? predict(idx) : TRUE;
+        if (passed) {
+            [path appendString:obj];
+            [path appendString:kQiniuPathDelimiter];
+        }
+    }];
+    if (path.length == 0) {
+        return self.bucket.name;
+    } else {
+        return [path substringToIndex:path.length - 1];
+    }
+}
+
+- (NSString *)selectFullPath {
+    return [self currentFullPathWithPredict:^BOOL(NSUInteger pathIndex) {
+        return pathIndex != 0;
+    }];
+}
+
+- (NSString *)selectActivePath {
+    return [self currentFullPathWithPredict:^BOOL(NSUInteger pathIndex) {
+        return pathIndex != 0 && pathIndex <= self.currentPathIndex;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

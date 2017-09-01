@@ -23,6 +23,7 @@
 
 #define kQiniuResourceManager       [QiniuResourceManager sharedInstance]
 #define kQiniuDownloadManager       [QiniuDownloadManager sharedInstance]
+#define kQiniuUploadManager         [QiniuUploadManager sharedInstance]
 
 #define kQiniuPathDelimiter          @"/"
 

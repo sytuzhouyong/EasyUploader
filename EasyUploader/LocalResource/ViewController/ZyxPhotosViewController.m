@@ -53,14 +53,17 @@
     // Do any additional setup after loading the view.
     [self addSubviews];
 
-    [[self.toolView.uploadButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        NSArray<ALAsset *> *selectedResources = [self selectedPhotos];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:0 target:self action:@selector(selectAllButtonPressed:)];
+
+    kWeakself;
+    self.toolView.uploadHandler = ^(id x) {
+        NSArray<ALAsset *> *selectedResources = [weakself selectedPhotos];
         for (ALAsset *asset in selectedResources) {
             NSString *key = [ALAssetUtil millisecondDateStringOfALAsset:asset];
             NSLog(@"key = %@", key);
             [[QiniuUploadManager sharedInstance] uploadALAsset:asset toBucket:@"" withKey:key];
         }
-    }];
+    };
 
     [[self rac_signalForSelector:@selector(collectionView:didSelectItemAtIndexPath:)] subscribeNext:^(id x) {
         self.isSelectAnyResource = [self isSelectAnyResource];
@@ -70,7 +73,7 @@
     }];
 
     [RACObserve(self, isSelectAnyResource) subscribeNext: ^(id object){
-        self.toolView.uploadButton.enabled = [object boolValue];
+        [self.toolView enableUploadButton: [object boolValue]];
     }];
 
 }
@@ -84,7 +87,7 @@
 }
 
 - (void)addSubviews {
-    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllButtonPressed)];
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:UIBarButtonItemStylePlain target:self action:@selector(selectAllButtonPressed:)];
     self.navigationController.navigationItem.rightBarButtonItem = button;
 
     [self.view addSubview:self.toolView];
@@ -100,12 +103,13 @@
         make.bottom.equalTo(self.toolView.mas_top);
     }];
 
-    [[self.toolView.selectPathButon rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+    kWeakself;
+    self.toolView.selectPathHandler = ^(NSString *path) {
         QiniuMainViewController *vc = [QiniuMainViewController new];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentViewController:nav animated:YES completion:nil];
-    }];
+        [weakself presentViewController:nav animated:YES completion:nil];
+    };
 }
 
 # pragma mark - Resource Enum
@@ -222,9 +226,9 @@
 
 #pragma mark - Button Action
 
-- (void)selectAllButtonPressed {
+- (void)selectAllButtonPressed:(UIBarButtonItem *)item {
     self.isSelectAll = !self.isSelectAll;
-    self.navigationController.navigationItem.rightBarButtonItem.title = self.isSelectAll ? @"取消全选" : @"全选";
+    item.title = self.isSelectAll ? @"取消全选" : @"全选";
     self.isSelectAnyResource = self.isSelectAll;
 }
 
@@ -361,8 +365,9 @@
 - (SelectUploadPathToolView *)toolView {
     ReturnObjectIfNotNil(_toolView);
 
-    SelectUploadPathToolView *view = [[SelectUploadPathToolView alloc] init];
-    [view.selectPathButon setTitle:kQiniuResourceManager.selectedBucket.name forState:UIControlStateNormal];
+    SelectUploadPathToolView *view = [[SelectUploadPathToolView alloc] initWithFrame:CGRectZero uploadPath:kQiniuUploadManager.uploadPath];
+    NSString *lastPathCompenment = kQiniuUploadManager.uploadPath.lastPathComponent;
+    [view updatePath:lastPathCompenment];
     _toolView = view;
     return view;
 }
