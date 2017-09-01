@@ -36,8 +36,7 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
     // 不为空说明是选择上传路径界面
-    if (self.presentingViewController != nil) {
-        kAppDelegate.isUnderPathSelectMode = YES;
+    if (kAppDelegate.isUnderPathSelectMode) {
         self.title = @"选择目录";
 
         UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithImage:UIImageNamed(@"icon_arrow_left") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonPressed)];

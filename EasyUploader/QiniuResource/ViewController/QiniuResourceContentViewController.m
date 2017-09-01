@@ -25,11 +25,11 @@
 
 @implementation QiniuResourceContentViewController
 
+// name: full path, for example: test1/test11
 - (instancetype)initWithBucket:(QiniuBucket *)bucket path:(NSString *)name parentVC:(UIViewController *)parentVC {
     if ( self = [super initWithStyle:UITableViewStylePlain]) {
         self.bucket = bucket;
         self.parentVC = (QiniuResouresViewController *)parentVC;
-        [self.parentVC addNewContentVC:self named:name];
         self.currentPath = name.length == 0 ? @"" : [NSString stringWithFormat:@"%@/", name];
     }
     return self;

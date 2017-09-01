@@ -32,14 +32,14 @@
 - (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths {
     if (self = [super initWithNibName:nil bundle:nil]) {
         self.bucket = bucket;
-        self.paths = [NSMutableArray array];
+        self.paths = [NSMutableArray arrayWithArray:paths];
         self.contentVCs = [NSMutableArray array];
     }
     return self;
 }
 
 - (instancetype)initWithBucket:(QiniuBucket *)bucket {
-    return [self initWithBucket:bucket paths:nil];
+    return [self initWithBucket:bucket paths:@[@""]];
 }
 
 - (void)viewDidLoad {
@@ -52,12 +52,31 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(uploadButtonClicked)];
 
     [self addSubviews];
+
+    NSString *tempPath = @"";
+    for (NSUInteger i=0; i<self.paths.count; i++) {
+        NSString *item = self.paths[i];
+        tempPath = item.length == 0 ? @"" : [NSString stringWithFormat:@"%@/%@", tempPath, item];
+
+        QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:tempPath parentVC:self];
+        [self.contentVCs addObject:vc];
+        [self.contentView addSubview:vc.view];
+//        [self addChildViewController:vc];
+        [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(kContentInset, kContentInset, kContentInset, kContentInset));
+        }];
+    }
+
     self.currentPathIndex = self.paths.count - 1;
 }
 
 - (void)addSubviews {
     kWeakself;
-    self.pathView = [[PathView alloc] initWithResourePaths:self.paths pathSelectHandler:^(NSUInteger index) {
+    NSMutableArray<NSString *> *paths = [NSMutableArray arrayWithArray:self.paths];
+    if (paths[0].length == 0) {
+        paths[0] = self.bucket.name;
+    }
+    self.pathView = [[PathView alloc] initWithResourePaths:paths pathSelectHandler:^(NSUInteger index) {
         if (index == self.currentPathIndex) {
             return;
         }
@@ -101,12 +120,6 @@
         make.top.equalTo(self.pathView.mas_bottom);
         make.bottom.equalTo(attr);
     }];
-
-    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:@"" parentVC:self];
-    [self.contentView addSubview:vc.view];
-    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(kContentInset, kContentInset, kContentInset, kContentInset));
-    }];
 }
 
 #pragma mark - Button Event
@@ -127,8 +140,8 @@
     if (path.length != 0) {
         fixedPath = [path componentsSeparatedByString:@"/"].lastObject;
     }
-
     [_paths addObject:fixedPath];
+
     [self.pathView appendPath:fixedPath];
     [self.contentVCs addObject:vc];
 }
@@ -145,7 +158,9 @@
 }
 
 - (void)enterNewContentVCNamed:(NSString *)name {
-    UIViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:name parentVC:self];
+    QiniuResourceContentViewController *vc = [[QiniuResourceContentViewController alloc] initWithBucket:self.bucket path:name parentVC:self];
+    [self addNewContentVC:vc named:name];
+
     vc.view.frame = CGRectOffset(CGRectInset(self.contentView.bounds, kContentInset, kContentInset), kWindowWidth, 0);
     [self.contentView addSubview:vc.view];
     // notice: must have a delay, because vc.view must has benn in view hierarchy
@@ -154,6 +169,8 @@
     });
 }
 
+
+// name: full path such as test1/test11
 - (void)enterContentVCNamed:(NSString *)name {
     // first judge whether have entered content vc
     NSInteger enteredIndex = [self haveEnteredConentVCNamed:name];
@@ -223,13 +240,13 @@ typedef BOOL (^PathPredict)(NSUInteger pathIndex);
 
 - (NSString *)selectFullPath {
     return [self currentFullPathWithPredict:^BOOL(NSUInteger pathIndex) {
-        return pathIndex != 0;
+        return YES;
     }];
 }
 
 - (NSString *)selectActivePath {
     return [self currentFullPathWithPredict:^BOOL(NSUInteger pathIndex) {
-        return pathIndex != 0 && pathIndex <= self.currentPathIndex;
+        return pathIndex <= self.currentPathIndex;
     }];
 }
 

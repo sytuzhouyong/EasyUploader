@@ -11,6 +11,8 @@
 #import "ZyxPhotoCollectionViewCell.h"
 #import "SelectUploadPathToolView.h"
 #import "QiniuMainViewController.h"
+#import "QiniuResourceContentViewController.h"
+#import "QiniuResouresViewController.h"
 
 #define kPhotoCellIdentifier            @"ZyxPhotoCell"
 #define kPhotoSectionHeaderIdentifier   @"ZyxPhotoSectionHeader"
@@ -105,8 +107,16 @@
 
     kWeakself;
     self.toolView.selectPathHandler = ^(NSString *path) {
-        QiniuMainViewController *vc = [QiniuMainViewController new];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        kAppDelegate.isUnderPathSelectMode = YES;
+        
+        QiniuBucket *bucket = kQiniuResourceManager.selectedBucket;
+        NSArray *paths = [path componentsSeparatedByString:@"/"];
+
+        QiniuMainViewController *mainVC = [QiniuMainViewController new];
+        QiniuResouresViewController *resourcesVC = [[QiniuResouresViewController alloc] initWithBucket:bucket paths:paths];
+        
+        UINavigationController *nav = [[UINavigationController alloc] init];
+        nav.viewControllers = @[mainVC, resourcesVC];
         nav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [weakself presentViewController:nav animated:YES completion:nil];
     };
