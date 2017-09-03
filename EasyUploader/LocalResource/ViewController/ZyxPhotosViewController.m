@@ -58,12 +58,14 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:0 target:self action:@selector(selectAllButtonPressed:)];
 
     kWeakself;
+    // 上传资源
     self.toolView.uploadHandler = ^(id x) {
         NSArray<ALAsset *> *selectedResources = [weakself selectedPhotos];
         for (ALAsset *asset in selectedResources) {
             NSString *key = [ALAssetUtil millisecondDateStringOfALAsset:asset];
             NSLog(@"key = %@", key);
-            [[QiniuUploadManager sharedInstance] uploadALAsset:asset toBucket:@"" withKey:key];
+            QiniuBucket *bucket = kQiniuResourceManager.selectedBucket;
+            [kQiniuUploadManager uploadALAsset:asset toBucket:bucket.name withKey:key];
         }
     };
 

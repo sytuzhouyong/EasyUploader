@@ -31,7 +31,7 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
 }
 
 - (NSString *)makeUploadTokenOfBucket:(NSString *)bucket withKey:(NSString *)key {
-    NSString *policy = [self defaultUploadPolicyOfBucket:(NSString *)bucket withKey:key];
+    NSString *policy = [self defaultUploadPolicyOfBucket:bucket withKey:key];
     NSData *policyData = [policy dataUsingEncoding:NSUTF8StringEncoding];
 
     NSString *encodedPolicy = [GTMBase64 stringByWebSafeEncodingData:policyData padded:TRUE];

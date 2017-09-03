@@ -231,7 +231,7 @@ typedef BOOL (^PathPredict)(NSUInteger pathIndex);
             [path appendString:kQiniuPathDelimiter];
         }
     }];
-    if (path.length == 0) {
+    if ([path isEqualToString:kQiniuPathDelimiter]) {
         return self.bucket.name;
     } else {
         return [path substringToIndex:path.length - 1];
