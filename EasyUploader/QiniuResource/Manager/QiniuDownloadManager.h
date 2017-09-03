@@ -17,6 +17,7 @@ SINGLETON_DECLEAR;
 - (void)downloadResourceWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler;
 - (void)downloadResourceThumbnailWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler;
 
-- (NSURL *)resourceThumbnailURLWithKey:(NSString *)key;
+- (NSURL *)thumbnailURLWithKey:(NSString *)key;
+- (NSURL *)thumbnailURLWithKey:(NSString *)key inBucket:(QiniuBucket *)bucket;
 
 @end

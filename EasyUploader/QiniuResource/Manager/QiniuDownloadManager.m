@@ -47,7 +47,7 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 }
 
 - (void)downloadResourceThumbnailWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler {
-    NSURL *downloadURL = [self resourceThumbnailURLWithKey:key];
+    NSURL *downloadURL = [self thumbnailURLWithKey:key];
     NSURLRequest *request = [NSURLRequest requestWithURL:downloadURL];
 
     [[self.manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress) {
@@ -64,11 +64,17 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
     }] resume];
 }
 
-- (NSURL *)resourceThumbnailURLWithKey:(NSString *)key {
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@?imageView2/1/w/80/h/80/format/jpg/q/100", kQiniuResourceDownloadURL, key];
+- (NSURL *)thumbnailURLWithKey:(NSString *)key {
+    return [self thumbnailURLWithKey:key inBucket:kQiniuResourceManager.selectedBucket];
+}
+
+// 图片资源的缩略图 url
+- (NSURL *)thumbnailURLWithKey:(NSString *)key inBucket:(QiniuBucket *)bucket {
+    NSString *domain = [kQiniuResourceManager domainOfBucket:bucket];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?imageView2/1/w/80/h/80/format/jpg/q/100", domain, key];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *downloadURLString = [self makeDownloadTokenOfKey:key url:urlString containParam:YES];
-    return [NSURL URLWithString:downloadURLString];
+    urlString = [self makeDownloadTokenOfKey:key url:urlString containParam:YES];
+    return [NSURL URLWithString:urlString];
 }
 
 - (NSString *)makeDownloadTokenOfKey:(NSString *)key url:(NSString *)url containParam:(BOOL)containParam {

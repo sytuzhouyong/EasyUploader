@@ -12,7 +12,7 @@
 
 @interface QiniuResourceManager ()
 
-@property (nonatomic, strong) NSMutableDictionary *domainDict;
+@property (nonatomic, strong) NSMutableDictionary *domainsDict;
 
 @end
 
@@ -21,16 +21,56 @@
 SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 
 - (void)init_additional {
-    self.domainDict = [NSMutableDictionary dictionary];
+    self.domainsDict = [NSMutableDictionary dictionary];
+}
+
+- (NSString *)domainOfBucket:(QiniuBucket *)bucket {
+    NSArray *domains = self.domainsDict[bucket.name];
+    if (domains.count == 0) {
+        return @"";
+    }
+
+    NSString *domain = domains.firstObject;
+    return [NSString stringWithFormat:@"http://%@", domain];
+}
+
+// 查询所有 buckets
++ (void)queryAllBucketsWithHandler:(BucketsHandler)handler {
+    NSURLRequest *request = [self.class requestWithHostName:kQiniuResourceHost path:@"/buckets" hostNameInHeader:@"rs.qbox.me"];
+
+    [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
+        NSArray<QiniuBucket *> *buckets = nil;
+        if (success) {
+            buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
+            for (QiniuBucket *bucket in buckets) {
+                [kQiniuResourceManager queryDomainOfBucket:bucket];
+            }
+        }
+        ExecuteBlock1IfNotNil(handler, buckets);
+    }];
+}
+
+// 查询 bucket 的外链域名, 用于资源下载
+- (void)queryDomainOfBucket:(QiniuBucket *)bucket {
+    NSString *path = [NSString stringWithFormat:@"/v6/domain/list?tbl=%@", bucket.name];
+    NSURLRequest *request = [self.class requestWithHostName:kQiniuAPIHost path:path];
+    [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
+        NSLog(@"response = %@", responseObject);
+        if (success) {
+            self.domainsDict[bucket.name] = responseObject;
+        }
+    }];
 }
 
 // 查询指定 bucket 的资源
 + (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
-    NSString *requestPath = [NSString stringWithFormat:@"/list?bucket=%@&prefix=%@&limit=%d&delimiter=/", bucket.name, prefix, limit];
-    NSLog(@"request url = %@", requestPath);
+    NSString *path = [NSString stringWithFormat:@"/list?bucket=%@&prefix=%@&limit=%d&delimiter=/", bucket.name, prefix, limit];
+    NSLog(@"request url = %@", path);
     // if have chinese character, need url encode
-    requestPath = [requestPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self.class sendRequestWithPath:requestPath body:@"" host:kQiniuResourceHost andHandler:^(BOOL success, id responseObject) {
+    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    NSURLRequest *request = [self.class requestWithHostName:kQiniuResourceHost path:path];
+    [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
         NSLog(@"response = %@", responseObject);
         NSArray<QiniuResource *> *resources = nil;
         if (success) {
@@ -40,26 +80,8 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
     }];
 }
 
-// 查询所有 buckets
-+ (void)queryAllBucketsWithHandler:(BucketsHandler)handler {
-    [self.class sendRequestWithPath:@"/buckets" body:@"" host:kQiniuBucketHost andHandler:^(BOOL success, id responseObject) {
-        NSArray<QiniuBucket *> *buckets = nil;
-        if (success) {
-            buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
-        }
-        ExecuteBlock1IfNotNil(handler, buckets);
-    }];
-}
 
-- (void)queryDomainOfBucket:(QiniuBucket *)bucket withHandler:(StringArrayHandler)handler {
-    NSString *url = [NSString stringWithFormat:@"/v6/domain/list?tbl=%@", bucket.name];
-    [self.class sendRequestWithPath:url baseURL:kQiniuBaseRequestURL body:@"" host:kQiniuAPIHost andHandler:^(BOOL success, id responseObject) {
-        NSLog(@"response = %@", responseObject);
-        if (success) {
-            self.domainDict[bucket.name] = responseObject;
-        }
-    }];
-}
+
 
 // 添加 bucket
 + (void)addBucketWithName:(NSString *)name {
@@ -69,27 +91,36 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
     ;
 }
 
-+ (void)sendRequestWithPath:(NSString *)path baseURL:(NSString *)baseURL body:(NSString *)body host:(NSString *)host andHandler:(RequestHandler)handler {
-    NSString *authedPath = [self.class authRequestPath:path andBody:body];
-    NSString *url = [NSString stringWithFormat:@"%@%@", baseURL, path];
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    [request setValue:authedPath forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:host forHTTPHeaderField:@"Host"];
-
++ (void)sendRequest:(NSURLRequest *)request withHandler:(RequestHandler)handler {
     [[[AFHTTPSessionManager manager] dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         BOOL success = YES;
         if (error != nil) {
             success = NO;
-            NSLog(@"resquest [%@] failed, error = %@", path, error);
+            NSLog(@"resquest failed, error = %@", error);
         }
         ExecuteBlock2IfNotNil(handler, success, responseObject);
     }] resume];
 }
 
-+ (void)sendRequestWithPath:(NSString *)path body:(NSString *)body host:(NSString *)host andHandler:(RequestHandler)handler {
-    [self.class sendRequestWithPath:path baseURL:kQiniuBaseRequestURL body:body host:host andHandler:handler];
+
++ (NSURLRequest *)requestWithHostName:(NSString *)host path:(NSString *)path {
+    return [self.class requestWithProtocol:@"http" hostName:host path:path hostNameInHeader:host body:@""];
+}
+
++ (NSURLRequest *)requestWithHostName:(NSString *)host path:(NSString *)path hostNameInHeader:(NSString *)headerHostName {
+    return [self.class requestWithProtocol:@"http" hostName:host path:path hostNameInHeader:headerHostName body:@""];
+}
+
++ (NSURLRequest *)requestWithProtocol:(NSString *)protocol hostName:(NSString *)host path:(NSString *)path hostNameInHeader:(NSString *)headerHostName body:(NSString *)body {
+    NSString *authedPath = [self.class authRequestPath:path andBody:body];
+    NSString *urlString = [NSString stringWithFormat:@"%@://%@%@", protocol, host, path];
+    NSURL *url = [NSURL URLWithString:urlString];
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setValue:authedPath forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:headerHostName forHTTPHeaderField:@"Host"];
+    return request;
 }
 
 // 生成指定请求的 URL 的管理凭证

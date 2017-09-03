@@ -77,7 +77,7 @@
     self.sizeLabel.text = resource.sizeDesc;
 
     if ([resource.mimeType isEqualToString:@"image/jpeg"]) {
-        NSURL *url = [kQiniuDownloadManager resourceThumbnailURLWithKey:resource.name];
+        NSURL *url = [kQiniuDownloadManager thumbnailURLWithKey:resource.name];
         [self.iconImageView sd_setImageWithURL:url placeholderImage:UIImageNamed(@"icon_image")];
     }
 }
@@ -93,7 +93,6 @@
         default:
             break;
     }
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

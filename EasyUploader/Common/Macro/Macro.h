@@ -14,11 +14,9 @@
 #define kAccessKey                  @"ebgn6Ab9Zk8mtWxycGT9ww2GHB3HI5-FTeXGTJTe"
 #define kSecretKey                  @"aqF2ARHxYqekMsxyutZOgahXb_PdVmLeDHfNKh-0"
 
-#define kQiniuBaseRequestURL        @"http://rsf.qbox.me"
-#define kQiniuBucketHost            @"rs.qbox.me"
 #define kQiniuResourceHost          @"rsf.qbox.me"
 #define kQiniuAPIHost               @"api.qiniu.com"
-#define kQiniuResourceDownloadHost  @"onzw106di.bkt.clouddn.com"
+
 #define kQiniuResourceDownloadURL   @"http://onzw106di.bkt.clouddn.com"
 
 #define kQiniuResourceManager       [QiniuResourceManager sharedInstance]
