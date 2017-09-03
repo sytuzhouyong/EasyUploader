@@ -76,7 +76,8 @@
     self.detailLabel.text = resource.createTimeDesc;
     self.sizeLabel.text = resource.sizeDesc;
 
-    if ([resource.mimeType isEqualToString:@"image/jpeg"]) {
+    NSString *mineType = [resource.mimeType substringToIndex:@"image".length + 1];
+    if ([mineType isEqualToString:@"image/"]) {
         NSURL *url = [kQiniuDownloadManager thumbnailURLWithKey:resource.name];
         [self.iconImageView sd_setImageWithURL:url placeholderImage:UIImageNamed(@"icon_image")];
     }
