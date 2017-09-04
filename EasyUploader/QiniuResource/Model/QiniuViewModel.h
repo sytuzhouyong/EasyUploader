@@ -50,9 +50,11 @@
 
 - (instancetype)initWithResources:(NSArray *)resources type:(QiniuResourceType)type;
 
+- (void)addResources:(NSArray *)resource type:(QiniuResourceType)type;
 - (QiniuResource *)resourceAtIndexPath:(NSIndexPath *)indexPath;
 - (NSUInteger)numberOfResources;
 - (BOOL)isExpandAtIndexPath:(NSIndexPath *)indexPath;
 - (void)updateExpandStateAtIndexPath:(NSIndexPath *)indexPath;
+
 
 @end

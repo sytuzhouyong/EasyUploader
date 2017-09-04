@@ -20,6 +20,7 @@
 @property (nonatomic, copy) ExpandButtonHandler downloadHandler;
 @property (nonatomic, weak) QiniuResouresViewController *parentVC;
 @property (nonatomic, copy) NSString *currentPath;
+@property (nonatomic, copy) NSString *marker;   // 用于分页数据查找下一页的数据
 
 @end
 
@@ -44,13 +45,15 @@
     self.tableView.tableFooterView = [UIView new];
     [self.tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kFileCellIdentifier];
     [self.tableView registerClass:ResourceToolCell.class forCellReuseIdentifier:kDirCellIdentifier];
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
+//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
 
-    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:100 handler:^(NSArray<QiniuResource *> *resources) {
+    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:10 marker:self.marker handler:^(NSArray<QiniuResource *> *resources, NSString *marker) {
         dispatch_async(dispatch_get_main_queue(), ^{
             QiniuResourceType type = kAppDelegate.isUnderPathSelectMode ? QiniuResourceTypeDir : QiniuResourceTypeAll;
             self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources type:type];
             [self.tableView reloadData];
+            self.marker = marker;
         });
     }];
 }
@@ -82,7 +85,21 @@
 }
 
 - (void)loadMore:(id)obj {
-    [self.tableView.mj_header endRefreshing];
+    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:3 marker:self.marker handler:^(NSArray<QiniuResource *> *resources, NSString *marker) {
+        self.marker = marker;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (resources.count == 0) {
+                [self.tableView.mj_footer endRefreshing];
+                return;
+            }
+
+            QiniuResourceType type = kAppDelegate.isUnderPathSelectMode ? QiniuResourceTypeDir : QiniuResourceTypeAll;
+            [self.viewModel addResources:resources type:type];
+            [self.tableView reloadData];
+//            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
+        });
+    }];
 }
 
 #pragma mark - UITableView

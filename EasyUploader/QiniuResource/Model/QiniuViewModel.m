@@ -88,16 +88,20 @@
 - (instancetype)initWithResources:(NSArray *)resources type:(QiniuResourceType)type {
     if (self = [super init]) {
         self.cellModels = [NSMutableArray arrayWithCapacity:resources.count];
-        [resources enumerateObjectsUsingBlock:^(QiniuResource *obj, NSUInteger idx, BOOL *stop) {
-            if ((type & QiniuResourceTypeDir) && obj.type == QiniuResourceTypeDir) {
-                [self.cellModels addObject:[[QiniuResourceCellModel alloc] initWithResource:obj]];
-            }
-            if ((type & QiniuResourceTypeFile) && obj.type == QiniuResourceTypeFile) {
-                [self.cellModels addObject:[[QiniuResourceCellModel alloc] initWithResource:obj]];
-            }
-        }];
+        [self addResources:resources type:type];
     }
     return self;
+}
+
+- (void)addResources:(NSArray *)resources type:(QiniuResourceType)type {
+    [resources enumerateObjectsUsingBlock:^(QiniuResource *obj, NSUInteger idx, BOOL *stop) {
+        if ((type & QiniuResourceTypeDir) && obj.type == QiniuResourceTypeDir) {
+            [self.cellModels addObject:[[QiniuResourceCellModel alloc] initWithResource:obj]];
+        }
+        if ((type & QiniuResourceTypeFile) && obj.type == QiniuResourceTypeFile) {
+            [self.cellModels addObject:[[QiniuResourceCellModel alloc] initWithResource:obj]];
+        }
+    }];
 }
 
 - (QiniuResource *)resourceAtIndexPath:(NSIndexPath *)indexPath {

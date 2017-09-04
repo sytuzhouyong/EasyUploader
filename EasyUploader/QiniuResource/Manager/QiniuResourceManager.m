@@ -63,20 +63,25 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 }
 
 // 查询指定 bucket 的资源
-+ (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit handler:(ResourcesHandler)handler {
-    NSString *path = [NSString stringWithFormat:@"/list?bucket=%@&prefix=%@&limit=%d&delimiter=/", bucket.name, prefix, limit];
++ (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit marker:(NSString *)marker handler:(ResourcesHandler)handler {
+    NSString *fixedMarker = SafeString(marker);
+    NSString *path = [NSString stringWithFormat:@"/list?bucket=%@&prefix=%@&limit=%d&marker=%@&delimiter=%@", bucket.name, prefix, limit, fixedMarker, kQiniuPathDelimiter];
     NSLog(@"request url = %@", path);
     // if have chinese character, need url encode
     path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
     NSURLRequest *request = [self.class requestWithHostName:kQiniuResourceHost path:path];
-    [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
+    [self.class sendRequest:request withHandler:^(BOOL success, NSDictionary *responseObject) {
         NSLog(@"response = %@", responseObject);
         NSArray<QiniuResource *> *resources = nil;
+        NSString *marker = @"";
         if (success) {
             resources = [QiniuResource resourcesWithDict:responseObject];
+            if (responseObject[@"marker"]) {
+                marker = responseObject[@"marker"];
+            }
         }
-        ExecuteBlock1IfNotNil(handler, resources);
+        ExecuteBlock2IfNotNil(handler, resources, marker);
     }];
 }
 
