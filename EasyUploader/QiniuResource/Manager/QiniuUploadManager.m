@@ -8,7 +8,7 @@
 
 #import "QiniuUploadManager.h"
 #import "QNUploadManager.h"
-
+#import "QNUploadOption+Private.h"
 
 
 @implementation QiniuUploadManager
@@ -47,19 +47,22 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
     return token;
 }
 
-- (void)uploadALAsset:(ALAsset *)asset toBucket:(NSString *)bucket withKey:(NSString *)key {
+- (void)uploadALAsset:(ALAsset *)asset toBucket:(NSString *)bucket withKey:(NSString *)key handler:(UploadHandler)handler {
     NSString *token = [self makeUploadTokenOfBucket:bucket withKey:key];
     NSLog(@"upload token [%@]  = %@", key, token);
+
+    QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithProgressHandler:^(NSString *key, float percent) {
+        ExecuteBlock3IfNotNil(handler, NO, key, percent);
+    }];
 
     QNUploadManager *manager = [[QNUploadManager alloc] init];
     [manager putALAsset: asset
                     key: key
                   token: token
                complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
-                     NSLog(@"info = %@\n", info);
-                     NSLog(@"key = %@\n",key);
-                     NSLog(@"resp = %@\n", resp);
-                 } option: nil];
+                   BOOL success = resp[@"hash"];
+                   ExecuteBlock3IfNotNil(handler, success, key, 1.0f);
+                 } option: uploadOption];
 }
 
 @end

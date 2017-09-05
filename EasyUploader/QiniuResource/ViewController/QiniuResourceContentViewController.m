@@ -48,12 +48,15 @@
 //    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore:)];
 
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentVC.navigationController.view animated:YES];
+    hud.label.text = @"加载中..."; //NSLocalizedString(@"Loading...", @"HUD loading title");
     [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:10 marker:self.marker handler:^(NSArray<QiniuResource *> *resources, NSString *marker) {
         dispatch_async(dispatch_get_main_queue(), ^{
             QiniuResourceType type = kAppDelegate.isUnderPathSelectMode ? QiniuResourceTypeDir : QiniuResourceTypeAll;
             self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources type:type];
             [self.tableView reloadData];
             self.marker = marker;
+            [hud hideAnimated:YES];
         });
     }];
 }

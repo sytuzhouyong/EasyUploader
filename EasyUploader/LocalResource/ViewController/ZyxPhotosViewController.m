@@ -65,7 +65,9 @@
             NSString *key = [ALAssetUtil millisecondDateStringOfALAsset:asset];
             NSLog(@"key = %@", key);
             QiniuBucket *bucket = kQiniuResourceManager.selectedBucket;
-            [kQiniuUploadManager uploadALAsset:asset toBucket:bucket.name withKey:key];
+            [kQiniuUploadManager uploadALAsset:asset toBucket:bucket.name withKey:key handler:^(BOOL finished, NSString *key, float percent) {
+                NSLog(@"finished: %d, percent: %.3f", finished, percent);
+            }];
         }
     };
 

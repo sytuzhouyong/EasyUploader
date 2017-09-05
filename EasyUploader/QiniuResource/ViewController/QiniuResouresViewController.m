@@ -73,7 +73,9 @@
 - (void)addSubviews {
     kWeakself;
     NSMutableArray<NSString *> *paths = [NSMutableArray arrayWithArray:self.paths];
-    if (paths[0].length == 0) {
+    if (paths.count == 0) {
+        [paths addObject:self.bucket.name];
+    } else if (paths[0].length == 0) {
         paths[0] = self.bucket.name;
     }
     self.pathView = [[PathView alloc] initWithResourePaths:paths pathSelectHandler:^(NSUInteger index) {

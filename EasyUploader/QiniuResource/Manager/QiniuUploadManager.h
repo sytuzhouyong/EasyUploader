@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^UploadHandler)(BOOL finished, NSString *key, float percent);
+
 @interface QiniuUploadManager : NSObject
 
 SINGLETON_DECLEAR;
 
 @property (nonatomic, copy) NSString *uploadPath;
 
-- (void)uploadALAsset:(ALAsset *)asset toBucket:(NSString *)bucket withKey:(NSString *)key;
+- (void)uploadALAsset:(ALAsset *)asset toBucket:(NSString *)bucket withKey:(NSString *)key handler:(UploadHandler)handler;
 
 @end
