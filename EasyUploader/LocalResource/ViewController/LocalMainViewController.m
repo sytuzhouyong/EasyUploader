@@ -17,7 +17,7 @@
 
     // 不为空说明是选择上传路径界面
     if (self.presentingViewController != nil) {
-        self.title = @"选择目录";
+        self.title = @"选择相册";
 
         UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithImage:UIImageNamed(@"icon_arrow_left") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonPressed)];
         self.navigationItem.leftBarButtonItem = buttonItem;
