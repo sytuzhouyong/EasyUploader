@@ -72,9 +72,19 @@
             [weakself.viewModel updateExpandStateAtIndexPath:weakself.lastIndexPath];
         }
 
+        BOOL expand = [weakself.viewModel isExpandAtIndexPath:indexPath];
         [weakself.viewModel updateExpandStateAtIndexPath:indexPath];
-        [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         weakself.lastIndexPath = indexPath;
+
+        [UIView animateWithDuration:0.3 animations:^{
+            if (!expand) {
+                button.transform = CGAffineTransformRotate(button.transform, M_PI);
+            } else {
+                button.transform = CGAffineTransformRotate(button.transform, -M_PI);
+            }
+        } completion:^(BOOL finished) {
+            [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
     };
     self.downloadHandler = ^(UIButton *button) {
         CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];

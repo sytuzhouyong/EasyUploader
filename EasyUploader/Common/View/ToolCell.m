@@ -77,6 +77,12 @@
 }
 
 - (void)updateExpandState:(BOOL)expand {
+    if (!expand) {
+        self.button.transform = CGAffineTransformIdentity;
+    } else {
+        self.button.transform = CGAffineTransformMakeRotation(-M_PI);
+    }
+
     [self.toolView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(expand ? 44 : 0);
     }];

@@ -73,15 +73,6 @@
         CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
         NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
         BOOL expand = [weakself.viewModel isExpandAtIndexPath:indexPath];
-        [UIView animateWithDuration:0.3 animations:^{
-            if (!expand) {
-                button.transform = CGAffineTransformRotate(button.transform, -M_PI*0.0000001);
-            } else {
-                button.transform = CGAffineTransformRotate(button.transform, -M_PI);
-            }
-        } completion:^(BOOL finished) {
-            ;
-        }];
 
         NSArray *indexPaths = @[indexPath];
         if (self.lastIndexPath && self.lastIndexPath.row != indexPath.row && [self.viewModel isExpandAtIndexPath:self.lastIndexPath]) {
@@ -90,15 +81,24 @@
         }
 
         [weakself.viewModel updateExpandStateAtIndexPath:indexPath];
-        [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         weakself.lastIndexPath = indexPath;
+
+        [UIView animateWithDuration:0.3 animations:^{
+            if (!expand) {
+                button.transform = CGAffineTransformRotate(button.transform, M_PI);
+            } else {
+                button.transform = CGAffineTransformRotate(button.transform, -M_PI);
+            }
+        } completion:^(BOOL finished) {
+            [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
     };
 }
 
 #pragma mark - UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.viewModel.cellModels.count;
+    return [self.viewModel numberOfBuckets];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
