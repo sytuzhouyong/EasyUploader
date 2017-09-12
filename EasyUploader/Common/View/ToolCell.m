@@ -40,9 +40,9 @@
         [button addTarget:self action:@selector(expandButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView).offset(10);
-            make.trailing.equalTo(self.contentView).offset(-10);
-            make.size.mas_equalTo(CGSizeMake(34, 24));
+            make.top.equalTo(self.contentView);
+            make.trailing.equalTo(self.contentView).offset(-5);
+            make.size.mas_equalTo(CGSizeMake(44, 44));
         }];
 
         UILabel *label = [[UILabel alloc] init];
