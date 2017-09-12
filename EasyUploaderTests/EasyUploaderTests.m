@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "Common.h"
 
 @interface EasyUploaderTests : XCTestCase
 
@@ -27,6 +28,8 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    NSString *desc = [DateUtil intelligentDateStringWithDate:[NSDate date]];
+    XCTAssertTrue([desc isEqualToString:@"今天"]);
 }
 
 - (void)testPerformanceExample {

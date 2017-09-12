@@ -90,6 +90,7 @@
                 button.transform = CGAffineTransformRotate(button.transform, -M_PI);
             }
         } completion:^(BOOL finished) {
+            // 如果放在动画之前跑，效果会和 reload 冲突，导致动画很突兀
             [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
         }];
     };
