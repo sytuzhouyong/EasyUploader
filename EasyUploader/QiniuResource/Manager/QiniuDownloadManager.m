@@ -77,6 +77,19 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
     return [NSURL URLWithString:urlString];
 }
 
+- (NSURL *)urlWithKey:(NSString *)key inBucket:(QiniuBucket *)bucket {
+    NSString *domain = [kQiniuResourceManager domainOfBucket:bucket];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", domain, key];
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    urlString = [self makeDownloadTokenOfKey:key url:urlString containParam:NO];
+    return [NSURL URLWithString:urlString];
+}
+
+- (NSURL *)urlWithKey:(NSString *)key {
+    return [self urlWithKey:key inBucket:kQiniuResourceManager.selectedBucket];
+}
+
+
 - (NSString *)makeDownloadTokenOfKey:(NSString *)key url:(NSString *)url containParam:(BOOL)containParam {
     // reuse token with key
     if (self.downloadURLDict[key]) {

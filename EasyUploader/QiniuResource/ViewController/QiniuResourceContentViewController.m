@@ -10,6 +10,8 @@
 #import "QiniuResouresViewController.h"
 #import "ResourceToolCell.h"
 #import "QiniuViewModel.h"
+#import "JGPhotoBrowser.h"
+#import "JGPhoto.h"
 
 @interface QiniuResourceContentViewController ()
 
@@ -143,10 +145,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QiniuResource *resource = [self.viewModel resourceAtIndexPath:indexPath];
-    if (resource.type == QiniuResourceTypeFile) {
+    if (resource.type == QiniuResourceTypeDir) {
+        [self.parentVC enterContentVCNamed:resource.name];
         return;
     }
-    [self.parentVC enterContentVCNamed:resource.name];
+
+    NSMutableArray *photoArray = [NSMutableArray array];
+    JGPhotoBrowser *photoBrowser = [[JGPhotoBrowser alloc] init];
+    for (int i=0; i<[self.viewModel numberOfResources]; i++) {
+        NSIndexPath *indexPath = NSIndexPath(0, i);
+        QiniuResource *resource = [self.viewModel resourceAtIndexPath:indexPath];
+
+        NSURL *url = [kQiniuDownloadManager urlWithKey:resource.name];
+
+        JGPhoto *photo = [[JGPhoto alloc] init];
+        photo.url = url;
+        photo.srcImageView = ((ResourceToolCell *)[tableView cellForRowAtIndexPath:indexPath]).iconImageView;
+        [photoArray addObject:photo];
+    }
+
+    photoBrowser.photos = photoArray;
+    photoBrowser.currentPhotoIndex = indexPath.row;
+    [photoBrowser show];
 }
 
 - (void)viewDidLayoutSubviews {

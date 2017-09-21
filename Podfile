@@ -14,6 +14,7 @@ pod 'MJRefresh', '~> 3.1.12'
 pod 'SDWebImage'
 pod 'MBProgressHUD', '~> 1.0.0'
 pod 'ReactiveCocoa', '~> 2.1.8'
+pod 'JGPhotoBrowser'
 
 target 'EasyUploader' do
 	

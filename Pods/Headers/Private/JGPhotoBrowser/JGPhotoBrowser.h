@@ -1,0 +1,1 @@
+../../../JGPhotoBrowser/JGPhotoBrowser/JGPhotoBrowser.h

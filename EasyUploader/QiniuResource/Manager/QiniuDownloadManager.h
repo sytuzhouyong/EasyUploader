@@ -20,4 +20,7 @@ SINGLETON_DECLEAR;
 - (NSURL *)thumbnailURLWithKey:(NSString *)key;
 - (NSURL *)thumbnailURLWithKey:(NSString *)key inBucket:(QiniuBucket *)bucket;
 
+- (NSURL *)urlWithKey:(NSString *)key;
+- (NSURL *)urlWithKey:(NSString *)key inBucket:(QiniuBucket *)bucket;
+
 @end
