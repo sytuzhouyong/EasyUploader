@@ -29,7 +29,7 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 
 - (void)downloadResourceWithKey:(NSString *)key handler:(DonwloadResourceHandler)handler {
     NSString *url = [NSString stringWithFormat:@"%@/%@", kQiniuResourceDownloadURL, key];
-    NSString *downloadURL = [self makeDownloadTokenOfKey:key url:url containParam:NO];
+    NSString *downloadURL = [self makeDownloadTokenOfKey:key url:url isThumbnail:NO];
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadURL]];
     [[self.manager downloadTaskWithRequest:request progress:^(NSProgress *downloadProgress) {
@@ -73,7 +73,7 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
     NSString *domain = [kQiniuResourceManager domainOfBucket:bucket];
     NSString *urlString = [NSString stringWithFormat:@"%@/%@?imageView2/1/w/80/h/80/format/jpg/q/100", domain, key];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    urlString = [self makeDownloadTokenOfKey:key url:urlString containParam:YES];
+    urlString = [self makeDownloadTokenOfKey:key url:urlString isThumbnail:YES];
     return [NSURL URLWithString:urlString];
 }
 
@@ -81,7 +81,7 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
     NSString *domain = [kQiniuResourceManager domainOfBucket:bucket];
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", domain, key];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    urlString = [self makeDownloadTokenOfKey:key url:urlString containParam:NO];
+    urlString = [self makeDownloadTokenOfKey:key url:urlString isThumbnail:NO];
     return [NSURL URLWithString:urlString];
 }
 
@@ -90,17 +90,19 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 }
 
 
-- (NSString *)makeDownloadTokenOfKey:(NSString *)key url:(NSString *)url containParam:(BOOL)containParam {
+- (NSString *)makeDownloadTokenOfKey:(NSString *)key url:(NSString *)url isThumbnail:(BOOL)isThumbnail {
     // reuse token with key
-    if (self.downloadURLDict[key]) {
-        return self.downloadURLDict[key];
+    NSString *format = isThumbnail ? @"%@-thumbnail" : @"%@";
+    NSString *fixedKey = [NSString stringWithFormat:format, key];
+    if (self.downloadURLDict[fixedKey]) {
+        return self.downloadURLDict[fixedKey];
     }
 
     time_t deadline;
     time(&deadline);    // 返回当前系统时间
     deadline += 3600;   // +3600秒,即默认token保存1小时.
 
-    NSString *paramConnector = containParam ? @"&" : @"?";
+    NSString *paramConnector = isThumbnail ? @"&" : @"?";
     NSString *tokenURL = [NSString stringWithFormat:@"%@%@e=%ld", url, paramConnector, deadline];
 
     char digestStr[CC_SHA1_DIGEST_LENGTH];
@@ -111,7 +113,7 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 
     NSString *encodedDigest = [GTMBase64 stringByWebSafeEncodingBytes:digestStr length:CC_SHA1_DIGEST_LENGTH padded:TRUE];
     NSString *token = [NSString stringWithFormat:@"%@&token=%@:%@", tokenURL, kAccessKey, encodedDigest];
-    self.downloadURLDict[key] = token;
+    self.downloadURLDict[fixedKey] = token;
 
     return token;
 }

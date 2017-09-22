@@ -150,11 +150,17 @@
         return;
     }
 
+    NSUInteger selectedIndex = indexPath.row;
     NSMutableArray *photoArray = [NSMutableArray array];
     JGPhotoBrowser *photoBrowser = [[JGPhotoBrowser alloc] init];
     for (int i=0; i<[self.viewModel numberOfResources]; i++) {
-        NSIndexPath *indexPath = NSIndexPath(0, i);
-        QiniuResource *resource = [self.viewModel resourceAtIndexPath:indexPath];
+        QiniuResource *resource = [self.viewModel resourceAtIndexPath:NSIndexPath(0, i)];
+        if (resource.type != QiniuResourceTypeFile) {
+            if (indexPath.row > i) {
+                selectedIndex--;
+            }
+            continue;
+        }
 
         NSURL *url = [kQiniuDownloadManager urlWithKey:resource.name];
 
@@ -165,7 +171,7 @@
     }
 
     photoBrowser.photos = photoArray;
-    photoBrowser.currentPhotoIndex = indexPath.row;
+    photoBrowser.currentPhotoIndex = selectedIndex;
     [photoBrowser show];
 }
 
