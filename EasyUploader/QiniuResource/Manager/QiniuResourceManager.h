@@ -27,6 +27,8 @@ typedef void (^StringArrayHandler)(NSArray<NSString *> *strings);
 + (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
 + (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit marker:(NSString *)marker handler:(ResourcesHandler)handler;
 
++ (void)deleteResourceNamed:(NSString *)key inBucket:(QiniuBucket *)bucket withHandler:(RequestHandler)handler;
+
 
 + (NSString *)authRequestPath:(NSString *)url andBody:(NSString *)body;
 

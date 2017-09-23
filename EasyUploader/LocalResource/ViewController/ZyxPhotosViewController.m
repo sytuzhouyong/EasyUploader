@@ -63,6 +63,7 @@
         NSArray<ALAsset *> *selectedResources = [weakself selectedPhotos];
         for (ALAsset *asset in selectedResources) {
             NSString *key = [ALAssetUtil millisecondDateStringOfALAsset:asset];
+            key = [NSString stringWithFormat:@"%@.jpg", key];
             NSLog(@"key = %@", key);
             QiniuBucket *bucket = kQiniuResourceManager.selectedBucket;
             [kQiniuUploadManager uploadALAsset:asset toBucket:bucket.name withKey:key handler:^(BOOL finished, NSString *key, float percent) {

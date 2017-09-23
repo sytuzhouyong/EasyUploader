@@ -86,6 +86,17 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 }
 
 
++ (void)deleteResourceNamed:(NSString *)key inBucket:(QiniuBucket *)bucket withHandler:(RequestHandler)handler {
+    NSString *path = [NSString stringWithFormat:@"%@:%@", bucket.name, key];
+    NSString *encodedPath = [GTMBase64 encodeBase64String:path];
+    NSString *requestPath = [NSString stringWithFormat:@"/delete/%@", encodedPath];
+
+    NSURLRequest *request = [self.class requestWithHostName:@"rs.qiniu.com" path:requestPath];
+    [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
+        NSLog(@"response = %@", responseObject);
+        ExecuteBlock2IfNotNil(handler, success, responseObject);
+    }];
+}
 
 
 // 添加 bucket

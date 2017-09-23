@@ -50,6 +50,10 @@
     return self.cellModels.count;
 }
 
+- (void)deleteResourceAtIndexPath:(NSIndexPath *)indexPath {
+    [self.cellModels removeObjectAtIndex:indexPath.row];
+}
+
 - (void)updateExpandStateAtIndexPath:(NSIndexPath *)indexPath; {
     QiniuBucketCellModel *cellModel = self.cellModels[indexPath.row];
     cellModel.expand = !cellModel.expand;
@@ -112,6 +116,9 @@
     return self.cellModels.count;
 }
 
+- (void)deleteResourceAtIndexPath:(NSIndexPath *)indexPath {
+    [self.cellModels removeObjectAtIndex:indexPath.row];
+}
 
 - (void)updateExpandStateAtIndexPath:(NSIndexPath *)indexPath {
     self.cellModels[indexPath.row].expand = !self.cellModels[indexPath.row].expand;

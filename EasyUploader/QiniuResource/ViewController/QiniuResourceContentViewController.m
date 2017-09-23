@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, copy) ExpandButtonHandler expandHandler;
 @property (nonatomic, copy) ExpandButtonHandler downloadHandler;
+@property (nonatomic, copy) ExpandButtonHandler deleteHandler;
 @property (nonatomic, weak) QiniuResouresViewController *parentVC;
 @property (nonatomic, copy) NSString *currentPath;
 @property (nonatomic, copy) NSString *marker;   // 用于分页数据查找下一页的数据
@@ -97,6 +98,23 @@
             ;
         }];
     };
+    self.deleteHandler = ^(UIButton *button) {
+        CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
+        NSIndexPath *indexPath = [weakself.tableView indexPathForRowAtPoint:pt];
+
+        QiniuResource *resource = [weakself.viewModel resourceAtIndexPath:indexPath];
+
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakself.parentVC.navigationController.view animated:YES];
+        hud.label.text = @"删除中...";
+        [QiniuResourceManager deleteResourceNamed:resource.name inBucket:weakself.bucket withHandler:^(BOOL success, id responseObject) {
+            hud.label.text = success ? @"删除成功" : @"删除失败";
+            [hud hideAnimated:YES];
+            if (success) {
+                [weakself.viewModel deleteResourceAtIndexPath:indexPath];
+                [weakself.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            }
+        }];
+    };
 }
 
 - (void)loadMore:(id)obj {
@@ -136,6 +154,7 @@
     ResourceToolCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.expandHandler = self.expandHandler;
     cell.downloadHandler = self.downloadHandler;
+    cell.deleteHandler = self.deleteHandler;
 
     [cell configWithQiniuResource:resource prefix:self.currentPath];
     [cell updateExpandState:expand];
