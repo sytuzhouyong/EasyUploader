@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^SelectPathHandler) ();
+typedef void (^SelectPathHandler) (void);
 
 @interface SelectUploadPathToolView : UIView
 
