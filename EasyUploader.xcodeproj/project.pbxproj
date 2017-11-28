@@ -34,6 +34,7 @@
 		255E155A1F22778700411A67 /* zh-Hans.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E15521F22778700411A67 /* zh-Hans.plist */; };
 		255E155E1F227A5600411A67 /* QiniuBucket.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E155D1F227A5600411A67 /* QiniuBucket.m */; };
 		255E15611F227A6A00411A67 /* QiniuResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15601F227A6A00411A67 /* QiniuResource.m */; };
+		258A40341F7FD6C70012653D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 258A40331F7FD6C70012653D /* Podfile */; };
 		258ADFDE1F571A0900766E6B /* ConfirmUploadPathToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 258ADFDD1F571A0900766E6B /* ConfirmUploadPathToolView.m */; };
 		259A36101F2B71B200F10298 /* QiniuViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A360F1F2B71B200F10298 /* QiniuViewModel.m */; };
 		259A36131F2DA95C00F10298 /* ToolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 259A36121F2DA95C00F10298 /* ToolCell.m */; };
@@ -129,6 +130,8 @@
 		255E155D1F227A5600411A67 /* QiniuBucket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuBucket.m; sourceTree = "<group>"; };
 		255E155F1F227A6A00411A67 /* QiniuResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuResource.h; sourceTree = "<group>"; };
 		255E15601F227A6A00411A67 /* QiniuResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResource.m; sourceTree = "<group>"; };
+		258A40331F7FD6C70012653D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		258A40351F7FD7790012653D /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		258ADFDC1F571A0900766E6B /* ConfirmUploadPathToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmUploadPathToolView.h; sourceTree = "<group>"; };
 		258ADFDD1F571A0900766E6B /* ConfirmUploadPathToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmUploadPathToolView.m; sourceTree = "<group>"; };
 		259A360E1F2B71B200F10298 /* QiniuViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiniuViewModel.h; sourceTree = "<group>"; };
@@ -202,12 +205,14 @@
 		250391FE1E65C758002062F0 = {
 			isa = PBXGroup;
 			children = (
+				258A40331F7FD6C70012653D /* Podfile */,
 				250392091E65C758002062F0 /* EasyUploader */,
 				250392231E65C758002062F0 /* EasyUploaderTests */,
 				2503922E1E65C758002062F0 /* EasyUploaderUITests */,
 				250392081E65C758002062F0 /* Products */,
 				5D8780288547C981C44BD48A /* Pods */,
 				E52281758AD8CBAB7BD9F71F /* Frameworks */,
+				258A40351F7FD7790012653D /* Podfile */,
 			);
 			sourceTree = "<group>";
 		};
@@ -633,6 +638,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				258A40341F7FD6C70012653D /* Podfile in Resources */,
 				255E155A1F22778700411A67 /* zh-Hans.plist in Resources */,
 				255E15561F22778700411A67 /* en.plist in Resources */,
 				25A1D00F1F23705E0018888F /* LaunchScreen.storyboard in Resources */,

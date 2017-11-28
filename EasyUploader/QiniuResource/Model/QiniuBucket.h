@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QiniuBucket : NSObject
+@interface QiniuBucket : RLMObject
 
-@property (nonatomic, copy) NSString *name;
-//@property (nonatomic, copy) NSString *
+//@property NSInteger ID;
+@property NSString *name;
+@property NSString *domainURL;
 
 + (instancetype)bucketWithJSONString:(NSString *)json;
 + (NSArray<QiniuBucket *> *)instancesWithJSONString:(NSString *)json;

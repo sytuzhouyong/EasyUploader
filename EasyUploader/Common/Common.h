@@ -24,6 +24,7 @@
 #import <MJRefresh/MJRefresh.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "MBProgressHUD.h"
+#import "Realm.h"
 
 # pragma mark - Project
 #import "AppDelegate.h"

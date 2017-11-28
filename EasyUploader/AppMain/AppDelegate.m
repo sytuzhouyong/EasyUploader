@@ -39,12 +39,35 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
-    
+
+    [self createDatabaseNamed:@"uploader.realm"];
+
     return YES;
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+}
 
+#pragma mark - Realm
+
+- (void)createDatabaseNamed:(NSString *)fileName {
+    NSString *filePath = [[StringUtil documentsPath] stringByAppendingPathComponent:fileName];
+    NSLog(@"数据库目录 = %@", filePath);
+
+    RLMRealmConfiguration *config = [RLMRealmConfiguration defaultConfiguration];
+    config.fileURL = [NSURL URLWithString:filePath];
+//    config.objectClasses = @[MyClass.class, MyOtherClass.class];
+    config.readOnly = NO;
+    int currentVersion = 1.0;
+    config.schemaVersion = currentVersion;
+
+//    config.migrationBlock = ^(RLMMigration *migration , uint64_t oldSchemaVersion) {       // 这里是设置数据迁移的block
+//        if (oldSchemaVersion < currentVersion) {
+//        }
+//    };
+
+    [RLMRealmConfiguration setDefaultConfiguration:config];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

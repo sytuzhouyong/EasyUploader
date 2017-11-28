@@ -15,16 +15,17 @@ typedef NS_ENUM(NSInteger, QiniuResourceType) {
 };
 
 
-@interface QiniuResource : NSObject
+@interface QiniuResource : RLMObject
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *hashString;
-@property (nonatomic, copy) NSString *mimeType;
-@property (nonatomic, strong) NSDate *createTime;
-@property (nonatomic, copy) NSString *createTimeDesc;
-@property (nonatomic, assign) NSInteger size;
-@property (nonatomic, copy) NSString *sizeDesc;
-@property (nonatomic, assign) QiniuResourceType type;
+@property NSString *name;
+@property NSString *hashString;
+@property NSString *mimeType;
+@property NSDate *createTime;
+@property NSString *createTimeDesc;
+@property NSInteger size;
+@property NSString *sizeDesc;
+@property QiniuResourceType type;
+@property QiniuBucket *bucket;
 
 + (instancetype)resourceWithDict:(NSDictionary *)dict;
 + (NSArray<QiniuResource *> *)resourcesWithDict:(NSDictionary *)dict;

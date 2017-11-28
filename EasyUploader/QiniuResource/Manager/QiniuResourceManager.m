@@ -12,8 +12,6 @@
 
 @interface QiniuResourceManager ()
 
-@property (nonatomic, strong) NSMutableDictionary *domainsDict;
-
 @end
 
 @implementation QiniuResourceManager
@@ -21,17 +19,6 @@
 SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 
 - (void)init_additional {
-    self.domainsDict = [NSMutableDictionary dictionary];
-}
-
-- (NSString *)domainOfBucket:(QiniuBucket *)bucket {
-    NSArray *domains = self.domainsDict[bucket.name];
-    if (domains.count == 0) {
-        return @"";
-    }
-
-    NSString *domain = domains.firstObject;
-    return [NSString stringWithFormat:@"http://%@", domain];
 }
 
 // 查询所有 buckets
@@ -40,13 +27,22 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 
     [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
         NSArray<QiniuBucket *> *buckets = nil;
-        if (success) {
-            buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
-            for (QiniuBucket *bucket in buckets) {
-                [kQiniuResourceManager queryDomainOfBucket:bucket];
-            }
+        if (!success) {
+            ExecuteBlock1IfNotNil(handler, buckets);
+            return;
         }
+
+        buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
         ExecuteBlock1IfNotNil(handler, buckets);
+
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        [realm beginWriteTransaction];
+        [realm addObjects:buckets];
+        [realm commitWriteTransaction];
+        
+        for (QiniuBucket *bucket in buckets) {
+            [kQiniuResourceManager queryDomainOfBucket:bucket];
+        }
     }];
 }
 
@@ -55,10 +51,18 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
     NSString *path = [NSString stringWithFormat:@"/v6/domain/list?tbl=%@", bucket.name];
     NSURLRequest *request = [self.class requestWithHostName:kQiniuAPIHost path:path];
     [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
-        NSLog(@"response = %@", responseObject);
-        if (success) {
-            self.domainsDict[bucket.name] = responseObject;
+        NSLog(@"request[%@]'s response[%@] is %@", path, responseObject, success ? @"success" : @"failed");
+        if (!success) {
+            return;
         }
+
+        RLMResults<QiniuBucket *> *buckets = [QiniuBucket objectsWhere:@"name == %@", bucket.name];
+        NSLog(@"buckets count = %lu", (unsigned long)buckets.count);
+
+        [[RLMRealm defaultRealm] transactionWithBlock:^{
+            NSString *url = [NSString stringWithFormat:@"http://%@", ((NSArray *)responseObject).firstObject];
+            buckets.firstObject.domainURL = url;
+        }];
     }];
 }
 

@@ -8,13 +8,15 @@ platform :ios, "8.0" # 第一行指定平台和版本
 pod 'AFNetworking', '~> 3.0'
 pod "Qiniu", :git => 'https://github.com/qiniu/objc-sdk.git', :branch => 'AFNetworking-3.x'
 pod 'HappyDNS', '~> 0.3'
-pod 'CocoaLumberjack', '~> 3.2.0'
+pod 'CocoaLumberjack', '~> 3.2.1'
 pod 'Masonry', '~> 1.0.2'
 pod 'MJRefresh', '~> 3.1.12'
 pod 'SDWebImage'
 pod 'MBProgressHUD', '~> 1.0.0'
 pod 'ReactiveCocoa', '~> 2.1.8'
-pod 'JGPhotoBrowser'
+pod 'JGPhotoBrowser', '~> 1.2.1'
+# pod 'Realm', '~> 2.10.2'
+pod 'Realm'
 
 target 'EasyUploader' do
 	
