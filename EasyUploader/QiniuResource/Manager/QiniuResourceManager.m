@@ -37,7 +37,12 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 
         RLMRealm *realm = [RLMRealm defaultRealm];
         [realm beginWriteTransaction];
-        [realm addObjects:buckets];
+        for (QiniuBucket *bucket in buckets) {
+            NSUInteger count = [QiniuBucket objectsWhere:@"name = %@", bucket.name].count;
+            if (count == 0) {
+                [realm addObject:bucket];
+            }
+        }
         [realm commitWriteTransaction];
         
         for (QiniuBucket *bucket in buckets) {
@@ -57,11 +62,14 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
         }
 
         RLMResults<QiniuBucket *> *buckets = [QiniuBucket objectsWhere:@"name == %@", bucket.name];
-        NSLog(@"buckets count = %lu", (unsigned long)buckets.count);
+        NSAssert(buckets.count == 1, @"number of buckets with name %@ must be equal to 1!", bucket.name);
 
         [[RLMRealm defaultRealm] transactionWithBlock:^{
             NSString *url = [NSString stringWithFormat:@"http://%@", ((NSArray *)responseObject).firstObject];
-            buckets.firstObject.domainURL = url;
+            QiniuBucket *managedBucket = buckets.firstObject;
+            if (![url isEqualToString:managedBucket.domainURL]) {
+                buckets.firstObject.domainURL = url;
+            }
         }];
     }];
 }
@@ -78,14 +86,15 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
     [self.class sendRequest:request withHandler:^(BOOL success, NSDictionary *responseObject) {
         NSLog(@"response = %@", responseObject);
         NSArray<QiniuResource *> *resources = nil;
-        NSString *marker = @"";
+        NSString *responseMarker = @"";
         if (success) {
             resources = [QiniuResource resourcesWithDict:responseObject];
+            
             if (responseObject[@"marker"]) {
-                marker = responseObject[@"marker"];
+                responseMarker = responseObject[@"marker"];
             }
         }
-        ExecuteBlock2IfNotNil(handler, resources, marker);
+        ExecuteBlock2IfNotNil(handler, resources, responseMarker);
     }];
 }
 

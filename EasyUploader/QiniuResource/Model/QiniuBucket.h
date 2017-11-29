@@ -10,9 +10,8 @@
 
 @interface QiniuBucket : RLMObject
 
-//@property NSInteger ID;
-@property NSString *name;
-@property NSString *domainURL;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *domainURL;
 
 + (instancetype)bucketWithJSONString:(NSString *)json;
 + (NSArray<QiniuBucket *> *)instancesWithJSONString:(NSString *)json;

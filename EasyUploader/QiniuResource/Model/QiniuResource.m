@@ -15,6 +15,10 @@
 
 @implementation QiniuResource
 
++ (NSString *)primaryKey {
+    return @"hashString";
+}
+
 + (instancetype)resourceWithDict:(NSDictionary *)dict {
     QiniuResource *resource = [[QiniuResource alloc] init];
     resource.type = QiniuResourceTypeFile;

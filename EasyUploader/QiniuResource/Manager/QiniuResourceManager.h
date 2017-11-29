@@ -22,8 +22,6 @@ typedef void (^StringArrayHandler)(NSArray<NSString *> *strings);
 
 @property (nonatomic, strong) QiniuBucket *selectedBucket;
 
-- (NSString *)domainOfBucket:(QiniuBucket *)bucket;
-
 + (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
 + (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit marker:(NSString *)marker handler:(ResourcesHandler)handler;
 

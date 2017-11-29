@@ -13,21 +13,14 @@
 - (id)initWithName:(NSString *)name {
     if (self = [super init]) {
         self.name = name;
-//        self.ID = [self autoIncreaseID];
         self.domainURL = @"";
     }
     return self;
 }
 
-- (NSInteger)autoIncreaseID {
-    NSInteger index = [self.class allObjects].count + 1;
-    NSLog(@"index = %lu", index);
-    return index;
++ (NSString *)primaryKey {
+    return @"name";
 }
-
-//+ (NSString *)primaryKey {
-//    return @"ID";
-//}
 
 + (instancetype)bucketWithJSONString:(NSString *)json {
     QiniuBucket *bucket = [[QiniuBucket alloc] initWithName:json];

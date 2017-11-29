@@ -25,6 +25,8 @@
 @property (nonatomic, copy) NSString *currentPath;
 @property (nonatomic, copy) NSString *marker;   // 用于分页数据查找下一页的数据
 
+@property (nonatomic, strong) RLMNotificationToken *token;
+
 @end
 
 @implementation QiniuResourceContentViewController
