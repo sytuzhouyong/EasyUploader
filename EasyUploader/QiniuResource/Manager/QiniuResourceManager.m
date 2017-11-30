@@ -51,6 +51,12 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
     }];
 }
 
++ (QiniuBucket *)bucketWithName:(NSString *)name {
+    RLMResults<QiniuBucket *> *buckets = [QiniuBucket objectsWhere:@"name == %@", name];
+    NSAssert(buckets.count == 1, @"number of buckets with name %@ must be equal to 1!", name);
+    return buckets.firstObject;
+}
+
 // 查询 bucket 的外链域名, 用于资源下载
 - (void)queryDomainOfBucket:(QiniuBucket *)bucket {
     NSString *path = [NSString stringWithFormat:@"/v6/domain/list?tbl=%@", bucket.name];
@@ -61,14 +67,11 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
             return;
         }
 
-        RLMResults<QiniuBucket *> *buckets = [QiniuBucket objectsWhere:@"name == %@", bucket.name];
-        NSAssert(buckets.count == 1, @"number of buckets with name %@ must be equal to 1!", bucket.name);
-
+        QiniuBucket *bucketInDB = [self.class bucketWithName:bucket.name];
         [[RLMRealm defaultRealm] transactionWithBlock:^{
             NSString *url = [NSString stringWithFormat:@"http://%@", ((NSArray *)responseObject).firstObject];
-            QiniuBucket *managedBucket = buckets.firstObject;
-            if (![url isEqualToString:managedBucket.domainURL]) {
-                buckets.firstObject.domainURL = url;
+            if (![url isEqualToString:bucketInDB.domainURL]) {
+                bucketInDB.domainURL = url;
             }
         }];
     }];
@@ -83,13 +86,24 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
     path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
     NSURLRequest *request = [self.class requestWithHostName:kQiniuResourceHost path:path];
+    kWeakself;
     [self.class sendRequest:request withHandler:^(BOOL success, NSDictionary *responseObject) {
         NSLog(@"response = %@", responseObject);
         NSArray<QiniuResource *> *resources = nil;
         NSString *responseMarker = @"";
         if (success) {
+            QiniuBucket *bucketInDB = [weakself bucketWithName:bucket.name];
+
             resources = [QiniuResource resourcesWithDict:responseObject];
-            
+            for (QiniuResource * resource in resources) {
+                resource.bucket = bucketInDB;
+            }
+
+            RLMRealm *realm = [RLMRealm defaultRealm];
+            [realm beginWriteTransaction];
+            [realm addOrUpdateObjectsFromArray:resources];
+            [realm commitWriteTransaction];
+
             if (responseObject[@"marker"]) {
                 responseMarker = responseObject[@"marker"];
             }
