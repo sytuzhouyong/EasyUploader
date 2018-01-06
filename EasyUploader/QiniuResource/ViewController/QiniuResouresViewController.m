@@ -78,18 +78,22 @@
     } else if (paths[0].length == 0) {
         paths[0] = self.bucket.name;
     }
-    self.pathView = [[PathView alloc] initWithResourePaths:paths pathSelectHandler:^(NSUInteger index) {
-        if (index == self.currentPathIndex) {
+
+    PathView *pathView = [[PathView alloc] initWithResourePaths:paths pathSelectHandler:nil];
+    pathView.handler = ^(NSUInteger index) {
+        if (index == weakself.currentPathIndex) {
             return;
         }
         [weakself updateUIWhenEnterContentVCAtIndex:index];
 
         if (kAppDelegate.isUnderPathSelectMode) {
-            kQiniuUploadManager.uploadPath = [self selectActivePath];
+            kQiniuUploadManager.uploadPath = [weakself selectActivePath];
         }
-    }];
-    [self.view addSubview:self.pathView];
-    [self.pathView mas_makeConstraints:^(MASConstraintMaker *make) {
+    };
+
+    [self.view addSubview:pathView];
+    self.pathView = pathView;
+    [pathView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.view);
         make.top.equalTo(self.view).offset(64);
         make.height.mas_equalTo(36);
@@ -119,7 +123,7 @@
     [self.view addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.view);
-        make.top.equalTo(self.pathView.mas_bottom);
+        make.top.equalTo(pathView.mas_bottom);
         make.bottom.equalTo(attr);
     }];
 }
@@ -255,6 +259,10 @@ typedef BOOL (^PathPredict)(NSUInteger pathIndex);
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    NSLog(@"qiniu vc dealloc");
 }
 
 @end
