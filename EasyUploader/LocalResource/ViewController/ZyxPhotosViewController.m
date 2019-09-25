@@ -53,6 +53,7 @@
     [super viewDidLoad];
     self.title = [kZyxPhotoManager nameOfGroup:self.group];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
     [self addSubviews];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"全选" style:0 target:self action:@selector(selectAllButtonPressed:)];
@@ -99,8 +100,9 @@
 
     [self.view addSubview:self.toolView];
     [_toolView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.trailing.bottom.equalTo(self.view);
+        make.leading.trailing.equalTo(self.view);
         make.height.mas_equalTo(72);
+        make.bottom.equalTo(self.view).offset(-kTabBarArcHeight);
     }];
 
     [self.view addSubview:self.collectionView];

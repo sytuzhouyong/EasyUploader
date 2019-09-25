@@ -99,10 +99,10 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
                 resource.bucket = bucketInDB;
             }
 
-            RLMRealm *realm = [RLMRealm defaultRealm];
-            [realm beginWriteTransaction];
-            [realm addOrUpdateObjectsFromArray:resources];
-            [realm commitWriteTransaction];
+//            RLMRealm *realm = [RLMRealm defaultRealm];
+//            [realm beginWriteTransaction];
+//            [realm addOrUpdateObjectsFromArray:resources];
+//            [realm commitWriteTransaction];
 
             if (responseObject[@"marker"]) {
                 responseMarker = responseObject[@"marker"];

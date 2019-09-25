@@ -25,6 +25,7 @@
         UILabel *tipLabel = [[UILabel alloc] init];
         tipLabel.backgroundColor = [UIColor clearColor];
         tipLabel.text = @"选择上传路径";
+        tipLabel.textColor = [UIColor whiteColor];
         tipLabel.textAlignment = NSTextAlignmentLeft;
         tipLabel.font = [UIFont systemFontOfSize:12];
         [self addSubview:tipLabel];

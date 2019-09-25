@@ -12,6 +12,8 @@ typedef void (^PathSelectHandler)(NSUInteger index);
 
 @interface PathView : UIView
 
+@property (nonatomic, copy) PathSelectHandler handler;
+
 - (instancetype)initWithResourePaths:(NSArray<NSString *> *)paths pathSelectHandler:(PathSelectHandler)handler;
 - (void)appendPath:(NSString *)path;
 - (void)updateUIWhenSelectPathButtonChangedTo:(NSUInteger)index;

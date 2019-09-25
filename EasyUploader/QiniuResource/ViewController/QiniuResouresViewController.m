@@ -95,7 +95,7 @@
     self.pathView = pathView;
     [pathView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.trailing.equalTo(self.view);
-        make.top.equalTo(self.view).offset(64);
+        make.top.equalTo(self.view).offset(kViewOffsetY);
         make.height.mas_equalTo(36);
     }];
 

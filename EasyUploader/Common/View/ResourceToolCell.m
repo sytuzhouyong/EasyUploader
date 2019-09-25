@@ -72,14 +72,15 @@
 }
 
 - (void)configWithQiniuResource:(QiniuResource *)resource prefix:(NSString *)prefix {
-    self.label.text = [resource.name substringWithRange:NSMakeRange(prefix.length, resource.name.length - prefix.length)];
+    NSString *name = [resource.name substringFromIndex:prefix.length];
+    self.label.text = name;
     self.detailLabel.text = resource.createTimeDesc;
     self.sizeLabel.text = resource.sizeDesc;
 
     NSString *mineType = [resource.mimeType substringToIndex:@"image".length + 1];
     if ([mineType isEqualToString:@"image/"]) {
         NSURL *url = [kQiniuDownloadManager thumbnailURLWithKey:resource.name];
-        [self.iconImageView sd_setImageWithURL:url placeholderImage:UIImageNamed(@"icon_image")];
+        [self.iconImageView sd_setImageWithURL:nil placeholderImage:UIImageNamed(@"icon_image")];
     }
 }
 

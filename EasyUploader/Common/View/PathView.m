@@ -14,7 +14,6 @@
 @interface PathView ()
 
 @property (nonatomic, strong) NSMutableArray<NSString *> *paths;
-@property (nonatomic, copy) PathSelectHandler handler;
 @property (nonatomic, assign) CGSize lastSize;
 @property (nonatomic, assign) CGFloat offset;
 

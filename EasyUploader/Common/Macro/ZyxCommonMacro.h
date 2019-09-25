@@ -18,6 +18,7 @@
 #define kKeyWindow              kApplication.keyWindow
 #define kUserDefaults           [NSUserDefaults standardUserDefaults]
 #define kWeakself               __weak __typeof(&*self) weakself = self
+#define kStrongself             __strong __typeof(&*self) strongself = weakself
 
 
 #pragma mark - 简便函数宏
@@ -77,10 +78,13 @@ _s ? @"icon_round_selected_blue" : @"icon_round_unselected_gray"
 // UI按照375 x 667 切的图，在除了3.5英寸屏幕的其他分辨率下要等比缩放
 #define kUIScale                            kWindowHeight / 667.0f
 #define kNavigationBarColor                 RGB(0x18, 0x5C, 0xC1)
-#define kStatusBarHeight                    20
-#define kTitleContentViewHeight             44
-#define kBaseViewControllerTitleViewHeight  64
-#define kNavigationBarFontSize              15
+
+#define kStatusBarHeight                    [kApplication statusBarFrame].size.height
+#define kNavBarHeight                       44
+#define kViewOffsetY                        (kStatusBarHeight + kNavBarHeight)
+#define kTabBarHeight                       (kStatusBarHeight > 20.1 ? 83.0 : 49.0)
+#define kTabBarArcHeight                    (kStatusBarHeight > 20.1 ? 34.0 : 0.0) // iphoneX底部弧度区域高度
+
 #define kFullDateFormat                     @"EEE, d MMM yyyy HH:mm:ss zzz"
 #define kFileTitleDateFormat                @"yyyy_MM_dd_HH:mm:ss"
 #define kBundleIdentifier                   @"com.zhouyong.XingHomecloud"
