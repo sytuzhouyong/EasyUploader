@@ -31,7 +31,9 @@
     tabBarController.viewControllers = @[qiniuNav, localNav];
     tabBarController.delegate = self;
     qiniuNav.tabBarItem.title = @"七牛云";
+    qiniuNav.tabBarItem.image = [UIImage imageNamed:@"tabbar_qiniu"];
     localNav.tabBarItem.title = @"本地相册";
+    localNav.tabBarItem.image = [UIImage imageNamed:@"tabbar_album"];
     //    qiniuNav.navigationController.navigationBar.barTintColor = kNavigationBarColor;
     qiniuNav.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     localNav.navigationController.navigationBar.barStyle = UIBarStyleBlack;

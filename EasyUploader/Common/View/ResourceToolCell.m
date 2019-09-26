@@ -23,9 +23,6 @@
         }
 
         self.iconImageView.image = UIImageNamed(@"icon_image");
-        [self.iconImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView).offset(7);
-        }];
 
         [self.label mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.iconImageView.mas_trailing).offset(10);
@@ -77,11 +74,13 @@
     self.detailLabel.text = resource.createTimeDesc;
     self.sizeLabel.text = resource.sizeDesc;
 
-    NSString *mineType = [resource.mimeType substringToIndex:@"image".length + 1];
-    if ([mineType isEqualToString:@"image/"]) {
-//        NSURL *url = [kQiniuDownloadManager thumbnailURLWithKey:resource.name];
-        [self.iconImageView sd_setImageWithURL:nil placeholderImage:UIImageNamed(@"icon_image")];
+    NSString *iconName = resource.type == QiniuResourceTypeDir ? @"icon_bucket" : @"icon_file";
+    NSString *ext = resource.name.lowercaseString.pathExtension;
+    if ([@[@".png", @".jpg", @".heic"] indexOfObject:ext] != NSNotFound) {
+        iconName = @"icon_file_image";
     }
+    NSURL *url = [kQiniuDownloadManager thumbnailURLWithKey:resource.name];
+    [self.iconImageView sd_setImageWithURL:url placeholderImage:UIImageNamed(iconName)];
 }
 
 - (void)buttonClicked:(UIButton *)button {

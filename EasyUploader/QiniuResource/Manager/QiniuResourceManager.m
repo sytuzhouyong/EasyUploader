@@ -65,21 +65,22 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
     }];
 }
 
-// 查询 bucket 的外链域名, 用于资源下载
+# pragma mark - 查询 bucket 的外链域名, 用于资源下载
 // bucket的测试域名有时间限制，超过一定时间后就会获取域名失败，七牛服务器会返回空，这时候需要你去绑定自定义域名才能访问
 - (void)queryDomainOfBucket:(QiniuBucket *)bucket {
     NSString *path = [NSString stringWithFormat:@"/v6/domain/list?tbl=%@", bucket.name];
     NSURLRequest *request = [self.class requestWithHostName:kQiniuAPIHost path:path];
     [self.class sendRequest:request withHandler:^(BOOL success, NSArray<NSString *> *responseObject) {
         NSLog(@"request[%@]'s response[%@] is %@", path, responseObject, success ? @"success" : @"failed");
-    
-        NSString *domain = responseObject.firstObject;
-        NSString *url = [NSString stringWithFormat:@"http://%@", domain];
-        bucket.domainURL = url;
+        if (responseObject.count != 0) {
+            NSString *domain = responseObject.firstObject;
+            NSString *url = [NSString stringWithFormat:@"http://%@", domain];
+            bucket.domainURL = url;
+        }
     }];
 }
 
-// 查询指定 bucket 的资源
+# pragma mark - 查询指定 bucket 下的资源列表
 - (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit marker:(NSString *)marker handler:(ResourcesHandler)handler {
     NSString *fixedMarker = SafeString(marker);
     NSString *path = [NSString stringWithFormat:@"/list?bucket=%@&prefix=%@&limit=%d&marker=%@&delimiter=%@", bucket.name, prefix, limit, fixedMarker, kQiniuPathDelimiter];

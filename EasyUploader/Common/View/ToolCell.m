@@ -21,42 +21,50 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
-        UIImageView *imageView = [[UIImageView alloc] init];
-
+        // 操作功能区view
+        UIView *toolView = [self toolView];
+        
+        // 上方k固定的view
+        UIView *topFixedView = [[UIView alloc] init];
+        [self.contentView addSubview:topFixedView];
+        [topFixedView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.trailing.top.equalTo(self.contentView);
+            make.bottom.equalTo(toolView.mas_top);
+        }];
+        
 //        SVGKImage *svgImage = [SVGKImage imageNamed:@"qiniu_bucket"];
 //        UIImage *image = [UIImage imageWithSVGNamed:@"qiniu_bucket.svg" targetSize:CGSizeMake(24, 24) fillColor:[UIColor blueColor]];
 //        imageView.image = svgImage.UIImage;
+        UIImageView *imageView = [[UIImageView alloc] init];
         imageView.image = UIImageNamed(@"icon_bucket");
-        [self.contentView addSubview:imageView];
+        [topFixedView addSubview:imageView];
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView).offset(4);
-            make.leading.equalTo(self.contentView).offset(10);
-            make.size.mas_equalTo(CGSize(36, 36));
+            make.centerY.equalTo(topFixedView);
+            make.leading.equalTo(topFixedView).offset(10);
+            make.size.mas_equalTo(CGSize(28, 28));
         }];
 
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         [button setImage:UIImageNamed(@"icon_arrow_down") forState:UIControlStateNormal];
         [button addTarget:self action:@selector(expandButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:button];
+        [topFixedView addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView);
-            make.trailing.equalTo(self.contentView).offset(-5);
+            make.top.equalTo(topFixedView);
+            make.trailing.equalTo(topFixedView).offset(-5);
             make.size.mas_equalTo(CGSizeMake(44, 44));
         }];
 
         UILabel *label = [[UILabel alloc] init];
         label.textColor = [UIColor darkTextColor];
         label.textAlignment = NSTextAlignmentLeft;
-        [self.contentView addSubview:label];
+        [topFixedView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(imageView.mas_trailing).offset(10);
             make.top.equalTo(imageView);
             make.bottom.equalTo(imageView);
             make.trailing.equalTo(button.mas_leading).offset(-10);
         }];
-
-        UIView *toolView = [self toolView];
 
         self.iconImageView = imageView;
         self.label = label;

@@ -7,6 +7,7 @@
 //
 
 #import "QiniuDownloadManager.h"
+#import "QiniuResourceManager.h"
 
 @interface QiniuDownloadManager ()
 
@@ -69,15 +70,20 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 }
 
 - (NSString *)domainOfBucketNamed:(NSString *)name {
-    RLMResults<QiniuBucket *> *results = [QiniuBucket objectsWhere:@"name = %@", name];
-    NSAssert(results.count == 1, @"number of bucket with name %@ must be only 1!", name);
-    NSString *domain = results.firstObject.domainURL;
-    return domain;
+    QiniuBucket *bucket = [kQiniuResourceManager bucketWithName:name];
+    return bucket.domainURL;
+//    RLMResults<QiniuBucket *> *results = [QiniuBucket objectsWhere:@"name = %@", name];
+//    NSAssert(results.count == 1, @"number of bucket with name %@ must be only 1!", name);
+//    NSString *domain = results.firstObject.domainURL;
+//    return domain;
 }
 
 // 图片资源的缩略图 url
 - (NSURL *)thumbnailURLWithKey:(NSString *)key inBucket:(QiniuBucket *)bucket {
     NSString *domain = [self domainOfBucketNamed:bucket.name];
+    if (domain.length == 0) {
+        return nil;
+    }
     NSString *urlString = [NSString stringWithFormat:@"%@/%@?imageView2/1/w/80/h/80/format/jpg/q/100", domain, key];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     urlString = [self makeDownloadTokenOfKey:key url:urlString isThumbnail:YES];
@@ -86,6 +92,9 @@ SINGLETON_IMPLEMENTATION(QiniuDownloadManager);
 
 - (NSURL *)urlWithKey:(NSString *)key inBucket:(QiniuBucket *)bucket {
     NSString *domain = [self domainOfBucketNamed:bucket.name];
+    if (domain.length == 0) {
+        return nil;
+    }
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", domain, key];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     urlString = [self makeDownloadTokenOfKey:key url:urlString isThumbnail:NO];
