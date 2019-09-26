@@ -25,21 +25,24 @@
 @property (nonatomic, strong) NSMutableArray<QiniuResourceContentViewController *> *contentVCs;
 @property (nonatomic, assign) NSUInteger currentPathIndex;
 
+@property (nonatomic, assign) BOOL pathSelectMode;
+
 @end
 
 @implementation QiniuResouresViewController
 
-- (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths {
+- (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths pathSelectMode:(BOOL)pathSelectMode {
     if (self = [super initWithNibName:nil bundle:nil]) {
         self.bucket = bucket;
         self.paths = [NSMutableArray arrayWithArray:paths];
         self.contentVCs = [NSMutableArray array];
+        self.pathSelectMode = pathSelectMode;
     }
     return self;
 }
 
 - (instancetype)initWithBucket:(QiniuBucket *)bucket {
-    return [self initWithBucket:bucket paths:@[@""]];
+    return [self initWithBucket:bucket paths:@[@""] pathSelectMode:NO];
 }
 
 - (void)viewDidLoad {
@@ -49,7 +52,10 @@
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tabBarController.tabBar.hidden = YES;
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(uploadButtonClicked)];
+    UIBarButtonItem *uploadItem = [[UIBarButtonItem alloc] initWithTitle:@"上传" style:UIBarButtonItemStylePlain target:self action:@selector(uploadButtonClicked)];
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked)];
+    UIBarButtonItem *rightItem = self.pathSelectMode ? cancelItem : uploadItem;
+    self.navigationItem.rightBarButtonItem = rightItem;
 
     [self addSubviews];
 
@@ -112,7 +118,8 @@
 
         [self.view addSubview:toolView];
         [toolView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.trailing.bottom.equalTo(self.view);
+            make.leading.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view).offset(-kTabBarArcHeight);
             make.height.mas_equalTo(48);
         }];
         attr = toolView.mas_top;
@@ -139,6 +146,10 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
+- (void)cancelButtonClicked {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
 # pragma mark - Enter Content View
 
 - (void)addNewContentVC:(QiniuResourceContentViewController *)vc named:(NSString *)path {
@@ -152,7 +163,7 @@
     [self.contentVCs addObject:vc];
 }
 
-- (NSInteger)haveEnteredConentVCNamed:(NSString *)path {
+- (NSInteger)indexOfConentVCNamed:(NSString *)path {
     __block NSInteger index = -1;
     [self.paths enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
         if ([obj isEqualToString:path]) {
@@ -179,7 +190,7 @@
 // name: full path such as test1/test11
 - (void)enterContentVCNamed:(NSString *)name {
     // first judge whether have entered content vc
-    NSInteger enteredIndex = [self haveEnteredConentVCNamed:name];
+    NSInteger enteredIndex = [self indexOfConentVCNamed:name];
     // backward existed content vc
     if (enteredIndex != -1) {
         [self updateUIWhenEnterContentVCAtIndex:enteredIndex];

@@ -46,7 +46,7 @@
     [self addSubviews];
     [self initHandlers];
 
-    [QiniuResourceManager queryAllBucketsWithHandler:^(NSArray<QiniuBucket *> *buckets) {
+    [kQiniuResourceManager queryAllBucketsWithHandler:^(NSArray<QiniuBucket *> *buckets) {
         dispatch_async(dispatch_get_main_queue(), ^{
             kQiniuResourceManager.selectedBucket = buckets.lastObject;
             self.viewModel = [[QiniuBucketViewModel alloc] initWithBuckets:buckets];
@@ -84,15 +84,14 @@
         weakself.lastIndexPath = indexPath;
 
         [UIView animateWithDuration:0.3 animations:^{
+            // 如果放在动画之前跑，效果会和 reload 冲突，导致动画很突兀
+            [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
             if (!expand) {
                 button.transform = CGAffineTransformRotate(button.transform, M_PI);
             } else {
                 button.transform = CGAffineTransformRotate(button.transform, -M_PI);
             }
-        } completion:^(BOOL finished) {
-            // 如果放在动画之前跑，效果会和 reload 冲突，导致动画很突兀
-            [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        }];
+        } completion:nil];
     };
 }
 

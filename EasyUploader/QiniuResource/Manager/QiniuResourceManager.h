@@ -11,21 +11,24 @@
 #import "QiniuResource.h"
 
 
-@interface QiniuResourceManager : NSObject
-
-SINGLETON_DECLEAR;
-
 typedef void (^BucketsHandler)(NSArray<QiniuBucket *> *buckets);
 typedef void (^ResourcesHandler)(NSArray<QiniuResource *> *resources, NSString *marker);
 typedef void (^RequestHandler)(BOOL success, id responseObject);
 typedef void (^StringArrayHandler)(NSArray<NSString *> *strings);
 
+
+@interface QiniuResourceManager : NSObject
+
+SINGLETON_DECLEAR;
+
 @property (nonatomic, strong) QiniuBucket *selectedBucket;
+- (QiniuBucket *)bucketWithName:(NSString *)name;
 
-+ (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
-+ (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit marker:(NSString *)marker handler:(ResourcesHandler)handler;
+//
+- (void)queryAllBucketsWithHandler:(BucketsHandler)handler;
+- (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit marker:(NSString *)marker handler:(ResourcesHandler)handler;
 
-+ (void)deleteResourceNamed:(NSString *)key inBucket:(QiniuBucket *)bucket withHandler:(RequestHandler)handler;
+- (void)deleteResourceNamed:(NSString *)key inBucket:(QiniuBucket *)bucket withHandler:(RequestHandler)handler;
 
 
 + (NSString *)authRequestPath:(NSString *)url andBody:(NSString *)body;

@@ -90,7 +90,12 @@
 }
 
 - (UIView *)toolView {
+    if (_toolView != nil) {
+        return _toolView;
+    }
+    
     UIView *view = [[UIView alloc] init];
+    _toolView = view;
     view.clipsToBounds = YES;
     view.backgroundColor = RGB(0xEE, 0xEE, 0xEE);
     [self.contentView addSubview:view];
@@ -104,11 +109,11 @@
     NSArray *buttonInfos = [self toolButtons];
     NSUInteger count = buttonInfos.count;
 
-    CGSize imageSize = CGSize(24, 24);
-    CGFloat padding = (self.contentView.width - imageSize.width * count)  / (count + 1);
+    CGSize imageSize = CGSize(44, 40);
+    CGFloat padding = (kWindowWidth - imageSize.width * count)  / (count + 1);
 
     for (NSInteger i=0; i<count; i++) {
-        CGFloat x = padding * i + padding;
+        CGFloat x = (padding + imageSize.width) * i + padding;
 
         ToolButtonInfo *buttonInfo = buttonInfos[i];
         ZyxImageTitleButton *button = [ZyxImageTitleButton buttonWithType:UIButtonTypeCustom];
@@ -120,7 +125,7 @@
         button.spacing = 1;
         [view addSubview:button];
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSize(44, 40));
+            make.size.mas_equalTo(imageSize);
             make.centerY.equalTo(view);
             make.leading.equalTo(view).offset(x);
         }];

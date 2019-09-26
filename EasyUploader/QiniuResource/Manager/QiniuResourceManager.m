@@ -12,6 +12,8 @@
 
 @interface QiniuResourceManager ()
 
+@property (nonatomic, strong) NSMutableDictionary<NSString *, QiniuBucket *> *bucketDict;
+
 @end
 
 @implementation QiniuResourceManager
@@ -19,10 +21,18 @@
 SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 
 - (void)init_additional {
+    self.bucketDict = [NSMutableDictionary dictionary];
+}
+
+- (QiniuBucket *)bucketWithName:(NSString *)name {
+    return _bucketDict[name];
+//    RLMResults<QiniuBucket *> *buckets = [QiniuBucket objectsWhere:@"name == %@", name];
+//    NSAssert(buckets.count == 1, @"number of buckets with name %@ must be equal to 1!", name);
+//    return buckets.firstObject;
 }
 
 // 查询所有 buckets
-+ (void)queryAllBucketsWithHandler:(BucketsHandler)handler {
+- (void)queryAllBucketsWithHandler:(BucketsHandler)handler {
     NSURLRequest *request = [self.class requestWithHostName:kQiniuResourceHost path:@"/buckets" hostNameInHeader:@"rs.qbox.me"];
 
     [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
@@ -33,52 +43,44 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
         }
 
         buckets = [QiniuBucket instancesWithJSONStrings:responseObject];
+        for (QiniuBucket *item in buckets) {
+            _bucketDict[item.name] = item;
+        }
         ExecuteBlock1IfNotNil(handler, buckets);
 
-        RLMRealm *realm = [RLMRealm defaultRealm];
-        [realm beginWriteTransaction];
-        for (QiniuBucket *bucket in buckets) {
-            NSUInteger count = [QiniuBucket objectsWhere:@"name = %@", bucket.name].count;
-            if (count == 0) {
-                [realm addObject:bucket];
-            }
-        }
-        [realm commitWriteTransaction];
+//        RLMRealm *realm = [RLMRealm defaultRealm];
+//        [realm beginWriteTransaction];
+//        for (QiniuBucket *bucket in buckets) {
+//            NSUInteger count = [QiniuBucket objectsWhere:@"name = %@", bucket.name].count;
+//            if (count == 0) {
+//                [realm addObject:bucket];
+//            }
+//        }
+//        [realm commitWriteTransaction];
         
+        // 查询 bucket 的外链域名, 用于资源下载
         for (QiniuBucket *bucket in buckets) {
             [kQiniuResourceManager queryDomainOfBucket:bucket];
         }
     }];
 }
 
-+ (QiniuBucket *)bucketWithName:(NSString *)name {
-    RLMResults<QiniuBucket *> *buckets = [QiniuBucket objectsWhere:@"name == %@", name];
-    NSAssert(buckets.count == 1, @"number of buckets with name %@ must be equal to 1!", name);
-    return buckets.firstObject;
-}
-
 // 查询 bucket 的外链域名, 用于资源下载
+// bucket的测试域名有时间限制，超过一定时间后就会获取域名失败，七牛服务器会返回空，这时候需要你去绑定自定义域名才能访问
 - (void)queryDomainOfBucket:(QiniuBucket *)bucket {
     NSString *path = [NSString stringWithFormat:@"/v6/domain/list?tbl=%@", bucket.name];
     NSURLRequest *request = [self.class requestWithHostName:kQiniuAPIHost path:path];
-    [self.class sendRequest:request withHandler:^(BOOL success, id responseObject) {
+    [self.class sendRequest:request withHandler:^(BOOL success, NSArray<NSString *> *responseObject) {
         NSLog(@"request[%@]'s response[%@] is %@", path, responseObject, success ? @"success" : @"failed");
-        if (!success) {
-            return;
-        }
-
-        QiniuBucket *bucketInDB = [self.class bucketWithName:bucket.name];
-        [[RLMRealm defaultRealm] transactionWithBlock:^{
-            NSString *url = [NSString stringWithFormat:@"http://%@", ((NSArray *)responseObject).firstObject];
-            if (![url isEqualToString:bucketInDB.domainURL]) {
-                bucketInDB.domainURL = url;
-            }
-        }];
+    
+        NSString *domain = responseObject.firstObject;
+        NSString *url = [NSString stringWithFormat:@"http://%@", domain];
+        bucket.domainURL = url;
     }];
 }
 
 // 查询指定 bucket 的资源
-+ (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit marker:(NSString *)marker handler:(ResourcesHandler)handler {
+- (void)queryResourcesInBucket:(QiniuBucket *)bucket withPrefix:(NSString *)prefix limit:(int)limit marker:(NSString *)marker handler:(ResourcesHandler)handler {
     NSString *fixedMarker = SafeString(marker);
     NSString *path = [NSString stringWithFormat:@"/list?bucket=%@&prefix=%@&limit=%d&marker=%@&delimiter=%@", bucket.name, prefix, limit, fixedMarker, kQiniuPathDelimiter];
     NSLog(@"request url = %@", path);
@@ -108,12 +110,15 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
                 responseMarker = responseObject[@"marker"];
             }
         }
-        ExecuteBlock2IfNotNil(handler, resources, responseMarker);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ExecuteBlock2IfNotNil(handler, resources, responseMarker);
+        });
     }];
 }
 
 
-+ (void)deleteResourceNamed:(NSString *)key inBucket:(QiniuBucket *)bucket withHandler:(RequestHandler)handler {
+- (void)deleteResourceNamed:(NSString *)key inBucket:(QiniuBucket *)bucket withHandler:(RequestHandler)handler {
     NSString *path = [NSString stringWithFormat:@"%@:%@", bucket.name, key];
     NSString *encodedPath = [GTMBase64 encodeBase64String:path];
     NSString *requestPath = [NSString stringWithFormat:@"/delete/%@", encodedPath];
@@ -127,7 +132,7 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 
 
 // 添加 bucket
-+ (void)addBucketWithName:(NSString *)name {
+- (void)addBucketWithName:(NSString *)name {
 //    NSString *requestPath =  @"/buckets";
 //    NSString *requestPathAuthed = [self.class authRequestPath:requestPath andBody:@""];
 //    NSString *url = [NSString stringWithFormat:@"%@%@", kQiniuResourceHost, requestPath];

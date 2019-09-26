@@ -120,7 +120,7 @@
         NSArray *paths = [path componentsSeparatedByString:@"/"];
 
         QiniuMainViewController *mainVC = [QiniuMainViewController new];
-        QiniuResouresViewController *resourcesVC = [[QiniuResouresViewController alloc] initWithBucket:bucket paths:paths];
+        QiniuResouresViewController *resourcesVC = [[QiniuResouresViewController alloc] initWithBucket:bucket paths:paths pathSelectMode:YES];
         
         UINavigationController *nav = [[UINavigationController alloc] init];
         nav.viewControllers = @[mainVC, resourcesVC];

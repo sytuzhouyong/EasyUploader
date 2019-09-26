@@ -15,11 +15,11 @@
 @property (nonatomic, strong, readonly) NSArray *paths;
 
 - (instancetype)initWithBucket:(QiniuBucket *)bucket;
-- (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths;
+- (instancetype)initWithBucket:(QiniuBucket *)bucket paths:(NSArray *)paths pathSelectMode:(BOOL)pathSelectMode;
 
 
 - (void)addNewContentVC:(QiniuResourceContentViewController *)vc named:(NSString *)path;
-- (NSInteger)haveEnteredConentVCNamed:(NSString *)path;
+- (NSInteger)indexOfConentVCNamed:(NSString *)path;
 - (void)enterContentVCNamed:(NSString *)name;
 
 - (void)updateUIWhenEnterNewContentVC;

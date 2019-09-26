@@ -79,7 +79,7 @@
 
     NSString *mineType = [resource.mimeType substringToIndex:@"image".length + 1];
     if ([mineType isEqualToString:@"image/"]) {
-        NSURL *url = [kQiniuDownloadManager thumbnailURLWithKey:resource.name];
+//        NSURL *url = [kQiniuDownloadManager thumbnailURLWithKey:resource.name];
         [self.iconImageView sd_setImageWithURL:nil placeholderImage:UIImageNamed(@"icon_image")];
     }
 }

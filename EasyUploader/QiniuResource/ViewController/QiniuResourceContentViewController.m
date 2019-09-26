@@ -55,7 +55,7 @@
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.parentVC.navigationController.view animated:YES];
     hud.label.text = @"加载中..."; //NSLocalizedString(@"Loading...", @"HUD loading title");
-    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:10 marker:self.marker handler:^(NSArray<QiniuResource *> *resources, NSString *marker) {
+    [kQiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:10 marker:self.marker handler:^(NSArray<QiniuResource *> *resources, NSString *marker) {
         dispatch_async(dispatch_get_main_queue(), ^{
             QiniuResourceType type = kAppDelegate.isUnderPathSelectMode ? QiniuResourceTypeDir : QiniuResourceTypeAll;
             self.viewModel = [[QiniuResourceViewModel alloc] initWithResources:resources type:type];
@@ -82,14 +82,13 @@
         weakself.lastIndexPath = indexPath;
 
         [UIView animateWithDuration:0.3 animations:^{
+             [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
             if (!expand) {
                 button.transform = CGAffineTransformRotate(button.transform, M_PI);
             } else {
                 button.transform = CGAffineTransformRotate(button.transform, -M_PI);
             }
-        } completion:^(BOOL finished) {
-            [weakself.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        }];
+        } completion:nil];
     };
     self.downloadHandler = ^(UIButton *button) {
         CGPoint pt = [weakself.tableView convertPoint:button.center fromView:button.superview];
@@ -108,7 +107,7 @@
 
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakself.parentVC.navigationController.view animated:YES];
         hud.label.text = @"删除中...";
-        [QiniuResourceManager deleteResourceNamed:resource.name inBucket:weakself.bucket withHandler:^(BOOL success, id responseObject) {
+        [kQiniuResourceManager deleteResourceNamed:resource.name inBucket:weakself.bucket withHandler:^(BOOL success, id responseObject) {
             hud.label.text = success ? @"删除成功" : @"删除失败";
             [hud hideAnimated:YES];
             if (success) {
@@ -120,20 +119,23 @@
 }
 
 - (void)loadMore:(id)obj {
-    [QiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:3 marker:self.marker handler:^(NSArray<QiniuResource *> *resources, NSString *marker) {
+    // 没有mark说明没有下一页的数据
+    if (_marker.length == 0) {
+        [self.tableView.mj_footer endRefreshing];
+        return;
+    }
+    
+    [kQiniuResourceManager queryResourcesInBucket:_bucket withPrefix:self.currentPath limit:3 marker:_marker handler:^(NSArray<QiniuResource *> *resources, NSString *marker) {
         self.marker = marker;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (resources.count == 0) {
-                [self.tableView.mj_footer endRefreshing];
-                return;
-            }
-
-            QiniuResourceType type = kAppDelegate.isUnderPathSelectMode ? QiniuResourceTypeDir : QiniuResourceTypeAll;
-            [self.viewModel addResources:resources type:type];
-            [self.tableView reloadData];
-//            [self.tableView.mj_header endRefreshing];
+        if (resources.count == 0) {
             [self.tableView.mj_footer endRefreshing];
-        });
+            return;
+        }
+        
+        QiniuResourceType type = kAppDelegate.isUnderPathSelectMode ? QiniuResourceTypeDir : QiniuResourceTypeAll;
+        [self.viewModel addResources:resources type:type];
+        [self.tableView reloadData];
+        [self.tableView.mj_footer endRefreshing];
     }];
 }
 
