@@ -12,6 +12,7 @@
 #import "QiniuViewModel.h"
 #import "ToolCell.h"
 #import <Flutter/Flutter.h>
+#import "FlutterVC.h"
 
 #define kExpandButtonTag        1000
 #define kLabelTag               2000
@@ -65,8 +66,17 @@
 }
 
 - (void)showTaskButtonPressed {
-    FlutterViewController* c = [[FlutterViewController alloc] init];
-    [self.navigationController pushViewController:c animated:YES];
+    self.hidesBottomBarWhenPushed = YES;
+    
+    FlutterVC* vc = [[FlutterVC alloc] init];
+    UIView *splashView = [[UIView alloc] init];
+    UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loading.frame = CGRectMake(100, 100, 24, 24);
+    [splashView addSubview:loading];
+    splashView.backgroundColor = [UIColor whiteColor ];
+    vc.splashScreenView = splashView;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)cancelButtonPressed {
