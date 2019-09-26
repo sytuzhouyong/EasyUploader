@@ -31,7 +31,7 @@ SINGLETON_IMPLEMENTATION_ADD(QiniuResourceManager, init_additional);
 //    return buckets.firstObject;
 }
 
-// 查询所有 buckets
+# pragma mark - 查询所有 buckets
 - (void)queryAllBucketsWithHandler:(BucketsHandler)handler {
     NSURLRequest *request = [self.class requestWithHostName:kQiniuResourceHost path:@"/buckets" hostNameInHeader:@"rs.qbox.me"];
 

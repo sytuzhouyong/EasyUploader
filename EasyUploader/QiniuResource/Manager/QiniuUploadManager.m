@@ -9,6 +9,7 @@
 #import "QiniuUploadManager.h"
 #import "QNUploadManager.h"
 #import "QNUploadOption+Private.h"
+#import "QNConfiguration.h"
 
 
 @implementation QiniuUploadManager
@@ -51,18 +52,30 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
     NSString *token = [self makeUploadTokenOfBucket:bucket withKey:key];
     NSLog(@"upload token [%@]  = %@", key, token);
 
-    QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithProgressHandler:^(NSString *key, float percent) {
-        ExecuteBlock3IfNotNil(handler, NO, key, percent);
+    QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil
+                                                        progressHandler:^(NSString *key, float percent) {
+                                                            ExecuteBlock3IfNotNil(handler, NO, key, percent);
+                                                        }
+                                                                 params:nil
+                                                               checkCrc:NO
+                                                     cancellationSignal:^BOOL{
+                                                         return NO;
+                                                                 }
+                                    ];
+    QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.zone = [QNFixedZone zone2];
+        builder.retryMax = 3;
     }];
-
-    QNUploadManager *manager = [[QNUploadManager alloc] init];
+    QNUploadManager *manager = [[QNUploadManager alloc] initWithConfiguration:config];
     [manager putALAsset: asset
                     key: key
                   token: token
                complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+                   NSLog(@"key: %@, resp = %@, info = %@", key, resp, info);
                    BOOL success = resp[@"hash"];
                    ExecuteBlock3IfNotNil(handler, success, key, 1.0f);
-                 } option: uploadOption];
+                 }
+                 option: uploadOption];
 }
 
 @end

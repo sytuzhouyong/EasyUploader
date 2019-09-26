@@ -64,7 +64,8 @@
         NSArray<ALAsset *> *selectedResources = [weakself selectedPhotos];
         for (ALAsset *asset in selectedResources) {
             NSString *key = [ALAssetUtil millisecondDateStringOfALAsset:asset];
-            key = [NSString stringWithFormat:@"%@.jpg", key];
+            NSString *ext = [ALAssetUtil extOfAsset:asset];
+            key = [NSString stringWithFormat:@"%@.%@", key, ext];
             NSLog(@"key = %@", key);
             QiniuBucket *bucket = kQiniuResourceManager.selectedBucket;
             [kQiniuUploadManager uploadALAsset:asset toBucket:bucket.name withKey:key handler:^(BOOL finished, NSString *key, float percent) {
@@ -117,7 +118,7 @@
         kAppDelegate.isUnderPathSelectMode = YES;
         
         QiniuBucket *bucket = kQiniuResourceManager.selectedBucket;
-        NSArray *paths = [path componentsSeparatedByString:@"/"];
+        NSArray *paths = [path componentsSeparatedByString:kQiniuPathDelimiter];
 
         QiniuMainViewController *mainVC = [QiniuMainViewController new];
         QiniuResouresViewController *resourcesVC = [[QiniuResouresViewController alloc] initWithBucket:bucket paths:paths pathSelectMode:YES];

@@ -11,7 +11,7 @@
 #import "ResourceToolCell.h"
 #import "QiniuViewModel.h"
 #import "JGPhotoBrowser.h"
-#import "JGPhoto.h"
+#import "JGPBPhoto.h"
 
 @interface QiniuResourceContentViewController ()
 
@@ -175,7 +175,7 @@
 
     NSUInteger selectedIndex = indexPath.row;
     NSMutableArray *photoArray = [NSMutableArray array];
-    JGPhotoBrowser *photoBrowser = [[JGPhotoBrowser alloc] init];
+    
     for (int i=0; i<[self.viewModel numberOfResources]; i++) {
         QiniuResource *resource = [self.viewModel resourceAtIndexPath:NSIndexPath(0, i)];
         if (resource.type != QiniuResourceTypeFile) {
@@ -193,8 +193,7 @@
         [photoArray addObject:photo];
     }
 
-    photoBrowser.photos = photoArray;
-    photoBrowser.currentPhotoIndex = selectedIndex;
+    JGPBBrowserController *photoBrowser = [[JGPBBrowserController alloc] initWithPhotos:photoArray index:selectedIndex];
     [photoBrowser show];
 }
 

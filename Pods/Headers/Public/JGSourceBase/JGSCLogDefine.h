@@ -1,0 +1,1 @@
+../../../JGSourceBase/JGSourceBase/Common/JGSCLogDefine.h

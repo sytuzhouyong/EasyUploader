@@ -1,0 +1,1 @@
+../../../JGSourceBase/JGSourceBase/Common/JGSCWeakStrongProperty.h

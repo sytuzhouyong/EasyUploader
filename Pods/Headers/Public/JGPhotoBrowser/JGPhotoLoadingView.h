@@ -1,1 +1,0 @@
-../../../JGPhotoBrowser/JGPhotoBrowser/JGPhotoLoadingView.h

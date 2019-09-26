@@ -35,4 +35,20 @@
     return [formatter stringFromDate:date];
 }
 
++ (NSString *)extOfAsset:(ALAsset *)asset {
+    NSURL *url = (NSURL *)[asset valueForProperty:ALAssetPropertyAssetURL];
+    NSString *string = url.absoluteString;
+    NSArray<NSString *> *items = [string componentsSeparatedByString:@"&"];
+    for (NSString *item in items) {
+        if ([item hasPrefix:@"ext="]) {
+            return [item substringFromIndex:@"ext=".length];
+        }
+    }
+    return @"";
+}
+
++ (id)valueOfALAsset:(ALAsset *)asset withKey:(NSString *)key {
+    return [asset valueForProperty:key];
+}
+
 @end

@@ -3,28 +3,32 @@
 [![@qiniu on weibo](http://img.shields.io/badge/weibo-%40qiniutek-blue.svg)](http://weibo.com/qiniutek)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
 [![Build Status](https://travis-ci.org/qiniu/objc-sdk.svg?branch=master)](https://travis-ci.org/qiniu/objc-sdk)
+[![codecov](https://codecov.io/gh/qiniu/objc-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/qiniu/objc-sdk)
 [![Latest Stable Version](http://img.shields.io/cocoapods/v/Qiniu.svg)](https://github.com/qiniu/objc-sdk/releases)
 ![Platform](http://img.shields.io/cocoapods/p/Qiniu.svg)
+
 
 ## 安装
 
 通过 CocoaPods
 
 ```ruby
-pod "Qiniu", :git => 'https://github.com/qiniu/objc-sdk.git', :branch => 'AFNetworking-3.x'
+pod "Qiniu", "~> 7.2" 
 ```
 
 ## 运行环境
 
-| Qiniu SDK 版本 | 最低 iOS版本   | 最低 OS X 版本  |                                   Notes                                   |
-|:--------------------:|:---------------------------:|:----------------------------:|:-------------------------------------------------------------------------:|
-|          7.x         |            iOS 6            |           OS X 10.8          | Xcode 最低版本 5.  |
-|          [7.x / AFNetworking-3.x](https://github.com/qiniu/objc-sdk/tree/AFNetworking-3.x)         |            iOS 7            |           OS X 10.9          | Xcode 最低版本 6.  |
-|          [7.x / AFNetworking-1.x](https://github.com/qiniu/objc-sdk/tree/AFNetworking-1.x)         |            iOS 5            |         OS X 10.7        |Xcode 最低版本 5. |
-|          [6.x](https://github.com/qiniu/ios-sdk)         |            iOS 6            |         None        |Xcode 最低版本 5. |
+|               Qiniu SDK 版本               | 最低 iOS版本 | 最低 OS X 版本 |     Notes     |
+| :--------------------------------------: | :------: | :--------: | :-----------: |
+|                  7.2.x                   |  iOS 7   | OS X 10.9  | Xcode 最低版本 6. |
+|         7.1.x / AFNetworking-3.x         |  iOS 7   | OS X 10.9  | Xcode 最低版本 6. |
+| [7.0.x / AFNetworking-2.x](https://github.com/qiniu/objc-sdk/tree/7.0.x/AFNetworking-2.x) |  iOS 6   | OS X 10.8  | Xcode 最低版本 5. |
+| [7.x / AFNetworking-1.x](https://github.com/qiniu/objc-sdk/tree/AFNetworking-1.x) |  iOS 5   | OS X 10.7  | Xcode 最低版本 5. |
+| [6.x](https://github.com/qiniu/ios-sdk)  |  iOS 6   |    None    | Xcode 最低版本 5. |
 
 ## 使用方法
 
+### 简单上传
 ```Objective-C
 #import <QiniuSDK.h>
 ...
@@ -35,7 +39,34 @@ pod "Qiniu", :git => 'https://github.com/qiniu/objc-sdk.git', :branch => 'AFNetw
         complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
         NSLog(@"%@", info);
         NSLog(@"%@", resp);
-    } option:nil];
+    } option:[QNUploadOption defaultOptions]];
+...
+```
+
+### 如使用最新版的sdk，默认自动判断上传空间。如需要指定上传区域，可以按如下方式上传：
+```Objective-C
+#import <QiniuSDK.h>
+...
+    QNConfiguration *config = [QNConfiguration build:^(QNConfigurationBuilder *builder) {
+        builder.useHttps = NO;// 是否使用https
+        builder.zone = [QNFixedZone zone0];// 指定华东区域
+        // builder.zone = [QNFixedZone zone1];// 指定华北区域
+        // builder.zone = [QNFixedZone zone2];// 指定华南区域
+        // builder.zone = [QNFixedZone zoneNa0];// 指定北美区域
+        // builder.zone = [QNFixedZone zoneAs0];// 指定东南亚区域
+    }];
+    
+    QNUploadManager *upManager = [[QNUploadManager alloc] initWithConfiguration:config];
+    QNUploadOption *option = [[QNUploadOption alloc] initWithProgressHandler:^(NSString *key, float percent) {
+        NSLog(@"progress %f", percent);
+    }];
+    
+    NSData *data = [@"Hello, World!" dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *token = @"从服务端SDK获取";
+    [upManager putData:data key:@"hello" token:token complete: ^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+        NSLog(@"%@", info);
+        NSLog(@"%@", resp);
+    } option:option];
 ...
 ```
 
@@ -46,14 +77,14 @@ pod "Qiniu", :git => 'https://github.com/qiniu/objc-sdk.git', :branch => 'AFNetw
 ### 所有测试
 
 ``` bash
-$ xctool -workspace QiniuSDK.xcworkspace -scheme "QiniuSDK Mac" -sdk macosx -configuration Release test -test-sdk macosx
+$ xcodebuild test -workspace QiniuSDK.xcworkspace -scheme QiniuSDK_Mac -configuration Release -destination 'platform=macOS,arch=x86_64'
 ```
 ### 指定测试
 
 可以在单元测试上修改, 熟悉 SDK
 
 ``` bash
-$ xctool -workspace QiniuSDK.xcworkspace -scheme "QiniuSDK_Mac" -sdk macosx -configuration Debug test -test-sdk macosx -only "QiniuSDK MacTests:QNResumeUploadTest/test500k"
+$ xcodebuild test -workspace QiniuSDK.xcworkspace -scheme QiniuSDK_Mac -configuration Release -destination 'platform=macOS,arch=x86_64' -only-testing:"QiniuSDK_MacTests/QNResumeUploadTest/test5M"
 ```
 
 ## 示例代码

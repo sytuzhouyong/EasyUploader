@@ -1,0 +1,1 @@
+../../../JGPhotoBrowser/JGPhotoBrowser/JGPBPhotoToolView.h
