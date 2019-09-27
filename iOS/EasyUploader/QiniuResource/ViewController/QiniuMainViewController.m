@@ -67,17 +67,20 @@
 
 - (void)showTaskButtonPressed {
     self.hidesBottomBarWhenPushed = YES;
+    self.navigationController.navigationBarHidden = YES;
+    
+    // 自定义闪屏，否则首次启动FlutterVC会显示iOS的启动页面
+    UIView *splashView = [[UIView alloc] init];
+    splashView.backgroundColor = [UIColor whiteColor ];
+    UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loading.frame = CGRectMake(100, 100, 60, 60);
+    [splashView addSubview:loading];
     
     FlutterVC* vc = [[FlutterVC alloc] init];
-    UIView *splashView = [[UIView alloc] init];
-    UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    loading.frame = CGRectMake(100, 100, 24, 24);
-    [splashView addSubview:loading];
-    splashView.backgroundColor = [UIColor whiteColor ];
     vc.splashScreenView = splashView;
-    
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 
 - (void)cancelButtonPressed {
     [self dismissViewControllerAnimated:YES completion:nil];
