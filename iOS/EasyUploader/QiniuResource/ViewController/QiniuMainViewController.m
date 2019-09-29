@@ -31,6 +31,10 @@
 
 @implementation QiniuMainViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -66,7 +70,6 @@
 }
 
 - (void)showTaskButtonPressed {
-    self.hidesBottomBarWhenPushed = YES;
     self.navigationController.navigationBarHidden = YES;
     
     // 自定义闪屏，否则首次启动FlutterVC会显示iOS的启动页面
@@ -77,7 +80,29 @@
     [splashView addSubview:loading];
     
     FlutterVC* vc = [[FlutterVC alloc] init];
+    [vc setInitialRoute:@"task-list"];
     vc.splashScreenView = splashView;
+    vc.hidesBottomBarWhenPushed = YES; // 在哪个页面隐藏tabbar就在哪个控制器上设置这个属性
+    
+    kWeakself;
+    NSString *channelName = @"easy-upload-ios";
+    FlutterMethodChannel *messageChannel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:vc];
+   
+    [messageChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
+        // call.method 获取 flutter 给回到的方法名，要匹配到 channelName 对应的多个 发送方法名，一般需要判断区分
+        // call.arguments 获取到 flutter 给到的参数，（比如跳转到另一个页面所需要参数）
+        // result 是给flutter的回调， 该回调只能使用一次
+        NSLog(@"method=%@ \narguments = %@", call.method, call.arguments);
+        NSString *method = call.method;
+//        id args = call.arguments;
+        
+        // method和WKWebView里面JS交互很像
+        if ([method isEqualToString:@"popVC"] ) {
+            [weakself.navigationController popViewControllerAnimated:YES];
+            weakself.navigationController.navigationBarHidden = NO;
+        }
+    }];
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
