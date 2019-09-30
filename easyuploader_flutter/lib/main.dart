@@ -1,21 +1,44 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'transfer/task_list_widget.dart';
+import 'task/task_list_widget.dart';
 
 void main() => runApp(_widgetForRoute(ui.window.defaultRouteName));
+//void main() => runApp(MyApp());
 
 // 根据iOS端传来的route跳转不同界面
 Widget _widgetForRoute(String route) {
   print('route == $route');
   switch (route) {
-    case 'myApp':
-      return new MyApp();
     case 'task-list':
-      return new TaskListWidget(title: '传输列表');
+      return new TaskListWidget(title: '传输列表', pushFromIOS: true,);
     default:
-      return Center(
-        child: Text('Unknown route: $route', textDirection: TextDirection.ltr),
-      );
+      return MyApp();
+  }
+}
+
+class MyHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Flutter Default Main Page'),
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 100),),
+              Text('Flutter View Controller', style: TextStyle(color: Colors.blue, fontSize: 20),),
+              Padding(padding: EdgeInsets.only(top: 20),),
+              IconButton(icon: Icon(Icons.forward), iconSize: 36, onPressed: () {
+                Navigator.pushNamed(context, 'task-list');
+//            Navigator.of(context).pushReplacementNamed('task-list');
+              },)
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -30,11 +53,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: <String, WidgetBuilder> {
-        'task-list': (BuildContext context) => new TaskListWidget(title: '传输列表'),
+        'task-list': (BuildContext context) => new TaskListWidget(title: '传输列表', pushFromIOS:false),
       },
-      home: Center(
-        child: Text('Flutter View Controller', style: TextStyle(color: Colors.blue, fontSize: 20),),
-      )
+      home: MyHome(),
     );
   }
 }

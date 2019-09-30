@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:easyuploader_flutter/main.dart';
-import 'package:easyuploader_flutter/transfer/task_vo.dart';
+import 'package:easyuploader_flutter/task/task_vo.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

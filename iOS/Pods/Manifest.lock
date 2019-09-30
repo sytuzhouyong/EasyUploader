@@ -26,6 +26,12 @@ PODS:
   - Flutter (1.0.0)
   - FlutterPluginRegistrant (0.0.1):
     - Flutter
+    - path_provider
+    - shared_preferences
+    - sqflite
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - HappyDNS (0.3.15)
   - JGPhotoBrowser (1.2.9):
     - JGSourceBase (~> 0.1.0)
@@ -37,6 +43,8 @@ PODS:
   - Masonry (1.0.2)
   - MBProgressHUD (1.0.0)
   - MJRefresh (3.1.17)
+  - path_provider (0.0.1):
+    - Flutter
   - Qiniu (7.2.6)
   - ReactiveCocoa (2.1.8):
     - ReactiveCocoa/Core (= 2.1.8)
@@ -53,6 +61,11 @@ PODS:
   - SDWebImage/GIF (4.4.7):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - shared_preferences (0.0.1):
+    - Flutter
+  - sqflite (0.0.1):
+    - Flutter
+    - FMDB (~> 2.7.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -65,16 +78,20 @@ DEPENDENCIES:
   - Masonry (~> 1.0.2)
   - MBProgressHUD (~> 1.0.0)
   - MJRefresh (~> 3.1.12)
+  - path_provider (from `../easyuploader_flutter/.ios/Flutter/.symlinks/path_provider/ios`)
   - Qiniu (~> 7.2.6)
   - ReactiveCocoa (~> 2.1.8)
   - Realm
   - SDWebImage
+  - shared_preferences (from `../easyuploader_flutter/.ios/Flutter/.symlinks/shared_preferences/ios`)
+  - sqflite (from `../easyuploader_flutter/.ios/Flutter/.symlinks/sqflite/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - CocoaLumberjack
     - FLAnimatedImage
+    - FMDB
     - HappyDNS
     - JGPhotoBrowser
     - JGSourceBase
@@ -93,6 +110,12 @@ EXTERNAL SOURCES:
     :path: "../easyuploader_flutter/.ios/Flutter/engine"
   FlutterPluginRegistrant:
     :path: "../easyuploader_flutter/.ios/Flutter/FlutterPluginRegistrant"
+  path_provider:
+    :path: "../easyuploader_flutter/.ios/Flutter/.symlinks/path_provider/ios"
+  shared_preferences:
+    :path: "../easyuploader_flutter/.ios/Flutter/.symlinks/shared_preferences/ios"
+  sqflite:
+    :path: "../easyuploader_flutter/.ios/Flutter/.symlinks/sqflite/ios"
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -100,17 +123,21 @@ SPEC CHECKSUMS:
   easyuploader_flutter: 50d52064467cc61a0e718fff90466be6907bf705
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  FlutterPluginRegistrant: 8855ca2b426d228cb41aa6c26c0c83b8c49e3593
+  FlutterPluginRegistrant: 678dbe0e9625c287462b8d09c08decaa45792e8a
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HappyDNS: 00c15e651a347206e58a20503a32a5564589b56a
   JGPhotoBrowser: b50d81d24dd4d5a044f4d128fb0ee12f258ddc11
   JGSourceBase: 03fca616c3686a7197fcac672201d7f083fd7d8b
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: ee5b68f639775462faba4db0fd243baf4d42c2cf
+  path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
   Qiniu: 9d1f20dcc348919972b4ee1b1272f9b9d4a7e69e
   ReactiveCocoa: f89f2e009a87951b50321bf9feb958823fcc617e
   Realm: 7b3d04740facf45e958a514b466a32b04f1113d6
   SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
+  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
+  sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
 
 PODFILE CHECKSUM: 3e8b68b801817c12857767b2b38e7aadabec77f5
 

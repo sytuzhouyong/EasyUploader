@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'task_vo.dart';
 
 class TaskListItemWidget extends StatefulWidget {
-  final TransferTaskModel task;
+  final TaskModel task;
 
   TaskListItemWidget({
     Key key,

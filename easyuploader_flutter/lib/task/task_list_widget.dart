@@ -3,16 +3,18 @@ import 'package:flutter/services.dart';
 import 'task_vo.dart';
 import 'task_list_header_widget.dart';
 import 'task_list_item_widget.dart';
+import 'task_manager.dart';
 
 
 class TaskListWidget extends StatefulWidget {
 
   final String title;
-  final List<TransferTaskModel> tasks = testTasks; // 任务列表
+  bool pushFromIOS = true;
 
   TaskListWidget({
     Key key,
     @required this.title,
+    this.pushFromIOS,
   }): super(key: key);
 
   @override
@@ -22,6 +24,8 @@ class TaskListWidget extends StatefulWidget {
 class _TaskListWidgetState extends State<TaskListWidget> {
   // 列表滚动控制器
   final ScrollController _scrollController = new ScrollController();
+  final TaskManager taskManager = TaskManager.instance;
+  List<TaskModel> tasks = List(); // 任务列表
 
   // 创建一个给native的channel (类似iOS的通知）
   static const methodChannel = const MethodChannel('easy-upload-ios');
@@ -30,6 +34,19 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 //    setState(() {
 //    });
 //  }
+
+  _refreshList() async {
+    List<TaskModel> items = await taskManager.queryTask();
+    setState(() {
+      tasks = items;
+    });
+  }
+
+  _onAddTask() async {
+    TaskModel task = testTasks[0];
+    await taskManager.addTask(task);
+    await _refreshList();
+  }
 
   _iOSPopVC() async {
     await methodChannel.invokeMethod('popVC');
@@ -48,17 +65,24 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               tooltip: '返回',
-              onPressed: () { _iOSPopVC(); },
+              onPressed: () {
+                if (widget.pushFromIOS) {
+                  _iOSPopVC();
+                } else {
+                  Navigator.pop(context);
+                }
+              },
             ),
             // 右侧按钮
             actions: <Widget>[
               GestureDetector(
                 child: Container(
                   margin: const EdgeInsets.only(right: 10),
-                  child: Icon(Icons.search),
+                  child: Icon(Icons.add),
                 ), //
                 onTap: () {
-                  Navigator.pushNamed(context, 'search');
+//                  Navigator.pushNamed(context, 'search');
+                  _onAddTask();
                 },
               ),
             ],
@@ -69,15 +93,15 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             physics: const AlwaysScrollableScrollPhysics(),
             // 元素的行高
 //        itemExtent: 60,
-            itemCount: widget.tasks.length,
+            itemCount: tasks.length,
             itemBuilder: (BuildContext context, int index) {
-              TransferTaskModel task = widget.tasks[index];
+              TaskModel task = tasks[index];
               return Column(
                 children: <Widget>[
                   Offstage(
                     offstage: index != 0,
                     child: TaskListHeaderWidget(
-                        numberOfTask: widget.tasks.length,
+                        numberOfTask: tasks.length,
                         title: '上传列表'
                     ),
                   ),
