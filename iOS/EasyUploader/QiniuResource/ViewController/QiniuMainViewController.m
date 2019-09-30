@@ -84,27 +84,26 @@
     vc.splashScreenView = splashView;
     vc.hidesBottomBarWhenPushed = YES; // 在哪个页面隐藏tabbar就在哪个控制器上设置这个属性
     
-    kWeakself;
-    NSString *channelName = @"easy-upload-ios";
-    FlutterMethodChannel *messageChannel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:vc];
-   
-    [messageChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
-        // call.method 获取 flutter 给回到的方法名，要匹配到 channelName 对应的多个 发送方法名，一般需要判断区分
-        // call.arguments 获取到 flutter 给到的参数，（比如跳转到另一个页面所需要参数）
-        // result 是给flutter的回调， 该回调只能使用一次
-        NSLog(@"method=%@ \narguments = %@", call.method, call.arguments);
-        NSString *method = call.method;
-//        id args = call.arguments;
-        
-        // method和WKWebView里面JS交互很像
-        if ([method isEqualToString:@"popVC"] ) {
-            [weakself.navigationController popViewControllerAnimated:YES];
-            weakself.navigationController.navigationBarHidden = NO;
-        }
-    }];
-    
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+#pragma mark - <FlutterStreamHandler>
+//// // 这个onListen是Flutter端开始监听这个channel时的回调，第二个参数 EventSink是用来传数据的载体。
+//- (FlutterError* _Nullable)onListenWithArguments:(id _Nullable)arguments eventSink:(FlutterEventSink)events {
+//    // arguments flutter给native的参数
+//    // 回调给flutter， 建议使用实例指向，因为该block可以使用多次
+//    if (events) {
+//        events(@"push传值给flutter的vc");
+//    }
+//    return nil;
+//}
+//
+///// flutter不再接收
+//- (FlutterError* _Nullable)onCancelWithArguments:(id _Nullable)arguments {
+//    // arguments flutter给native的参数
+//    NSLog(@"arguments = %@", arguments);
+//    return nil;
+//}
 
 
 - (void)cancelButtonPressed {

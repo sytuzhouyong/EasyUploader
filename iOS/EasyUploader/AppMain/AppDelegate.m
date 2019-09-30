@@ -44,7 +44,7 @@
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
 
-    [self createDatabaseNamed:@"uploader.realm"];
+//    [self createDatabaseNamed:@"uploader.realm"];
 
     return YES;
 }

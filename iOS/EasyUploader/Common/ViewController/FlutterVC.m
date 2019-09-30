@@ -7,6 +7,7 @@
 //
 
 #import "FlutterVC.h"
+#include "GeneratedPluginRegistrant.h"
 
 @interface FlutterVC ()
 
@@ -16,24 +17,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Resolve this problem.
+    // MissingPluginException(No implementation found for method getApplicationDocumentsDirectory on channel plugins.flutter.io/path_provider)
+    [GeneratedPluginRegistrant registerWithRegistry:self];
     // Do any additional setup after loading the view.
 }
 
-
-//- (UIView *)splashScreenView {
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
-//    view.backgroundColor = [UIColor redColor];
-//    return view;
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)dealloc {
+    NSLog(@"FlutterVC dealloc");
 }
-*/
 
 @end

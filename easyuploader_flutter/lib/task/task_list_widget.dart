@@ -9,12 +9,12 @@ import 'task_manager.dart';
 class TaskListWidget extends StatefulWidget {
 
   final String title;
-  bool pushFromIOS = true;
+  final bool pushFromIOS;
 
   TaskListWidget({
     Key key,
     @required this.title,
-    this.pushFromIOS,
+    @required this.pushFromIOS,
   }): super(key: key);
 
   @override
@@ -28,12 +28,28 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   List<TaskModel> tasks = List(); // 任务列表
 
   // 创建一个给native的channel (类似iOS的通知）
-  static const methodChannel = const MethodChannel('easy-upload-ios');
+  static const methodChannel = const MethodChannel('method.ios');
+  static const eventChannel = const EventChannel('event.ios');
 
 //  void _incrementCounter() {
 //    setState(() {
 //    });
 //  }
+  @override
+  void initState() {
+    super.initState();
+    print('flutter board cast');
+    eventChannel.receiveBroadcastStream(12345).listen(_onEvent, onError: _onError);
+  }
+
+  // 回调事件
+  void _onEvent(Object event) {
+    print('onEvent: $event');
+  }
+  // 错误返回
+  void _onError(Object error) {
+    print('onError: $error');
+  }
 
   _refreshList() async {
     List<TaskModel> items = await taskManager.queryTask();
@@ -67,6 +83,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
               tooltip: '返回',
               onPressed: () {
                 if (widget.pushFromIOS) {
+                  print('11111');
                   _iOSPopVC();
                 } else {
                   Navigator.pop(context);
