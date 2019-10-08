@@ -26,6 +26,7 @@ PODS:
   - Flutter (1.0.0)
   - FlutterPluginRegistrant (0.0.1):
     - Flutter
+    - image_picker
     - path_provider
     - shared_preferences
     - sqflite
@@ -33,6 +34,8 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - HappyDNS (0.3.15)
+  - image_picker (0.0.1):
+    - Flutter
   - JGPhotoBrowser (1.2.9):
     - JGSourceBase (~> 0.1.0)
     - SDWebImage (~> 4.4.1)
@@ -74,6 +77,7 @@ DEPENDENCIES:
   - Flutter (from `../easyuploader_flutter/.ios/Flutter/engine`)
   - FlutterPluginRegistrant (from `../easyuploader_flutter/.ios/Flutter/FlutterPluginRegistrant`)
   - HappyDNS (~> 0.3)
+  - image_picker (from `../easyuploader_flutter/.ios/Flutter/.symlinks/image_picker/ios`)
   - JGPhotoBrowser (~> 1.2.1)
   - Masonry (~> 1.0.2)
   - MBProgressHUD (~> 1.0.0)
@@ -110,6 +114,8 @@ EXTERNAL SOURCES:
     :path: "../easyuploader_flutter/.ios/Flutter/engine"
   FlutterPluginRegistrant:
     :path: "../easyuploader_flutter/.ios/Flutter/FlutterPluginRegistrant"
+  image_picker:
+    :path: "../easyuploader_flutter/.ios/Flutter/.symlinks/image_picker/ios"
   path_provider:
     :path: "../easyuploader_flutter/.ios/Flutter/.symlinks/path_provider/ios"
   shared_preferences:
@@ -123,9 +129,10 @@ SPEC CHECKSUMS:
   easyuploader_flutter: 50d52064467cc61a0e718fff90466be6907bf705
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  FlutterPluginRegistrant: 678dbe0e9625c287462b8d09c08decaa45792e8a
+  FlutterPluginRegistrant: 7d914edbe8cf7a0ed3e90c81662851fd404346e2
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   HappyDNS: 00c15e651a347206e58a20503a32a5564589b56a
+  image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
   JGPhotoBrowser: b50d81d24dd4d5a044f4d128fb0ee12f258ddc11
   JGSourceBase: 03fca616c3686a7197fcac672201d7f083fd7d8b
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e

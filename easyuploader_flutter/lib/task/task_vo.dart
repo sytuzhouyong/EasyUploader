@@ -1,4 +1,5 @@
 
+
 enum TaskState {
   Read,
   Processing,
@@ -11,7 +12,7 @@ class TaskModel {
   String name;              // 任务的名字
   int totalSize;        // 任务的数据大小 以B为单位
   int transferredSize;  // 任务已经传输的数据大小 以B为单位
-  TaskState state;  // 传输状态
+  TaskState state;      // 传输状态
   String thumbnailUrl;      // 缩略图url
 
   TaskModel({

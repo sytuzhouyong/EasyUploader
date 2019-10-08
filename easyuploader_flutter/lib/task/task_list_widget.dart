@@ -4,7 +4,8 @@ import 'task_vo.dart';
 import 'task_list_header_widget.dart';
 import 'task_list_item_widget.dart';
 import 'task_manager.dart';
-
+import 'dart:convert';
+import 'package:image_picker/image_picker.dart';
 
 class TaskListWidget extends StatefulWidget {
 
@@ -28,8 +29,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   List<TaskModel> tasks = List(); // 任务列表
 
   // 创建一个给native的channel (类似iOS的通知）
-  static const methodChannel = const MethodChannel('method.ios');
-  static const eventChannel = const EventChannel('event.ios');
+  static const methodChannel = const MethodChannel('channel.method.ios');
 
 //  void _incrementCounter() {
 //    setState(() {
@@ -38,17 +38,8 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   @override
   void initState() {
     super.initState();
-    print('flutter board cast');
-    eventChannel.receiveBroadcastStream(12345).listen(_onEvent, onError: _onError);
-  }
-
-  // 回调事件
-  void _onEvent(Object event) {
-    print('onEvent: $event');
-  }
-  // 错误返回
-  void _onError(Object error) {
-    print('onError: $error');
+    _iOSGetTobeUploadedTasks();
+    _refreshList();
   }
 
   _refreshList() async {
@@ -56,6 +47,15 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     setState(() {
       tasks = items;
     });
+    await methodChannel.invokeMethod('clearTobeUploadedTasks');
+  }
+
+  // 提供给原生调用
+  addUploadTasks(List<TaskModel> tasks) async {
+    print('add upload tasks: $tasks');
+
+    await taskManager.addTasks(tasks);
+    await _refreshList();
   }
 
   _onAddTask() async {
@@ -67,9 +67,38 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   _iOSPopVC() async {
     await methodChannel.invokeMethod('popVC');
   }
+  _iOSGetTobeUploadedTasks() async {
+    String text = await methodChannel.invokeMethod('getTobeUploadedTasks');
+    print('_iOSGetTobeUploadedTasks result: $text');
+    if (text.length <= 0) {
+      print('empty upload tasks');
+      return;
+    }
+    List maps = jsonDecode(text);
+    List<TaskModel> tasks = List();
+    for (Map map in maps) {
+      TaskModel task = TaskModel.fromMap(map);
+      tasks.add(task);
+    }
+    addUploadTasks(tasks);
+  }
+
+  // Native调用原生监听
+  Future<dynamic> handelNativeCall(MethodCall methodCall) {
+    print('handelNativeCall $methodCall');
+
+    String backResult = "gobackSuccess";
+    if (methodCall.method == "addUploadTasks") {
+      print('param: ${methodCall.arguments}');
+//      addUploadTasks(methodCall.arguments);
+    }
+    return Future.value(backResult);
+  }
 
   @override
   Widget build(BuildContext context) {
+//      methodChannel.setMethodCallHandler(handelNativeCall);
+
     return MaterialApp(
       home: Material(
         child: Scaffold(
@@ -108,8 +137,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             controller: _scrollController,
             // 列表内容不足一屏时，列表也可以滑动
             physics: const AlwaysScrollableScrollPhysics(),
-            // 元素的行高
-//        itemExtent: 60,
             itemCount: tasks.length,
             itemBuilder: (BuildContext context, int index) {
               TaskModel task = tasks[index];

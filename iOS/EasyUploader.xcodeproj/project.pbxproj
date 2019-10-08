@@ -15,7 +15,6 @@
 		252E315D1F4F327600A78F21 /* PathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E315C1F4F327600A78F21 /* PathView.m */; };
 		252E31601F51CC5700A78F21 /* QiniuResourceContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E315F1F51CC5700A78F21 /* QiniuResourceContentViewController.m */; };
 		25368CCF233CDB770089F827 /* FlutterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 25368CCE233CDB770089F827 /* FlutterVC.m */; };
-		25368CD5234202330089F827 /* FlutterUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 25368CD4234202330089F827 /* FlutterUtil.m */; };
 		255E15321F2274B000411A67 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FD1F2274B000411A67 /* UITextField+Padding.m */; };
 		255E15331F2274B000411A67 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E14FF1F2274B000411A67 /* UIView+Frame.m */; };
 		255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E15021F2274B000411A67 /* DDLogCustomFormatter.m */; };
@@ -94,8 +93,6 @@
 		252E315F1F51CC5700A78F21 /* QiniuResourceContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiniuResourceContentViewController.m; sourceTree = "<group>"; };
 		25368CCD233CDB770089F827 /* FlutterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlutterVC.h; sourceTree = "<group>"; };
 		25368CCE233CDB770089F827 /* FlutterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlutterVC.m; sourceTree = "<group>"; };
-		25368CD3234202330089F827 /* FlutterUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlutterUtil.h; sourceTree = "<group>"; };
-		25368CD4234202330089F827 /* FlutterUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlutterUtil.m; sourceTree = "<group>"; };
 		255E14FC1F2274B000411A67 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		255E14FD1F2274B000411A67 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		255E14FE1F2274B000411A67 /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -353,8 +350,6 @@
 				255E15141F2274B000411A67 /* DateUtil.m */,
 				255E15151F2274B000411A67 /* DeviceUtil.h */,
 				255E15161F2274B000411A67 /* DeviceUtil.m */,
-				25368CD3234202330089F827 /* FlutterUtil.h */,
-				25368CD4234202330089F827 /* FlutterUtil.m */,
 				255E15171F2274B000411A67 /* LanguagTranslateUtil.h */,
 				255E15181F2274B000411A67 /* LanguagTranslateUtil.m */,
 				255E15191F2274B000411A67 /* StringUtil.h */,
@@ -830,7 +825,6 @@
 				255E153C1F2274B000411A67 /* StringUtil.m in Sources */,
 				25F253061F3E13BC0007D104 /* QiniuMainViewController.m in Sources */,
 				255E15341F2274B000411A67 /* DDLogCustomFormatter.m in Sources */,
-				25368CD5234202330089F827 /* FlutterUtil.m in Sources */,
 				259A36101F2B71B200F10298 /* QiniuViewModel.m in Sources */,
 				255E153E1F2274B000411A67 /* ZyxPhotoCollectionViewCell.m in Sources */,
 				255E15391F2274B000411A67 /* DateUtil.m in Sources */,

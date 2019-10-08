@@ -31,7 +31,7 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
     return json;
 }
 
-- (NSString *)makeUploadTokenOfBucket:(NSString *)bucket withKey:(NSString *)key {
+- (NSString *)generateUploadTokenOfBucketNamed:(NSString *)bucket withKey:(NSString *)key {
     NSString *policy = [self defaultUploadPolicyOfBucket:bucket withKey:key];
     NSData *policyData = [policy dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -48,9 +48,11 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
     return token;
 }
 
-- (void)uploadALAsset:(ALAsset *)asset toBucket:(NSString *)bucket withKey:(NSString *)key handler:(UploadHandler)handler {
-    NSString *token = [self makeUploadTokenOfBucket:bucket withKey:key];
-    NSLog(@"upload token [%@]  = %@", key, token);
+- (void)uploadALAsset:(ALAsset *)asset handler:(UploadHandler)handler {
+    QiniuBucket *bucket = kQiniuResourceManager.selectedBucket;
+    NSString *key = [self uploadKeyOfALAsset:asset];
+    NSString *token = [self generateUploadTokenOfBucketNamed:bucket.name withKey:key];
+    NSLog(@"upload key = %@, token = %@", key, token);
 
     QNUploadOption *uploadOption = [[QNUploadOption alloc] initWithMime:nil
                                                         progressHandler:^(NSString *key, float percent) {
@@ -76,6 +78,97 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
                    ExecuteBlock3IfNotNil(handler, success, key, 1.0f);
                  }
                  option: uploadOption];
+}
+
+- (void)saveTobeUploadTasks:(NSArray<ALAsset *> *)assets {
+    [self createThumbnailDirIfNecessory];
+
+    NSMutableArray *params = [NSMutableArray arrayWithCapacity:assets.count];
+    for (ALAsset *asset in assets) {
+        NSDictionary *param = [self taskPropertyDictOfALAsset:asset];
+        
+        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
+        // 将取得的图片写入本地的沙盒中，其中0.5表示压缩比例，1表示不压缩，数值越小压缩比例越大
+        
+        NSString *path = [self thumbnailPathOfAsset:asset];
+        BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+        if (!exists) {
+            NSData *data = UIImageJPEGRepresentation(image, 1);
+            BOOL success = [data writeToFile:path atomically:YES];
+            if (!success) {
+                NSLog(@"writeToFile failed");
+            }
+        }
+        [params addObject:param];
+        
+    }
+    self.tobeUploadedTask = params;
+}
+
+- (NSString *)thumbnailDir {
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+//    path = [path stringByAppendingPathComponent:@"thumbnail"];
+    return path;
+}
+
+- (NSString *)thumbnailPathOfAsset:(ALAsset *)asset {
+    NSString *dir = [self thumbnailDir];
+    NSString *fileName = asset.defaultRepresentation.filename;
+    NSString *path = [dir stringByAppendingPathComponent:fileName];
+    return path;
+}
+
+- (BOOL)createThumbnailDirIfNecessory {
+    NSString *dir = [self thumbnailDir];
+    
+    NSFileManager *manager = [NSFileManager defaultManager];
+    BOOL isDir = NO;
+    BOOL exists = [manager fileExistsAtPath:dir isDirectory:&isDir];
+    
+    if (isDir && !exists) {
+        NSError *error = nil;
+        BOOL result = [[NSFileManager defaultManager] createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:&error];
+        if (!result && error) {
+            NSLog(@"create dir thumbnail failed, error: %@", error);
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
+- (void)uploadALAssets:(NSArray<ALAsset *> *)assets handler:(UploadHandler)handler {
+   
+//    [[FlutterUtil sharedInstance] invokeFlutterMethod:@"addUploadTasks" param:params result:^(id  _Nonnull result) {
+//        NSLog(@"invokeFlutterMethod addTasks result: %@", result);
+//    }];
+    
+//    for (ALAsset *asset in assets) {
+//        NSString *key = [self uploadKeyOfALAsset:asset];
+//        [kQiniuUploadManager uploadALAsset:asset handler:^(BOOL finished, NSString *key, float percent) {
+//            NSLog(@"finished: %d, percent: %.3f", finished, percent);
+//        }];
+//    }
+}
+
+- (NSString *)uploadKeyOfALAsset:(ALAsset *)asset {
+//    NSString *title = [ALAssetUtil millisecondDateStringOfALAsset:asset];
+//    NSString *ext = [ALAssetUtil extOfAsset:asset];
+//    NSString *key = [NSString stringWithFormat:@"%@.%@", title, ext];
+    
+    ALAssetRepresentation *repres = asset.defaultRepresentation;
+    NSString *key = repres.filename;
+    return key;
+}
+
+- (NSDictionary *)taskPropertyDictOfALAsset:(ALAsset *)asset {
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"name"] = [self uploadKeyOfALAsset:asset];
+    param[@"total_size"] = @0;
+    param[@"transferred_size"] = @0;
+    param[@"state"] = @0;
+    param[@"thumbnail_url"] = [self thumbnailPathOfAsset:asset];
+    return param;
 }
 
 @end

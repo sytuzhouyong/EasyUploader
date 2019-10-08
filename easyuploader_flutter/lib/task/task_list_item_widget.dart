@@ -1,4 +1,8 @@
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'task_vo.dart';
 
 class TaskListItemWidget extends StatefulWidget {
@@ -17,6 +21,8 @@ class TaskListItemWidget extends StatefulWidget {
 
 
 class TaskListItemWidgetState extends State<TaskListItemWidget> {
+  static const methodChannel = const MethodChannel('channel.method.ios');
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,11 +36,12 @@ class TaskListItemWidgetState extends State<TaskListItemWidget> {
         children: <Widget>[
           // 1. 任务资源缩略图
           Container(
-            alignment: Alignment.center,
+            width: 40,
+            height: 40,
             margin: const EdgeInsets.all(10),
-            child: IconButton(
-                icon: const Icon(Icons.favorite_border),
-                onPressed: null
+            child: Image.file(File(widget.task.thumbnailUrl)),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
             ),
           ),
           // 2. 任务名称和进度信息

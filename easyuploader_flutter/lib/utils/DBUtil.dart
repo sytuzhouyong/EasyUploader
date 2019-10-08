@@ -47,6 +47,18 @@ class DBUtil {
     return id;
   }
 
+  Future<List<int>> insertBatch(List<String> sqls) async {
+    Database db = await _getDB();
+    List<int> ids = List();
+    await db.transaction((txn) async {
+      for (String sql in sqls) {
+        int id = await txn.rawInsert(sql);
+        ids.add(id);
+      }
+    });
+    return ids;
+  }
+
   // 返回更新的记录数
   Future<int> update(String sql) async {
     Database db = await _getDB();

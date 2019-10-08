@@ -1,4 +1,4 @@
-import '../DBUtil/DBUtil.dart';
+import '../utils//DBUtil.dart';
 import 'task_vo.dart';
 
 
@@ -20,41 +20,62 @@ class TaskManager {
     dbUtil = new DBUtil();
   }
 
-  addTask(TaskModel task) async {
+  String insertSqlWithTask(TaskModel task) {
+    print('insertSqlWithTask: $task');
     String insertKeys = '';
     String insertValues = '';
     if (task.name != null) {
       insertKeys += 'name, ';
       insertValues += '"${task.name}", ';
+      print('name = ${task.name}');
     }
     if (task.totalSize > 0) {
       insertKeys += 'total_size, ';
       insertValues += '${task.totalSize}, ';
+      print('totalSize = ${task.totalSize}');
     }
     if (task.transferredSize > 0) {
       insertKeys += 'transferred_size, ';
       insertValues += '${task.transferredSize}, ';
+      print('transferredSize = ${task.transferredSize}');
     }
     if (task.state.index >= 0) {
       insertKeys += 'state, ';
       insertValues += '${task.state.index}, ';
+      print('state = ${task.state.index}');
     }
     if (task.thumbnailUrl != null) {
       insertKeys += 'thumbnail_url, ';
       insertValues += '"${task.thumbnailUrl}", ';
+      print('thumbnailUrl = ${task.thumbnailUrl}');
     }
     insertKeys = insertKeys.substring(0, insertKeys.length - 2);
     insertValues = insertValues.substring(0, insertValues.length - 2);
     String sql = 'INSERT INTO task ($insertKeys) values ($insertValues)';
     print('sql = $sql');
+    return sql;
+  }
+
+  addTask(TaskModel task) async {
+    String sql = insertSqlWithTask(task);
 
     int id = await dbUtil.insert(sql);
     print('add task, return id : $id');
     task.id = id;
   }
 
+  addTasks(List<TaskModel> tasks) async {
+    List<String> sqlList = List();
+    for (TaskModel task in tasks) {
+      String sql = insertSqlWithTask(task);
+      sqlList.add(sql);
+    }
+    List<int> ids = await dbUtil.insertBatch(sqlList);
+    print('insert result ids = $ids');
+  }
+
   Future<List<TaskModel>> queryTask() async {
-    String sql = 'SELECT * FROM task';
+    String sql = 'SELECT * FROM task ORDER BY id DESC';
     List<Map> list = await dbUtil.query(sql);
 
     List<TaskModel> tasks = List();

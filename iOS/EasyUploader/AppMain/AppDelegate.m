@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "QiniuMainViewController.h"
 #import "LocalMainViewController.h"
+#import "FlutterVC.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate>
 
@@ -51,6 +52,31 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     
+}
+
+- (UINavigationController *)currentNavVC {
+    UITabBarController *tabBarVC = (UITabBarController *)kAppDelegate.window.rootViewController;
+    UINavigationController *nav = tabBarVC.selectedViewController;
+    return nav;
+}
+
+- (void)showTaskListVC {
+    UINavigationController *nav = [self currentNavVC];
+    nav.navigationBarHidden = YES;
+    
+    // 自定义闪屏，否则首次启动FlutterVC会显示iOS的启动页面
+    UIView *splashView = [[UIView alloc] init];
+    splashView.backgroundColor = [UIColor whiteColor ];
+    UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loading.frame = CGRectMake(100, 100, 60, 60);
+    [splashView addSubview:loading];
+    
+    FlutterVC* vc = [[FlutterVC alloc] init];
+    [vc setInitialRoute:@"task-list"];
+    vc.splashScreenView = splashView;
+    vc.hidesBottomBarWhenPushed = YES; // 在哪个页面隐藏tabbar就在哪个控制器上设置这个属性
+    
+    [nav pushViewController:vc animated:YES];
 }
 
 #pragma mark - Realm

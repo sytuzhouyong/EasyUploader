@@ -70,21 +70,7 @@
 }
 
 - (void)showTaskButtonPressed {
-    self.navigationController.navigationBarHidden = YES;
-    
-    // 自定义闪屏，否则首次启动FlutterVC会显示iOS的启动页面
-    UIView *splashView = [[UIView alloc] init];
-    splashView.backgroundColor = [UIColor whiteColor ];
-    UIActivityIndicatorView *loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    loading.frame = CGRectMake(100, 100, 60, 60);
-    [splashView addSubview:loading];
-    
-    FlutterVC* vc = [[FlutterVC alloc] init];
-    [vc setInitialRoute:@"task-list"];
-    vc.splashScreenView = splashView;
-    vc.hidesBottomBarWhenPushed = YES; // 在哪个页面隐藏tabbar就在哪个控制器上设置这个属性
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    [kAppDelegate showTaskListVC];
 }
 
 #pragma mark - <FlutterStreamHandler>

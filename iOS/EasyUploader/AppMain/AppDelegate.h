@@ -15,6 +15,8 @@
 
 
 - (void)showPhotoAuthorizationAlertView;
+- (UINavigationController *)currentNavVC;
+- (void)showTaskListVC;
 
 @end
 

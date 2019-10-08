@@ -61,17 +61,11 @@
     kWeakself;
     // 上传资源
     self.toolView.uploadHandler = ^(id x) {
-        NSArray<ALAsset *> *selectedResources = [weakself selectedPhotos];
-        for (ALAsset *asset in selectedResources) {
-            NSString *key = [ALAssetUtil millisecondDateStringOfALAsset:asset];
-            NSString *ext = [ALAssetUtil extOfAsset:asset];
-            key = [NSString stringWithFormat:@"%@.%@", key, ext];
-            NSLog(@"key = %@", key);
-            QiniuBucket *bucket = kQiniuResourceManager.selectedBucket;
-            [kQiniuUploadManager uploadALAsset:asset toBucket:bucket.name withKey:key handler:^(BOOL finished, NSString *key, float percent) {
-                NSLog(@"finished: %d, percent: %.3f", finished, percent);
-            }];
-        }
+        NSArray<ALAsset *> *assets = [weakself selectedPhotos];
+        [kQiniuUploadManager saveTobeUploadTasks:assets];
+        [weakself dismissViewControllerAnimated:YES completion:^{
+            [kAppDelegate showTaskListVC];
+        }];
     };
 
     [[self rac_signalForSelector:@selector(collectionView:didSelectItemAtIndexPath:)] subscribeNext:^(id x) {

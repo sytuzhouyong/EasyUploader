@@ -15,7 +15,12 @@ typedef void (^UploadHandler)(BOOL finished, NSString *key, float percent);
 SINGLETON_DECLEAR;
 
 @property (nonatomic, copy) NSString *uploadPath;
+@property (nonatomic, copy) NSArray *tobeUploadedTask;
 
-- (void)uploadALAsset:(ALAsset *)asset toBucket:(NSString *)bucket withKey:(NSString *)key handler:(UploadHandler)handler;
+- (void)saveTobeUploadTasks:(NSArray<ALAsset *> *)assets;
+
+// 上传资源
+- (void)uploadALAssets:(NSArray<ALAsset *> *)assets handler:(UploadHandler)handler;
+- (void)uploadALAsset:(ALAsset *)asset handler:(UploadHandler)handler;
 
 @end
