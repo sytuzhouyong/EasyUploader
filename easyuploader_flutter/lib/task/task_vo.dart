@@ -65,6 +65,11 @@ class TaskModel {
     state = TaskState.values[map['state']];
     thumbnailUrl = map['thumbnail_url'];
   }
+
+  @override
+  String toString() {
+    return '[$name, state: $state, totalSize: $totalSize]';
+  }
 }
 
 List<TaskModel> testTasks = [

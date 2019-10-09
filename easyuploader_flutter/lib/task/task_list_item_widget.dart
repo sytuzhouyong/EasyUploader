@@ -39,10 +39,13 @@ class TaskListItemWidgetState extends State<TaskListItemWidget> {
             width: 40,
             height: 40,
             margin: const EdgeInsets.all(10),
-            child: Image.file(File(widget.task.thumbnailUrl)),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.file(File(widget.task.thumbnailUrl))
             ),
+//            decoration: BoxDecoration(
+//              color: Colors.redAccent,
+//            ),
           ),
           // 2. 任务名称和进度信息
           Expanded(

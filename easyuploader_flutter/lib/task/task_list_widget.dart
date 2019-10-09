@@ -5,7 +5,7 @@ import 'task_list_header_widget.dart';
 import 'task_list_item_widget.dart';
 import 'task_manager.dart';
 import 'dart:convert';
-import 'package:image_picker/image_picker.dart';
+//import 'package:image_picker/image_picker.dart';
 
 class TaskListWidget extends StatefulWidget {
 
@@ -31,10 +31,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   // 创建一个给native的channel (类似iOS的通知）
   static const methodChannel = const MethodChannel('channel.method.ios');
 
-//  void _incrementCounter() {
-//    setState(() {
-//    });
-//  }
   @override
   void initState() {
     super.initState();
@@ -50,14 +46,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     await methodChannel.invokeMethod('clearTobeUploadedTasks');
   }
 
-  // 提供给原生调用
-  addUploadTasks(List<TaskModel> tasks) async {
-    print('add upload tasks: $tasks');
-
-    await taskManager.addTasks(tasks);
-    await _refreshList();
-  }
-
   _onAddTask() async {
     TaskModel task = testTasks[0];
     await taskManager.addTask(task);
@@ -67,6 +55,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   _iOSPopVC() async {
     await methodChannel.invokeMethod('popVC');
   }
+  // 获取native端的任务列表
   _iOSGetTobeUploadedTasks() async {
     String text = await methodChannel.invokeMethod('getTobeUploadedTasks');
     print('_iOSGetTobeUploadedTasks result: $text');
@@ -80,7 +69,16 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       TaskModel task = TaskModel.fromMap(map);
       tasks.add(task);
     }
-    addUploadTasks(tasks);
+
+    await taskManager.addTasks(tasks);
+    await _refreshList();
+  }
+
+  Future<bool> _deleteTaskAtIndex(int index) async {
+    TaskModel task = tasks[index];
+    bool success = await taskManager.deleteTaskById(task.id);
+    print('delete task at index: $index ${success ? "success" : "fail"}');
+    return success;
   }
 
   // Native调用原生监听
@@ -112,7 +110,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
               tooltip: '返回',
               onPressed: () {
                 if (widget.pushFromIOS) {
-                  print('11111');
                   _iOSPopVC();
                 } else {
                   Navigator.pop(context);
@@ -149,8 +146,51 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                         title: '上传列表'
                     ),
                   ),
-                  TaskListItemWidget(
-                    task: task,
+                  Dismissible(
+                    confirmDismiss: (DismissDirection direction) async {
+                      bool result = await showAlertDialog(context, index);
+                      print('show dialog returns $result');
+                      if (!result) {
+                         return false;
+                      }
+                      bool deleted = await _deleteTaskAtIndex(index);
+                      if (!deleted) {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text('删除 ${tasks[index].name} 失败'),)
+                        );
+                        return false;
+                      }
+                      return true;
+                    },
+                    background: Container( // 右滑展示
+                      child: ListTile(
+                          leading: IconButton(
+                              icon: Icon(Icons.favorite, color: Colors.yellow,),
+                              onPressed: null
+                          )
+                      ),
+                    ),
+                    secondaryBackground: Container( // 左滑展示
+                      child: ListTile(
+                          trailing: IconButton(
+                              icon: Icon(Icons.delete, color: Colors.red,),
+                              onPressed: null
+                          )
+                      ),
+                    ),
+                    key: Key('key_task_item_${tasks[index].id}'),
+                    child: TaskListItemWidget(
+                      task: task,
+                    ),
+                    // 删除后回调
+                    onDismissed: (DismissDirection direction) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text('删除了${tasks[index].name}'),)
+                      );
+                      setState(() {
+                        tasks.removeAt(index);
+                      });
+                    },
                   ),
                 ],
               );
@@ -158,6 +198,32 @@ class _TaskListWidgetState extends State<TaskListWidget> {
           )
         ),
       ),
+    );
+  }
+
+  Future<bool> showAlertDialog(BuildContext context, int index) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return new AlertDialog(
+          title: new Text("提醒"),
+          content: new Text("确定删除 ${tasks[index].name} 吗？"),
+          actions: <Widget>[
+            new FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: new Text("确认"),
+            ),
+            new FlatButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: new Text("取消"),
+            ),
+          ],
+        );
+      }
     );
   }
 }

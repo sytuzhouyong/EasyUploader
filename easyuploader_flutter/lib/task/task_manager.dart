@@ -74,6 +74,13 @@ class TaskManager {
     print('insert result ids = $ids');
   }
 
+  Future<bool> deleteTaskById(int id) async {
+    String sql = 'DELETE FROM task where id=$id';
+    int count = await dbUtil.delete(sql);
+    print('delete task by id, return delete count: $count');
+    return count > 0;
+  }
+
   Future<List<TaskModel>> queryTask() async {
     String sql = 'SELECT * FROM task ORDER BY id DESC';
     List<Map> list = await dbUtil.query(sql);

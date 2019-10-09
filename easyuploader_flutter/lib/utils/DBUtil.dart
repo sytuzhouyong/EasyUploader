@@ -59,6 +59,13 @@ class DBUtil {
     return ids;
   }
 
+  // 返回删除的记录数
+  Future<int> delete(String sql) async {
+    Database db = await _getDB();
+    int count = await db.rawDelete(sql);
+    return count;
+  }
+
   // 返回更新的记录数
   Future<int> update(String sql) async {
     Database db = await _getDB();
