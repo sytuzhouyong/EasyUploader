@@ -1,7 +1,8 @@
 
+typedef UploadTaskCallback = Future<TaskModel> Function(TaskModel task);
 
 enum TaskState {
-  Read,
+  Ready,
   Processing,
   Done,
   Failed,
@@ -9,27 +10,29 @@ enum TaskState {
 
 class TaskModel {
   int id;
-  String name;              // 任务的名字
+  String name;          // 任务的名字
   int totalSize;        // 任务的数据大小 以B为单位
   int transferredSize;  // 任务已经传输的数据大小 以B为单位
   TaskState state;      // 传输状态
-  String thumbnailUrl;      // 缩略图url
+  String thumbnailUrl;  // 缩略图url
+  String assetUrl;      // 原始资源url
 
   TaskModel({
     this.name,
     this.totalSize,
     this.transferredSize,
     this.state,
-    this.thumbnailUrl
+    this.thumbnailUrl,
+    this.assetUrl,
   });
 
   String processDesc() {
-    if (state == TaskState.Processing) {
+//    if (state == TaskState.Processing) {
       String p1 = dataSizeDesc(transferredSize);
       String p2 = dataSizeDesc(totalSize);
       return '$p1/$p2';
-    }
-    return '';
+//    }
+//    return '';
   }
 
   String dataSizeDesc(int size) {
@@ -53,6 +56,7 @@ class TaskModel {
       'transferred_size': transferredSize,
       'state': state.index,
       'thumbnail_url': thumbnailUrl,
+      'asset_url': assetUrl,
     };
     return map;
   }
@@ -64,16 +68,19 @@ class TaskModel {
     transferredSize = map['transferred_size'];
     state = TaskState.values[map['state']];
     thumbnailUrl = map['thumbnail_url'];
+    assetUrl = map['asset_url'];
   }
+
+  /// TODO: 完成数据库字段和对象属性之间的映射关系
 
   @override
   String toString() {
-    return '[$name, state: $state, totalSize: $totalSize]';
+    return '[$name, state: $state, totalSize: $totalSize, assetURL: $assetUrl, thumbURL: $thumbnailUrl]';
   }
 }
 
-List<TaskModel> testTasks = [
-  TaskModel(name: '2017-12-10 12321.jpg', totalSize: 102400, transferredSize: 0, state: TaskState.Processing, thumbnailUrl: ''),
-  TaskModel(name: '2017-12-10 12322.jpg', totalSize: 102400, transferredSize: 0, state: TaskState.Processing, thumbnailUrl: ''),
-  TaskModel(name: '2017-12-10 12323.jpg', totalSize: 102400, transferredSize: 0, state: TaskState.Processing, thumbnailUrl: ''),
-];
+//List<TaskModel> testTasks = [
+//  TaskModel(name: '2017-12-10 12321.jpg', totalSize: 102400, transferredSize: 0, state: TaskState.Processing, thumbnailUrl: ''),
+//  TaskModel(name: '2017-12-10 12322.jpg', totalSize: 102400, transferredSize: 0, state: TaskState.Processing, thumbnailUrl: ''),
+//  TaskModel(name: '2017-12-10 12323.jpg', totalSize: 102400, transferredSize: 0, state: TaskState.Processing, thumbnailUrl: ''),
+//];

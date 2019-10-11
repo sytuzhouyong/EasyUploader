@@ -44,6 +44,12 @@ SINGLETON_DECLEAR;
 - (NSString *)nameOfGroup:(ALAssetsGroup *)group;
 - (UIImage *)imageInAsset:(ALAsset *)asset withType:(ZyxImageType)imageType;
 - (UIImage *)latestPhotoInGroup:(ALAssetsGroup *)group withType:(ZyxImageType)imageType;
+
+///  根据url获取asset
+- (ALAsset *)assetWithUrl:(NSURL *)url;
+- (ALAsset *)assetWithUrlString:(NSString *)urlString;
+- (NSString *)urlStringOfAsset:(ALAsset *)asset;
+
 // 返回资源的文件名
 - (NSString *)mediaNameOfURL:(NSURL *)url;
 - (NSString *)mediaNameOfAsset:(ALAsset *)asset;

@@ -12,6 +12,7 @@ class DBUtil {
         'total_size INTEGER DEFAULT 0, '
         'transferred_size INTEGER DEFAULT 0, '
         'state INTEGER DEFAULT 0, '
+        'asset_url TEXT, '
         'thumbnail_url TEXT'
       ')';
 
@@ -77,7 +78,7 @@ class DBUtil {
   Future<List<Map>> query(String sql) async {
     Database db = await _getDB();
     List<Map> list = await db.rawQuery(sql);
-    print('list = $list');
+    print('query list count = ${list.length}');
     return list;
   }
 }

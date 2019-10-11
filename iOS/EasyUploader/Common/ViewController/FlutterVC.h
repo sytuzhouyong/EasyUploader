@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FlutterVC : FlutterViewController
 
+- (void)sendFlutterNotificationWithObject:(NSDictionary *)object;
+
 @end
 
 NS_ASSUME_NONNULL_END

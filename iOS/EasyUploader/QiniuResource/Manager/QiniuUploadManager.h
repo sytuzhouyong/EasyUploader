@@ -15,6 +15,7 @@ typedef void (^UploadHandler)(BOOL finished, NSString *key, float percent);
 SINGLETON_DECLEAR;
 
 @property (nonatomic, copy) NSString *uploadPath;
+// 保存了新添加的上传任务，Flutter会在任务列表页面显示的时候来取这个数据, 并在取完之后清空这个数据
 @property (nonatomic, copy) NSArray *tobeUploadedTask;
 
 - (void)saveTobeUploadTasks:(NSArray<ALAsset *> *)assets;

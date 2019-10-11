@@ -31,6 +31,7 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
     return json;
 }
 
+/// 生成上传token
 - (NSString *)generateUploadTokenOfBucketNamed:(NSString *)bucket withKey:(NSString *)key {
     NSString *policy = [self defaultUploadPolicyOfBucket:bucket withKey:key];
     NSData *policyData = [policy dataUsingEncoding:NSUTF8StringEncoding];
@@ -156,18 +157,18 @@ SINGLETON_IMPLEMENTATION(QiniuUploadManager);
 //    NSString *ext = [ALAssetUtil extOfAsset:asset];
 //    NSString *key = [NSString stringWithFormat:@"%@.%@", title, ext];
     
-    ALAssetRepresentation *repres = asset.defaultRepresentation;
-    NSString *key = repres.filename;
+    NSString *key = asset.defaultRepresentation.filename;
     return key;
 }
 
 - (NSDictionary *)taskPropertyDictOfALAsset:(ALAsset *)asset {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"name"] = [self uploadKeyOfALAsset:asset];
-    param[@"total_size"] = @0;
+    param[@"total_size"] = @(asset.defaultRepresentation.size);
     param[@"transferred_size"] = @0;
     param[@"state"] = @0;
     param[@"thumbnail_url"] = [self thumbnailPathOfAsset:asset];
+    param[@"asset_url"] = [[ZyxPhotoManager sharedInstance] urlStringOfAsset:asset];
     return param;
 }
 

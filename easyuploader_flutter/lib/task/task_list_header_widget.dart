@@ -13,7 +13,6 @@ class TaskListHeaderWidget extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return new TaskListHeaderWidgetState();
   }
 }
@@ -23,7 +22,6 @@ class TaskListHeaderWidgetState extends State<TaskListHeaderWidget> {
   @override
   Widget build(BuildContext context) {
     String text = widget.title + ' (' + widget.numberOfTask.toString() + ')';
-    // TODO: implement build
     return Container(
       height: 32,
       margin: EdgeInsets.only(left: 20),

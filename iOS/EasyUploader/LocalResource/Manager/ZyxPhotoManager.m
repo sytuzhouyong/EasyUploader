@@ -249,6 +249,38 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
     return image;
 }
 
+
+- (ALAsset *)assetWithUrl:(NSURL *)url {
+    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
+    __block ALAsset *asset = nil;
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [_assetsLibrary assetForURL:url resultBlock:^(ALAsset *myasset) {
+            asset = myasset;
+            dispatch_semaphore_signal(sem);
+        } failureBlock:^(NSError *error) {
+            DDLogError(@"oh no, get asset with url[%@] failed", url.absoluteString);
+            dispatch_semaphore_signal(sem);
+        }];
+    });
+    dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+    return asset;
+}
+
+- (ALAsset *)assetWithUrlString:(NSString *)urlString {
+    if (urlString.length <= 0) {
+        return nil;
+    }
+    NSURL *url = [NSURL URLWithString:urlString];
+    return [self assetWithUrl:url];
+}
+
+- (NSString *)urlStringOfAsset:(ALAsset *)asset {
+    NSURL *url = [asset valueForProperty:ALAssetPropertyAssetURL];
+    return url.absoluteString;
+}
+
+
 // 这个代码会在某些iPhone6 9.2.1 上获取不到media name
 //- (NSString *)mediaNameOfURL:(NSURL *)url {
 //    PHFetchResult<PHAsset *> *result = [PHAsset fetchAssetsWithALAssetURLs:@[url] options:nil];
@@ -259,21 +291,8 @@ SINGLETON_IMPLEMENTATION(ZyxPhotoManager);
 
 // assets-library://asset/asset.JPG?id=3ABCB6AE-9122-429E-B8E0-84779CC88188&ext=JPG
 - (NSString *)mediaNameOfURL:(NSURL *)url {
-    __block NSString *name = nil;
-    
-    dispatch_semaphore_t sem = dispatch_semaphore_create(0);
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [self.assetsLibrary assetForURL:url resultBlock:^(ALAsset *myasset) {
-            ALAssetRepresentation *representation = [myasset defaultRepresentation];
-            name = [representation filename];
-            dispatch_semaphore_signal(sem);
-        } failureBlock:^(NSError *error) {
-            DDLogError(@"oh no, get media name[%@] failed", url);
-            dispatch_semaphore_signal(sem);
-        }];
-    });
-    
-    dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
+    ALAsset *asset = [self assetWithUrl:url];
+    NSString *name = asset.defaultRepresentation.filename;
     return name;
 }
 

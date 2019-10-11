@@ -6,11 +6,13 @@ import 'package:flutter/services.dart';
 import 'task_vo.dart';
 
 class TaskListItemWidget extends StatefulWidget {
-  final TaskModel task;
+  TaskModel task;
+  final UploadTaskCallback uploadTaskCallback;
 
   TaskListItemWidget({
     Key key,
-    @required this.task
+    @required this.task,
+    @required this.uploadTaskCallback
   }): super(key: key);
 
   @override
@@ -19,10 +21,26 @@ class TaskListItemWidget extends StatefulWidget {
   }
 }
 
-
 class TaskListItemWidgetState extends State<TaskListItemWidget> {
   static const methodChannel = const MethodChannel('channel.method.ios');
-  
+
+  Widget thumbnailImageWidget() {
+    String url = widget.task.thumbnailUrl;
+    File file = File(url);
+    if (file.existsSync()) {
+      return Image.file(file);
+    } else {
+      return Icon(Icons.image, color: Colors.grey, size: 40,);
+    }
+  }
+
+  void uploadButtonHandler() async {
+    TaskModel updatedTask = await widget.uploadTaskCallback(widget.task);
+    setState(() {
+      widget.task = updatedTask;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +59,7 @@ class TaskListItemWidgetState extends State<TaskListItemWidget> {
             margin: const EdgeInsets.all(10),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.file(File(widget.task.thumbnailUrl))
+                child: thumbnailImageWidget(),
             ),
 //            decoration: BoxDecoration(
 //              color: Colors.redAccent,
@@ -70,10 +88,22 @@ class TaskListItemWidgetState extends State<TaskListItemWidget> {
             ),
           ),
           // 3. 操作按钮
-
-          Container(
-            margin: const EdgeInsets.only(right: 12),
-            child: IconButton(icon: Icon(Icons.file_upload), onPressed: null),
+//          Offstage(
+//            offstage: widget.task.state == TaskState.Processing,
+//            child: Container(
+//              margin: const EdgeInsets.only(right: 12),
+//              child: Text('xxx', style: TextStyle(fontSize: 14, color: Colors.blue),),
+//            ),
+//          ),
+          Offstage(
+//            offstage: widget.task.state == TaskState.Ready,
+            offstage: false,
+            child: Container(
+              margin: const EdgeInsets.only(right: 12),
+              child: IconButton(icon: Icon(Icons.cloud_upload), onPressed: () {
+                uploadButtonHandler();
+              }),
+            ),
           ),
         ],
       ),

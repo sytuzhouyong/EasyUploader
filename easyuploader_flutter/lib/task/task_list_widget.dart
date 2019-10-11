@@ -25,18 +25,71 @@ class TaskListWidget extends StatefulWidget {
 class _TaskListWidgetState extends State<TaskListWidget> {
   // 列表滚动控制器
   final ScrollController _scrollController = new ScrollController();
+  // 任务管理器
   final TaskManager taskManager = TaskManager.instance;
   List<TaskModel> tasks = List(); // 任务列表
 
   // 创建一个给native的channel (类似iOS的通知）
   static const methodChannel = const MethodChannel('channel.method.ios');
+  // 注册一个通知
+  static const EventChannel eventChannel = const EventChannel('channel.event.native');
+
 
   @override
   void initState() {
     super.initState();
+
+    // 监听事件，同时发送参数12345
+    eventChannel.receiveBroadcastStream(12345).listen(_onEvent,onError: _onError);
+
     _iOSGetTobeUploadedTasks();
     _refreshList();
   }
+
+  // 回调事件
+  void _onEvent(Object event) {
+    print('_onEvent ${event.toString()}');
+    if (event is Map) {
+      Map params = event;
+      int id = params['id'];
+      String name = params['name'];
+      double percent = params['percent'];
+      bool finished = params['finished'];
+      print('id = $id, name = $name, percent = $percent, finished = $finished');
+
+      TaskModel updatedTask;
+      int index = 0;
+      for (TaskModel item in tasks) {
+        if (item.id == id) {
+          updatedTask = item;
+          break;
+        }
+        index++;
+      }
+      if (updatedTask == null) {
+        print('not find task with id $id');
+        return;
+      }
+
+      int size = (updatedTask.totalSize.toDouble() * percent).toInt();
+      updatedTask.transferredSize = size;
+      if (finished) {
+        updatedTask.state = TaskState.Done;
+      }
+
+      setState(() {
+        tasks[index] = updatedTask;
+      });
+
+      taskManager.updateTask({'id':id}, {'transferredSize': size, 'state': updatedTask.state.index});
+
+    }
+  }
+  // 错误返回
+  void _onError(Object error) {
+
+  }
+
 
   _refreshList() async {
     List<TaskModel> items = await taskManager.queryTask();
@@ -47,9 +100,9 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   }
 
   _onAddTask() async {
-    TaskModel task = testTasks[0];
-    await taskManager.addTask(task);
-    await _refreshList();
+//    TaskModel task = testTasks[0];
+//    await taskManager.addTask(task);
+//    await _refreshList();
   }
 
   _iOSPopVC() async {
@@ -181,6 +234,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                     key: Key('key_task_item_${tasks[index].id}'),
                     child: TaskListItemWidget(
                       task: task,
+                      uploadTaskCallback: taskManager.uploadTaskCallback,
                     ),
                     // 删除后回调
                     onDismissed: (DismissDirection direction) {

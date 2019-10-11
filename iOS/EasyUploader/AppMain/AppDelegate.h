@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class FlutterVC;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, assign) BOOL isUnderPathSelectMode;
+@property (nonatomic, strong) FlutterVC *flutterVC;
 
 
 - (void)showPhotoAuthorizationAlertView;
