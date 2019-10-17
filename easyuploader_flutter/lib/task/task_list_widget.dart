@@ -148,8 +148,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 
   @override
   Widget build(BuildContext context) {
-//      methodChannel.setMethodCallHandler(handelNativeCall);
-
     return MaterialApp(
       home: Material(
         child: Scaffold(
@@ -174,7 +172,9 @@ class _TaskListWidgetState extends State<TaskListWidget> {
               GestureDetector(
                 child: Container(
                   margin: const EdgeInsets.only(right: 10),
-                  child: Icon(Icons.add),
+                  child: IconButton(icon:Icon(Icons.mode_edit), onPressed: () {
+
+                  },),
                 ), //
                 onTap: () {
 //                  Navigator.pushNamed(context, 'search');

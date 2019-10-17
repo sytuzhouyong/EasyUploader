@@ -26,6 +26,13 @@ class TaskModel {
     this.assetUrl,
   });
 
+  static final Map<String, String> propertiesMap = {
+    'totalSize': 'total_size',
+    'transferredSize': 'transferred_size',
+    'thumbnailUrl': 'thumbnail_url',
+    'assetUrl': 'asset_url'
+  };
+
   String processDesc() {
 //    if (state == TaskState.Processing) {
       String p1 = dataSizeDesc(transferredSize);
@@ -72,6 +79,13 @@ class TaskModel {
   }
 
   /// TODO: 完成数据库字段和对象属性之间的映射关系
+  static String columnName(String key) {
+    if (propertiesMap.containsKey(key)) {
+      print('xxx = ${propertiesMap[key]}');
+      return propertiesMap[key];
+    }
+    return key;
+  }
 
   @override
   String toString() {

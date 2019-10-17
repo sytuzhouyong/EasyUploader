@@ -88,16 +88,26 @@ class TaskListItemWidgetState extends State<TaskListItemWidget> {
             ),
           ),
           // 3. 操作按钮
-//          Offstage(
-//            offstage: widget.task.state == TaskState.Processing,
-//            child: Container(
-//              margin: const EdgeInsets.only(right: 12),
-//              child: Text('xxx', style: TextStyle(fontSize: 14, color: Colors.blue),),
-//            ),
-//          ),
           Offstage(
-//            offstage: widget.task.state == TaskState.Ready,
-            offstage: false,
+            offstage: widget.task.state != TaskState.Processing,
+            child: Container(
+              margin: const EdgeInsets.only(right: 12),
+              child: Icon(Icons.dashboard),
+            ),
+          ),
+          Offstage(
+            offstage: widget.task.state != TaskState.Done,
+            child: Container(
+              margin: const EdgeInsets.only(right: 12),
+              child:  IconButton(icon: Icon(Icons.done), onPressed: () {
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text('已经完成了'),)
+                );
+              }),
+            ),
+          ),
+          Offstage(
+            offstage: widget.task.state != TaskState.Ready,
             child: Container(
               margin: const EdgeInsets.only(right: 12),
               child: IconButton(icon: Icon(Icons.cloud_upload), onPressed: () {

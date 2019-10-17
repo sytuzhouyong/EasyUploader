@@ -70,7 +70,7 @@ class TaskManager {
   Future<int> updateTask(Map<String, dynamic> queries, Map<String, dynamic> updates) async {
     String querySql = generateAssignmentStatementWithMap(queries);
     String updateSql = generateAssignmentStatementWithMap(updates);
-    String sql = 'UPDATE task SET ($updateSql) WHERE $querySql';
+    String sql = 'UPDATE task SET $updateSql WHERE $querySql';
     int count  = await dbUtil.update(sql);
     return count;
   }
@@ -132,7 +132,8 @@ class TaskManager {
       if (value is String) {
         valueText = "'$value'";
       }
-      statementItems.add('$key = $valueText');
+      var tableName = TaskModel.columnName(key);
+      statementItems.add('$tableName = $valueText');
     });
     String statement = statementItems.join(', ');
     return statement;
