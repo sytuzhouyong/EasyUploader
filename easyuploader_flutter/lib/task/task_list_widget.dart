@@ -7,8 +7,82 @@ import 'task_manager.dart';
 import 'dart:convert';
 //import 'package:image_picker/image_picker.dart';
 
-class TaskListWidget extends StatefulWidget {
+// 创建一个给native的channel (类似iOS的通知）
+const methodChannel = const MethodChannel('channel.method.ios');
 
+class TaskTabListWidget extends StatefulWidget {
+  final String title;
+  final bool pushFromIOS;
+
+  TaskTabListWidget({
+    Key key,
+    @required this.title,
+    @required this.pushFromIOS,
+  });
+
+  @override
+  State<StatefulWidget> createState() => _TaskTabListWidgetState();
+}
+
+class _TaskTabListWidgetState extends State<TaskTabListWidget> {
+  final List<Tab> tabs = <Tab>[
+    Tab(text:'未上传',),
+    Tab(text:'已上传',),
+  ];
+
+  _iOSPopVC() async {
+    await methodChannel.invokeMethod('popVC');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DefaultTabController(
+        length: tabs.length,
+        child: Scaffold(
+          appBar: AppBar(
+            // Here we take the value from the MyHomePage object that was created by
+            // the App.build method, and use it to set our appbar title.
+            title: Text(widget.title),
+            // 左侧按钮
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              tooltip: '返回',
+              onPressed: () {
+                if (widget.pushFromIOS) {
+                  _iOSPopVC();
+                } else {
+                  Navigator.pop(context);
+                }
+              },
+            ),
+            // 右侧按钮
+            actions: <Widget>[
+              GestureDetector(
+                child: Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  child: IconButton(icon:Icon(Icons.mode_edit), onPressed: () {
+                  },),
+                ), //
+                onTap: () {
+//                  Navigator.pushNamed(context, 'search');
+                },
+              ),
+            ],
+            bottom: TabBar(tabs: tabs),
+          ),
+          body: TabBarView(
+            children: tabs.map((Tab tab) {
+              return TaskListWidget(title: '', pushFromIOS: true,);
+           }).toList(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TaskListWidget extends StatefulWidget {
   final String title;
   final bool pushFromIOS;
 
@@ -29,8 +103,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   final TaskManager taskManager = TaskManager.instance;
   List<TaskModel> tasks = List(); // 任务列表
 
-  // 创建一个给native的channel (类似iOS的通知）
-  static const methodChannel = const MethodChannel('channel.method.ios');
+
   // 注册一个通知
   static const EventChannel eventChannel = const EventChannel('channel.event.native');
 
@@ -105,9 +178,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 //    await _refreshList();
   }
 
-  _iOSPopVC() async {
-    await methodChannel.invokeMethod('popVC');
-  }
   // 获取native端的任务列表
   _iOSGetTobeUploadedTasks() async {
     String text = await methodChannel.invokeMethod('getTobeUploadedTasks');
@@ -148,110 +218,74 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Material(
-        child: Scaffold(
-          appBar: AppBar(
-            // Here we take the value from the MyHomePage object that was created by
-            // the App.build method, and use it to set our appbar title.
-            title: Text(widget.title),
-            // 左侧按钮
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              tooltip: '返回',
-              onPressed: () {
-                if (widget.pushFromIOS) {
-                  _iOSPopVC();
-                } else {
-                  Navigator.pop(context);
-                }
-              },
-            ),
-            // 右侧按钮
-            actions: <Widget>[
-              GestureDetector(
-                child: Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: IconButton(icon:Icon(Icons.mode_edit), onPressed: () {
-
-                  },),
-                ), //
-                onTap: () {
-//                  Navigator.pushNamed(context, 'search');
-                  _onAddTask();
+    return Scaffold(
+      body: ListView.builder(
+        controller: _scrollController,
+        // 列表内容不足一屏时，列表也可以滑动
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: tasks.length,
+        itemBuilder: (BuildContext context, int index) {
+          TaskModel task = tasks[index];
+          return Column(
+            children: <Widget>[
+              Offstage(
+                offstage: index != 0,
+                child: TaskListHeaderWidget(
+                    numberOfTask: tasks.length,
+                    title: '上传列表'
+                ),
+              ),
+              Dismissible(
+                confirmDismiss: (DismissDirection direction) async {
+                  bool result = await showAlertDialog(context, index);
+                  print('show dialog returns $result');
+                  if (!result) {
+                     return false;
+                  }
+                  bool deleted = await _deleteTaskAtIndex(index);
+                  if (!deleted) {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('删除 ${tasks[index].name} 失败'),)
+                    );
+                    return false;
+                  }
+                  return true;
+                },
+                background: Container( // 右滑展示
+                  child: ListTile(
+                      leading: IconButton(
+                          icon: Icon(Icons.favorite, color: Colors.yellow,),
+                          onPressed: null
+                      )
+                  ),
+                ),
+                secondaryBackground: Container( // 左滑展示
+                  child: ListTile(
+                      trailing: IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red,),
+                          onPressed: null
+                      )
+                  ),
+                ),
+                key: Key('key_task_item_${tasks[index].id}'),
+                child: TaskListItemWidget(
+                  task: task,
+                  uploadTaskCallback: taskManager.uploadTaskCallback,
+                ),
+                // 删除后回调
+                onDismissed: (DismissDirection direction) {
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text('删除了${tasks[index].name}'),)
+                  );
+                  setState(() {
+                    tasks.removeAt(index);
+                  });
                 },
               ),
             ],
-          ),
-          body: ListView.builder(
-            controller: _scrollController,
-            // 列表内容不足一屏时，列表也可以滑动
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemCount: tasks.length,
-            itemBuilder: (BuildContext context, int index) {
-              TaskModel task = tasks[index];
-              return Column(
-                children: <Widget>[
-                  Offstage(
-                    offstage: index != 0,
-                    child: TaskListHeaderWidget(
-                        numberOfTask: tasks.length,
-                        title: '上传列表'
-                    ),
-                  ),
-                  Dismissible(
-                    confirmDismiss: (DismissDirection direction) async {
-                      bool result = await showAlertDialog(context, index);
-                      print('show dialog returns $result');
-                      if (!result) {
-                         return false;
-                      }
-                      bool deleted = await _deleteTaskAtIndex(index);
-                      if (!deleted) {
-                        Scaffold.of(context).showSnackBar(SnackBar(
-                          content: Text('删除 ${tasks[index].name} 失败'),)
-                        );
-                        return false;
-                      }
-                      return true;
-                    },
-                    background: Container( // 右滑展示
-                      child: ListTile(
-                          leading: IconButton(
-                              icon: Icon(Icons.favorite, color: Colors.yellow,),
-                              onPressed: null
-                          )
-                      ),
-                    ),
-                    secondaryBackground: Container( // 左滑展示
-                      child: ListTile(
-                          trailing: IconButton(
-                              icon: Icon(Icons.delete, color: Colors.red,),
-                              onPressed: null
-                          )
-                      ),
-                    ),
-                    key: Key('key_task_item_${tasks[index].id}'),
-                    child: TaskListItemWidget(
-                      task: task,
-                      uploadTaskCallback: taskManager.uploadTaskCallback,
-                    ),
-                    // 删除后回调
-                    onDismissed: (DismissDirection direction) {
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text('删除了${tasks[index].name}'),)
-                      );
-                      setState(() {
-                        tasks.removeAt(index);
-                      });
-                    },
-                  ),
-                ],
-              );
-            },
-          )
-        ),
-      ),
+          );
+        },
+      )
     );
   }
 

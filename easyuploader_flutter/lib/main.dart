@@ -10,7 +10,7 @@ Widget _widgetForRoute(String route) {
   print('route == $route');
   switch (route) {
     case 'task-list':
-      return new TaskListWidget(title: '传输列表', pushFromIOS: true,);
+      return new TaskTabListWidget(title: '任务列表', pushFromIOS: true,);
     default:
       return MyApp();
   }
